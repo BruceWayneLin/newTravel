@@ -1,0 +1,562 @@
+.whereDgo{
+  border:none;
+}
+
+.fa-chevron-circle-down, fa-chevron-circle-up {
+  cursor:pointer!important;
+}
+
+.titleForm h2{
+  text-transform: uppercase;
+  font-size: 24px;
+  color: #e84466;
+  margin-bottom: 0px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.2;
+  text-rendering: optimizeLegibility;
+  border-bottom: 1px solid #e84466;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+button.form-control {
+  background-color: #e84466;
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.col-xs-2 span, .col-xs-10 span{
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #808080;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.col-xs-2 {
+  text-align: right;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.col-xs-10 {
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.applicantContain ul li, .insuredBox ul li {
+  list-style: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 18px;
+  text-align: left;
+  font-weight: normal;
+  line-height: 1.5em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #808080;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.applicantContain ul h3, .insuredBox ul li h3 {
+  color: #333333;
+}
+
+.applicantContain ul li, .insuredBox ul li {
+  list-style: none;
+  color:black;
+}
+
+.pplInfo .col-lg-6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.imageCla .img-responsive {
+  display: inline-block;
+}
+
+.imageCla span {
+  font-size: 22px;
+  color: #01a29a;
+  text-align: center;
+}
+
+.priceSpan span {
+  float: left;
+  font-size: 20px;
+  color: #e84466;
+  text-align: right;
+}
+
+.priceSpan .priceSp {
+  float: left;
+  font-size: 20px;
+  color: black;
+  text-align: right;
+  font-weight: 500;
+}
+
+.thead-inverse th {
+  text-align: center;
+}
+
+.table {
+  font-size: 18px;
+  margin: 60px auto;
+}
+
+.table. tr td {
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.table thead {
+  background-color: #e84466;
+  color: white;
+  font-weight: normal;
+}
+
+.table tr {
+  margin: 30px auto;
+}
+
+.table {
+  border: 1px solid #e4e4e4;
+}
+
+.table tbody tr td {
+  background-color: white;
+}
+
+.table tbody {
+  border-color: #e84466;
+}
+
+.packageInfo ul li:first-child {
+  list-style: none;
+  margin-top: 5px;
+}
+
+.packageInfo ul li span {
+  font-weight: normal!important;
+  color: #333;
+}
+
+.packageInfo ul {
+  margin-bottom: 0px;
+}
+
+.packageInfo .col-xs-12 h4 {
+  font-size: 17px;
+  font-weight: bold;
+  color: #333;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.packageInfo span {
+  font-size: 17px;
+  font-weight: normal;
+}
+
+.packageInfo .col-xs-2 span {
+  font-size: 17px;
+  font-weight: normal;
+  position: relative;
+  top: 6px;
+}
+
+.applicantContain ul {
+  display:inline-block;
+}
+
+.col-xs-10 span {
+  font-weight: normal;
+  font-size: 15px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.formContainer {
+  background-color: white;
+  margin-top: 70px;
+}
+
+.formContainer ul {
+  padding-left: 0px;
+}
+
+.app-index.container h2 {
+  padding-top: 0px;
+}
+
+.firstCon {
+  background-color: white;
+}
+
+.whereDgo.col-lg-12.text-center h2 {
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 450px) {
+  table tr td, th {
+    width: 100%;
+  }
+}
+
+.insuredBoxTable {
+  padding-top: 0px;
+  padding-bottom: 25px;
+  font-size: 20px;
+}
+
+.insuredBoxTable th {
+  font-weight: normal;
+  color: #e84466;
+}
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+table th, td, .row.pplInfo {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+  table caption {
+    font-size: 1.3em;
+  }
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  table td:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+.packageInfo ul li {
+  list-style: none;
+  padding-left: 15px;
+  line-height: 2em;
+}
+
+.row.packageInfo {
+  position: relative;
+  top: -10px;
+}
+
+.packageInfo .col-xs-2, .packageInfo .col-xs-10 {
+  margin-top:0px;
+
+}
+
+
+.firstCon {
+  background-color: white;
+  margin: 20px 8%;
+  border: 0.5px dotted #e84466;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+span.blackSpanTitle {
+   color:rgb(51, 51, 51);
+   font-size: 24px !important;
+   color:black;
+   font-weight: normal;
+   font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+ .lastCon {
+   background-color: white;
+   margin-left: 15px;
+   margin-bottom: 15px;
+   position:relative;
+   top: -15px;
+ }
+
+.applicantDivFirst .liInsideSpanTitle {
+   font-weight: bolder;
+   color: #333;
+   font-size: 17px;
+   font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+ }
+
+ .firstCon ul li span {
+   margin-left: 20px;
+   font-weight: normal;
+   font-size: 15px;
+ }
+
+ .applicant ul li {
+   list-style: none;
+ }
+
+ .applicantDivFirst {
+   margin: 15px auto;
+   padding-left: 23%;
+   color: #333;
+   font-size: 17px!important;
+   font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
+   font-weight: normal;
+ }
+
+ .applicantDivFirst span {
+   font-weight: normal;
+   font-size: 17px;
+   color: #333;
+   font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
+ }
+
+ .applicantDivFirst ul li {
+   margin: 5px auto;
+   font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
+ }
+
+.fa-chevron-circle-down {
+   color: #01a29a;
+   font-size: 25px;
+   position: relative;
+   top: 33px;
+   left: 40%;
+   pointer-events:none;
+ }
+
+ #titleWithoutPadding .col-xs-2, #titleWithoutPadding .col-xs-10 {
+   padding-top: 0px;
+   padding-bottom: 0px;
+   font-size: 15px;
+ }
+
+h2.touBaouTit {
+  text-align: left;
+  font-size: 17px;
+  margin-left: 4%;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  position:relative;
+  top: 0px;
+  font-weight: bolder;
+  color: #333;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
+}
+
+#spanBlack ul li span:nth-child(2){
+  color:#333;
+}
+
+#spanBlack .col-xs-6 {
+  padding: 0px;
+}
+
+span.priceSpanNT {
+  color: #e84466;
+  font-weight: normal;
+  margin-right:80px;
+  font-size: 24px;
+}
+
+.fa-chevron-circle-up {
+  color: #01a29a;
+  font-size: 30px;
+  cursor:pointer;
+}
+
+@media screen and (max-width: 500px){
+  .applicantDivFirst {
+    padding-left: 0px;
+  }
+  .applicant .col-xs-6, .applicant .col-xs-12 {
+    padding: 0px;
+  }
+  #accordionDiv div.panel.panel-default {
+    padding-left: 0px;
+  }
+  .packageInfo ul li {
+    padding-left: 0px;
+  }
+  .container.formContainer .col-xs-6, .container.formContainer .col-xs-5{
+    width: 100%!important;
+  }
+  .imageCla img{
+    margin-right:0!important;
+    position: relative;
+    margin-bottom: 15px;
+  }
+  .imageCla span{
+    font-size: 18px;
+    left: 23%;
+  }
+  #titleWithoutPadding .col-lg-12.text-center {
+    padding:0px;
+    width: 100%;
+  }
+  .lastSubMit {
+    margin-bottom: 0px!important;
+    margin-top: 20px!important;
+  }
+  #MobileUseIdForPrice {
+    padding-left: 20%!important;
+    white-space: nowrap!important;
+    width: 100%!important;
+  }
+  .fa-chevron-circle-down {
+    top: 50px;
+    left: 49%;
+    z-index: 100;
+  }
+  .packageInfo .col-xs-12 h4　{
+    left: -16px;
+    position: relative;
+    text-decoration: underline;
+    margin-top: 10px;
+  }
+  .row.packageInfo {
+    top:-50px!important;
+  }
+  #specialDropUpIdDiv {
+    top:0!important;
+  }
+}
+
+.lastSubMit {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.imageCla span {
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 1025px) and (min-width: 768px) {
+  .lastSubMit {
+    margin-bottom: 10px!important;
+    margin-top: 10px!important;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 500px) {
+ .imageCla {
+   margin-right: 60%!important;
+ }
+  .lastSubMit {
+    margin-bottom: 0px!important;
+    margin-top: 20px!important;
+  }
+  .imageCla {
+    margin-left: 15%!important;
+    margin-right: 0px!important;
+  }
+  .imageCla span {
+    display: block!important;
+    padding-top:10px;
+  }
+}
+
+@media screen and (max-width: 990px) and (min-width: 768px) {
+  .imgContain {
+    left: -8%;
+  }
+  #accordionDiv .fa.fa-chevron-circle-down {
+    font-size:30px!important;
+    top: 35px!important;
+  }
+  #accordionDiv .fa.fa-chevron-circle-up {
+    margin-top: 15px;
+    margin-right:14%;
+  }
+  #accordionDiv .col-xs-12 {
+    padding-left: 0px;
+  }
+}
+
+.fa-chevron-circle-down {
+  font-size: 30px!important;
+}
+
+@media screen and (max-width: 500px) {
+  .imageCla span {
+    white-space: normal!important;
+    display: block;
+  }
+  .formContainer {
+    margin-top: 80px;
+  }
+}
+
+@media screen and (max-width: 500px) and (min-width: 375px) {
+  #accordionDiv .fa.fa-chevron-circle-down {
+    top: 35px!important;
+  }
+}
+
+#flagInsuredPPlFlag {
+  position:relative;
+  top: -85px;
+}
+
+.dropup .panel-heading {
+  border:none;
+}
+
+@media screen and (min-width:768px) {
+  .fa-chevron-circle-down {
+    top:37px!important;
+  }
+}

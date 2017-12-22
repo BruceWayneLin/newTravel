@@ -1,0 +1,506 @@
+<div id="myConfirmModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <p>
+      <span class="close hidden">&times;</span>
+    </p>
+    <div class="col-xs-12 text-cetner">
+      <h2>提示訊息！</h2>
+    </div>
+    <div class="text-center">
+      <div>
+        <p>您的被保人資料將不被保留，要繼續？</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <button id="closebtn" class="closebtn1" (click)="ModelCancel()">取消</button>
+        <button id="closebtn" class="closebtn2" (click)="ModelClick(true)">確定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="myConfirmModal2" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <p>
+      <span class="close hidden">&times;</span>
+    </p>
+    <div class="col-xs-12 text-cetner">
+      <h2>提示訊息！</h2>
+    </div>
+    <div class="text-center">
+      <div>
+        <p>您的被保人資料將不被保留，要繼續？</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <button id="closebtn" class="closebtn1" (click)="ModelCancel()">取消</button>
+        <button id="closebtn" class="closebtn2" (click)="ModelClick(false)">確定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="flagForEmpty"></div>
+<div class="container formContainer">
+<div id="memberTitleFlag" class="row memberTitle">
+  <div class="app-index container">
+    <div class="whereDgo col-lg-12 text-center">
+      <h2>要/被保險人資訊</h2>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container-fluid" style="height: 80px;">
+    <div class="col-lg-12" style="padding:0px;height: 50px;">
+      <div class="titleForm text-left">
+        <h2 style="padding-top:10px; padding-bottom:20px;">要保人</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <div class="col-xs-12 text-center paddingExtra personalContent" style="margin-bottom: 20px;">
+      <div class="col-xs-12 text-left">
+        <div class="col-sm-6">
+          <span class="formSubTxt">請填寫中文姓名，以保障您的權益</span>
+        </div>
+        <div class="col-sm-6">
+            <input required maxlength="50" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$" [ngClass]="{'inValidInput': emailElm.touched && !emailElm.valid}" class="memberFormInput form-control input-lg emailInput" [(ngModel)]="email" #emailElm="ngModel" (change)="emailChange(email)" type="text" placeholder="電子信箱 *" [disabled]="checkEmailDis">
+            <span class="pull-right"><img  *ngIf="emailElm.touched && !emailElm.valid" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          <div class="inValid" *ngIf="emailElm.touched && !emailElm.valid">email格式不正確。</div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 text-left">
+        <div class="col-xs-12 col-sm-6">
+        </div>
+        <div class="col-sm-6">
+          <div class="col-sm-6 lastNameDiv">
+            <input required maxlength="10" (change)="changedData() && checkChineseName(lastNameEl.value, '')" [ngClass]="{'inValidInput': lastNameEl.touched && !lastNameEl.valid || lastNameEl.touched && !lastNameEl.valid}" class="memberFormInput form-control"  [(ngModel)]="lastName" #lastNameEl="ngModel"  type="text" placeholder="姓" [disabled]="checkLastNameDis">
+            <div class="inValid" *ngIf="lastNameEl.touched && !lastNameEl.valid || lastNameEl.touched && !lastNameEl.valid">此欄位為必填。</div>
+            <div class="inValid" *ngIf="checkChineseName(lastNameEl.value, '')">名字只能是中文。</div>
+          </div>
+          <div class="col-sm-6 firstNameDiv" >
+            <input required maxlength="10"  (change)="changedData('', '', '') && checkChineseName(firstNameEl.value, '')" [ngClass]="{'inValidInput': lastNameEl.touched && !lastNameEl.valid || firstNameEl.touched && !firstNameEl.valid}"  class="pull-left memberFormInput form-control" [(ngModel)]="firstName" #firstNameEl="ngModel" type="text" placeholder="名" [disabled]="checkFirstNameDis">
+            <span class="pull-right"><img  *ngIf="lastNameEl.touched && !lastNameEl.valid || firstNameEl.touched && !firstNameEl.valid" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+            <div class="inValid" *ngIf="firstNameEl.touched && !firstNameEl.valid">此欄位為必填。</div>
+            <div class="inValid" *ngIf="checkChineseName(firstNameEl.value, '')">名字只能是中文。</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 text-center">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+          <input maxlength="10"  (change)="changedData('', '', '')"  style="text-transform:uppercase" [ngClass]="{'inValidInput': pidEl.touched && pidCheck(pidEl.value)}" class="memberFormInput form-control input-lg" [(ngModel)]="pid" #pidEl="ngModel" type="text" placeholder="身分證字號*" [disabled]="checkPidDis">
+          <span class="pull-right"><img  *ngIf="pidEl.touched && pidCheck(pidEl.value)" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          <div class="inValid" *ngIf="pidEl.touched && pidCheck(pidEl.value)">身分證格式不正確。</div>
+        </div>
+      </div>
+      <div class="col-xs-12 text-center">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6 birthContain">
+          <div class="col-xs-12 text-left" id="mobileTxtBirth">
+              <span class="mobileTxtBirth">
+                生日
+              </span>
+          </div>
+          <div class="col-xs-1" style="padding:0px;">
+            <span class="pull-right txtBirth" style="padding-top:15px;">生日</span>
+          </div>
+          <div class="col-xs-5">
+            <select required [(ngModel)]="pBirthYear" [ngClass]="{'inValidInput':birthdayYEl.touched && !birthdayYEl.valid && birthdayMEl.touched && !birthdayMEl.valid &&  birthdayDEl.touched && !birthdayDEl.valid || personalAgeOver}" (change)="changedData(birthdayYEl.value, birthdayMEl.value, birthdayDEl.value)" #birthdayYEl="ngModel" class="form-control" [disabled]="checkBDay">
+              <option value="">年</option>
+              <option *ngFor="let year of applicantSelectListYear" value="{{year}}">{{year}}</option>
+            </select>
+          </div>
+          <div id="specialBirthColxs" class="col-xs-3">
+            <select required [(ngModel)]="pBirthMonth"  [ngClass]="{'inValidInput':birthdayYEl.touched && !birthdayYEl.valid && birthdayMEl.touched && !birthdayMEl.valid &&  birthdayDEl.touched && !birthdayDEl.valid || personalAgeOver}" (change)="changedData(birthdayYEl.value, birthdayMEl.value, birthdayDEl.value)"  #birthdayMEl="ngModel" class="form-control" [disabled]="checkBDay">
+              <option value="">月</option>
+              <option *ngFor="let month of birthdayMonths" value="{{month}}">{{month}}</option>
+            </select>
+          </div>
+          <div id="specialBirthColxs" class="col-xs-3" style="padding-right:0px;">
+            <select required  [(ngModel)]="pBirthDay"  (change)="changedData(birthdayYEl.value, birthdayMEl.value, birthdayDEl.value)"  [ngClass]="{'inValidInput':birthdayYEl.touched && !birthdayYEl.valid && birthdayMEl.touched && !birthdayMEl.valid &&  birthdayDEl.touched && !birthdayDEl.valid || personalAgeOver}" #birthdayDEl="ngModel" class="form-control" [disabled]="checkBDay">
+              <option value="">日</option>
+              <option *ngFor="let day of birthdayDays" value="{{day}}">{{day}}</option>
+            </select>
+          </div>
+          <span class="pull-right"><img  *ngIf="birthdayYEl.touched && !birthdayYEl.valid && birthdayMEl.touched && !birthdayMEl.valid &&  birthdayDEl.touched && !birthdayDEl.valid || personalAgeOver" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          <div class="inValid" *ngIf="birthdayYEl.touched && !birthdayYEl.valid && birthdayMEl.touched && !birthdayMEl.valid &&  birthdayDEl.touched && !birthdayDEl.valid">生日不正確。</div>
+          <div class="inValid" *ngIf="personalAgeOver">{{'要保人須為'+ applicantAgeMin +'歲~'+ applicantAgeMax +'歲，被保險人可為'+ insuredAgeMin +'歲~' + insuredAgeMax + '歲，有任何問題請來電免費客服專線0800-234-088。'}}</div>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <div class="col-xs-6"></div>
+        <div class="col-xs-6">
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <hr style="border-bottom: 1px solid #e84466;">
+    </div>
+  </div>
+</div>
+
+<div class="row personalContentDiv">
+  <div class="container personalContent">
+    <div class="col-lg-12 text-center paddingExtra">
+
+      <div class="col-lg-12 text-left">
+        <div class="col-xs-12 col-sm-6">
+          <h2 class="formTitTxt">聯絡資料</h2>
+          <span class="formSubTxt">請填入正確地址，以利保單與活動贈品寄送</span>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <input required maxlength="10" [ngClass]="{'inValidInput': MobileEl.touched && !MobileEl.valid}" type="tel" class="memberFormInput form-control input-lg" [(ngModel)]="Mobile" pattern="[0-9]*" #MobileEl="ngModel" value="" placeholder="行動電話 *">
+          <span class="pull-right"><img  *ngIf="MobileEl.touched && !MobileEl.valid" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          <div class="inValid" *ngIf="MobileEl.touched && !MobileEl.valid">行動電話不正確。</div>
+        </div>
+      </div>
+
+      <div class="col-lg-12 text-center">
+        <div class="col-xs-12 col-sm-6">
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <div class="col-xs-4" style="padding-left:0px;">
+            <i class="fa fa-angle-down dropDown" style="font-size:36px;!important;z-index:999;"></i>
+            <select class="form-control" [ngClass]="{'inValidInput': birthdayCityEl.touched && birthdayDistrictEl.touched && checkCityArea(birthdayCityEl.value, birthdayDistrictEl.value)}"  [(ngModel)]="selectedCity"  #birthdayCityEl="ngModel" (change)="toLoadArea()">
+              <option value="">縣市</option>
+                <option *ngFor="let item of cityList; let i = index;" [ngValue]="item.id">
+                  {{item.name}}
+                </option>
+            </select>
+          </div>
+          <div class="col-xs-4">
+            <i class="fa fa-angle-down dropDown" style="font-size:36px;!important;z-index:999;"></i>
+            <select [disabled]="selectedCity == ''" [ngClass]="{'inValidInput': birthdayCityEl.touched && birthdayDistrictEl.touched && checkCityArea(birthdayCityEl.value, birthdayDistrictEl.value)}" [(ngModel)]="selectedDistrict" #birthdayDistrictEl="ngModel" (change)="toZipCode(birthdayDistrictEl)" class="form-control">
+              <option value="">區</option>
+              <option *ngFor="let item of filteredArea; let i = index;" [ngValue]="item.id">
+                {{item.name}}
+              </option>
+            </select>
+          </div>
+          <div class="col-xs-4" style="padding-right:0px;">
+            <input placeholder="郵遞區號" [(ngModel)]="areaZipCode" class="form-control" disabled />
+          </div>
+          <span class="pull-right"><img  *ngIf="birthdayCityEl.touched && birthdayDistrictEl.touched && checkCityArea(birthdayCityEl.value, birthdayDistrictEl.value)" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          <div class="inValid" *ngIf="birthdayCityEl.touched && birthdayDistrictEl.touched && checkCityArea(birthdayCityEl.value, birthdayDistrictEl.value)">此欄位為必填。</div>
+        </div>
+      </div>
+
+      <div class="col-lg-12 text-center">
+        <div class="col-xs-12 col-sm-6"></div>
+        <div class="col-xs-12 col-sm-6">
+          <input class="memberFormInput form-control input-lg" maxlength="50" [ngClass]="{'inValidInput': addrEl.touched && addrCheck(addrEl.value)}" [(ngModel)]="addr" #addrEl="ngModel" type="text" placeholder="地址 *" value="凱選路中正街一號">
+          <span class="pull-right"><img  *ngIf="addrEl.touched && addrCheck(addrEl.value)" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          <div class="inValid" *ngIf="addrEl.touched && addrCheck(addrEl.value)">此欄位為必填。</div>
+        </div>
+      </div>
+      <div class="col-lg-12 text-center" [hidden]="hideUpinput" style="margin-top:12px;">
+        <div class="col-xs-12 col-sm-6"></div>
+        <div class="col-xs-12 col-sm-6 text-left" id="aggreeToUpdate">
+          <label for="aggreeToUpdate" (click)="aggreeToUpdate = !aggreeToUpdate">
+            <div ngClass="{{aggreeToUpdate? 'checkBoxDiv' : 'checkBoxDiv noChecked' }}">
+              <input type="checkbox" [hidden]="true" [checked]="aggreeToUpdate" (click)="aggreeToUpdate = !aggreeToUpdate" class="aggreeToUpdate" id="aggreeToUpdate">
+              <span class="aggreeToUpdate">更新聯絡資料</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <div class="row">
+    <div class="container-fluid">
+      <div class="col-lg-12" style="padding:0px;">
+        <div class="titleForm text-left">
+          <h2 style="padding-top:10px; padding-bottom:20px;">被保險人</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="row" id="addInsuredAdd">
+  <div class="container-fluid insuredContent" style="">
+    <div class="col-xs-12 text-center">
+      <div class="col-xs-12 text-center insuredBtnArea">
+        <div class="col-xs-12 text-center">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-10 text-left">
+            <div class="col-xs-6">
+              <div id="haoma" class="col-xs-12 pull-left">
+                <span class="titleSpan" style="padding-right:0px;white-space: nowrap;">需要為您的同行旅伴加保嗎？</span>
+                <h4 style="color:#e84466;white-space: nowrap;position: relative;top: -22px;">*提醒您，購買保險需有直系親屬/婚姻關係喔</h4>
+              </div>
+            </div>
+            <div id="choicesHaoNoHao" class="pull-right">
+              <div id="choiceTwo">
+                <button name="withFds"  class="form-control btn-sm"  (click)="ToShowConfirmModal(true)" [ngClass]="{inputRadioChecked: noGoWithYourFds}">
+                  好啊
+                  <!--<span style="pointer-events: none;" class="widthFdsSpanTwo" [ngClass]="{inputRadioCheckedTxt: noGoWithYourFds}"></span>-->
+                </button>
+              </div>
+              <div id="choiceOne">
+                <button name="withFds"  class="form-control btn-sm" (click)="ToShowConfirmModal(false)" [ngClass]="{inputRadioChecked: !noGoWithYourFds}">
+                  先不用
+                <!--<span style="pointer-events: none;" class="widthFdsSpanOne" [ngClass]="{inputRadioCheckedTxt: !noGoWithYourFds}"></span>-->
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-1"></div>
+        </div>
+      </div>
+      <!--<div class="col-xs-12">-->
+        <!--<div id="MobileChoicesHaoNoHao" class="col-xs-12">-->
+          <!--<div class="col-xs-6">-->
+            <!--<div id="choiceMobileOne" [ngClass]="{inputRadioChecked: !noGoWithYourFds}">-->
+            <!--<button name="withFds2" type="radio" class="form-control btn-sm" (click)="ToShowConfirmModal(false)" [ngClass]="{inputRadioChecked: !noGoWithYourFds}">-->
+              <!--<span class="widthFdsSpanOne" style="" [ngClass]="{inputRadioCheckedTxt: !noGoWithYourFds}">-->
+                <!--先不用-->
+              <!--</span>-->
+            <!--</button>-->
+            <!--</div>-->
+          <!--</div>-->
+
+          <!--<div class="col-xs-6">-->
+            <!--<div id="choiceMobileTwo">-->
+            <!--<button name="withFds2" type="radio" class="form-control btn-sm" (click)="ToShowConfirmModal(true)" [ngClass]="{inputRadioChecked: noGoWithYourFds}">-->
+              <!--<span class="widthFdsSpanTwo" [ngClass]="{inputRadioCheckedTxt: noGoWithYourFds}">-->
+                <!--好啊-->
+              <!--</span>-->
+            <!--</button>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="(!noGoWithYourFds && (hiddenAtBegining !== 'hide'))">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="col-xs-1">
+      </div>
+      <div class="col-xs-10">
+      </div>
+      <div class="insuredBoxAlone">
+      </div>
+      <div class="col-xs-1">
+      </div>
+    </div>
+
+    <div class="col-xs-12" id="personalAreaPlaceForMobile">
+      <div class="col-xs-12 firstColPArea" style="">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-4">
+          <h2 class="formTitTxt">
+            個人資料
+          </h2>
+          <span class="formSubTxt">請填寫中文姓名，方便保險作業</span>
+        </div>
+        <div class="col-xs-4">
+          <div class="col-xs-12 pull-left">
+            <span class="mobileSpanNeedToHide">與要保人關係:</span>
+          </div>
+
+          <div class="col-xs-12 pull-left">
+            <i class="fa fa-angle-down dropDown" id="topSpeArrow" style="font-size:36px;left:80%!important;!important;z-index:999;"></i>
+            <select name="" [ngClass]="{inValidInput: aloneRela.touched && !aloneRela.valid}" #aloneRela="ngModel" (change)="personalSelectChange()" id="relationShipSelect" class="form-control" [(ngModel)]="personalInfoSelect" required>
+              <option [ngValue]="item.value" *ngFor="let item of relationship;let i = index;">{{item.text}}</option>
+            </select>
+            <!--<div class="inValid text-center" *ngIf="aloneRela.touched && !aloneRela.valid" style="padding-top:10px;padding-left: 5%;">此欄位為必填。</div>-->
+          </div>
+
+          <div>
+            <span class="pull-right"><img style="padding: 0px;top: 60px;"  *ngIf="aloneLastNameEmpty || aloneFirstNameEmpty" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+            <div class="col-xs-6 pull-left">
+              <input type="text" placeholder="姓" (change)="checkChineseName(aloneLastName.value, 'last')" [(ngModel)]="applicantAloneLastName" #aloneLastName="ngModel" class="form-control" [ngClass]="{'inValidInput':aloneLastNameEmpty || aloneNameLastChinese}"  [disabled]="applicantAloneLockInput">
+              <div class="inValid text-left" *ngIf="aloneLastNameEmpty">此欄位為必填。</div>
+              <div class="inValid text-left" *ngIf="aloneNameLastChinese">姓名必須是中文。</div>
+            </div>
+            <div class="col-xs-6 pull-left">
+              <input type="text" placeholder="名" (change)="checkChineseName(aloneFirstName.value, 'first')" [(ngModel)]="applicantAloneFirstName" #aloneFirstName="ngModel" class="form-control" [ngClass]="{'inValidInput':aloneFirstNameEmpty || aloneNameFirstChinese}" [disabled]="applicantAloneLockInput">
+              <div class="inValid text-left" *ngIf="aloneFirstNameEmpty">此欄位為必填。</div>
+              <div class="inValid text-left" *ngIf="aloneNameFirstChinese">姓名必須是中文。</div>
+            </div>
+          </div>
+
+          <div class="col-xs-12 pull-right">
+            <input maxlength="10" type="text" placeholder="請輸入身分證" style="text-transform:uppercase" [(ngModel)]="applicantAlonePid" #alonePid="ngModel" (change)="checkAlonePid(alonePid.value)" class="form-control" [ngClass]="{inValidInput: alonePidWrong || alonePidTypeWrong || alonePidEmpty}" [disabled]="applicantAloneLockInput">
+            <span class="pull-right"><img  *ngIf="alonePidWrong || alonePidTypeWrong || alonePidEmpty" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+            <div class="inValid text-left" *ngIf="alonePidTypeWrong">身分證格式錯誤。</div>
+            <div class="inValid text-left" *ngIf="alonePidEmpty">此欄位為必填。</div>
+          </div>
+          <div class="col-xs-12 text-left" id="mobileTxtBirth">
+              <span class="mobileTxtBirth">
+                生日
+              </span>
+          </div>
+          <div class="col-xs-12 pull-right birthContain">
+            <div class="txtBirth" class="col-xs-1" style="padding:0px;">
+              <span class="pull-right txtBirth" style="padding-top:15px;">生日</span>
+            </div>
+            <div class="col-xs-5">
+              <select [(ngModel)]="applicantAloneBirthYear" (change)="checkAloneBd() && changedData()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}" #birthdayYAE="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
+                <option value="">年</option>
+                <option *ngFor="let year of birthdayYears" value="{{year}}" selected>{{year}}</option>
+              </select>
+            </div>
+            <div class="col-xs-3" style="">
+              <select [(ngModel)]="applicantAloneBirthMonth" (change)="checkAloneBd() && changedData()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}"  #birthdayYAM="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
+                <option value="">月</option>
+                <option *ngFor="let month of birthdayMonths" value="{{month}}" selected>{{month}}</option>
+              </select>
+            </div>
+            <div class="col-xs-3">
+              <select  [(ngModel)]="applicantAloneBirthDay" (change)="checkAloneBd() && changedData()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}"  #birthdayYAD="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
+                <option value="">日</option>
+                <option *ngFor="let day of aloneBirthdayDays" value="{{day}}" selected>{{day}}</option>
+              </select>
+            </div>
+            <span class="pull-right"><img  *ngIf="aloneBdWrong || aloneBdEmpty" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+            <div class="inValid" *ngIf="aloneBdWrong">{{'被保險人須為'+ insuredMinAge +'歲 ~'+ insuredAgeMax +'歲，有任何問題請來電免費客服專線0800-234-088。'}}</div>
+            <div id="warningWord" class="inValid text-left" *ngIf="!aloneBdWrong"><span>{{aloneWarningWord}}</span></div>
+            <div class="inValid text-left" *ngIf="aloneBdEmpty">此欄位為必填。</div>
+          </div>
+        </div>
+        <div class="col-xs-2">
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="noGoWithYourFds && (hiddenAtBegining !== 'hide')" >
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="col-xs-1">
+      </div>
+      <div class="col-xs-10">
+      </div>
+      <div class="insuredBoxAlone">
+      </div>
+      <div class="col-xs-1">
+      </div>
+    </div>
+  </div>
+  <div class="row addPPlMinusPlus" >
+    <div class="col-xs-12 text-center pointAddPPlNum">
+      <span class="titleSpan" style="padding-right:0px;font-size:30px;position: relative;">點選加減人數</span>
+    </div>
+  </div>
+<div class="row addInsuredPP">
+  <div class="container">
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-xs-2 kaiD ">
+        <div>
+          <img src="assets/images/dolls/kai.png" alt="" class="kai img-responsive">
+        </div>
+        <span class="plusFont">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </span>
+      </div>
+      <div class="col-xs-7 appendDollArea">
+        <div class="annaDiv">
+          <div alt="" class="anan ananDivImg img-responsive" [ngClass]="{'img-grey': owlAnanOne}">
+          </div>
+        </div>
+        <div class="annaDiv">
+          <div alt="" class="anan ananDivImg img-responsive" [ngClass]="{'img-grey': owlAnanTwo}">
+          </div>
+        </div>
+        <div class="annaDiv">
+          <div alt="" class="anan ananDivImg img-responsive" [ngClass]="{'img-grey': owlAnanThree}">
+          </div>
+        </div>
+        <div class="annaDiv">
+          <div alt="" class="anan ananDivImg img-responsive" [ngClass]="{'img-grey': owlAnanFour}">
+          </div>
+        </div>
+        <div class="annaDiv">
+          <div alt="" class="anan ananDivImg img-responsive" [ngClass]="{'img-grey': owlAnanFifth}">
+          </div>
+        </div>
+          <!--<img src="assets/images/dolls/anan.png" alt="" class="anan img-responsive" [ngClass]="{'img-grey': owlAnanFifth}">-->
+        </div>
+      <div class="col-xs-3">
+        <button class="form-control minusBtn" (click)="deleteThisMinus()"><i class="fa fa-minus"></i></button>
+        <button class="form-control plusBtn" (click)="createInsuredCard()"><i class="fa fa-plus"></i></button>
+      </div>
+    </div>
+    <div class="col-sm-6 text-center">
+    </div>
+  </div>
+  <div class="container noneTit">
+    <div class="col-lg-12 text-left">
+      <h5>*加保5人以上請撥 免費客服專線: 0800-234-088</h5>
+    </div>
+  </div>
+</div>
+<div class="row">
+<app-add-member></app-add-member>
+</div>
+</ng-container>
+
+<div [hidden]="hiddenAtBegining == 'hide'">
+  <div class="row">
+    <div class="container-fluid">
+      <div class="col-lg-12" style="padding:0px;">
+        <div class="titleForm text-left">
+          <h2 style="padding-top:10px; padding-bottom:20px;">受益人</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="rule1" class="container rules">
+      <div class="col-sm-12 text-left">
+        <h2>受益人為法定繼承人。</h2>
+        <h2>如果您想指定受益人給其他人，請致電並填寫契約變更申請書給予客服中心變更</h2>
+      </div>
+    </div>
+    <div class="container rules">
+      <div class="col-lg-12 text-center">
+        <div class="roundDiv text-center">
+          <div (click)="aggreeToUpdateAlreadyRead = !aggreeToUpdateAlreadyRead"  ngClass="{{aggreeToUpdateAlreadyRead == true ? 'checkBoxDiv' : 'checkBoxDiv noChecked' }}">
+            <input type="text" [hidden]="true" style="display:none;" class="square pull-left" type="checkbox" checked/>
+          </div>
+          <ng-container>
+            <div for="agree" class="agreement">我已閱讀
+              <a target="_blank" [attr.href]="pdfUrl4Terms">保單條款</a>
+              ，並同意遵守保單條款的條件和除外責任，及上述各聲明事項。 我並已閱讀<a target="_blank" href="/legal/obligations">保險代理人履行個人資料保護法告知義務內容</a>
+              , 瞭解 貴公司蒐集處理或利用本人個人資料之目的及用途。
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container">
+      <div class="col-lg-12 text-center">
+        <div class="col-xs-12 col-sm-6 col-lg-6">
+          <button [routerLink]="['/']" (click)="toGoDownWindow()" id="goingCheckInfoBack" class="form-control goingCheckInfo" style="background-color:white;color:black;">回方案選擇</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-lg-6">
+          <button class="form-control goingCheckInfo" [ngClass]="{'specilAlreadiRead': !aggreeToUpdateAlreadyRead}" (click)="ToSaveInsured()" [disabled]="!aggreeToUpdateAlreadyRead">下一步</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

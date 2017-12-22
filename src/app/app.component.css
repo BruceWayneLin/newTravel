@@ -1,0 +1,149 @@
+footer {
+  text-align: center;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  color: #808080;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+input, input:before, input:after {
+  -webkit-user-select: initial;
+  -khtml-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
+}
+
+footer img {
+  width: 100%;
+}
+
+.logo {
+  background:url('/assets/images/logos/carelineWhite.png');
+  height: 40px;
+  width: 200px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  float:left;
+}
+
+.navbar-default {
+  background-color: transparent;
+  border: none;
+}
+
+#fakeUl {
+  padding: 15px 0px;
+}
+
+#fakeUl li {
+  margin-right: 35px;
+  margin-left: 15px;
+  font-size: 16px;
+}
+
+header {
+  background-color: rgba(0, 0, 0, 0.48);
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  color: white;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.memberBtn {
+  width: 140px;
+  background: transparent;
+  color: white;
+  height: 40px;
+  border: 2px solid white;
+  padding: 0px;
+  font-size: 15px;
+}
+
+footer .col-xs-12, .navbar-brand {
+  padding: 0px;
+}
+
+@media screen and (max-width:500px){
+  #fakeUl {
+    display: none;
+  }
+  .modal {
+    padding-top:50%!important;
+  }
+  .modal ul li p {
+    font-size: 14px;
+  }
+  .modal button{
+    font-size: 14px;
+  }
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000!important; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 1000%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 10%;
+}
+
+.modal button{
+  width: 80px;
+  border-radius: 5px;
+  margin: 30px 0px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  margin-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: -5% auto; /* 15% from the top and centered */
+  /*padding: 20px;*/
+  border: 1px solid #888;
+}
+
+@media screen and (max-width:420px){
+  .modal-content {
+    margin: -15% auto!important;
+  }
+}
+
+.modal ul {
+  list-style: none;
+}
+
+.modal ul li p {
+  font-size: 18px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modalLogo {
+  margin: 0px auto;
+  width: 200px;
+  margin-bottom: 40px;
+}

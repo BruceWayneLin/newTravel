@@ -1,0 +1,534 @@
+
+<div id="insuredContainer">
+<div class="row">
+  <div class="container insuredPersonalInfo">
+    <div id="insuredInfoAppend" class="col-lg-12 text-center">
+      <div class="row tobeHide">
+        <div class="col-xs-6"></div>
+        <div class="col-xs-6">
+          <div class="col-xs-12 priceTotalDiv">
+            <div class="text-center priceHead">
+              <span class="pull-left">應收保費總計:</span>
+              <h3>NT${{finalPrice}}</h3>
+            </div>
+          </div>
+          <!--<div class="col-xs-4"></div>-->
+        </div>
+      </div>
+      <!--// first Card-->
+      <div id="insuredOneCard" class="col-lg-6 col-sm-6">
+        <div class="insuredTit col-sm-12 text-left">
+          <div class="col-xs-1">
+            <div class="circleDiv">
+              <p>1</p>
+            </div>
+          </div>
+          <div class="col-xs-11" style="padding-right:0px;float:none;">
+            <i id="firstDropDown" class="fa fa-angle-down dropDown" style="font-size:36px;!important;z-index:999;"></i>
+            <select #fistRelationship="ngModel" [(ngModel)]="firstCardRelationship" (change)="changedRelationship(firstCardRelationship.value, 1)" class="form-control btn-sm" [ngClass]="{'inValidInput': fistRelationship.touched && !fistRelationship.valid || firstRelationshipInvalid || firstCardValidFail || firstRelatedRepeat}" required>
+              <option value="">請選擇</option>
+              <option [ngValue]="item.value" *ngFor="let item of relationShip; let i = index;">{{item.text}}</option>
+            </select>
+            <div class="bthInValid">
+            <div class="inValid" *ngIf="fistRelationship.touched && !fistRelationship.valid || firstCardValidFail || firstRelationshipInvalid">此欄位為必填。</div>
+            <div class="inValid text-left" *ngIf="firstRelatedRepeat">您的被保人關係已重複。</div>
+            <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+        </div>
+        <div class="col-xs-12 col-sm-6"></div>
+        <div class="col-xs-12 col-sm-12 text-center">
+          <div class="col-xs-6 col-sm-6" style="padding-left:0px;">
+            <input class=" memberFormInput form-control" (change)="checkDisable('last')" [ngClass]="{inValidInput:firstLastNameValiFail || firstCardValidFail || checkChineseName(firstLast.value)}" #firstLast="ngModel" [disabled]="lockFirstCard" [(ngModel)]="firstCardLastName" type="text" placeholder="姓" value="" required>
+            <div class="inValid text-left" style="white-space: nowrap;" *ngIf="firstCardValidFail || firstLastNameValiFail">此欄位為必填。</div>
+            <div class="inValid text-left" style="white-space: nowrap;"  style="white-space: nowrap;" *ngIf="checkChineseName(firstLast.value)">姓名必須是中文。</div>
+          </div>
+          <div class="col-xs-6 col-sm-6" style="padding-right:0px;">
+            <input class=" memberFormInput form-control" (change)="checkDisable('first')" [ngClass]="{inValidInput: firstFirstNameValiFail || firstCardValidFail || checkChineseName(firstFirst.value)}" #firstFirst="ngModel" [disabled]="lockFirstCard" [(ngModel)]="firstCardFirstName" type="text" placeholder="名" value="" required>
+            <div class="inValid text-left" style="white-space: nowrap;" *ngIf="firstCardValidFail || firstFirstNameValiFail">此欄位為必填。</div>
+            <div class="inValid text-left" style="white-space: nowrap;"  style="white-space: nowrap;" *ngIf="checkChineseName(firstFirst.value)">姓名必須是中文。</div>
+          </div>
+          <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+        </div>
+        <div class="col-lg-12 text-center pid">
+          <input maxlength="10" class="insuredPid memberFormInput form-control input-lg" style="text-transform:uppercase" (change)="checkPidByClick(firstPid.value, 1)" [ngClass]="{inValidInput:firstPidTypeWrong || firstCardValidFail || firstPidEmpty}" #firstPid="ngModel" [disabled]="lockFirstCard" [(ngModel)]="firstCardPid" type="text" placeholder="身分證字號*" value="" required>
+          <div class="inValid text-left" style="white-space: nowrap;" *ngIf="firstCardValidFail || firstPidEmpty">此欄位為必填。</div>
+          <div class="inValid text-left" *ngIf="firstPidTypeWrong">{{firstPidWrongWords}}</div>
+          <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+        </div>
+        <div class="bdMobile">
+        <div class="col-xs-12 text-left" id="mobileTxtBirth">
+            <span class="mobileTxtBirth">
+              生日
+            </span>
+        </div>
+        <div class="insuredBirthEx col-xs-12 text-center">
+          <div class="col-xs-1">
+            <span class="txtBirth" style="padding-top:15px;">生日</span>
+          </div>
+          <div class="col-xs-5">
+            <select name="" id="" [(ngModel)]="firstCardYear" #firstYear="ngModel" class="form-control" [ngClass]="{inValidInput:firstBdOverAge || firstCardValidFail || firstBdEmpty}" [disabled]="lockFirstCard" #birthYearValueEl (change)="checkRatioAmt(1)" required>
+              <option value="">年</option>
+              <option *ngFor="let year of birthdayYears" value="{{year}}">{{year}}</option>
+            </select>
+          </div>
+          <div class="col-xs-3">
+            <select name="" id="" [(ngModel)]="firstCardMonth" #firstMonth="ngModel" class="form-control" [ngClass]="{inValidInput:firstBdOverAge || firstCardValidFail || firstBdEmpty}" [disabled]="lockFirstCard" (change)="checkRatioAmt(1)" required>
+              <option value="">月</option>
+              <option *ngFor="let month of birthdayMonths" #birthMonthValueEl value="{{month}}">{{month}}</option>
+            </select>
+          </div>
+          <div class="col-xs-3">
+            <select name="" id="" [(ngModel)]="firstCardDay" #firstDay="ngModel" class="form-control birthInput" [ngClass]="{inValidInput:firstBdOverAge || firstCardValidFail || firstBdEmpty}" [disabled]="lockFirstCard" (change)="checkRatioAmt(1)" required>
+              <option value="">日</option>
+              <option *ngFor="let day of firstBdayArr" #birthDayValueEl value="{{day}}">{{day}}</option>
+            </select>
+            <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          </div>
+          <div class="bthInValid">
+          <div class="inValid text-left" *ngIf="firstCardValidFail || firstBdEmpty">此欄位為必填。</div>
+          <div class="inValid text-left" *ngIf="firstBdOverAge">{{'被保險人須為'+ insuredMinAge +'歲 ~'+ insuredMaxAge +'歲，有任何問題請來電免費客服專線0800-234-088。'}}</div>
+          <div id="warningWord" class="inValid text-left" *ngIf="!firstBdOverAge"><span>{{firstCardWarningWord}}</span></div>
+          </div>
+        </div>
+        </div>
+        <div class="col-xs-12 text-right insuredPriceDivH4">
+          <h4 class="text-right"><span style="color:black;">保費:</span> NT${{firstCardInsuredPriceWord}}</h4>
+        </div>
+      </div>
+
+      <!--// second card-->
+      <div id="insuredOneCard" class="col-lg-6 col-sm-6" style="padding-bottom:11px;" *ngIf="!owlAnanTwo()">
+          <div class="insuredTit col-sm-12 text-left">
+            <div class="col-xs-1">
+              <div class="circleDiv">
+                <p>2</p>
+              </div>
+            </div>
+            <div class="col-xs-11" style="padding-right:0px;float:none;">
+              <i class="fa fa-angle-down dropDown" style="font-size:36px;!important;z-index:999;"></i>
+              <select [(ngModel)]="secondCardRelationship" (change)="checkRelationShipRepeat(secondRelationship.value, 2)" #secondRelationship="ngModel" class="form-control btn-sm" [ngClass]="{inValidInput: secondRelationship.touched && !secondRelationship.valid || secondRelationshipInvalid || secondRelatedRepeat}" required>
+                <option value="">與要保人關係</option>
+                <ng-container *ngFor="let item of relationShip; let i = index;">
+                  <option *ngIf="item.text !== '本人'" [ngValue]="item.value" >{{item.text}}</option>
+                </ng-container>
+              </select>
+              <button [hidden]="true" (click)="deleteThisOne()" class="deleteBtn pull-right">
+                <i class="fa fa-close"></i>
+              </button>
+            </div>
+            <div class="bthInValid col-xs-1">
+            </div>
+            <div class="inValid text-left" *ngIf="secondRelationship.touched && !secondRelationship.valid || secondRelationshipInvalid">此欄位為必填。</div>
+            <div class="inValid text-left" *ngIf="secondRelatedRepeat">您的被保人關係已重複。</div>
+            <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          </div>
+          <div class="col-xs-12 col-sm-12 text-center">
+            <div class="col-xs-6 col-sm-6" style="padding-left:0px;">
+              <input class=" memberFormInput form-control" #secondLastName="ngModel" (change)="checkDisable('')" [(ngModel)]="secondCardLastName" [ngClass]="{inValidInput: secondLastName.touched && !secondLastName.valid || secondLastNameValiFail}" type="text" placeholder="姓" value="" required>
+              <div class="inValid text-left" style="white-space: nowrap;" *ngIf="secondLastName.touched && !secondLastName.valid || secondCardValidFail || secondLastNameValiFail">此欄位為必填。</div>
+              <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(secondLastName.value)">姓名必須是中文。</div>
+            </div>
+            <div class="col-xs-6 col-sm-6" style="padding-right:0px;">
+              <input class=" memberFormInput form-control" #secondFirstName="ngModel" (change)="checkDisable('')" [(ngModel)]="secondCardFirstName" [ngClass]="{inValidInput: secondFirstName.touched && !secondFirstName.valid || secondFirstNameValiFail}" type="text" placeholder="名" value="" required>
+              <div class="inValid text-left" style="white-space: nowrap;"  *ngIf="secondFirstName.touched && !secondFirstName.valid || secondCardValidFail || secondFirstNameValiFail">此欄位為必填。</div>
+              <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(secondFirstName.value)">姓名必須是中文。</div>
+            </div>
+            <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          </div>
+          <div class="col-lg-12 text-center pid">
+            <input maxlength="10" (change)="checkPidByClick(secondPid.value, 2)" style="text-transform:uppercase" class="insuredPid memberFormInput form-control input-lg" #secondPid="ngModel" [ngClass]="{inValidInput: secondPid.touched && !secondPid.valid || secondPidTypeWrong || secondPidEmpty}" [(ngModel)]="secondCardPid" type="text" placeholder="身分證字號*" value="" required>
+            <div class="inValid text-left" *ngIf="secondPid.touched && !secondPid.valid && !secondPidTypeWrong || secondPidEmpty">此欄位為必填。</div>
+            <div class="inValid text-left" *ngIf="secondPidTypeWrong">{{secondPidWrongWords}}</div>
+            <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          </div>
+        <div class="bdMobile">
+        <div class="col-xs-12 text-left" id="mobileTxtBirth">
+            <span class="mobileTxtBirth">
+              生日
+            </span>
+          </div>
+          <div class="insuredBirthEx col-xs-12 text-center">
+            <div class="col-xs-1">
+              <span class="txtBirth" style="padding-top:15px;">生日</span>
+            </div>
+            <div class="col-xs-5">
+              <select name="" id="" [(ngModel)]="secondCardYear" #secondYear="ngModel" class="form-control" (change)="checkRatioAmt(2)"  [ngClass]="{inValidInput: secondYear.touched && !secondYear.valid || secondBdOverAge || secondBdEmpty}" required>
+                <option value="">年</option>
+                <option *ngFor="let year of birthdayYears" value="{{year}}">{{year}}</option>
+              </select>
+            </div>
+            <div class="col-xs-3">
+              <select name="" id="" [(ngModel)]="secondCardMonth" #secondMonth="ngModel" class="form-control" (change)="checkRatioAmt(2)" [ngClass]="{inValidInput: secondMonth.touched && !secondMonth.valid || secondBdOverAge || secondBdEmpty}" required>
+                <option value="">月</option>
+                <option *ngFor="let month of birthdayMonths" value="{{month}}">{{month}}</option>
+              </select>
+            </div>
+            <div class="col-xs-3">
+              <select name="" id="" [(ngModel)]="secondCardDay" #secondDay="ngModel" class="form-control birthInput" (change)="checkRatioAmt(2)" [ngClass]="{inValidInput: secondDay.touched && !secondDay.valid || secondBdOverAge || secondBdEmpty}" required>
+                <option value="">日</option>
+                <option *ngFor="let day of secondBdayArr" value="{{day}}">{{day}}</option>
+              </select>
+              <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+            </div>
+            <div class="bthInValid">
+            </div>
+            <div class="inValid text-left" *ngIf="secondYear.touched && !secondYear.valid && secondMonth.touched && !secondMonth.valid && secondDay.touched && !secondDay.valid || secondBdEmpty">此欄位為必填。</div>
+            <div class="inValid text-left" *ngIf="secondBdOverAge">{{'被保險人須為'+ insuredMinAge +'歲 ~'+ insuredMaxAge +'歲，有任何問題請來電免費客服專線0800-234-088。'}}</div>
+            <div id="warningWord" class="inValid text-left" *ngIf="!secondBdOverAge"><span>{{secondCardWarningWord}}</span></div>
+          </div>
+        </div>
+          <div class="col-xs-12 text-right insuredPriceDivH4">
+            <h4 class="text-right"><span style="color:black;">保費:</span> NT${{secondCardInsuredPriceWord}}</h4>
+          </div>
+        </div>
+
+      <!--// third card-->
+      <div id="insuredOneCard" class="col-lg-6 col-sm-6" *ngIf="!owlAnanThree()">
+        <div class="insuredTit col-sm-12 text-left">
+          <div class="col-xs-1">
+            <div class="circleDiv">
+              <p>3</p>
+            </div>
+          </div>
+          <div class="col-xs-11" style="padding-right:0px; float:none; height: 110px;">
+            <i class="fa fa-angle-down dropDown" style="font-size:36px;!important;z-index:999;"></i>
+            <select name="" [(ngModel)]="thirdCardRelationship"  (change)="relationShipChecked(thirdRelationship.value, '3')" (change)="checkRelationShipRepeat(thirdRelationship.value, 3)" #thirdRelationship="ngModel" class="form-control btn-sm" [ngClass]="{inValidInput: thirdRelationship.touched && !thirdRelationship.valid || thirdCardValidFail || thirdRelationshipInvalid || thirdRelatedRepeat}" [disabled]="!thirdCardLock" required>
+              <option value="">與要保人關係</option>
+              <ng-container *ngFor="let item of relationShip; let i = index;">
+                <option *ngIf="item.text !== '本人'" [ngValue]="item.value" >{{item.text}}</option>
+              </ng-container>
+            </select>
+            <div class="bthInValid col-xs-1">
+            </div>
+            <div class="inValid text-left" *ngIf="thirdRelationship.touched && !thirdRelationship.valid && thirdCardValidFail || thirdRelationshipInvalid">此欄位為必填。</div>
+            <div class="inValid text-left" *ngIf="thirdRelatedRepeat">您的被保人關係已重複。</div>
+            <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+        </div>
+        <div class="col-xs-12 col-sm-6"></div>
+        <div class="col-xs-12 col-sm-12 text-center">
+          <div class="col-xs-6 col-sm-6" style="padding-left:0px;">
+            <input class=" memberFormInput form-control" (change)="checkDisable('')" type="text" #thirdLastName="ngModel" [(ngModel)]="thirdCardLastName" [ngClass]="{inValidInput: thirdLastName.touched && !thirdLastName.valid || thirdCardValidFail || thirdLastNameValiFail}" placeholder="姓" value="" [disabled]="!thirdCardLock" required>
+            <div class="inValid text-left" style="white-space: nowrap;" *ngIf="thirdLastName.touched && !thirdLastName.valid || thirdCardValidFail || thirdLastNameValiFail">此欄位為必填。</div>
+            <div class="inValid text-left" style="white-space: nowrap;" *ngIf="checkChineseName(thirdLastName.value)">姓名必須是中文。</div>
+          </div>
+          <div class="col-xs-6 col-sm-6" style="padding-right:0px;">
+            <input class=" memberFormInput form-control" (change)="checkDisable('')" type="text" #thirdFirstName="ngModel" [(ngModel)]="thirdCardFirstName" [ngClass]="{inValidInput: thirdFirstName.touched && !thirdFirstName.valid || thirdCardValidFail || thirdFirstNameValiFail}" placeholder="名" [disabled]="!thirdCardLock" value="" required>
+            <div class="inValid text-left"style="white-space: nowrap;"  *ngIf="thirdFirstName.touched && !thirdFirstName.valid || thirdCardValidFail || thirdFirstNameValiFail">此欄位為必填。</div>
+            <div class="inValid text-left" style="white-space: nowrap;" *ngIf="checkChineseName(thirdFirstName.value)">姓名必須是中文。</div>
+          </div>
+          <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+        </div>
+        <div class="col-lg-12 text-center pid">
+          <input maxlength="10" (change)="checkPidByClick(thirdPid.value, 3)" style="text-transform:uppercase" class="insuredPid memberFormInput form-control input-lg" #thirdPid="ngModel" [(ngModel)]="thirdCardPid" type="text" [ngClass]="{inValidInput: thirdPid.touched && !thirdPid.valid || thirdPidTypeWrong || thirdCardValidFail || thirdPidEmpty}" placeholder="身分證字號*" [disabled]="!thirdCardLock" value="" required>
+          <div class="inValid text-left" style="white-space: nowrap;" *ngIf="thirdPid.touched && !thirdPid.valid && !thirdPidTypeWrong || thirdCardValidFail || thirdPidEmpty">此欄位為必填。</div>
+          <div class="inValid text-left" style="white-space: nowrap;" *ngIf="thirdPidTypeWrong">{{thirdPidWrongWords}}</div>
+          <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+        </div>
+        <div class="bdMobile">
+          <div class="col-xs-12 text-left" id="mobileTxtBirth">
+              <span class="mobileTxtBirth">
+                生日
+              </span>
+          </div>
+        <div class="insuredBirthEx col-xs-12 text-center">
+          <div class="col-xs-1">
+            <span class="txtBirth" style="padding-top:15px;">生日</span>
+          </div>
+          <div class="col-xs-5">
+            <select [(ngModel)]="thirdCardYear" #thirdYear="ngModel" id="" class="form-control" [disabled]="!thirdCardLock" [ngClass]="{inValidInput: thirdYear.touched && !thirdYear.valid || thirdBdOverAge || thirdCardValidFail || thirdBdEmpty}" (change)="checkRatioAmt(3)" required>
+              <option value="">年</option>
+              <option *ngFor="let year of birthdayYears" value="{{year}}">{{year}}</option>
+            </select>
+          </div>
+          <div class="col-xs-3">
+            <select  [(ngModel)]="thirdCardMonth" #thirdMonth="ngModel" class="form-control" [disabled]="!thirdCardLock" [ngClass]="{inValidInput: thirdMonth.touched && !thirdMonth.valid || thirdBdOverAge || thirdCardValidFail || thirdBdEmpty}" (change)="checkRatioAmt(3)" required>
+              <option value="">月</option>
+              <option *ngFor="let month of birthdayMonths" value="{{month}}">{{month}}</option>
+            </select>
+          </div>
+          <div class="col-xs-3">
+            <select  [(ngModel)]="thirdCardDay" #thirdDay="ngModel" class="form-control birthInput" [disabled]="!thirdCardLock" [ngClass]="{inValidInput: thirdDay.touched && !thirdDay.valid || thirdBdOverAge || thirdCardValidFail || thirdBdEmpty}" (change)="checkRatioAmt(3)" required>
+              <option value="">日</option>
+              <option *ngFor="let day of thirdBdayArr" value="{{day}}">{{day}}</option>
+            </select>
+            <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          </div>
+          <div class="bthInValid">
+          </div>
+          <div class="inValid text-left" *ngIf="thirdYear.touched && !thirdYear.valid && thirdMonth.touched && !thirdMonth.valid && thirdDay.touched && !thirdDay.valid || thirdCardValidFail || thirdBdEmpty">此欄位為必填。</div>
+          <div class="inValid text-left" *ngIf="thirdBdOverAge">{{'被保險人須為'+ insuredMinAge +'歲 ~'+ insuredMaxAge +'歲，有任何問題請來電免費客服專線0800-234-088。'}}</div>
+          <div id="warningWord" class="inValid text-left" *ngIf="!thirdBdOverAge"><span>{{thirdCardWarningWord}}</span></div>
+        </div>
+        </div>
+        <div class="col-xs-12 text-right insuredPriceDivH4">
+          <h4 class="text-right"><span style="color:black;">保費:</span> NT${{thirdCardInsuredPriceWord}}</h4>
+        </div>
+      </div>
+
+      <!--// fourth card-->
+      <div id="insuredOneCard" class="col-lg-6 col-sm-6" style="padding-bottom: 11px;" *ngIf="!owlAnanFour()">
+      <div class="insuredTit col-sm-12 text-left">
+        <div class="col-xs-1">
+          <div class="circleDiv">
+            <p>4</p>
+          </div>
+        </div>
+        <div class="col-xs-11" style="padding-right:0px; float:none;">
+          <i class="fa fa-angle-down dropDown" style="font-size:36px;!important;z-index:999;"></i>
+          <select [disabled]="!fourthCardLock" [(ngModel)]="fourthCardRelationship" (change)="checkRelationShipRepeat(fourthRelation.value, 4)" #fourthRelation="ngModel" class="form-control btn-sm" [ngClass]="{inValidInput: fourthRelation.touched && !fourthRelation.valid || fourthCardValidFail || fourthRelationshipInvalid || fourthRelatedRepeat}" required>
+            <option value="">與要保人關係</option>
+            <ng-container *ngFor="let item of relationShip; let i = index;">
+              <option *ngIf="item.text !== '本人'" [ngValue]="item.value" >{{item.text}}</option>
+            </ng-container>
+          </select>
+          <button [hidden]="true" (click)="deleteThisOne()" class="deleteBtn pull-right">
+            <i class="fa fa-close"></i>
+          </button>
+        </div>
+        <div class="bthInValid col-xs-1">
+        </div>
+        <div class="inValid text-left" *ngIf="fourthRelation.touched && !fourthRelation.valid || fourthCardValidFail || fourthRelationshipInvalid">此欄位為必填。</div>
+        <div class="inValid text-left" *ngIf="fourthRelatedRepeat">您的被保人關係已重複。</div>
+        <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+      </div>
+      <div class="col-xs-12 col-sm-12 text-center">
+        <div class="col-xs-6 col-sm-6" style="padding-left:0px;">
+          <input class=" memberFormInput form-control" (change)="checkDisable('')" [disabled]="!fourthCardLock" #fourthLastName="ngModel" [(ngModel)]="fourthCardLastName" type="text" placeholder="姓" value="" [ngClass]="{inValidInput: fourthLastName.touched && !fourthLastName.valid || fourthCardValidFail || fourthLastNameValiFail}" required>
+          <div class="inValid text-left" style="white-space: nowrap;" *ngIf="fourthLastName.touched && !fourthLastName.valid || fourthCardValidFail || fourthLastNameValiFail">此欄位為必填。</div>
+          <div class="inValid text-left" style="white-space: nowrap;" *ngIf="checkChineseName(fourthLastName.value)">姓名必須是中文。</div>
+        </div>
+        <div class="col-xs-6 col-sm-6" style="padding-right:0px;">
+          <input class=" memberFormInput form-control" (change)="checkDisable('')" [disabled]="!fourthCardLock" type="text" #fourthFirstName="ngModel" [(ngModel)]="fourthCardFirstName" placeholder="名" value="" [ngClass]="{inValidInput: fourthFirstName.touched && !fourthFirstName.valid || fourthCardValidFail || fourthFirstNameValiFail}" required>
+          <div class="inValid text-left" style="white-space: nowrap;" *ngIf="fourthFirstName.touched && !fourthFirstName.valid || fourthCardValidFail || fourthFirstNameValiFail">此欄位為必填。</div>
+          <div class="inValid text-left" style="white-space: nowrap;" *ngIf="checkChineseName(fourthFirstName.value)">姓名必須是中文。</div>
+        </div>
+        <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+      </div>
+      <div class="col-lg-12 text-center pid">
+        <input maxlength="10" [disabled]="!fourthCardLock"  class="insuredPid memberFormInput form-control input-lg" style="text-transform:uppercase" (change)="checkPidByClick(fourthPid.value, 4)" #fourthPid="ngModel" [(ngModel)]="fourthCardPid" type="text" placeholder="身分證字號*" value="" [ngClass]="{inValidInput: fourthPid.touched && !fourthPid.valid || fourthPidTypeWrong || fourthCardValidFail || fourthPidEmpty}" required>
+        <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+        <div class="inValid text-left" style="white-space: nowrap;" *ngIf="fourthPid.touched && !fourthPid.valid && !fourthPidTypeWrong || fourthCardValidFail || fourthPidEmpty">此欄位為必填。</div>
+        <div class="inValid text-left" style="white-space: nowrap;"  *ngIf="fourthPidTypeWrong">{{fourthPidWrongWords}}</div>
+      </div>
+        <div class="bdMobile">
+          <div class="col-xs-12 text-left" id="mobileTxtBirth">
+              <span class="mobileTxtBirth">
+                生日
+              </span>
+          </div>
+        <div class="insuredBirthEx col-xs-12 text-center">
+          <div class="col-xs-1">
+            <span class="txtBirth" style="padding-top:15px;">生日</span>
+          </div>
+          <div class="col-xs-5">
+            <select [disabled]="!fourthCardLock" [(ngModel)]="fourthCardYear" #fourthYear="ngModel" class="form-control" [ngClass]="{inValidInput: fourthYear.touched && !fourthYear.valid || fourthBdOverAge || fourthCardValidFail || fourthBdEmpty}" (change)="checkRatioAmt(4)" required>
+              <option value="">年</option>
+              <option *ngFor="let year of birthdayYears" value="{{year}}">{{year}}</option>
+            </select>
+          </div>
+          <div class="col-xs-3">
+            <select [disabled]="!fourthCardLock" [(ngModel)]="fourthCardMonth" #fourthMonth="ngModel" class="form-control" [ngClass]="{inValidInput: fourthMonth.touched && !fourthMonth.valid || fourthBdOverAge || fourthCardValidFail || fourthBdEmpty}" (change)="checkRatioAmt(4)" required>
+              <option value="">月</option>
+              <option *ngFor="let month of birthdayMonths" value="{{month}}">{{month}}</option>
+            </select>
+          </div>
+          <div class="col-xs-3">
+            <select [disabled]="!fourthCardLock" [(ngModel)]="fourthCardDay" #fourthDay="ngModel" class="form-control birthInput" [ngClass]="{inValidInput: fourthDay.touched && !fourthDay.valid || fourthBdOverAge || fourthCardValidFail || fourthBdEmpty}" (change)="checkRatioAmt(4)" required>
+              <option value="">日</option>
+              <option *ngFor="let day of fourthBdayArr" value="{{day}}">{{day}}</option>
+            </select>
+            <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          </div>
+          <div class="bthInValid">
+          </div>
+          <div class="inValid text-left" *ngIf="fourthYear.touched && !fourthYear.valid && fourthMonth.touched && !fourthMonth.valid && fourthDay.touched && !fourthDay.valid || fourthCardValidFail || fourthBdEmpty">此欄位為必填。</div>
+          <div class="inValid text-left" *ngIf="fourthBdOverAge">{{'被保險人須為'+ insuredMinAge +'歲 ~'+ insuredMaxAge +'歲，有任何問題請來電免費客服專線0800-234-088。'}}</div>
+          <div id="warningWord" class="inValid text-left" *ngIf="!fourthBdOverAge"><span>{{fourthCardWarningWord}}</span></div>
+        </div>
+        </div>
+      <div class="col-xs-12 text-right insuredPriceDivH4">
+        <h4 class="text-right"><span style="color:black;">保費:</span> NT${{fourthCardInsuredPriceWord}}</h4>
+      </div>
+    </div>
+
+      <!--// fifth card-->
+      <div id="insuredOneCard" class="col-lg-6 col-sm-6" *ngIf="!owlAnanFifth()">
+      <div class="insuredTit col-sm-12 text-left">
+        <div class="col-xs-1">
+          <div class="circleDiv">
+            <p>5</p>
+          </div>
+        </div>
+        <div class="col-xs-11" style="padding-right:0px;float:none;height: 102px;">
+          <i class="fa fa-angle-down dropDown" style="font-size:36px;!important;z-index:999;"></i>
+          <select [disabled]="!fifthCardLock" [(ngModel)]="fifthCardRelationship" (change)="checkRelationShipRepeat(fifthRelation.value, 5)" #fifthRelation="ngModel" class="form-control btn-sm" [ngClass]="{inValidInput: fifthRelation.touched && !fifthRelation.valid || fifthCardValidFail || fifthRelationshipInvalid || fifthRelatedRepeat}" required>
+            <option value="">與要保人關係</option>
+            <ng-container *ngFor="let item of relationShip; let i = index;">
+              <option *ngIf="item.text !== '本人'" [ngValue]="item.value" >{{item.text}}</option>
+            </ng-container>
+          </select>
+          <div class="bthInValid col-xs-1">
+          </div>
+          <div class="inValid text-left" *ngIf="fifthRelation.touched && !fifthRelation.valid || fifthCardValidFail || fifthRelationshipInvalid">此欄位為必填。</div>
+          <div class="inValid text-left" *ngIf="fifthRelatedRepeat">您的被保人關係已重複。</div>
+          <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+      </div>
+      <div class="col-xs-12 col-sm-6"></div>
+      <div class="col-xs-12 col-sm-12 text-center">
+        <div class="col-xs-6 col-sm-6" style="padding-left:0px;">
+          <input [disabled]="!fifthCardLock" class=" memberFormInput form-control" (change)="checkDisable('')" [(ngModel)]="fifthCardLastName" #fifthLastName="ngModel" [ngClass]="{inValidInput: fifthLastName.touched && !fifthLastName.valid || fifthCardValidFail || fifthLastNameValiFail}" type="text" placeholder="姓" value="" required>
+          <div class="inValid text-left" style="white-space: nowrap;" *ngIf="fifthLastName.touched && !fifthLastName.valid || fifthCardValidFail || fifthLastNameValiFail">此欄位為必填。</div>
+          <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(fifthLastName.value)">姓名必須是中文。</div>
+        </div>
+        <div class="col-xs-6 col-sm-6" style="padding-right:0px;">
+          <input [disabled]="!fifthCardLock" class=" memberFormInput form-control" (change)="checkDisable('')" [(ngModel)]="fifthCardFirstName" #fifthFirstName="ngModel" type="text" [ngClass]="{inValidInput: fifthFirstName.touched && !fifthFirstName.valid || fifthCardValidFail || fifthFirstNameValiFail}" placeholder="名" value="" required>
+          <div class="inValid text-left" style="white-space: nowrap;" *ngIf="fifthFirstName.touched && !fifthFirstName.valid || fifthCardValidFail || fifthFirstNameValiFail">此欄位為必填。</div>
+          <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(fifthFirstName.value)">姓名必須是中文。</div>
+        </div>
+        <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+      </div>
+      <div class="col-lg-12 text-center pid">
+        <input [disabled]="!fifthCardLock" maxlength="10" class="insuredPid memberFormInput form-control input-lg" style="text-transform:uppercase" (change)="checkPidByClick(fifthPid.value, 5)" [(ngModel)]="fifthCardPid" #fifthPid="ngModel" [ngClass]="{inValidInput: fifthPid.touched && !fifthPid.valid || fifthPidTypeWrong || fifthCardValidFail || fifthPidEmpty}" type="text" placeholder="身分證字號*" value="" required>
+        <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+        <div class="inValid text-left" style="white-space: nowrap;" *ngIf="fifthPid.touched && !fifthPid.valid && !fifthPidTypeWrong || fifthCardValidFail || fifthPidEmpty">此欄位為必填。</div>
+        <div class="inValid text-left" style="white-space: nowrap;" *ngIf="fifthPidTypeWrong">{{fifthPidWrongWords}}</div>
+      </div>
+        <div class="bdMobile">
+          <div class="col-xs-12 text-left" id="mobileTxtBirth">
+              <span class="mobileTxtBirth">
+                生日
+              </span>
+          </div>
+        <div class="insuredBirthEx col-xs-12 text-center">
+          <div class="col-xs-1">
+            <span class="txtBirth" style="padding-top:15px;">生日</span>
+          </div>
+          <div class="col-xs-5">
+            <select [disabled]="!fifthCardLock" name="" [(ngModel)]="fifthCardYear" class="form-control" (change)="checkRatioAmt(5)" #fifthYear="ngModel" [ngClass]="{inValidInput: fifthYear.touched && !fifthYear.valid || fifthBdOverAge || fifthCardValidFail || fifthBdEmpty}" required>
+              <option value="">年</option>
+              <option *ngFor="let year of birthdayYears" value="{{year}}" >{{year}}</option>
+            </select>
+          </div>
+          <div class="col-xs-3">
+            <select [disabled]="!fifthCardLock" name="" [(ngModel)]="fifthCardMonth"  class="form-control" (change)="checkRatioAmt(5)"  #fifthMonth="ngModel" [ngClass]="{inValidInput: fifthMonth.touched && !fifthMonth.valid || fifthBdOverAge || fifthCardValidFail || fifthBdEmpty}" required>
+              <option value="">月</option>
+              <option *ngFor="let month of birthdayMonths" value="{{month}}" >{{month}}</option>
+            </select>
+          </div>
+          <div class="col-xs-3">
+            <select [disabled]="!fifthCardLock" name="" [(ngModel)]="fifthCardDay" class="form-control birthInput"  (change)="checkRatioAmt(5)"  #fifthDay="ngModel" [ngClass]="{inValidInput: fifthDay.touched && !fifthDay.valid || fifthBdOverAge || fifthCardValidFail || fifthBdEmpty}" required>
+              <option value="">日</option>
+              <option *ngFor="let day of fifthBdayArr" value="{{day}}">{{day}}</option>
+            </select>
+            <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          </div>
+          <div class="bthInValid">
+          <div class="inValid text-left" *ngIf="fifthYear.touched && !fifthYear.valid && fifthMonth.touched && !fifthMonth.valid && fifthDay.touched && !fifthDay.valid || fifthCardValidFail || fifthBdEmpty">此欄位為必填。</div>
+          <div class="inValid text-left" *ngIf="fifthBdOverAge">{{'被保險人須為'+ insuredMinAge +'歲 ~'+ insuredMaxAge +'歲，有任何問題請來電免費客服專線0800-234-088。'}}</div>
+          <div id="warningWord" class="inValid text-left" *ngIf="!fifthBdOverAge"><span>{{fifthCardWarningWord}}</span></div>
+          </div>
+        </div>
+        </div>
+      <div class="col-xs-12 text-right insuredPriceDivH4">
+        <h4 class="text-right"><span style="color:black;">保費:</span> NT${{fifthCardInsuredPriceWord}}</h4>
+      </div>
+    </div>
+
+      <!--// sixth card-->
+      <div id="insuredOneCard" class="col-lg-6 col-sm-6" *ngIf="!owlAnanSixth()" style="padding-bottom:11px;">
+        <div class="insuredTit col-sm-12 text-left">
+          <div class="col-xs-1">
+            <div class="circleDiv">
+              <p>6</p>
+            </div>
+          </div>
+          <div class="col-xs-11" style="padding-right:0px;float:none;">
+            <i class="fa fa-angle-down dropDown" style="font-size:36px;!important;z-index:999;"></i>
+            <select [disabled]="!sixthCardLock" [(ngModel)]="sixthCardRelationship" (change)="checkRelationShipRepeat(sixthRelation.value, 6)" #sixthRelation="ngModel" class="form-control btn-sm" [ngClass]="{inValidInput: sixthRelation.touched && !sixthRelation.valid || sixthCardValidFail || sixthRelationshipInvalid || sixthRelatedRepeat}" required>
+              <option value="">與要保人關係</option>
+              <ng-container *ngFor="let item of relationShip; let i = index;">
+                <option *ngIf="item.text !== '本人'" [ngValue]="item.value" >{{item.text}}</option>
+              </ng-container>
+            </select>
+            <button [hidden]="true" (click)="deleteThisOne()" class="deleteBtn pull-right">
+              <i class="fa fa-close"></i>
+            </button>
+          </div>
+          <div class="bthInValid col-xs-1">
+          </div>
+          <div class="inValid text-left" *ngIf="sixthRelation.touched && !sixthRelation.valid || sixthCardValidFail  || sixthRelationshipInvalid">此欄位為必填。</div>
+          <div class="inValid text-left" *ngIf="sixthRelatedRepeat">您的被保人關係已重複。</div>
+          <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+        </div>
+        <div class="col-xs-12 col-sm-12 text-center">
+          <div class="col-xs-6 col-sm-6" style="padding-left:0px;">
+            <input [disabled]="!sixthCardLock" (change)="checkDisable('')" class=" memberFormInput form-control" type="text" [(ngModel)]="sixthCardLastName" #sixthLastName="ngModel" placeholder="姓" [ngClass]="{inValidInput: sixthLastName.touched && !sixthLastName.valid || sixthCardValidFail || sixthLastNameValidFail}" value="" required>
+            <div class="inValid text-left" style="white-space: nowrap;"  *ngIf="sixthLastName.touched && !sixthLastName.valid || sixthNameValidFai || sixthLastNameValidFail">此欄位為必填。</div>
+            <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(sixthLastName.value)">姓名必須是中文。</div>
+          </div>
+          <div class="col-xs-6 col-sm-6" style="padding-right:0px;">
+            <input [disabled]="!sixthCardLock" (change)="checkDisable('')" class=" memberFormInput form-control" type="text" [(ngModel)]="sixthCardFirstName" #sixthFirstName="ngModel" placeholder="名" [ngClass]="{inValidInput: sixthFirstName.touched && !sixthFirstName.valid || sixthCardValidFail || sixthFirstNameValidFail}" value="" required>
+            <div class="inValid text-left" style="white-space: nowrap;" *ngIf="sixthFirstName.touched && !sixthFirstName.valid || sixthNameValidFail || sixthFirstNameValidFail">此欄位為必填。</div>
+            <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(sixthFirstName.value)">姓名必須是中文。</div>
+          </div>
+          <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+        </div>
+        <div class="col-lg-12 text-center pid">
+          <input [disabled]="!sixthCardLock" maxlength="10" class="insuredPid memberFormInput form-control input-lg" (change)="checkPidByClick(sixthPid.value, 6)" style="text-transform:uppercase" [(ngModel)]="sixthCardPid" #sixthPid="ngModel" type="text" [ngClass]="{inValidInput: sixthPid.touched && !sixthPid.valid || sixthPidTypeWrong || sixthCardValidFail || sixthPidEmpty}" placeholder="身分證字號*" value="" required>
+          <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+          <div class="inValid text-left" style="white-space: nowrap;"  *ngIf="sixthPid.touched && !sixthPid.valid && !sixthPidTypeWrong || sixthPidEmpty">此欄位為必填。</div>
+          <span class="inValid text-left" *ngIf="sixthPidTypeWrong" style="float:left;">{{sixthPidWrongWords}}</span>
+        </div>
+        <div class="bdMobile">
+          <div class="col-xs-12 text-left" id="mobileTxtBirth">
+              <span class="mobileTxtBirth">
+                生日
+              </span>
+          </div>
+          <div class="insuredBirthEx col-xs-12 text-center">
+            <div class="col-xs-1">
+              <span class="txtBirth" style="padding-top:15px;">生日</span>
+            </div>
+            <div class="col-xs-5">
+              <select [disabled]="!sixthCardLock" [(ngModel)]="sixthCardYear" id="" class="form-control" #sixthYear="ngModel" (change)="checkRatioAmt(6)" [ngClass]="{inValidInput: sixthYear.touched && !sixthYear.valid || sixthBdOverAge || sixthCardValidFail || sixthBdEmpty}" required>
+                <option value="">年</option>
+                <option *ngFor="let year of birthdayYears" value="{{year}}">{{year}}</option>
+              </select>
+            </div>
+            <div class="col-xs-3">
+              <select [disabled]="!sixthCardLock" [(ngModel)]="sixthCardMonth" class="form-control" #sixthMonth="ngModel" (change)="checkRatioAmt(6)" [ngClass]="{inValidInput: sixthMonth.touched && !sixthMonth.valid || sixthBdOverAge || sixthCardValidFail || sixthBdEmpty}" required>
+                <option value="">月</option>
+                <option *ngFor="let month of birthdayMonths" value="{{month}}">{{month}}</option>
+              </select>
+            </div>
+            <div class="col-xs-3">
+              <select [disabled]="!sixthCardLock" [(ngModel)]="sixthCardDay" class="form-control birthInput" #sixthDay="ngModel" (change)="checkRatioAmt(6)" [ngClass]="{inValidInput: sixthDay.touched && !sixthDay.valid || sixthBdOverAge || sixthCardValidFail || sixthBdEmpty}" required>
+                <option value="">日</option>
+                <option *ngFor="let day of sixthBdayArr" value="{{day}}">{{day}}</option>
+              </select>
+              <span class="pull-right"><img  *ngIf="false" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
+            </div>
+            <div class="bthInValid">
+            </div>
+            <div class="inValid text-left" *ngIf="sixthYear.touched && !sixthYear.valid && sixthMonth.touched && !sixthMonth.valid && sixthDay.touched && !sixthDay.valid || sixthCardValidFail || sixthBdEmpty">此欄位為必填。</div>
+            <div class="inValid text-left" *ngIf="sixthBdOverAge">{{'被保險人須為'+ insuredMinAge +'歲 ~'+ insuredMaxAge +'歲，有任何問題請來電免費客服專線0800-234-088。'}}</div>
+            <div id="warningWord" class="inValid text-left" *ngIf="!sixthBdOverAge"><span>{{sixthCardWarningWord}}</span></div>
+          </div>
+        </div>
+        <div class="col-xs-12 text-right insuredPriceDivH4">
+          <h4 class="text-right"><span style="color:black;">保費:</span> NT${{sixthCardInsuredPriceWord}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

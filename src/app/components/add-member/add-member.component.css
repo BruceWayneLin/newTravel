@@ -1,0 +1,814 @@
+.titleForm h2 {
+    text-transform: uppercase;
+    font-size: 24px;
+    color: #e84466;
+    margin-bottom: 50px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.2;
+    text-rendering: optimizeLegibility;
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+    text-align: left;
+    border-bottom: 1px solid #e84466;
+    padding-bottom: 20px;
+}
+
+h2.formTitTxt{
+    margin: 0;
+    margin-bottom: 0.5em;
+    color: #000000;
+    font-size: 22px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.2;
+    text-rendering: optimizeLegibility;
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+    text-transform: uppercase;
+}
+
+.memberFormInput.form-control.input-lg {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 8px;
+    padding: 12px 15px;
+    font-size: 18px;
+    line-height: 1.42857143;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.paddingExtra {
+    padding-bottom: 35px;
+}
+
+.txtSexuality {
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+    color: #808080;
+    font-size: 18px;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.birthContain select.form-control {
+    width: 100%!important;
+}
+
+.txtBirth {
+    position: absolute;
+    left: 0px;
+    padding-top: 20px;
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+    color: #808080;
+    font-size: 18px;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.birthContain .col-xs-3 {
+    padding-left: 0px;
+}
+
+.birthContain {
+    margin-top:15px;
+}
+
+.personalContent {
+    padding: 0px;
+}
+
+.personalContentDiv .personalContent {
+    padding-top: 25px;
+}
+
+.insuredTit {
+    padding-left: 20px;
+    padding-right: 15px;
+}
+
+.insuredBirthEx {
+    padding-right: 0px;
+    padding-legt: 0px;
+}
+
+.insuredPersonalInfo {
+    padding-bottom: 50px;
+}
+
+.insuredPid{
+    margin-bottom: 10px;
+}
+
+#insuredOneCard{
+    border-style:dotted;
+    height: 100%;
+    min-height: 480px;
+}
+
+.plusBtn {
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.fa-plus {
+    color: white;
+    margin-top: 10px;
+}
+
+.plutBtn {
+    background-color: #e84466;
+    color: white;
+}
+
+.rules h2 {
+    padding-left: 13%;
+    font-size: 22px;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #000000;
+    font-size: 24px;
+    font-style: normal;
+    line-height: 1;
+    text-rendering: optimizeSpeed;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.agreement {
+    color: #808080;
+    min-height: 21px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.6;
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.square {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0 !important;
+    width: 20px;
+    height: 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 15px;
+}
+
+.roundDiv {
+    text-align: left;
+    margin: 20px auto;
+    height: 80px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    padding: 15px 50px;
+    border: 1px solid #cccccc;
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 400;
+    width: 840px;
+}
+
+.goingCheckInfo {
+    width: 400px;
+    background-color: #e84466;
+    display: inline;
+    margin-bottom: 80px;
+    margin-right: 15px;
+}
+
+.goingCheckInfo:disabled {
+    width: 60%;
+    background: #C8C8C8;
+    opacity: 0.6;
+    cursor: not-allowed;
+    color: #000000;
+    border: 1px solid #ccc;
+    padding-bottom: 30px;
+    cursor: pointer;
+    color: #eeeeee;
+    line-height:1px;
+    height: 40px;
+    font-size: 22px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    border-color: #eeeeee;
+    margin-bottom: 50px;
+}
+
+.priceHead{
+    text-align: right;
+    display: inline;
+    padding-top: 10px;
+    margin-left: 33px;
+}
+
+.priceHead span {
+    font-weight: normal;
+}
+
+.insuredPriceDivH4 span {
+    color: black;
+}
+
+.priceHead h3 {
+    color: #e84466;
+    font-size: 32px;
+    white-space: nowrap;
+    display:inline;
+}
+
+.priceHead h4 {
+    text-align: right;
+}
+
+.countTotal {
+    background-color: #e84466;
+    color: white;
+}
+
+input.memberFormInput.form-control.input-lg[disabled] {
+    background-color: #eee;
+    opacity: 1;
+}
+
+.tobeHide {
+    position: absolute;
+    z-index: -9;
+    right: 10px;
+    width: 100%;
+}
+
+.addInsuredPP {
+}
+
+.addInsuredPP h4{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.addInsuredPP .addDoll {
+    padding-left: 25px;
+}
+
+.addInsuredPP .addDoll i.fa-plus {
+    color: black;
+    font-size: 30px;
+    margin-top: 45px;
+}
+
+.anan {
+    margin-top: 22px;
+}
+
+.addInsuredPP i.fa-plus {
+    color: black;
+}
+
+.priceHead span.pull-left {
+    font-size: 20px;
+}
+
+.circleDiv {
+    background-color: #ccc;
+    border-radius: 30px;
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    text-align: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 45px;
+    position: relative;
+    top: -10px;
+    margin-top: 10px;
+}
+
+.circleDiv p {
+    font-size: 30px;
+    color: white;
+}
+
+.insuredTit .col-xs-2 {
+    padding: 0px;
+}
+
+.minusBtn {
+    background-color: grey;
+    color: white;
+    height: 40px;
+    padding-top: 7px;
+    width: 60px;
+}
+
+.plusBtn {
+    background-color: #e54a67;
+    height: 40px;
+    padding-top: 7px;
+    width: 60px;
+}
+
+.plusBtn i {
+    color: white!important;
+}
+
+.anan {
+    max-width: 60px;
+}
+
+.kai {
+    max-width: 80px;
+}
+
+.kaiD {
+    position: relative;
+    top: 5px;
+}
+
+.priceTotalDiv {
+    border-bottom: #ccc dotted;
+    padding-bottom: 5px;
+    position: relative;
+    top: -70px;
+    /*width: 520px;*/
+}
+
+.noneTit {
+    margin-bottom: 25px;
+}
+
+.insuredPriceDivH4 h4 {
+    color: #e84466;
+    font-size: 20px;
+    font-weight:normal;
+}
+
+.insuredPriceDivH4 h4 span{
+    color: #8c8c8c;
+    font-size: 20px;
+}
+
+button.goingCheckInfo {
+    color: white;
+}
+
+.app-index .whereDgo h2 {
+    margin-bottom: 10px;
+}
+
+span.formSubTxt {
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+    color: #808080;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.errImg {
+    position: absolute;
+    top: 5px;
+    padding-left: 10px;
+}
+
+.inValid {
+    color: #e84466;
+    font-size: 14px;
+    padding: 5px;
+    padding-top: 0px;
+    padding-left: 20px;
+    position: relative;
+    top: -5px;
+    z-index: -1;
+}
+
+@media screen and (max-width: 500px){
+    .bdMobile .inValid{
+        white-space: initial!important;
+        position:relative;
+        left:-10px;
+        top: -25px;
+    }
+    .row.addPPlMinusPlus {
+        margin-top: 50px;
+    }
+}
+
+.lastNameDiv {
+    padding-left:0px;
+}
+
+.firstNameDiv {
+    padding-right:0px;
+}
+
+.insuredContent {
+    padding: 0px 25px;
+}
+
+.insuredBoxAlone {
+    border-bottom: 1px solid #e84466;
+    width: 78%;
+    display: block;
+    margin: 0 auto;
+    height: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+    #insuredOneCard {
+        height: 410px;
+    }
+    .roundDiv {
+        width: 100%;
+        height:100%;
+        margin-top: 60px;
+    }
+    .agreement {
+        font-size: 10px;
+    }
+    .rules h2 {
+        padding-left: 0px;
+        font-size: 14px;
+    }
+    .goingCheckInfo {
+        width: 100%;
+    }
+    .lastNameDiv {
+        padding-left:0px;
+        padding-right: 0px;
+
+    }
+    .insuredContent {
+        padding: 0px;
+        height: 85px;
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .insuredPersonalInfo {
+        margin-top: 60px;
+    }
+
+    .insuredBirthEx div{
+        padding: 5px;
+    }
+    .insuredBirthEx .col-xs-1{
+        display: none;
+    }
+    #insuredOneCard {
+        min-height: 385px;
+        padding: 15px;
+    }
+    .firstNameDiv {
+        padding-right:0px;
+        padding-left:0px;
+    }
+    .square {
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
+    .noneTit h5 {
+        text-align: center;
+    }
+    .insuredPid.memberFormInput.form-control.input-lg {
+        margin: 10px auto;
+        position: relative;
+        top: 7px;
+        padding-top: 0px;
+    }
+    .birthInput {
+        width:80px;
+    }
+    .memberFormInput.form-control.input-lg {
+        margin-bottom: 7px;
+    }
+    .roundDiv {
+        margin-top: 20px;
+    }
+    .rules h2 {
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 14px;
+    }
+}
+
+.insuredBtnArea input {
+    display: inline-block;
+    width: 100px;
+}
+
+.insuredBtnArea label {
+    margin-left: 15px;
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+    cursor: pointer;
+    width: 100px;
+    position: relative;
+    top: 23px;
+}
+
+.insuredBtnArea label .widthFdsSpanTwo {
+    position: relative;
+    width: 100px;
+    white-space: nowrap;
+    top: -45px;
+    margin-left: 24px;
+
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.insuredBtnArea label .widthFdsSpanOne {
+    position: relative;
+    width: 100px;
+    white-space: nowrap;
+    margin-left:15px;
+    top: -45px;
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.insuredBtnArea span {
+    border: none;
+    font-size: 22px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    padding-right: 50px;
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.insuredBtnArea .col-xs-8 .titleSpan{
+    position: relative;
+    top: -20px;
+    font-size: 28px;
+}
+
+div.row.memberTitle {
+    margin-top: 130px;
+}
+
+.insuredBtnArea input:checked {
+    background-color: #e84466;
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+    color: #ffffff;
+}
+
+.insuredBtnArea input:checked+span {
+    border: none;
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+    color: #ffffff;
+}
+
+.insuredBtnArea {
+    border-bottom: 1px solid #e84466;
+    padding-bottom: 50px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.plusFont {
+    position: relative;
+    left: 98px;
+    top: -42px;
+    font-size: 18px;
+}
+
+.annaDiv img{
+    width: 45px;
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+
+.appendDollArea {
+    position: relative;
+    left: 50px;
+    top: 10px;
+    padding: 0px;
+}
+
+.img-grey {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+.inValidInput {
+    border: 1px solid #e84466!important;
+}
+
+#insuredOneCard .col-sm-12, #insuredOneCard .col-lg-12, #insuredOneCard .insuredBirthEx {
+    /*min-height: 85px!important;*/
+}
+
+.insuredPriceDivH4 h4 {
+    margin: 0px;
+}
+
+@media screen and (max-width: 500px){
+    #insuredContainer {
+        margin-top: 15px;
+    }
+    .tobeHide .col-xs-6 {
+        width: 100%;
+    }
+    .tobeHide .col-xs-6 .priceTotalDiv{
+        width: 98%;
+    }
+    .insuredTit .col-xs-11 {
+        width: 98%;
+        padding: 0px;
+        margin-top: 10px;
+        top: 0px;
+    }
+    .insuredPid.memberFormInput {
+        top: -18px!important;
+        margin-bottom: 0px!important;
+        padding-bottom: 0px!important;
+    }
+    .pid .inValid {
+        top: -12px;
+    }
+    .txtBirth {
+        display: none;
+    }
+    .col-xs-12.col-sm-12.text-center{
+        top: -13px;
+        margin-top: 3px;
+    }
+    #insuredOneCard .col-lg-12.text-center {
+        position: static!important;
+    }
+    #insuredOneCard {
+        height: 510px;
+        padding: 0px;
+    }
+    .bthInValid {
+        width: 100%;
+        white-space: nowrap;
+        display: inline-flex;
+        height: 0px;
+    }
+    .insuredBirthEx {
+        top: -15px;
+        height: 65px;
+    }
+    .insuredTit {
+        padding-right: 10px;
+    }
+    .bdMobile {
+        position: relative;
+        top: -17px;
+    }
+    .bdMobile .bthInValid {
+        position: relative;
+        top: 0px;
+        padding-left: 15px;
+    }
+    .insuredPriceDivH4 {
+        position: relative;
+        top: -45px!important;
+    }
+    #mobileTxtBirth {
+        display: initial!important;
+        margin-bottom: 5px;
+    }
+}
+
+@media screen and (max-width:768px){
+    .insuredPriceDivH4 {
+        top: 3px!important;
+    }
+    #insuredOneCard {
+        min-height: 500px!important;
+    }
+}
+
+#mobileTxtBirth {
+    display: none;
+    margin-bottom: 5px;
+}
+
+.mobileTxtBirth {
+    font-size: 18px;
+    color: grey;
+    padding: 15px;
+}
+
+@media screen and (max-width: 1025px) and (min-width: 768px) {
+    .tobeHide .col-xs-6 {
+        width: 100%!important;
+    }
+    .priceTotalDiv {
+        width: 98%;
+    }
+    .col-lg-12.text-center.pid {
+        position: static!important;
+    }
+}
+
+@media screen and (max-width: 768px) and (min-width: 500px) {
+    .tobeHide .col-xs-6 {
+        width: 100%!important;
+    }
+    .priceTotalDiv {
+       width: 98%;
+    }
+    .col-lg-12.text-center.pid {
+        position: static!important;
+    }
+    .insuredInfoAppend {
+        padding-right:0px!important;
+        padding-left:0px!important;
+    }
+}
+
+@media screen and (max-width: 990px) and (min-width: 768px) {
+    .insuredTit .col-xs-11{
+        width:100%!important;
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-top:10px;
+    }
+    .insuredBirthEx .col-xs-3, .insuredBirthEx .col-xs-5 {
+        padding:0px;
+    }
+    .insuredBirthEx .col-xs-3 {
+        width: 22%!important;
+    }
+    span.txtBirth {
+        font-size:14px;
+        padding-left:0px;
+    }
+    .insuredBirthEx .inValid{
+    }
+    #insuredOneCard{
+        height: 100%!important;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .tobeHide .col-xs-6 {
+        width: 49%!important;
+    }
+}
+
+#warningWord {
+  color: #01a29a;
+}
+
+.dropDown {
+    position: absolute;
+    top: 55%;
+    left: 85%;
+    color: #ddd;
+    pointer-events:none!important;
+}
+
+.bthInValid.col-xs-1 {
+    width: 100%;
+    text-align: left;
+    top: -10px;
+    padding-left: 0px;
+}
+
+.col-lg-12.text-center.pid {
+    display: inline-block;
+}
+
+.bthInValid .inValid.text-left {
+    padding: 15px;
+}
+
+.col-xs-11 {
+    width: 100%!important;
+    padding: 0px;
+}
+
+#insuredOneCard .col-sm-12, #insuredOneCard .col-lg-12 {
+    min-height: 90px!important;
+}
+
+#insuredOneCard .insuredTit.col-sm-12.text-left {
+    min-height: 125px!important;
+}
+
+#insuredOneCard .insuredBirthEx {
+    min-height: 110px!Important;
+}
+
+@media screen and (max-width:500px) {
+    #firstDropDown {
+      top: 45%;
+    }
+    .insuredBirthEx .col-xs-3 {
+      width: 28%!important;
+    }
+}

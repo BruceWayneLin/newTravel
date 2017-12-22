@@ -1,0 +1,1433 @@
+.topSelect.form-control {
+  width: 240px;
+}
+
+.packageContent ul li {
+  list-style: none;
+  text-align: left;
+  margin: 0 auto;
+}
+
+.packageContent h2 {
+  margin-bottom: 0px;
+}
+
+.packUl {
+  margin: 0 auto;
+}
+
+.img-center {margin:0 auto;}
+
+.secondaryPackageCon {
+  padding-top: 15px;
+  height: auto;
+  max-width: 930px!important;
+}
+
+.secondaryPackageCon ul li {
+  list-style: none;
+  text-align: center;
+}
+
+.toUp {
+
+}
+
+.col-lg-12.detailUl {
+  text-align: left;
+}
+
+.detailUl ul li {
+  font-size: 18px;
+}
+
+.col-lg-12.detailUl.text-center {
+  margin-bottom: 10px;
+  border-bottom-color: none;
+}
+
+.customPkg h4 {
+  position: relative;
+  top: 15px;
+}
+
+.detailUl {
+  padding: 15px;
+}
+
+.detailDesc ul li {
+  font-size: 18px;
+}
+
+.detailDesc {
+  margin-top: 25px;
+}
+
+.packageTit h2 {
+  margin-top: 20px;
+}
+
+.packageTit ul {
+  /*position: relative;*/
+  /*top: -5px;*/
+  margin-left: 15%;
+}
+
+.moreDays {
+  background-color: white;
+  color: black;
+  width: 185px;
+}
+
+.feltNotEnough {
+  color: #e84466;
+  top: 15px;
+  left: 13%;
+  position: relative;
+  font-size: 20px;
+}
+
+.feltNotEnoughBtn {
+  font-size: 18px;
+  color: #e84466;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.customPkg {
+  padding: 45px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.customPkg button {
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  background-color: white;
+  border: 1px solid #ccc;
+  color: #ccc;
+  width: 30px;
+  height: 30px;
+}
+
+.customPkg span {
+  font-size: 18px;
+}
+
+.customPkg input {
+  width: 200px;
+  display: inline-block;
+  margin: 5px 10px;
+  position: relative;
+  top: 0px;
+}
+
+.customPkg input:checked {
+  border: 1px solid #e84466;
+}
+
+.insItemUl {
+  font-size: 14px;
+  white-space: nowrap;
+  padding-left: 0px;
+  margin: 0px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  color: #808080;
+}
+
+.pkgLong .col-xs-12:first-child {
+  margin-top: 25px;
+}
+
+.detailLA {
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.customPkg input {
+  width: 70%;
+}
+
+.customPkg ul li {
+  margin-top: 35px;
+  margin-bottom: 30px;
+  position: relative;
+  top: -15px;
+}
+
+.pkgLong ul {
+  position: absolute;
+  top: -280px;
+}
+
+.pkgLong ul li{
+ padding: 2px 0px;
+ font-size: 15px;
+}
+
+.customPkg span {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.customPkg .col-xs-3 {
+  padding: 0px;
+}
+
+.customPkg td {
+  min-width: 150px;
+}
+
+.customPkg .xBtn {
+  max-width: 28px!important;
+}
+
+.customPkg .col-xs-3:first-child {
+  max-width: 200px;
+}
+
+.talkBubble {
+  min-height: 250px;
+  position: relative;
+  border: 1px solid #ccc;
+  top: -37px;;
+  width: 100%;
+}
+
+#triangle-up {
+  background: url('/assets/images/pkg/triangle2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 22px;
+  position: relative;
+  top: 0px;
+  left: 80px;
+  z-index: 99;
+}
+
+.feltNotEnContain {
+  padding: 0px 8%;
+}
+
+.lastButtonAndGoInsured {
+  width: 400px;
+  border: 1px solid #e84466;
+}
+
+.logo {
+  max-width: 100px;
+  height: auto;
+  float: right;
+  margin: 20px 30%;
+  margin-top: 15px;
+}
+
+
+.featureDescH3 {
+  color: #e84466;
+  font-weight: normal;
+}
+
+.longTri {
+  position: absolute;
+  width: 50px;
+  top: 56px;
+  left: 46%;
+}
+
+.longTri img {
+  height: 30px;
+}
+
+#calendarTable td .checkBtn {
+  color: #5cb85c;
+  font-size: 32px;
+  position: relative;
+  top: -25px;
+  left: 33px;
+}
+
+#calendarTable .checkBtnTxt {
+  color: #e84466;
+  position: relative;
+  top: -8px;
+  left: 33%;
+  font-weight: normal;
+}
+
+#calendarTable td h4 {
+  position: absolute;
+}
+
+input[type="radio"]:checked {
+  border: 1px solid #e84466;
+  color: #e84466;
+  font-weight: normal;
+}
+
+label span i {
+  color: transparent;
+}
+
+:checked + span {
+  color: #e84466!important;
+}
+
+:checked + span i   {
+  color: #e84466!important;
+}
+
+label {
+  width: 100%;
+  top: 33px;
+  font-weight: normal;
+}
+
+label.purposeLabel span {
+  position: absolute;
+  font-size: 18px;
+  top: 15px;
+  left: 25%;
+  color: #808080;
+  font-weight: normal;
+}
+
+.purposeLabelCol3 {
+  padding: 0px;
+  padding-right: 5px;
+}
+
+.secondaryPackageCon .amtName {
+  font-size: 18px;
+  white-space: nowrap;
+  position: absolute;
+  margin-top: 17px;
+  margin-left: -105px;
+  z-index: 99;
+}
+
+.packageContent {
+  margin-top: 20px;
+  max-width: 930px;
+}
+
+input[type="button"]:checked {
+  border: 1px solid #e84466;
+  color: #e84466;
+  font-weight: normal;
+}
+
+.specialPkgLabel input:checked+span {
+  color: #e84466;
+}
+
+.specialPkgLabel span {
+  position: absolute;
+  top: 18px;
+  font-size: 18px;
+  left: 30%;
+  pointer-events: none;
+}
+
+.normalH3 {
+  color: #000;
+  font-size: 20px;
+  margin-top: 0px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  font-weight: 400;
+}
+
+.specialPkgLabel.toCusBtn span {
+  left: 20px;
+  top: 17px;
+}
+
+.table td {
+  width: 14%!important;
+  display:inline-block;
+}
+
+.table th {
+  width: 14%!important;
+  display:inline-block;
+}
+
+.modifiedDays {
+  background-color: white;
+  color: black;
+  width: 185px;
+  margin-top: 15px;
+}
+
+.diffDayH1 {
+  color: #e84466;
+  position: relative;
+  top: 5px;
+  margin-top: 30px;
+  padding-right: 5px;
+  padding-bottom: 15px;
+}
+
+.diffDayH1 span {
+  color: black;
+  font-size: 18px;
+}
+
+#tableEndDivRow {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  position: relative;
+  top: -60px;
+}
+
+#tableEndDivRow h3 {
+  position: relative;
+  top: 15px;
+}
+
+#feltNotEnoughCol {
+
+}
+
+#calendarTable td button:disabled {
+  color: #efefef;
+}
+
+.pkgLong .talkBubble li {
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.myFavCon {
+  margin: 0px -3px;
+  font-size: 18px;
+}
+
+.myFavCon a {
+  margin: 5px;
+  color: #01a29a;
+}
+
+.selectStartBakH2 {
+  margin-bottom: 15px;
+  margin-top: 25px;
+}
+
+.calendarFirstH3 {
+  font-size: 16px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  color: #808080;
+  line-height: 1.5;
+  position: absolute;
+  left: 46%;
+}
+
+.calendarSecH3 {
+  font-size: 16px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  color: #808080;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.weekDayText {
+  font-size: 16px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  color: #808080;
+}
+
+td.weekDayText {
+  font-size: 16px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  color: #808080;
+  margin-bottom: 20px;
+}
+
+#land {
+  list-style: none;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background-color: transparent;
+  min-height: 50px;
+  border: 1px solid #dddddd;
+  width: 25%;
+  font-size: 18px;
+  padding: 1%;
+  padding-left: 31px;
+  max-height: 50px;
+  margin-right:10px;
+}
+
+.customSelectUi li:first-child {
+  border: none;
+  font-size: 18px;
+  padding: 5px;
+  padding-bottom: 9px;
+}
+
+.customSelectUi li:first-child:hover {
+  background-color: white;
+  color: #555;
+}
+
+.customSelectUi li:nth-child(2){
+  border: 1px solid #e84466;
+  border-bottom: none;
+  margin-top: 10px;
+}
+
+.customSelectUi li:nth-child(3){
+  border: 1px solid #e84466;
+  border-bottom: none;
+  border-top: none;
+}
+
+.customSelectUi li:last-child {
+  border-bottom: 1px solid #e84466;
+}
+
+
+.customSelectUi li {
+  background-color: white;
+  position: relative;
+  z-index: 99;
+  font-size: 18px;
+  padding: 5px;
+  border: 1px solid #e84466;
+  border-top: none;
+  border-bottom: none;
+}
+
+.customSelectUi li:hover {
+  background-color: #e84466;
+  color: white;
+}
+
+
+#calendarTableDiv.container {
+  max-width: 930px!important;
+}
+
+.selPkgH2 {
+  margin-bottom: 20px!important;
+}
+
+.imgSrcH3Item {
+  color: #000000;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 1.4;
+  margin-top: 0px;
+  text-rendering: optimizeSpeed;
+  text-transform: uppercase;
+}
+
+.finalPrice {
+  margin: -25px;
+  font-size: 30px;
+  margin-bottom: 25px;
+  color: #e84466;
+  font-weight: 400;
+  position: relative;
+  top: 25px;
+  z-index: -1;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+#tableEndDivRow .col-sm-12 {
+  width: 930px;
+  padding-right: 55px;
+  position: relative;
+  top: 30px;
+}
+
+ a {
+  cursor: pointer!important;
+}
+
+.container.secondaryPackageCon.toggleDivHeight {
+  height: 480px;
+}
+
+.container.secondaryPackageCon.keepDivHeight {
+  height: 855px;
+}
+
+#country {
+  list-style: none;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background-color: transparent;
+  min-height: 50px;
+  border: 1px solid #dddddd;
+  width: 25%;
+  font-size: 18px;
+  padding: 1%;
+  padding-left: 31px;
+  max-height: 50px;
+  margin-right: 10px;
+}
+
+@media screen and (max-width:500px){
+  #land {
+    float: none!important;
+    width: 100%;
+    /*text-align: center;*/
+  }
+  #country {
+    float: none!important;
+    width: 100%;
+    /*text-align: center;*/
+  }
+  label.purposeLabel span {
+    left: 13%;
+  }
+  .calendarFirstH3 {
+    left: 36%;
+  }
+  table th {
+    font-size: 16px;
+    padding: 0px;
+    font-weight: normal;
+  }
+  #calendarTable td button {
+    font-size: 18px;
+    height: 55px;
+    padding-top: 18px;
+  }
+  #calendarTable td .checkBtn {
+    font-size: 12px;
+    top: -27px;
+    left: 4px!important;
+  }
+  #calendarTable h4 span {
+    font-size: 12px;
+    top: -13px;
+    left: -8px;
+  }
+  #tableEndDivRow .col-sm-12 {
+    width: 100%;
+    padding-left: 55px;
+  }
+  #mainLongDetailDiv {
+    width: 100%;
+    left: 0px;
+  }
+  #mainLongDetailDiv ul {
+    padding-left: 5px;
+  }
+  .packageTit .toShowContentAccordion {
+    width: 95%!important;
+    left: 23px!important;
+  }
+}
+
+.spanOfSelectedCountry {
+  margin-bottom: 30px;
+  font-size: 18px;
+  position: relative;
+  top:-20px;
+  color: #000000;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+/*owl-carousel {*/
+  /*z-index: -1;*/
+  /*top: 0px;*/
+  /*position: relative;*/
+/*}*/
+
+/* owl-carousel img {
+  color: rgba(221, 221, 221, 0.41);
+} */
+
+.immediatelyGo button{
+  width: 255px;
+  position: relative;
+  top: -135px;
+  z-index: 1;
+  font-weight: bold;
+  color: rgba(221, 221, 221, 0.41);
+  border: 2px solid white;
+}
+
+.immediatelyGo button {
+  border: 1px solid #e84466;
+}
+
+.fa-angle-down, .fa-angle-up {
+  color:#01a29a;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#pkgDetailSecond span {
+  display: block;
+  text-align: center;
+  position: absolute;
+  width: 33%;
+}
+
+.detailPkgOne {
+  width: 33.3%;
+  outline:0.5px solid #ccc;
+}
+
+.detailPkgTwo {
+  border: 0.5px solid #ccc;
+  width: 33.3%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.detailPkgThree {
+  text-align: left;
+  width: 33.3%;
+  outline: 1px solid #ccc;
+  position: relative;
+  top: -21px;
+}
+
+#pkgDetailSecond {
+  padding-top: 0px;
+  height: auto;
+  max-width: 930px!important;
+  border: 1px solid #ccc;
+}
+
+#rowOfBtn input {
+  width: 110px;
+}
+
+#rowOfBtn {
+  margin-bottom: 7px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
+}
+
+.shanshiContent {
+  color: #5cb85c;
+}
+
+#rowOfBtn h2 {
+  padding: 0px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-size: 22px;
+  white-space: nowrap;
+}
+
+#rowOfBtn .col-xs-1 {
+  padding-left: 5px;
+}
+
+
+#rowOfBtn img {
+  height: 60px;
+  margin: 0px;
+  float: right;
+}
+
+#rowOfBtn .col-xs-2 {
+  padding-left: 5px;
+}
+
+.secondaryPackageCon .col-xs-2 {
+  padding: 0px;
+  margin: 0px 13px;
+}
+
+#cusAmtBtn input, #cusAmtBtn label {
+  padding-right: 0px;
+  width: 100px;
+}
+
+#cusAmtBtn .amtName {
+  left: 5px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+#cusAmtBtn .col-xs-1 {
+}
+
+#cusAmtBtn .amtName i{
+  position: relative;
+  left: 3px;
+}
+
+#cutAmtBtn.col-xs-7 {
+  position: absolute;
+  left: 410px;
+}
+
+.packageContent .packageTit {
+  padding-bottom: 10px;
+}
+
+#cutAmtBtn.col-xs-7 .col-xs-3{
+  padding-left: 0px;
+  margin-right: -5px;
+}
+
+#paddingSpe {
+  position: relative;
+  left: -10px;
+  z-index: 99;
+}
+
+.mainLongDetail {
+  position: relative;
+  z-index: 222;
+  border: 1px solid #ccc;
+  background-color: white;
+  width: 107%;
+  left: -31px;
+  padding-top: 12px;
+  margin-bottom: 7px;
+}
+
+.mainDeShort {
+  background-color: white;
+  position: absolute;
+  z-index: 22;
+  width: 929px;
+  position: inherit;
+  left: -30px;
+}
+
+.mainDeShort span {
+  z-index: 23;
+  position: relative;
+}
+
+.packageTit .toShowContentAccordion {
+  height: 100%;
+  z-index: 22;
+  position: relative;
+  background-color: white;
+  width: 930px;
+  border: 1px solid #ccc;
+  left: -16px;
+  padding-top: 5px;
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+.noBottom {
+  padding-bottom: 0px!important;
+}
+
+.NoPaddingLeft {
+  left: 31%!important;
+  padding-left: 10px;
+  padding-right: 15px;
+}
+
+#cusBtn.form-control.purposeBtn.btn.btn-sm {
+  width: 110px;
+}
+
+header {
+  z-index:99;
+}
+
+.fa-chevron-circle-up {
+  color: #01a29a;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.packageTit.place.app-index.col-lg-12.text-center .row.toShowContentAccordion:last-child {
+  margin-bottom: 0px;
+}
+
+.col-xs-7.NoPaddingLeft input{
+  width: 110px!important;
+  height: 50px;
+  margin-right: 10px;
+}
+
+#cutAmtBtn.col-xs-7.NoPaddingLeft {
+  width: 70%!important;
+}
+
+/*.col-xs-7.NoPaddingLeft .col-xs-3:first-child {*/
+  /*!*padding-right: 20px!Important;*!*/
+/*}*/
+
+/*#cutAmtBtn.col-xs-7.NoPaddingLeft .col-xs-3 {*/
+  /*padding-left: 15px;*/
+  /*padding-right: 15px;*/
+/*}*/
+
+#cutAmtBtn.col-xs-7.NoPaddingLeft div.col-xs-3:nth-child(1){
+  position: relative;
+  left: 8px;
+}
+
+#cutAmtBtn.col-xs-7.NoPaddingLeft div.col-xs-3:nth-child(2){
+  position: relative;
+  left: -15px;
+}
+
+#cutAmtBtn.col-xs-7.NoPaddingLeft div.col-xs-3:nth-child(3){
+  position: relative;
+  left: -43px;
+}
+
+#cutAmtBtn.col-xs-7.NoPaddingLeft div.col-xs-3:nth-child(4){
+  position: relative;
+}
+
+#cutAmtBtn.col-xs-7.NoPaddingLeft div.col-xs-3:nth-child(4){
+  position: relative;
+  left:-12%;
+}
+
+#cutAmtBtn.col-xs-7.NoPaddingLeft .specialPkgLabel.toCusBtn  span {
+  left: 18%;
+}
+
+#feltNotEnoRow {
+  width: 930px;
+  margin: 0px auto;
+}
+
+.typhoonDay {
+  display: block;
+  position: relative;
+  left: 22px;
+  top: -5px;
+  color: #e84466;
+}
+
+.form-control.detailExplian {
+  color: #01a29a;
+  height: 40px;
+  padding-top: 7px;
+  margin-top: 16px;
+}
+
+#rowOfBtn .col-xs-2:nth-child(4){
+  position:relative;
+  left:-24px;
+}
+
+#rowOfBtn .col-xs-2:nth-child(5){
+  position:relative;
+  left:-57px;
+}
+
+#rowOfBtn .col-xs-2:nth-child(6){
+  position:relative;
+  left:-90px;
+}
+
+#detailTabletbl th{
+  text-align: left!important;
+  color: #e84466;
+}
+
+#detailTabletbl td{
+
+}
+
+@media screen and (max-width: 500px){
+  #mobileCusPkg {
+    display: initial;
+  }
+  #deskCusPkg {
+    display: none;
+  }
+  #mobileAmt {
+    margin-left: 0px!important;
+  }
+}
+
+@media screen and (max-width: 500px) and (min-width: 458px) {
+  #calendarTable td button {
+    padding-left: 15px!important;
+  }
+}
+
+@media screen and (max-width: 375px){
+  #calendarTable td button{
+    padding-left: 10px!important;
+  }
+  .specialPkgLabel input:checked + span {
+    left: 5px!important;
+  }
+  table .checkBtnTxt {
+    left: -12px!important;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .purposeLabelCol3 {
+    width: 100%!important;
+  }
+  #mobileCusPkg {
+    display: initial;
+  }
+  #deskCusPkg {
+    display: none;
+  }
+  .specialPkgLabel span {
+    font-size: 13px;
+    left: 0px;
+    width: 100%;
+  }
+  .specialPkgLabel input:checked + span {
+    font-size: 13px;
+    left: 0px;
+    width: 100%;
+  }
+  #btnOfPackages .col-xs-4 {
+
+  }
+  .divAmtLong {
+    margin-left: 0px!important;
+  }
+
+  #btnOfPackages.col-xs-10.text-center {
+    width:100%;
+    position: relative;
+    left: -7px;
+    margin-top: 10px;
+  }
+
+  #btnOfPackages input {
+    height: 45px;
+    width: 100px;
+  }
+  .packageContent .col-xs-6, .packageContent .col-xs-3 {
+    width: 100%;
+  }
+  .packageContent {
+    margin-top: 20px;
+  }
+  .packageContent h2 {
+    font-size: 18px;
+    margin-bottom: 0px;
+  }
+  .longTri {
+    left: 40%;
+  }
+  .imgSrcH3Item {
+    font-size: 14px;
+  }
+  .insItemUl li {
+    margin-left: 0px;
+    font-size: 10px;
+  }
+  #secondCol2 {
+    width: 40%;
+  }
+  .packageTit ul {
+    margin-left: 0px;
+  }
+  .feltNotEnoughBtn {
+    display: block;
+    margin: 10px auto;
+    float: none!important;
+    text-align: center;
+  }
+  .myFavCon {
+    font-size: 16px;
+  }
+  label.purposeLabel span {
+    font-size: 15px;
+    left: 38%;
+  }
+  label.purposeLabel input {
+    height: 42px;
+  }
+  .normalH2 {
+    font-size: 18px;
+  }
+  .normalH3 {
+    font-size: 18px;
+  }
+  td.weekDayText {
+    font-size: 12px!important;
+  }
+  #calendarTable td .checkBtn {
+    top: -20px;
+    left: 4px;
+  }
+  #feltNotEnoRow {
+    width: 100%;
+  }
+  #tableEndDivRow h3 {
+    font-size: 18px;
+  }
+  #mobileAmt {
+    margin-left: 0px!important;
+  }
+  #paddingSpe {
+    left: 0px!important;
+  }
+}
+
+@media screen and (max-width: 500px) and (min-width: 375px) {
+  #customerLogo.logo {
+    margin: 0px!important;
+    /*margin: auto;*/
+  }
+  .logo {
+    margin-left: 35%!important;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .logo {
+    margin: auto 35%;
+  }
+}
+
+@media screen and (min-width: 500px){
+  #mobileCusPkg {
+    display: none;
+  }
+  #deskCusPkg {
+    display: initial;
+  }
+  .typhoonDay {
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: 992px) and (min-width: 500px){
+  #cutAmtBtn.col-xs-7 {
+    position: absolute;
+    left: 321px;
+  }
+  #calendarTable td button{
+    padding-left: 15px!important;
+  }
+  #rowOfBtn input {
+    width: 85px;
+  }
+  .col-xs-7.NoPaddingLeft input {
+    width: 85px!important;
+  }
+  #cusBtn.form-control.purposeBtn.btn.btn-sm {
+    width: 85px;
+  }
+  .specialPkgLabel input:checked + span {
+    font-size: 16px;
+    left: 13px;
+  }
+  .specialPkgLabel.toCusBtn span {
+    font-size: 16px;
+    left: 13px;
+  }
+  #rowOfBtn h2 {
+    font-size: 20px;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft .specialPkgLabel.toCusBtn span {
+    left: 20px;
+  }
+  .feltNotEnoughBtn {
+    margin-right: 15%;
+  }
+  #btnOfPackages .specialPkgLabel span {
+    left: 33px;
+  }
+  #btnOfPackages .specialPkgLabel input:checked + span {
+    font-size: 16px;
+    left: 50px;
+  }
+  #tableEndDivRow .col-sm-12 {
+    width: 104%!important;
+  }
+  #land {
+    padding-left: 15px;
+  }
+  #country {
+    padding-left: 15px;
+  }
+  #calendarTable {
+    margin-right: 10px;
+  }
+
+  .packageTit .toShowContentAccordion{
+    width: 109%;
+    left: -15px;
+  }
+
+}
+
+@media screen and (max-width: 768px) and (min-width: 500px){
+  /* .owl-prev, .owl-next {
+    top: 85px!important;
+  } */
+  .form-control.detailExplian {
+    padding-top: 10px;
+  }
+  .feltNotEnoughBtn {
+    margin-right: 22%;
+    padding-right:19%;
+  }
+  #calendarTable {
+    margin-right: 10px;
+  }
+  #calendarTable .checkBtn {
+    left: 20%;
+  }
+  .packageTit .toShowContentAccordion{
+    width: 109%;
+    left: -15px;
+  }
+  #detailDivShift{
+    width: 24%!important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(4) {
+    left: -28px;
+  }
+  #selectNameTitle{
+    margin-top: 25px!important;
+  }
+  #land, #country {
+    width: 40% !important;
+    margin-right: 0px!important;
+  }
+  #paddingSpe {
+    width: 16.2%;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft div.col-xs-3:nth-child(4) {
+    left: -62px;
+  }
+  input.form-control.purposeBtn.packageButton3 {
+    margin-left: 6px;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft div.col-xs-3:nth-child(3){
+    position: relative;
+    left: -40px;
+  }
+  #cusAmtBtn .amtName {
+    left: 4%!important;
+  }
+}
+
+@media screen and (max-width: 415px) and (min-width: 413px){
+  #calendarTable td .checkBtn {
+    left: 4px!important;
+  }
+  #calendarTable h4 span {
+    left: -17px;
+  }
+}
+
+#secondCol2 {
+  padding-bottom: 15px;
+}
+
+@media screen and (max-width: 1200px) and (min-width: 768px){
+  .purposeLabelCol3 span {
+    left: 10%;
+  }
+  #land, #country {
+    width: 25%;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 990px) and (min-width: 700px){
+  #calendarTable .checkBtn.fa.fa-check {
+    left: 20%;
+  }
+  #calendarTable .checkBtnTxt {
+    left: -3%;
+  }
+  #land, #country {
+    width: 25%;
+    margin-right: 10px;
+  }
+  #calendarTable td button{
+    padding-left: 20%!important;
+  }
+  #customerLogo {
+    margin: 20px 25%;
+  }
+  .secondaryPackageCon .col-xs-2 {
+    width: 15.6%!important;
+  }
+  .insItemUl {
+    margin-left: 0px!important;
+    font-size:12px!important;
+  }
+}
+
+@media screen and (max-width: 700px) and (min-width: 500px){
+  #calendarTable .checkBtn.fa.fa-check {
+    left: 18px;
+    font-size: 18px;
+  }
+  #calendarTable .checkBtnTxt {
+    font-size: 14px;
+  }
+  #land, #country {
+    width: 25%;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width:500px){
+  .purposeLabelCol3 span {
+    left: 10%!important;
+  }
+  #calendarTable td button{
+    padding-left: 20%!important;
+  }
+  #insuredOneCard {
+    height:100%!important;
+  }
+  .packageTit .col-xs-6 h2 {
+    font-size: 22px;
+  }
+  .mainLongDetail {
+    width: 109%;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft .specialPkgLabel.toCusBtn span {
+    left: 15px!important;
+  }
+  .purposeLabelCol3 span {
+    left: 8%!important;
+  }
+  #btnOfPackages .specialPkgLabel input:checked + span {
+    left:18%;
+    font-size:18px!important;
+  }
+  #btnOfPackages .specialPkgLabel span {
+    left: 18%;
+    top: 15px!important;
+  }
+  .specialPkgLabel.toCusBtn  span, .specialPkgLabel input:checked + span {
+    left: 13%!important;
+  }
+}
+
+.immediatelyGo i {
+  font-size: 40px;
+  margin-bottom: 0px;
+  position: relative;
+  top: 0px;
+  color: hsla(0, 0%, 87%, 0.74);
+}
+
+@media screen and (min-width:990px) and (min-width: 768px){
+
+}
+
+@media screen and (max-width:500px) {
+  .packageTit .toShowContentAccordion {
+    margin-top: 0px;
+    top: -5px;
+  }
+  .whereDgo, .container.oneCon{
+    border:none;
+  }
+  .imAline {
+    border: 0.5px solid #e84466;
+    width: 92%;
+    display: block!important;
+    margin: 0px auto;
+  }
+  .dropDown {
+    left: -30px!important;
+    top: -57px!important;
+    float:right;
+    display: inline-block;
+    pointer-events: none!important;
+  }
+}
+
+.calDayNone{
+  position: absolute;
+}
+
+.imAline {
+  display:none;
+}
+
+.dropDown{
+  position: relative;
+  left: -60px;
+  top: 5px;
+  color: #ccc;
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.checkBtnTxt {
+  font-size: 18px;
+}
+
+@media screen and (max-width: 991px) and (min-width: 770px) {
+  #detailDivShift {
+    width: 174px;
+  }
+}
+
+.immediateH2:hover {
+  text-decoration: underline;
+  text-decoration: #e84466;
+}
+
+.shanshiContent {
+  padding-left:10%;
+}
+
+#rowOfBtn .col-xs-2:nth-child(6) span {
+  left: 10%;
+}
+
+#cusAmtBtn.col-xs-1 .amtName {
+  left: 13%;
+}
+
+#cutAmtBtn.col-xs-7.NoPaddingLeft div.col-xs-3:nth-child(4) .specialPkgLabel.toCusBtn span.amtName {
+  left: 20%!important;
+}
+
+@media screen and (max-width:1040px) and (min-width:1000px) {
+  #calendarTable button {
+    font-size: 35px;
+    padding-right: 45px;
+  }
+  #btnOfPackages .col-xs-4:nth-child(3) .specialPkgLabel span {
+    left:24%!important;
+  }
+  #btnOfPackages .col-xs-4:nth-child(1) .specialPkgLabel span {
+    left:27%!important;
+  }
+  label.purposeLabel span {
+    left: 19%!important;
+  }
+  #calendarTable  td .checkBtn {
+    left:5px!important;
+  }
+  #calendarTable .checkBtnTxt {
+    left: -15%!important;
+  }
+}
+
+@media screen and (max-width:770px) and (min-width:730px) {
+  #btnOfPackages .specialPkgLabel input[type="radio"]:checked + span {
+    left:22%!important;
+  }
+  #btnOfPackages .col-xs-4:nth-child(3) .specialPkgLabel input[type="radio"]:checked + span {
+     left:19%!important;
+   }
+  #btnOfPackages .col-xs-4:nth-child(3) .specialPkgLabel span {
+    left:14%!important;
+  }
+}

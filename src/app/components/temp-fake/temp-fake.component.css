@@ -1,0 +1,54 @@
+.content {
+  margin-top: 130px;
+  margin-bottom: 130px;
+}
+
+.content .col-xs-12 h1{
+  text-transform: uppercase;
+  font-size: 25px;
+  color: #e84466;
+  margin-bottom: 50px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.content .img-responsive {
+  margin: 0px auto;
+  display: inline-block;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+#fbButton {
+  margin-top: 50px;
+  background-color:	#3b5998;
+  color: #ffffff;
+  width: 400px;
+}
+
+h2.oneLine {
+  border: 1px solid #eee;
+  position: relative;
+  z-index: 1;
+  top: 22px;
+}
+
+div.oneLineSpan {
+  color: #8c8c8c;
+  position: relative;
+  z-index: 2;
+  background-color: white;
+  width: 50px;
+  font-size: 18px;
+  font-weight: normal;
+  margin: 0px auto;
+}
+
+#gaButton {
+  margin-top: 50px;
+  background-color: #db4437;
+  color: #ffffff;
+  width: 400px;
+}

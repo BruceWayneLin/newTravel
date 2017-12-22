@@ -1,0 +1,1772 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden!important;
+}
+
+/* You can add global styles to this file, and also import other style files */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  right: 0;
+  background-color: white; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.container-fluid.header-container {
+  height: 75px;
+  padding-top: 10px;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+@media screen and (max-width: 780px) {
+  .owl-prev, .owl-next {
+    top: 30%!important;
+  }
+  .nav.navbar-nav.navbar-right {
+    display: none;
+  }
+}
+
+.navbar {
+  margin-bottom: 0px!important;
+}
+
+.carousel-inner img {
+  width:100%;
+}
+
+.right.carousel-control.carousel-control-next {
+  background-image:none;
+  cursor:pointer;
+}
+
+.left.carousel-control.carousel-control-prev {
+  background-image:none;
+  cursor:pointer;
+}
+
+.app-index h2 {
+  text-transform: uppercase;
+  font-size: 25px;
+  color: #e84466;
+  padding-left:0px;
+  padding-right:0px;
+  font-weight: 400;
+  margin-bottom: 50px;
+  font-style: normal;
+  line-height: 1.2;
+  text-rendering: optimizeLegibility;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.app-index .whereDgo {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e84466;
+}
+
+.place h2 {
+  color: black;
+}
+
+.place {
+  padding-top: 50px;
+}
+
+select.form-control, button.form-control, input.form-control {
+  -webkit-appearance: none;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  height: 50px!important;
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 18px;
+  line-height: 1.42857143;
+  color: #555555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#land {
+  margin: 15px auto;
+}
+
+#country {
+  margin: 15px auto;
+}
+
+.oneCon {
+  border-bottom: 1px solid #e84466;
+  padding-bottom: 80px;
+}
+
+.container .normalH2 {
+  margin-top: 20px;
+  text-transform: uppercase;
+  font-size: 24px;
+  color: #e84466;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2;
+  text-rendering: optimizeLegibility;
+  color: #e84466;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+
+.body * {
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
+}
+
+.fluid-bread {
+  padding-top:30px;
+  padding-bottom:30px;
+}
+
+.monthClass {
+  clear:both;
+  height: 30px;
+}
+
+.weekDayText {
+  color: #808080;
+  font-size: 18px;
+}
+
+tr.weekDayTr {
+  border-top: 60px solid;
+  border-bottom: 10px solid;
+  border-color: transparent;
+}
+
+#calendarTable button {
+  color: #000000;
+  border: 1px solid #ccc;
+  padding-top: 30px;
+  background-color: white;
+  padding-bottom: 30px;
+  font-size: 24px;
+  height: 100px;
+  line-height: 1;
+  cursor: pointer;
+  width: 86%;
+  margin-bottom: 20px;
+  font-size: 40px;
+}
+
+#calendarTable table td, th{
+  border:none!important;
+}
+
+.calendarTitle {
+  position: relative;
+  width:100%;
+  text-align: center;
+  font-size: 18px;
+  color: #808080;
+  top: 45px;
+  left: 305%;
+}
+
+.lastButtonAndGoInsured {
+  background: #e84466;
+  display: inline-block;
+  padding: 11px 16px;
+  border: 0;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-weight: normal;
+  width: 80%;
+  max-width: 100%;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
+  margin-top: 25px;
+  margin-bottom: 70px;
+}
+
+.packageContent {
+  border: 1px solid #ccc;
+  margin: 0px auto;
+  margin-bottom: 10px;
+}
+
+.packageContent ul li span {
+  font-size: 16px;
+}
+
+.packageContent .packageTit {
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
+
+button:disabled {
+  font-size: 40px;
+  color: #000000;
+  border: 1px solid #ccc;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  height: 100px;
+  position: relative;
+  line-height: 1;
+  cursor: pointer;
+  color: #eeeeee;
+  border-color: #eeeeee;
+}
+
+body #calendarTable .table td {
+  width: 140px;
+}
+
+.memberTitle .whereDgo{
+  border: none;
+}
+
+.titleForm h2 {
+  text-transform: uppercase;
+  font-size: 25px;
+  color: #e84466;
+  margin-bottom: 50px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2;
+  text-rendering: optimizeLegibility;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  text-align: left;
+  border-bottom: 1px solid #e84466;
+  padding-bottom: 20px;
+}
+
+h2.formTitTxt{
+  margin: 0;
+  margin-bottom: 0.5em;
+  color: #000000;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.2;
+  text-rendering: optimizeLegibility;
+  text-transform: uppercase;
+}
+
+.memberFormInput.form-control.input-lg {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 20px;
+  padding: 12px 15px;
+  font-size: 18px;
+  line-height: 1.42857143;
+  color: #555555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.paddingExtra {
+  padding-bottom: 35px;
+}
+
+.txtSexuality {
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  color: #808080;
+  font-size: 18px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.birthContain select.form-control {
+  width: 100%!important;
+}
+
+.txtBirth {
+  position: absolute;
+  left: 0px;
+  padding-top: 20px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  color: #808080;
+  font-size: 18px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.birthContain .col-xs-3 {
+  padding-left: 0px;
+}
+
+.birthContain {
+  margin-top:15px;
+}
+
+.personalContent {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.insuredTit {
+  padding-left: 20px;
+  padding-right: 15px;
+}
+
+.insuredBirthEx {
+  padding-right: 0px;
+  padding-legt: 0px;
+}
+
+.insuredPersonalInfo {
+  padding-bottom: 50px;
+}
+
+.insuredPid{
+  margin-bottom: 10px;
+}
+
+#insuredOneCard{
+  border: #ccc dotted;
+  padding: 10px;
+  padding-top: 15px;
+}
+
+.plusBtn {
+  padding: 15px;
+}
+
+.fa-plus {
+  color: white;
+}
+
+.plutBtn {
+  background-color: #e84466;
+  color: white;
+}
+
+.rules h2 {
+  margin: 0;
+  margin-bottom: 10px;
+  color: #000000;
+  font-size: 24px;
+  font-style: normal;
+  line-height: 1;
+  text-rendering: optimizeSpeed;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.agreement {
+  color: #808080;
+  min-height: 21px;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.square {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0 !important;
+  width: 20px;
+  height: 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.roundDiv {
+  text-align: left;
+  margin:20px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+  padding: 30px;
+  border: 1px solid #cccccc;
+}
+
+.goingCheckInfo {
+  width: 60%;
+}
+
+.goingCheckInfo:disabled {
+  width: 60%;
+  background: #C8C8C8;
+  opacity: 0.6;
+  cursor: not-allowed;
+  color: #000000;
+  border: 1px solid #ccc;
+  padding-bottom: 30px;
+  cursor: pointer;
+  color: #eeeeee;
+  line-height:1px;
+  height: 40px;
+  font-size: 22px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+  border-color: #eeeeee;
+  margin-bottom: 50px;
+}
+
+.priceHead{
+  text-align: left;
+}
+
+.priceHead h3 {
+  color: #e84466;
+  font-size: 24px;
+  text-align: right;
+  text-align: left;
+
+}
+
+.priceHead h4 {
+  text-align: right;
+}
+
+.deleteBtn {
+  background-color: white;
+}
+
+button:active {
+  border-color: #e84466;
+}
+
+.circleDiv {
+  background-color: #ccc;
+  border-radius: 30px;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  text-align: center;
+  width: 45px;
+  position: relative;
+  left: -15px;
+  top: 10px;
+}
+
+.circleDiv p {
+  font-size: 30px;
+  color: white;
+}
+
+.deleteBtn {
+  border-radius: 30px;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  position: relative;
+  left: 27px;
+  border: 1px solid #e84466;
+}
+
+.deleteBtn i {
+  color: #e84466;
+}
+
+.insuredTit .col-xs-2 {
+  padding: 0px;
+}
+
+#insuredOneCard.col-xs-6 {
+  width:48% !important;
+  margin-right:5px;
+}
+
+.ananDiv {
+  margin-top: 25px;
+}
+
+
+.insuredPriceDivH4 h4 {
+  color: #e84466;
+  font-size: 20px;
+}
+
+.insuredPriceDivH4 h4 span{
+  color: #8c8c8c;
+  font-size: 20px;
+}
+
+*:focus {
+  outline: none!important;
+}
+
+.form-control:focus {
+  border-shadow: none!important;
+  box-shadow: none!important;
+}
+
+#calendarTable #moreDaysBtn {
+  background-color: #e84466;
+  color: white;
+  height: 20px;
+  font-size: 18px;
+  padding-top: 20px;
+  padding-bottom: 36px;
+  margin: 20px auto;
+}
+
+#purposePurLabel {
+  cursor: pointer;
+}
+
+.fa-search-plus, .fa-search-minus, .purposeBtn, feltNotEnoughBtn, select{
+  cursor: pointer;
+}
+
+#accordionDiv div.panel.panel-default {
+  background-color: white!important;
+  border: none;
+  padding-left: 50px;
+  box-shadow: none!important;
+}
+
+#accordionDiv .panel-heading:hover {
+  background: #fafafa!important;
+}
+
+#accordionDiv .panel-heading {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5)!important;
+}
+
+#accordionDiv .clickAccordion div.panel.panel-default.dropup .panel-heading {
+  box-shadow: none!important;
+}
+
+#accordionDiv .clickAccordion div.panel.panel-default.dropup {
+  border: 1px solid #eee;
+  background: #fafafa!important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5)!important;
+}
+
+#accordionDiv .clickAccordion div.panel.panel-default.dropup .panel-heading{
+  border: none;
+  background: #fafafa!important;
+}
+
+#accordionDiv .clickAccordion div.panel.panel-default.dropup {
+  margin-left: 4%;
+}
+
+@media screen and (max-width: 500px) {
+  #accordionDiv .clickAccordion div.panel.panel-default.dropup {
+    margin-left: 7%;
+    margin-right: 10%;
+    max-width: 465px;
+    width: 118%;
+  }
+}
+
+#accordionDiv .panel-heading {
+  background-color: white!important;
+  border: 1px solid #eee;
+  color: #808080;
+  text-align: left;
+  cursor:pointer;
+  font-weight: 200;
+  /*margin: auto 5%;*/
+  padding-left: 3%;
+}
+
+#accordionDiv .panel-body {
+  border-top: none;
+}
+
+.panel-body .fa.fa-arrow-down {
+  position:absolute;
+  top: 10px;
+  left: 110px;
+  z-index: 20;
+}
+
+.panel-title a {
+  font-weight: normal;
+  font-size: 17px;
+  color: #333!important;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.panel.panel-default .panel-title {
+  color: black;
+}
+
+#titleWithoutPadding .col-xs-10 span, #titleWithoutPadding .col-xs-2 span {
+  font-weight: normal;
+  font-size: 17px;
+  color:#333;
+  letter-spacing: 0;
+}
+
+#titleWithoutPadding .col-xs-10, #titleWithoutPadding .col-xs-2 {
+  margin: 5px auto!important;
+}
+
+.panel-group {
+  position: relative;
+  top: -15px;
+}
+
+header {
+  width: 104%!important;
+}
+
+@media screen and (max-width: 500px){
+  .owl-prev, .owl-next {
+    top: 30%!important;
+  }
+  #accordionDiv div.panel.panel-default {
+    padding-left: 0px;
+  }
+  #titleWithoutPadding .col-xs-2 {
+    padding: 0px;
+  }
+  .packageInfo .col-xs-12 h4{
+    left: -16px;
+    position: relative;
+    text-decoration: underline;
+    margin-top: 10px;
+  }
+  h2.touBaouTit {
+    text-decoration: underline;
+  }
+}
+
+/* div.owl-dots {
+  position: relative;
+  top: -50px;
+} */
+
+/* .owl-theme .owl-nav .owl-next {
+  background: url('/assets/images/arrowIcons/arrowRight.png')!important;
+  top: 40%;
+  right: 3%;
+  position: absolute;
+  background-size: cover;
+  display: block;
+  width: 60px;
+  height: 104px;
+  color: transparent!important;
+  background-repeat: no-repeat!important;
+}
+
+.owl-theme .owl-nav .owl-prev {
+  background: url('/assets/images/arrowIcons/arrowLeft.png')!important;
+  top: 40%;
+  left: 3%;
+  position: absolute;
+  background-size: cover;
+  display: block;
+  width: 60px;
+  height: 104px;
+  color: transparent!important;
+  z-index:999;
+  background-repeat: no-repeat!important;
+} */
+
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.select2-container {
+  color: #e84466!important;
+  border-color: #e84466!important;
+}
+
+.select2-results {
+  border: 1px solid #e84466!important;
+}
+
+.select2-results__options::-webkit-scrollbar {
+  background-color: white!important;
+  width: 2px;
+}
+
+.select2-results__options::-webkit-scrollbar-track {
+  background-color: white;
+} /* the new scrollbar will have a flat appearance with the set background color */
+
+.select2-selection.select2-selection--single {
+  height: 50px;
+  padding-top: 11px;
+  font-size: 18px;
+  border-radius: 50px;
+  margin-top: 7px;
+}
+
+.select2-results__options::-webkit-scrollbar-thumb {
+  background-color: #e84466;
+  width: 2px;
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+} /* this will style the thumb, ignoring the track */
+
+/*.select2-results__options::-webkit-scrollbar-button {*/
+  /*background-color: #7c2929;*/
+/*} !* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) *!*/
+
+/*.select2-results__options::-webkit-scrollbar-corner {*/
+  /*background-color: black;*/
+/*} !* if both the vertical and the horizontal bars appear, then perhaps the right bottom corner also needs to be styled *!*/
+
+.select2-search.select2-search--dropdown {
+  display: none;
+}
+
+.select2-selection__arrow {
+  top: 18px!important;
+}
+
+.select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+
+.select2-container--default.select2-container--open.select2-container--above .select2-selection--single, .select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple {
+  -moz-border-radius: 50px!important;
+  -webkit-border-radius: 50px!important;
+  border-radius: 50px!important;
+}
+
+.ui.dropdown .menu {
+  border: 1px solid #e84466!important;
+}
+
+div.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 180px;
+  position:relative;
+  z-index: -1;
+  top: 5px;
+}
+
+#land {
+  -moz-border-radius: 50px!important;
+  -webkit-border-radius: 50px!important;
+  border-radius: 50px!important;
+}
+
+#land .menu.transition.visible {
+  border-top: 1px solid #e84466!important;
+}
+
+@media screen and (max-width: 500px){
+  td.weekDayText {
+    font-size: 12px!important;
+  }
+  table th {
+    font-size: 12px!important;
+  }
+  #calendarTable td .checkBtn {
+    top: -20px;
+    left: 40%!important;
+  }
+  table .checkBtnTxt {
+    left: -23%!important;
+  }
+  #calendarTable button {
+    width: 95% !important;
+  }
+  #accordionDiv div.panel.panel-default {
+    padding: 0px;
+    width: 116%;
+    position: relative;
+    left: -10%;
+  }
+  #accordionDiv {
+    margin: 0px!important;
+  }
+  #accordionDiv .panel-heading {
+    padding-right: 5%;
+  }
+}
+
+.spinner-three-bounce {
+  background: url('/assets/images/dolls/loading.gif?v=1') 0px 0px !important;
+  width: 150px!important;
+  height: 150px!important;
+  background-repeat: no-repeat!important;
+}
+
+.txtLoading {
+  color: #e84466;
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  top: 60%;
+  z-index: 999;
+  width: 100%;
+  text-align: center;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
+}
+
+.bounce1, .bounce2, .bounce3 {
+  display: none!important;
+}
+
+#specialWordDivDetail, .divAmtLong {
+  margin-left: 19%!important;
+}
+
+html,body
+{
+  width: 100%!important;
+  height: 100%!important;
+  margin: 0px!important;
+  padding: 0px!important;
+  overflow-x: hidden!important;
+}
+
+input[type="radio"]:checked + label span {
+  color: #e84466!important;
+  font-weight: normal!important;
+}
+/*input[type="radio"]:checked + label span {*/
+/*color: #e84466!important;*/
+/*font-weight: normal!important;*/
+/*}*/
+
+
+.fa-chevron-circle-down, .fa-chevron-circle-up {
+  cursor:pointer;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+.form-control:focus {
+  outline: none!important;
+  border-color:#cccccc!important;
+}
+.insItemUl {
+  margin-left: 0px!important;
+}
+
+html, body, h1, h2, h3, h4, h5, h6, span, p {
+  font-family: Microsoft JhengHei,Microsoft YaHei,Heiti TC Light,微软雅黑,Arial Narrow Regular,stheititc,sans-serif!important;
+}
+
+.backdrop {
+  background-color: rgba(221,221,221,0.8)!important;
+}
+
+html .row .container {}
+
+input, input:before, input:after {
+  -webkit-user-select: initial;
+  -khtml-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
+}
+
+@media screen and (max-width: 376px) {
+  .panel-group .fa-chevron-circle-down{
+    font-size: 25px!important;
+    top: 45px!important;
+    z-index:999!important;
+  }
+}
+
+@media screen and (max-width: 500px) and (min-width: 376px) {
+  h4.panel-title {
+    padding-right: 10px!important;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .dropup h4.panel-title {
+    top: -15px!important;
+    position: relative!important;
+  }
+  #specialDropUpIdDiv .fa-chevron-circle-up {
+    position: relative;
+    top: -10px;
+  }
+  .panel-group .fa-chevron-circle-down{
+    font-size: 25px!important;
+    top: 35px!important;
+    z-index:999!important;
+  }
+  .panel.panel-default.dropup {
+    z-index: 1000;
+  }
+  .owl-theme .owl-nav .owl-prev, .owl-theme .owl-nav .owl-next {
+    z-index:999!important;
+  }
+  .typhoonDay{
+    white-space: nowrap!important;
+    left:-9px !important;
+  }
+  .insuredPriceDivH4{
+    top: 10px!important;
+  }
+  html, body {
+    /* max-height: 100%; */
+    /* position: relative; */
+    /* -webkit-transform: translate3d(0,0,0); */
+  }
+
+  html, body {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .checkBtnTxt{
+    white-space: nowrap!important;
+  }
+  input, button, textarea, select {
+    -webkit-transform: translate3d(0,0,0)!important;
+  }
+  .insuredBirthEx .col-xs-3:nth-child(2){
+    width: 30%!important;
+    padding-right:0px!important;
+  }
+  .packageContent {
+    margin-top:19px!important;
+  }
+}
+.modal-content {
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 40%!important; /* Could be more or less, depending on screen size */
+  min-width: 270px!important;
+  top: 3%;
+  position: absolute;
+  left: 0%;
+}
+
+.container-inward {
+  margin-top: 0px!important;
+}
+.weekDayText, td {
+  border-top: none!important;
+  padding: 0px!important;
+}
+@media screen and (max-width:1024px){
+  .dropup .panel-title a {
+    padding-right: 5%;
+  }
+}
+@media screen and (min-width:1024px){
+  .dropup .panel-title a {
+    padding-right: 10%;
+  }
+}
+
+#closebtn {
+  color: white;
+  background: #808080;
+  border-color: #808080;
+  cursor: pointer;
+  width: 10%;
+  height: 40%;
+  border-radius: 25px;
+  border-width: 2px;
+  border-style: solid;
+  padding-left: 1.75vw;
+  padding-right: 1.75vw;
+  min-width: 100px;
+}
+
+#closebtn.closebtn1 {
+  color: #808080;
+  background: transparent;
+  border-color: #808080;
+  cursor: pointer;
+  width: 10%;
+  height: 40%;
+  border-radius: 25px;
+  border-width: 2px;
+  border-style: solid;
+  padding-left: 1.75vw;
+  padding-right: 1.75vw;
+  min-width: 100px;
+}
+.modal-content h2 {
+  font-size: 28px;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  color:#e84466;
+  font-family: segoe ui,microsoft jhenghei,microsoft mhei,stheititc,sans-serif;
+  margin-left: 25px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+@media screen and (max-width: 375px) {
+  .panel.panel-default .panel-title {
+    padding-right: 20px!important;
+  }
+  .panel-group .fa.fa-chevron-circle-down {
+    top: 30px!important;
+  }
+  .fa.fa-chevron-circle-up {
+    font-size: 30px!important;
+  }
+}
+
+#closebtn {
+  white-space: nowrap!important;
+}
+
+.owl-theme.sliding.owl-carousel.owl-loaded.owl-drag {
+  /*height: 555px!important;*/
+}
+
+.lastButtonAndGoInsured:hover, .goingCheckInfo:hover, .inputRadioChecked:hover, .lastSubMit:hover {
+  background-color: #D0596E!important;
+}
+
+#goingCheckInfoBack:hover {
+  background-color: #808080!important;
+  color: #FFFFFF!important;
+}
+/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
+
+#detailDivShift {
+  width: 220px;
+}
+
+.dropup .panel-title a {
+  position: relative;
+  left: -40px;
+}
+
+@media screen and (max-width: 457px) {
+  calendarTable td button {
+    padding-left: 10px !important;
+  }
+  #calendarTable td h4{
+    left: 32%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #detailDivShift button {
+    margin-left: 45%;
+  }
+}
+
+/* firefox */
+@-moz-document url-prefix() {
+
+  @media screen and (max-width: 570px) {
+    #calendarTable td button {
+      font-size: 18px!important;
+    }
+  }
+  input[type=radio]{
+    visibility: hidden;
+  }
+  label {
+    width: 100%;
+    top: 33px;
+    font-weight: normal;
+    background-color: white;
+    border: 1px solid #ddd;
+    background-color: white;
+    height: 60px;
+    border-radius: 50px;
+  }
+  input[type="radio"]:checked+label{
+    border: 1px solid #e84466!important;
+  }
+  html :checked + span {
+    color: #e84466 !important;
+    left: 25%;
+  }
+
+  #rowOfBtn .col-xs-2, #rowOfBtn .col-xs-1 {
+      width: 15%!important;
+      min-width: 125px;
+  }
+
+  #rowOfBtn .col-xs-7 {
+    padding: 0px;
+  }
+  #cutAmtBtn.col-xs-7 {
+    left: 389px!important;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft {
+    left: 145px !important;
+  }
+
+  #cutAmtBtn.col-xs-7 .col-xs-3 {
+    width: 18%;
+    min-width: 125px;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft .col-xs-3{
+    left: 125px !important;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft .col-xs-3:first-child {
+    padding-left: 10px!important;
+  }
+  #rowOfBtn .col-xs-2 {
+
+  }
+  #calendarTable td {
+    width:12%!important;
+    margin-left:3px;
+  }
+  #calendarTable #emptyTd {
+    margin-left:6px!important;
+  }
+  .longTri {
+    top:63px!important;
+  }
+  table {
+    width: 110%;
+    max-width: 110%;
+  }
+  #choicesHaoNoHao span{
+    top:15%!important;
+  }
+  .changeColor {
+    border: 1px solid #e84466;
+  }
+  #rowOfBtn .col-xs-2:nth-child(3) {
+    padding-right: 20px !important;
+    padding-left: 15px !important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(4) {
+    padding-left: 12px!important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(6) {
+    left: -48px!important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(5) {
+    left: -35px!important;
+  }
+  #cusAmtBtn .amtName {
+    left: 10px!important;
+  }
+  input[type=radio]:checked ~ label + span {
+    border: 1px solid #e84466!important;
+    color: #e84466!important;
+  }
+  input[type=radio] + span {
+    top: 70px;
+  }
+  label[for="aggreeToUpdate"] {
+    border:none!important;
+  }
+  /*input[type=radio] + label {*/
+    /*color: #ccc!important;*/
+  /*}*/
+  select {
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+  }
+  label > input[type=radio]:checked {
+    border: 1px solid #e84466!important;
+  }
+  .shanshiContent {
+    padding-left:10%;
+  }
+  @media screen and (max-width: 1200px) {
+    #rowOfBtn .col-xs-2 {
+      width: 10%!important;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    #aggreeToUpdate .checkBoxDiv,.noChecked {
+      top: 25px!important;
+    }
+  }
+  @media screen and (max-width: 570px) {
+    #rule1 {
+      padding-left: 0%!important;
+    }
+    .modal-content {
+      top: 40px!important;
+    }
+    #topSpeArrow {
+      top:12px
+    }
+  }
+  .aggreeToUpdate {
+    margin-left: 20px;
+  }
+  #aggreeToUpdate {
+    top: 4px!important;
+  }
+  .widthFdsSpanOne.inputRadioCheckedTxt, .widthFdsSpanTwo.inputRadioCheckedTxt {
+    left: 0px;
+  }
+  #topSpeArrow {
+    top:12px
+  }
+  @media screen and (max-width: 414px) {
+    #calendarTable td {
+      width:12%!important;
+    }
+    #btnOfPackages .col-xs-4 {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+
+  @media screen and (min-width: 414px) and (max-width: 570px){
+    #haoma span {
+      left: 70%!important;
+    }
+    #haoma h4 {
+      left: 110%!important;
+    }
+  }
+  #mobileCusPkg label {
+    border: none;
+    height: auto;
+  }
+
+  @media screen and (max-width: 320px) {
+    #haoma span {
+      left: -100px!important;
+    }
+    #haoma h4 {
+      left: -120px!important;
+      font-size: 17px !important;
+    }
+    #choicesHaoNoHao {
+      width: 170%!important;
+      left: 35%!important;
+    }
+  }
+
+  @media screen and (min-width: 360px) and (max-width: 357px) {
+    #haoma span {
+      left: -250%!important;
+    }
+    #haoma h4 {
+      left: -337%!important;
+    }
+  }
+
+  @media screen and (max-width: 457px) {
+    .specialPkgLabel span {
+      left: -7px;
+    }
+  }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here */
+  input[type=radio]{
+    visibility: hidden;
+  }
+  label {
+    width: 100%;
+    top: 33px;
+    font-weight: normal;
+    background-color: white;
+    border: 1px solid #ddd;
+    background-color: white;
+    height: 60px;
+    border-radius: 50px;
+  }
+  input[type="radio"]:checked+label{
+    border: 1px solid #e84466!important;
+  }
+  html :checked + span {
+    color: #e84466 !important;
+    left: 25%;
+  }
+
+  #rowOfBtn .col-xs-2, #rowOfBtn .col-xs-1 {
+    width: 15%!important;
+    min-width: 125px;
+  }
+
+  #rowOfBtn .col-xs-7 {
+    padding: 0px;
+  }
+  #cutAmtBtn.col-xs-7 {
+    left: 389px!important;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft {
+    left: 145px !important;
+  }
+
+  #cutAmtBtn.col-xs-7 .col-xs-3 {
+    width: 18%;
+    min-width: 125px;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft .col-xs-3{
+    left: 125px !important;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft .col-xs-3:first-child {
+    padding-left: 10px!important;
+  }
+  #rowOfBtn .col-xs-2 {
+
+  }
+  #calendarTable td {
+    width:13%!important;
+    margin-left:3px;
+  }
+  #calendarTable #emptyTd {
+    margin-left:6px!important;
+  }
+  .longTri {
+    top:63px!important;
+  }
+  table {
+    width: 110%;
+    max-width: 110%;
+  }
+  #choicesHaoNoHao span{
+    top:15%!important;
+  }
+  .changeColor {
+    border: 1px solid #e84466;
+  }
+  #rowOfBtn .col-xs-2:nth-child(3) {
+    padding-right: 20px !important;
+    padding-left: 15px !important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(4) {
+    padding-left: 12px!important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(6) {
+    left: -48px!important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(5) {
+    left: -35px!important;
+  }
+  #cusAmtBtn .amtName {
+    left: 10px!important;
+  }
+  input[type=radio]:checked ~ label + span {
+    border: 1px solid #e84466!important;
+    color: #e84466!important;
+  }
+  input[type=radio] + span {
+    top: 70px;
+  }
+  label[for="aggreeToUpdate"] {
+    border:none!important;
+  }
+  /*input[type=radio] + label {*/
+  /*color: #ccc!important;*/
+  /*}*/
+  select {
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+  }
+  label > input[type=radio]:checked {
+    border: 1px solid #e84466!important;
+  }
+  @media screen and (max-width: 1200px) {
+    #rowOfBtn .col-xs-2 {
+      width: 10%!important;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    #aggreeToUpdate .checkBoxDiv,.noChecked {
+      top: 25px!important;
+    }
+  }
+  @media screen and (max-width: 570px) {
+    #rule1 {
+      padding-left: 0%!important;
+    }
+    .modal-content {
+      top: 40px!important;
+    }
+    #topSpeArrow {
+      top:12px
+    }
+  }
+  .aggreeToUpdate {
+    margin-left: 20px;
+  }
+  #aggreeToUpdate {
+    top: 4px!important;
+  }
+  .widthFdsSpanOne.inputRadioCheckedTxt, .widthFdsSpanTwo.inputRadioCheckedTxt {
+    left: 0px;
+  }
+  #topSpeArrow {
+    top:22px
+  }
+  @media screen and (max-width: 414px) {
+    #calendarTable td {
+      width:12%!important;
+    }
+  }
+  .shanshiContent {
+    padding-left:10%;
+  }
+}
+
+@supports (-ms-ime-align: auto) {
+  #calendarTable td {
+    width:13%!important;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+}
+
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  select::-ms-expand {
+    display: none!important;
+  }
+  .col-xs-7.NoPaddingLeft#cutAmtBtn .specialPkgLabel.toCusBtn span {
+    left: 16%!important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(4) span{
+    left:21%!important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(6) span{
+    left:15%!important;
+  }
+}
+
+@supports (-ms-accelerator:true) {
+  /* IE Edge 12+ CSS styles go here */
+  input[type=radio]{
+    visibility: hidden;
+  }
+  label {
+    width: 100%;
+    top: 33px;
+    font-weight: normal;
+    background-color: white;
+    border: 1px solid #ddd;
+    background-color: white;
+    height: 60px;
+    border-radius: 50px;
+  }
+  input[type="radio"]:checked+label{
+    border: 1px solid #e84466!important;
+  }
+  html :checked + span {
+    color: #e84466 !important;
+    left: 25%;
+  }
+
+  #rowOfBtn .col-xs-2, #rowOfBtn .col-xs-1 {
+    width: 15%!important;
+    min-width: 125px;
+  }
+
+  #rowOfBtn .col-xs-7 {
+    padding: 0px;
+  }
+  #cutAmtBtn.col-xs-7 {
+    left: 389px!important;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft {
+    left: 145px !important;
+  }
+
+  #cutAmtBtn.col-xs-7 .col-xs-3 {
+    width: 18%;
+    min-width: 125px;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft .col-xs-3{
+    left: 125px !important;
+  }
+  #cutAmtBtn.col-xs-7.NoPaddingLeft .col-xs-3:first-child {
+    padding-left: 10px!important;
+  }
+  #rowOfBtn .col-xs-2 {
+
+  }
+  #calendarTable td {
+    width:13%!important;
+    margin-left:3px;
+  }
+  #calendarTable #emptyTd {
+    margin-left:6px!important;
+  }
+  .longTri {
+    top:63px!important;
+  }
+  table {
+    width: 110%;
+    max-width: 110%;
+  }
+  #choicesHaoNoHao span{
+    top:15%!important;
+  }
+  .changeColor {
+    border: 1px solid #e84466;
+  }
+  #rowOfBtn .col-xs-2:nth-child(3) {
+    padding-right: 20px !important;
+    padding-left: 15px !important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(4) {
+    padding-left: 12px!important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(6) {
+    left: -48px!important;
+  }
+  #rowOfBtn .col-xs-2:nth-child(5) {
+    left: -35px!important;
+  }
+  #cusAmtBtn .amtName {
+    left: 10px!important;
+  }
+  input[type=radio]:checked ~ label + span {
+    border: 1px solid #e84466!important;
+    color: #e84466!important;
+  }
+  input[type=radio] + span {
+    top: 70px;
+  }
+  label[for="aggreeToUpdate"] {
+    border:none!important;
+  }
+  /*input[type=radio] + label {*/
+  /*color: #ccc!important;*/
+  /*}*/
+  select {
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+  }
+  label > input[type=radio]:checked {
+    border: 1px solid #e84466!important;
+  }
+  @media screen and (max-width: 1200px) {
+    #rowOfBtn .col-xs-2 {
+      width: 10%!important;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    #aggreeToUpdate .checkBoxDiv,.noChecked {
+      top: 25px!important;
+    }
+  }
+  @media screen and (max-width: 570px) {
+    #rule1 {
+      padding-left: 0%!important;
+    }
+    .modal-content {
+      top: 40px!important;
+    }
+    #topSpeArrow {
+      top:12px
+    }
+  }
+  .aggreeToUpdate {
+    margin-left: 20px;
+  }
+  #aggreeToUpdate {
+    top: 4px!important;
+  }
+  .widthFdsSpanOne.inputRadioCheckedTxt, .widthFdsSpanTwo.inputRadioCheckedTxt {
+    left: 0px;
+  }
+  #topSpeArrow {
+    top:13px
+  }
+  #rowOfBtn .col-xs-2:nth-child(6) span {
+    left: 13%!important;
+  }
+  #deskCusPkg .col-xs-2:nth-child(4) span {
+    left: 20%!important;
+  }
+  @media screen and (max-width: 414px) {
+    #calendarTable td {
+      width:12%!important;
+    }
+    #btnOfPackages .col-xs-4 {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+  .shanshiContent {
+    padding-left:10%;
+  }
+}
+
+#rowOfBtn .col-xs-2:nth-child(6) {
+  width:16%!important;
+}
+
+.col-xs-7.NoPaddingLeft#cutAmtBtn .specialPkgLabel.toCusBtn span {
+  left: 16%!important;
+}
+
+@media screen and (max-width: 500px) {
+  #topSpeArrow {
+    top:20px!important;
+  }
+  #choicesHaoNoHao {
+    width: 150%!important;
+  }
+  #customerLogo {
+    margin-left: -10%!important;
+  }
+  .insuredTit {
+    padding-left: 15px!important;
+    padding-right: 15px!important;
+  }
+}
+/* ie  */
+@supports (-ms-ime-align:auto) {
+  .img-grey {
+
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #specialDropUpIdDiv {
+    left: -60px!important;
+  }
+  #accordionDiv .clickAccordion div.panel.panel-default.dropup {
+    margin-left: 5%!important;
+  }
+}
+
+@media screen and (max-width: 993px) {
+  #specialDropUpIdDiv {
+    left: -60px!important;
+  }
+  #accordionDiv .clickAccordion div.panel.panel-default.dropup {
+    margin-left: 7%!important;
+  }
+  #accordionDiv .clickAccordion div.panel.panel-default.dropup i {
+    margin-top: 0px!important;
+    margin-right: -21px!important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #specialDropUpIdDiv {
+    left: -60px !important;
+  }
+
+  #accordionDiv .clickAccordion div.panel.panel-default.dropup {
+    margin-left: 0% !important;
+    padding-top: 10px;
+    width: 375px;
+  }
+
+  .dropup .panel-title a {
+    left: -10px;
+    top: 4px;
+  }
+
+  #accordionDiv .clickAccordion div.panel.panel-default.dropup i {
+    margin-top: 0px !important;
+    margin-right: -66px !important;
+  }
+
+  #accordionDiv .clickAccordion div.panel.panel-default.dropup .panel-title{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #accordionDiv .clickAccordion div.panel.panel-default.dropup i {
+    margin-right: -68px !important;
+  }
+  #accordionDiv .clickAccordion div.panel.panel-default.dropup {
+    width: 116%!important;
+  }
+  #accordionDiv .clickAccordion div.panel.panel-default.dropup {
+    margin-left: 0px!important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #specialDropUpIdDiv .fa-chevron-circle-up {
+    position: relative;
+    top: -25px;
+  }
+  .cl-owl.owl-carousel .owl-nav .owl-next {
+    top: 50%!important;
+  }
+  .cl-owl.owl-carousel .owl-nav .owl-prev {
+    top: 50%!important;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  #accordionDiv #ArrowDownCircle {
+    margin-right: 0px!important;
+  }
+  #accordionDiv .panel-collapse.collapse.in {
+    margin-bottom: -50px!important;
+  }
+}

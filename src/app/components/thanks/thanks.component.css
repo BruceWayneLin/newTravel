@@ -1,0 +1,96 @@
+.image-center img {
+  margin: 25px auto;
+  height: auto;
+}
+
+.imgH2 h2 {
+  color: #808080;
+  font-weight: 400;
+  font-size: 25px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+img.img-responsive {
+  margin: 0px auto;
+  margin-bottom: 20px;
+  height: auto;
+  /*height: 200px;*/
+}
+
+h2 {
+  color: #e84466;
+  font-weight: 400;
+  font-size: 25px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+}
+
+.imgH2 h3 {
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
+  color: #e84466;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+button.goingMemberArea {
+  margin: 50px auto;
+  background: #e84466;
+  display: inline-block;
+  padding: 11px 16px;
+  border: 0;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-weight: 400;
+  width: 400px;
+  max-width: 100%;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
+}
+
+.couponArea {
+  margin: 50px auto;
+}
+
+.inner ul li {
+  list-style: none;
+  text-align: left;
+}
+
+.inner ul {
+  padding-left: 0px;
+  margin-top: 10px!important;
+  margin-bottom: 10px!important;
+}
+
+.couponIma {
+}
+
+.inner {
+  text-align: center;
+}
+
+.firstRow {
+  margin-top: 0px;
+}
+
+@media screen and (max-width: 500px){
+  #failPay {
+    margin-top: 25% !important;
+  }
+  .imgH2 h3 {
+    font-size:18px;
+  }
+
+  h2{
+    font-size: 18px!important;
+  }
+  .couponArea .col-xs-6{
+    width: 100%!important;
+    margin-top: 10px;
+  }
+}

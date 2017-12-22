@@ -1,0 +1,51 @@
+<div class="row firstRow" >
+  <div class="container">
+    <div class="col-xs-12 text-center">
+      <div class="image-center">
+        <img [src]="purposeImgUrl" alt="" class="img-responsive">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container imgH2">
+    <div class="col-xs-12 text-center">
+      <h2>感謝您的訂購，祝旅途愉快</h2>
+      <h3>為維護您保險權益，請至會員專區下載要保書，簽名後回傳。</h3>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <div class="col-xs-12 text-center">
+      <a href="/CareLineMember/member/member/travelorder"><button class="goingMemberArea form-control">會員專區</button></a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <div class="div col-xs-12 text-center">
+      <h2>您獲得的優惠券 (可至會員專區查詢)</h2>
+    </div>
+  </div>
+</div>
+
+<div class="row couponArea">
+  <div class="container">
+    <div class="col-xs-12 text-center">
+      <div class="col-xs-6" *ngFor="let item of couponList; let i = index;">
+        <div class="inner">
+          <div class="couponIma col-xs-12">
+            <img style="margin:auto;" class="img-responsive" [src]="item['imageUrl']" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
