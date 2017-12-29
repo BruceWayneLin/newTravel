@@ -82,6 +82,7 @@ export class HomePageComponent implements OnInit {
   numberOfgetDayFromBkendLastSun: number = 0;
   clickAddedTotalNum: number = 0;
   systemDate: string;
+  fourthBtn: {};
 
   @ViewChild('eleTest')  el:ElementRef;
   @ViewChild('noNeedArea') nNA:ElementRef;
@@ -95,7 +96,7 @@ export class HomePageComponent implements OnInit {
     private dataService:DataServiceService
   ){
     $('body,html').animate({scrollTop: '0px'}, 0);
-    var envi = '';
+    var envi = 'local';
     if(envi == 'local'){
     }else{
       console.log = function(){};
@@ -130,6 +131,15 @@ export class HomePageComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.fourthBtn = {};
+    this.fourthBtn['packageId'] = '';
+    this.fourthBtn['packageName'] = '自訂方案';
+    this.fourthBtn['packageButtonName'] = '自訂方案';
+    this.fourthBtn['featureDesc'] = '選擇最符合自己需要的方案';
+    this.fourthBtn['secondaryItems'] = [];
+    this.fourthBtn['companyCode'] = '';
+    this.fourthBtn['primaryItems'] = [];
+    this.fourthBtn['table'] = {};
     this.toCompatibilityUse();
     this.CusDetailContent = true;
     this.product['product'] = 'Travel';
@@ -167,7 +177,8 @@ export class HomePageComponent implements OnInit {
         sendDataBak['startDate'] = this.startTravelDay;
         this.dataService.ifOnlyStartDayOnly(sendDataBak).subscribe((item) => {
           this.cusPackageList = item['cusPackageList'];
-          this.packageList = item['packageList'];
+          // this.packageList = item['packageList'];
+          // this.packageList.push(this.fourthBtn);
           item.cusPackageList.filter(val => val.isDefaultPackage == true).map(
               value => this.defaultCustomerPkg = value
           );
@@ -252,6 +263,8 @@ export class HomePageComponent implements OnInit {
 
       if(!this.dataService.orderNumberForSave){
         this.packageList = posts.packageList;
+        // this.packageList.push(this.fourthBtn);
+
         posts.cusPackageList.filter(val => val.isDefaultPackage == true).map(
             value => this.defaultCustomerPkg = value
         );
@@ -303,7 +316,8 @@ export class HomePageComponent implements OnInit {
       this.getDayFromBkend = (posts.productSetting['startDateLimit'] + n);
       this.theDayBeginingNeedToRun = this.getDayFromBkend + 10;
       this.startDayPlusLastDayNum = this.theDayBeginingNeedToRun;
-
+      
+      console.log('123432142141', this.packageList);
       this.startDayLimit = posts.productSetting['startDateLimit'];
       this.ifTheStartIsPlusOneMoreDay = posts.productSetting['start'];
       this.systemDate = posts.systemDate;
@@ -755,6 +769,8 @@ export class HomePageComponent implements OnInit {
                 console.log(item);
                 this.cusPackageList = item['cusPackageList'];
                 this.packageList = item['packageList'];
+                // this.packageList.push(this.fourthBtn);
+
                 item.cusPackageList.filter(val => val.isDefaultPackage == true).map(
                     value => this.defaultCustomerPkg = value
                 );
@@ -862,14 +878,15 @@ export class HomePageComponent implements OnInit {
         item['pictureCode'] = 'ITEM_MEDICAL_BILL'
       }
       if(item['pictureCode'] == 'ITEM_INCONVENIENT'){
-        item['pictureCode'] == 'TAK002'
+        item['pictureCode'] = 'TAK002'
       }
       if(item['pictureCode'] == 'ITEM_SUDDEN_SICK'){
-        item['pictureCode'] == 'TAK006'
+        item['pictureCode'] = 'TAK006'
       }
       if(item['pictureCode'] == 'C_DETAIL_RESCUE'){
-        item['pictureCode'] == 'TAK009'
+        item['pictureCode'] = 'TAK009'
       }
+      console.log('123412432124323', item);
     })
   }
 
@@ -1061,10 +1078,11 @@ export class HomePageComponent implements OnInit {
       this.selectedPackage = val;
       this.selectedPackageName = val.packageName;
       this.secondaryItems = this.selectedPackage['secondaryItems'];
-      this.toGetImgUrl(this.secondaryItems);
-      this.toGetLogo(this.selectedPackage['companyCode']);
+      this.featureDesc = this.selectedPackage['featureDesc'];
       this.pkgPrimary = this.selectedPackage['primaryItems'];
       this.tableList = this.selectedPackage['table'];
+      this.toGetImgUrl(this.secondaryItems);
+      this.toGetLogo(this.selectedPackage['companyCode']);
       let dataBak = {};
       dataBak['packageId'] = this.selectedPackage['packageId'];
       dataBak['days'] = this.diffDays;
@@ -1072,7 +1090,6 @@ export class HomePageComponent implements OnInit {
       this.dataService.getPkPrice(dataBak).subscribe((item) => {
         this.finalPrice = item;
       });
-      this.featureDesc = this.selectedPackage['featureDesc'];
       for (var i = 0; i <= this.pkgPrimary.length; i++){
       }
     }

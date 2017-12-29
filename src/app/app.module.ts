@@ -38,6 +38,7 @@ import { LayoutModule } from 'cl-layout/src/app/shared/layout/layout.module';
 import 'cl-layout/thirdparty-library';
 import { CarelineProjectType } from 'cl-layout/src/app/shared/layout/careline-layout-config';
 import { OwlCarouselModule } from 'cl-layout/src/app/shared/tools/owl-carousel/owl-carousel.module';
+import { VersionComponent } from './components/version/version.component';
 
 export const routes : Routes = [
   {
@@ -101,7 +102,8 @@ export const routes : Routes = [
     ConfirmInfoComponent,
     TempFakeComponent,
     ThanksComponent,
-    FailPaymentComponent
+    FailPaymentComponent,
+    VersionComponent
   ],
   exports: [
   ],

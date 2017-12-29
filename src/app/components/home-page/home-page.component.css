@@ -327,8 +327,14 @@ input[type="button"]:checked {
   position: absolute;
   top: 18px;
   font-size: 18px;
-  left: 30%;
+  left: 24%;
   pointer-events: none;
+}
+
+@media screen and (max-width:1200px) {
+  .specialPkgLabel span {
+    left: 20%;
+  }
 }
 
 .normalH3 {
@@ -346,12 +352,12 @@ input[type="button"]:checked {
 
 .table td {
   width: 14%!important;
-  display:inline-block;
+  display: inline-block;
 }
 
 .table th {
   width: 14%!important;
-  display:inline-block;
+  display: inline-block;
 }
 
 .modifiedDays {
@@ -986,7 +992,7 @@ header {
   }
   .specialPkgLabel input:checked + span {
     font-size: 13px;
-    left: 0px;
+    left: 8px;
     width: 100%;
   }
   #btnOfPackages .col-xs-4 {
@@ -1005,7 +1011,7 @@ header {
 
   #btnOfPackages input {
     height: 45px;
-    width: 100px;
+    width: 130%;
   }
   .packageContent .col-xs-6, .packageContent .col-xs-3 {
     width: 100%;
@@ -1139,11 +1145,12 @@ header {
     margin-right: 15%;
   }
   #btnOfPackages .specialPkgLabel span {
-    left: 33px;
+    left: 18%;
+    font-size:14px;
   }
   #btnOfPackages .specialPkgLabel input:checked + span {
     font-size: 16px;
-    left: 50px;
+    left: 17%;
   }
   #tableEndDivRow .col-sm-12 {
     width: 104%!important;
@@ -1304,11 +1311,11 @@ header {
   }
   #btnOfPackages .specialPkgLabel input:checked + span {
     left:18%;
-    font-size:18px!important;
+    font-size:14px;
   }
   #btnOfPackages .specialPkgLabel span {
     left: 18%;
-    top: 15px!important;
+    top: 20px!important;
   }
   .specialPkgLabel.toCusBtn  span, .specialPkgLabel input:checked + span {
     left: 13%!important;
@@ -1430,4 +1437,8 @@ header {
   #btnOfPackages .col-xs-4:nth-child(3) .specialPkgLabel span {
     left:14%!important;
   }
+}
+
+#calendarTable td {
+  display:inline-block!important;
 }

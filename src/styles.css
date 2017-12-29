@@ -1029,7 +1029,7 @@ input, input:before, input:after {
   border-color: #808080;
   cursor: pointer;
   width: 10%;
-  height: 40%;
+  height: auto;
   border-radius: 25px;
   border-width: 2px;
   border-style: solid;
@@ -1769,4 +1769,9 @@ input, input:before, input:after {
   #accordionDiv .panel-collapse.collapse.in {
     margin-bottom: -50px!important;
   }
+}
+
+#purposePurLabel {
+  cursor: pointer !important;
+  cursor: hand !important;
 }
