@@ -1,9 +1,9 @@
 .imgBak {
     background: url('/assets/images/dolls/loading.gif');
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-    height: 25%;
-    width: 20%;
+    height: 250px;
+    width: 250px;
     margin: 0 auto;
     display: block;
   }

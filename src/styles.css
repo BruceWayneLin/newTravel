@@ -1747,6 +1747,9 @@ input, input:before, input:after {
   #accordionDiv .clickAccordion div.panel.panel-default.dropup {
     margin-left: 0px!important;
   }
+  #btnOfPackages .col-xs-3 .specialPkgLabel .freeChoice {
+    left:-2px;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -1769,9 +1772,20 @@ input, input:before, input:after {
   #accordionDiv .panel-collapse.collapse.in {
     margin-bottom: -50px!important;
   }
+  #btnOfPackages .col-xs-3 {
+    padding-left: 8px;
+  }
 }
 
 #purposePurLabel {
   cursor: pointer !important;
   cursor: hand !important;
+}
+
+input[type="radio"]:checked + span{
+  color: #e84466!important;
+}
+
+#btnOfPackages .selectedRadio {
+  color: #e84466!important;
 }

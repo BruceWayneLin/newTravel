@@ -43,7 +43,7 @@ export class HomePageComponent implements OnInit {
   pkgCustomGo: boolean = false;
   pkgPrimary: any;
   secondaryItems: any;
-  pkgCustomTxt: string = '挑不到想要的?點我自己選';
+  pkgCustomTxt: string = '挑不到想要的?點我自由配';
   selPkgH2: string = '選擇方案';
   longDesc: Array<any> = [];
   pkgDetailLongArr: Array<any> = [];
@@ -167,6 +167,8 @@ export class HomePageComponent implements OnInit {
         this.firstMon = this.getMonday(new Date());
       }
     }
+    this.toDeterminedIfDisabledDaysNeedToHide();
+
     if(this.dataService.orderNumberForSave){
       this.dataService.getCustomerHomePage().subscribe((item)=>{
         this.startTravelDay = item['dateFrom'];
@@ -316,8 +318,6 @@ export class HomePageComponent implements OnInit {
       this.getDayFromBkend = (posts.productSetting['startDateLimit'] + n);
       this.theDayBeginingNeedToRun = this.getDayFromBkend + 10;
       this.startDayPlusLastDayNum = this.theDayBeginingNeedToRun;
-      
-      console.log('123432142141', this.packageList);
       this.startDayLimit = posts.productSetting['startDateLimit'];
       this.ifTheStartIsPlusOneMoreDay = posts.productSetting['start'];
       this.systemDate = posts.systemDate;
@@ -347,6 +347,12 @@ export class HomePageComponent implements OnInit {
       }
     });
     this.changeCountries('');
+  }
+
+  toDeterminedIfDisabledDaysNeedToHide() {
+    var d = new Date(this.firstMon);
+    d.setDate(d.getDate() - d.getDay());
+    console.log('432112344321112341234', d);
   }
 
   ngAfterViewInit(){
@@ -603,7 +609,7 @@ export class HomePageComponent implements OnInit {
       $('.toShowContentAccordion').hide();
       $('#mainLongDetailDiv').hide();
       $('#mobileAmt').show();
-    }, 100);
+    }, 100);  
     // if(window.innerWidth <= 500){
     //   setTimeout(function(){
     //     $('.toShowContentAccordion').slideUp('fast');
@@ -612,12 +618,12 @@ export class HomePageComponent implements OnInit {
     document.querySelector('#flagSix').scrollIntoView();
 
     if(this.pkgCustomGo){
-      this.selPkgH2 = '自訂方案';
-      this.pkgCustomTxt = '回建議方案挑選';
+      this.selPkgH2 = '自由配';
+      this.pkgCustomTxt = '回選擇方案挑選';
       this.toGetCustomPackageContent(this.defaultCustomerPkg);
     } else {
       this.selPkgH2 = '選擇方案';
-      this.pkgCustomTxt = '挑不到想要的?點我自己選';
+      this.pkgCustomTxt = '挑不到想要的?點我自由配';
       this.dataService.getIniData(this.product).subscribe((posts) => {
         posts.packageList.filter(val => val && val.isDefaultPackage).map(value =>
             this.selectedPackage = value
@@ -886,7 +892,6 @@ export class HomePageComponent implements OnInit {
       if(item['pictureCode'] == 'C_DETAIL_RESCUE'){
         item['pictureCode'] = 'TAK009'
       }
-      console.log('123412432124323', item);
     })
   }
 
@@ -1071,9 +1076,10 @@ export class HomePageComponent implements OnInit {
     this.selectedCountriesId;
   }
 
-  toGetPackageContent(val, classValueIs) {
+  toGetPackageContent(val, classValueIs, number) {
     $('.longTri').addClass('hidden');
     $('#' + classValueIs).removeClass('hidden');
+
     if(val){
       this.selectedPackage = val;
       this.selectedPackageName = val.packageName;
@@ -1086,10 +1092,28 @@ export class HomePageComponent implements OnInit {
       let dataBak = {};
       dataBak['packageId'] = this.selectedPackage['packageId'];
       dataBak['days'] = this.diffDays;
-
+      document.querySelector('#flagSix').scrollIntoView();
       this.dataService.getPkPrice(dataBak).subscribe((item) => {
         this.finalPrice = item;
       });
+      
+      var iOSMobile = !!navigator.platform && /iPhone/.test(navigator.platform);
+      if(window.innerWidth <= 500 && iOSMobile){
+        $('#btnOfPackages').find('.selectedRadio').removeClass('selectedRadio');
+        $('.packageButton' + number).siblings('span').addClass('selectedRadio');
+        $('#btnOfPackages').find('.fa-check').addClass('hidden');
+        $('.packageButton' + number).siblings('span').empty();
+        $('.packageButton' + number).siblings('span').append('<i class="fa fa-check"></i>'+this.selectedPackage['packageButtonName']).css(
+          {
+            'text-align': 'center',
+            'display': 'block',
+            'margin': '0 auto'
+          }
+        ); 
+        $('#btnOfPackages span').css({
+          'left': '10%'
+        });
+      }
       for (var i = 0; i <= this.pkgPrimary.length; i++){
       }
     }

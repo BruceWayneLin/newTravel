@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Version } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
@@ -89,6 +89,13 @@ export const routes : Routes = [
       breadcrumb: '付款失敗',
     },
     component: FailPaymentComponent
+  },
+  {
+    path:'version',
+    data: {
+      breadcrumb: '檢查版本',
+    },
+    component: VersionComponent
   }
 ]
 
