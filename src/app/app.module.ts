@@ -28,7 +28,6 @@ import 'rxjs/add/operator/switchMap';
 
 // import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 // import { InMockDbService } from './mock-packageList';
-import { TempFakeComponent } from './components/temp-fake/temp-fake.component';
 import { ShareService } from "./services/share.service";
 import { ThanksComponent } from './components/thanks/thanks.component';
 import { AddMemberComponent } from './components/add-member/add-member.component';
@@ -61,13 +60,6 @@ export const routes : Routes = [
       breadcrumb: '會員',
     },
     component: MemberCreateComponent
-  },
-  {
-    path:'fakeTemp',
-    data: {
-      breadcrumb: '假的按鈕頁',
-    },
-    component: TempFakeComponent
   },
   {
     path:'confirmPage',
@@ -107,7 +99,6 @@ export const routes : Routes = [
     MemberCreateComponent,
     HomePageComponent,
     ConfirmInfoComponent,
-    TempFakeComponent,
     ThanksComponent,
     FailPaymentComponent,
     VersionComponent

@@ -232,6 +232,7 @@ export class HomePageComponent implements OnInit {
         }
         this.dataService.getIniData(this.product).subscribe((posts) => {
           this.countries = posts.countryList;
+          this.packageList = posts.packageList;
           this.toGetCountryList(this.countries);
           this.changeCountries('');
           this.systemDate = posts.systemDate;
@@ -348,11 +349,15 @@ export class HomePageComponent implements OnInit {
     });
     this.changeCountries('');
   }
-
+  firstWeekLastDay: any;
   toDeterminedIfDisabledDaysNeedToHide() {
     var d = new Date(this.firstMon);
     d.setDate(d.getDate() - d.getDay());
-    console.log('432112344321112341234', d);
+    if(new Date(this.firstMon) > d) {
+      this.firstWeekLastDay = '';
+    } else {
+      this.firstWeekLastDay = d.getFullYear() + '-' + (d.getMonth()+1).toString() + '-' + d.getDate().toString();
+    }
   }
 
   ngAfterViewInit(){
@@ -604,7 +609,9 @@ export class HomePageComponent implements OnInit {
   }
 
   pkgCustomToggle() {
-    this.pkgCustomGo = !this.pkgCustomGo;
+    $('.longTri').addClass('hidden');
+    $('#remove3').removeClass('hidden');
+    this.pkgCustomGo = !false;
     setTimeout(function(){
       $('.toShowContentAccordion').hide();
       $('#mainLongDetailDiv').hide();
@@ -1079,7 +1086,9 @@ export class HomePageComponent implements OnInit {
   toGetPackageContent(val, classValueIs, number) {
     $('.longTri').addClass('hidden');
     $('#' + classValueIs).removeClass('hidden');
-
+    this.pkgCustomGo = false;
+    this.selPkgH2 = '選擇方案';
+    this.pkgCustomTxt = '挑不到想要的?點我自由配';
     if(val){
       this.selectedPackage = val;
       this.selectedPackageName = val.packageName;
