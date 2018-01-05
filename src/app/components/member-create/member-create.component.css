@@ -257,6 +257,10 @@ input.memberFormInput.form-control.input-lg[disabled] {
   padding-left: 25px;
 }
 
+#closebtn {
+  min-height: 51px;
+}
+
 .addInsuredPP .addDoll i.fa-plus {
   color: black;
   font-size: 30px;
