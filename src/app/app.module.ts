@@ -38,6 +38,7 @@ import 'cl-layout/thirdparty-library';
 import { CarelineProjectType } from 'cl-layout/src/app/shared/layout/careline-layout-config';
 import { OwlCarouselModule } from 'cl-layout/src/app/shared/tools/owl-carousel/owl-carousel.module';
 import { VersionComponent } from './components/version/version.component';
+import { B2bCarGogooutComponent } from './components/b2b-car-gogoout/b2b-car-gogoout.component';
 
 export const routes : Routes = [
   {
@@ -60,6 +61,13 @@ export const routes : Routes = [
       breadcrumb: '會員',
     },
     component: MemberCreateComponent
+  },
+  {
+    path:'gogoout',
+    data: {
+      breadcrumb: '會員',
+    },
+    component: B2bCarGogooutComponent
   },
   {
     path:'confirmPage',
@@ -101,7 +109,8 @@ export const routes : Routes = [
     ConfirmInfoComponent,
     ThanksComponent,
     FailPaymentComponent,
-    VersionComponent
+    VersionComponent,
+    B2bCarGogooutComponent
   ],
   exports: [
   ],

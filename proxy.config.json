@@ -15,5 +15,9 @@
   "/CareLineBranding": {
     "target": "http://210.242.7.164/",
     "secure": false
+  },
+  "/CareLineTravel/test-travel": {
+    "target": "http://210.242.7.164/",
+    "secure": false
   }
 }
