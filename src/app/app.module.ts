@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { DataServiceService } from './services/data-service.service';
 import { filterPipe } from './filter';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MomentModule } from 'angular2-moment';
 import { AccordionModule } from 'ngx-accordion';
 
@@ -38,62 +38,60 @@ import 'cl-layout/thirdparty-library';
 import { CarelineProjectType } from 'cl-layout/src/app/shared/layout/careline-layout-config';
 import { OwlCarouselModule } from 'cl-layout/src/app/shared/tools/owl-carousel/owl-carousel.module';
 import { VersionComponent } from './components/version/version.component';
-import { B2bCarGogooutComponent } from './components/b2b-car-gogoout/b2b-car-gogoout.component';
+import { RentalCarThemeModule } from './shared/theme/rental-car-theme/rental-car-theme.module';
+import { LayoutRoute } from 'cl-layout/src/app/shared/layout/layout';
+import { RentalCarThemeFactoryFactory } from './shared/theme/rental-car-theme/rental-car-theme-factory';
 
-export const routes : Routes = [
+export const routes: LayoutRoute[] = [
   {
-    path:'',
+    path: '',
     data: {
-      breadcrumb: '首頁',
+      // breadcrumb: '首頁',
+      component: {
+        factory: RentalCarThemeFactoryFactory
+      }
     },
     component: HomePageComponent
   },
   {
-    path:'index',
+    path: 'index',
     data: {
-      breadcrumb: '首頁',
+      // breadcrumb: '首頁',
     },
     component: HomePageComponent
   },
   {
-    path:'memberCreate',
+    path: 'memberCreate',
     data: {
-      breadcrumb: '會員',
+      // breadcrumb: '會員',
     },
     component: MemberCreateComponent
   },
   {
-    path:'gogoout',
+    path: 'confirmPage',
     data: {
-      breadcrumb: '會員',
-    },
-    component: B2bCarGogooutComponent
-  },
-  {
-    path:'confirmPage',
-    data: {
-      breadcrumb: '確認投保資訊',
+      // breadcrumb: '確認投保資訊',
     },
     component: ConfirmInfoComponent
   },
   {
-    path:'thanksPage',
+    path: 'thanksPage',
     data: {
-      breadcrumb: '投保感謝',
+      // breadcrumb: '投保感謝',
     },
     component: ThanksComponent
   },
   {
-    path:'failPayment',
+    path: 'failPayment',
     data: {
-      breadcrumb: '付款失敗',
+      // breadcrumb: '付款失敗',
     },
     component: FailPaymentComponent
   },
   {
-    path:'version',
+    path: 'version',
     data: {
-      breadcrumb: '檢查版本',
+      // breadcrumb: '檢查版本',
     },
     component: VersionComponent
   }
@@ -109,15 +107,14 @@ export const routes : Routes = [
     ConfirmInfoComponent,
     ThanksComponent,
     FailPaymentComponent,
-    VersionComponent,
-    B2bCarGogooutComponent
+    VersionComponent
   ],
   exports: [
   ],
   imports: [
     BrowserModule,
     LayoutModule.forRoot({
-      carelineProjectType : CarelineProjectType.travel
+      carelineProjectType: CarelineProjectType.travel
     }),
     // BreadcrumbsModule,
     OwlCarouselModule,
@@ -129,7 +126,8 @@ export const routes : Routes = [
     // InMemoryWebApiModule.forRoot(InMockDbService),
     AccordionModule,
     HttpModule,
-    SuiSelectModule
+    SuiSelectModule,
+    RentalCarThemeModule
   ],
   providers: [
     DataServiceService,
