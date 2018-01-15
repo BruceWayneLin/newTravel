@@ -41,6 +41,7 @@ import { VersionComponent } from './components/version/version.component';
 import { RentalCarThemeModule } from './shared/theme/rental-car-theme/rental-car-theme.module';
 import { LayoutRoute } from 'cl-layout/src/app/shared/layout/layout';
 import { RentalCarThemeFactoryFactory } from './shared/theme/rental-car-theme/rental-car-theme-factory';
+import { SignatureModule } from './components/signature/signature.module';
 
 export const routes: LayoutRoute[] = [
   {
@@ -94,8 +95,12 @@ export const routes: LayoutRoute[] = [
       // breadcrumb: '檢查版本',
     },
     component: VersionComponent
+  },
+  {
+    path: 'signature',
+    loadChildren: './components/signature/signature.module#SignatureModule'
   }
-]
+];
 
 @NgModule({
   declarations: [

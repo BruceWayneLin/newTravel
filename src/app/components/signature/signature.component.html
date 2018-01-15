@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="page-title careline-subtitle">
+    <cl-svg-signautre-paper></cl-svg-signautre-paper>
+    要保書簽名
+  </div>
+  <hr>
+  <div class="people-list-container">
+    <div class="page-desc careline-description">可選擇
+      <span class="careline-text-red-light">線上簽名</span>或紙本要保書，
+      <span class="careline-text-red-light">下載要保書列印後簽名，掃描或拍照上傳要保書</span>，即可保障您的權益
+    </div>
+    <div class="row">
+      <ng-container *ngFor="let signaturePeople of signaturePeopleList">
+        <cl-signature-input class="col-12" [signaturePeople]="signaturePeople" [orderNumber]="current.orderNumber" #signInput
+          (click)="signature(signInput)"></cl-signature-input>
+        <div class="w-100" *ngIf="signaturePeople.forceWrap"></div>
+      </ng-container>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center">
+        <button class="btn careline-btn careline-btn-lg careline-btn-theme-1 mt-5">
+          <div class="careline-btn-text ">
+            完成
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
