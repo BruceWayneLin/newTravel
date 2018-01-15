@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SignatureComponent } from './signature.component';
+import { SignatureGoGooutComponent } from './signature-go-goout.component';
 
-describe('SignatureComponent', () => {
-  let component: SignatureComponent;
-  let fixture: ComponentFixture<SignatureComponent>;
+describe('SignatureGoGooutComponent', () => {
+  let component: SignatureGoGooutComponent;
+  let fixture: ComponentFixture<SignatureGoGooutComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignatureComponent ]
+      declarations: [ SignatureGoGooutComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignatureComponent);
+    fixture = TestBed.createComponent(SignatureGoGooutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

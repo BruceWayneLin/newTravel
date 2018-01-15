@@ -3,11 +3,11 @@ import { DataServiceService } from '../../services/data-service.service'
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-signature',
-  templateUrl: './signature.component.html',
-  styleUrls: ['./signature.component.css']
+  selector: 'app-signature-go-goout',
+  templateUrl: './signature-go-goout.component.html',
+  styleUrls: ['./signature-go-goout.component.css']
 })
-export class SignatureComponent implements OnInit {
+export class SignatureGoGooutComponent implements OnInit {
 
   constructor(
     private dataService: DataServiceService,

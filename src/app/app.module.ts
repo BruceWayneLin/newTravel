@@ -43,8 +43,8 @@ import { RentalCarThemeModule } from './shared/theme/rental-car-theme/rental-car
 import { LayoutRoute } from 'cl-layout/src/app/shared/layout/layout';
 import { RentalCarThemeFactoryFactory } from './shared/theme/rental-car-theme/rental-car-theme-factory';
 import { GogooutComponent } from './components/gogoout/gogoout.component';
-import { SignatureComponent } from './components/signature/signature.component';
 import { PreviewPdfComponent } from './components/preview-pdf/preview-pdf.component';
+import { SignatureGoGooutComponent } from './components/signature-go-goout/signature-go-goout.component';
 
 export const routes: LayoutRoute[] = [
   {
@@ -75,7 +75,7 @@ export const routes: LayoutRoute[] = [
       }
       // breadcrumb: '首頁',
     },
-    component: SignatureComponent
+    component: SignatureGoGooutComponent
   },
   {
     path: 'gogoout/previewPdf',
@@ -151,7 +151,7 @@ export const routes: LayoutRoute[] = [
     VersionComponent,
     GogooutComponent,
     B2bCarGogooutComponent,
-    SignatureComponent,
+    SignatureGoGooutComponent,
     PreviewPdfComponent
   ],
   exports: [
