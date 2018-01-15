@@ -45,6 +45,8 @@ import { RentalCarThemeFactoryFactory } from './shared/theme/rental-car-theme/re
 import { GogooutComponent } from './components/gogoout/gogoout.component';
 import { PreviewPdfComponent } from './components/preview-pdf/preview-pdf.component';
 import { SignatureGoGooutComponent } from './components/signature-go-goout/signature-go-goout.component';
+import { SignatureModule } from './components/signature/signature.module';
+
 
 export const routes: LayoutRoute[] = [
   {
@@ -135,8 +137,12 @@ export const routes: LayoutRoute[] = [
       // breadcrumb: '檢查版本',
     },
     component: VersionComponent
+  },
+  {
+    path: 'signature',
+    loadChildren: './components/signature/signature.module#SignatureModule'
   }
-]
+];
 
 @NgModule({
   declarations: [
