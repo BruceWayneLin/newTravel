@@ -15,6 +15,7 @@ export class DataServiceService {
   public orderNumber = '';
   // public  finalPrice: number;
   public orderNumberForSave = '';
+  public gogoOrderNumber = '';
   public clearData: boolean = false;
   public purposeImageUrl: string;
   public readyToSaveData: boolean = false;
@@ -41,12 +42,48 @@ export class DataServiceService {
     ) {
 
     }
-  getIniData(val) {
-      this.loading = false;
-      return this.http.get('/CareLineTravel/travel-mbr/journey/initData?product='+val['product']+'&pack='+val['pack']
+
+  getSignatureData(){
+    let val = {};
+    if(sessionStorage.getItem('pid')){
+        this.gogoOrderNumber = JSON.parse(sessionStorage.getItem('pid'));  
+    }else{
+        val['orderNumber'] = this.gogoOrderNumber;    
+    }
+    return this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/sign/initData', val
     ).map(res => {
+        this.loading = false;
         return res.json();
-    });
+    });  
+  }  
+
+  getIniData(val) {
+      var apiCall = '';
+      console.log('12342424214214324124', this.gogoOrderNumber);
+        try{
+          if(this.gogoOrderNumber){
+            sessionStorage.setItem('pid', JSON.stringify(this.gogoOrderNumber));  
+          }  
+        }catch(error){
+
+        }
+      if(this.route.url.slice(0, 8) == '/gogoout'){
+        if(!val['orderNumber']){
+            val['orderNumber'] = this.gogoOrderNumber;
+        }  
+        apiCall = '/CareLineTravel/travel-mbr/b2bCar/gogoout/apIn/initData';
+        return this.http.post(apiCall, val
+        ).map(res => {
+            this.loading = false;
+            return res.json();
+        });
+      }else{
+        return this.http.get('/CareLineTravel/travel-mbr/journey/initData?product='+val['product']+'&pack='+val['pack']
+        ).map(res => {
+            this.loading = false;
+            return res.json();
+        });
+      }
   }
 
   getPkPrice(value) {
@@ -168,65 +205,66 @@ export class DataServiceService {
   }
 
   toGetInsuredInfo(value) {
-      this.loading = true;
-      if(this.backFromConfirm){
-          let objSendBak = {};
-          objSendBak['orderNumber'] = this.orderNumberForSave;
-          return this.http.post('/CareLineTravel/travel-mbr/journey/getDataAfterLogin', objSendBak).map(res => {
-              if(res.json().isEx){
-                  if(res.json().kickout){
-                      this.route.navigate(['/']);
-                  }else{
-                      if (res.json().data) {
-                          // Server 回傳錯誤
-                          if (res.json().data && res.json().data.errorFlagName) {
-                              var flagName = res.json().data.errorFlagName;
-                              this.idToGoFlow = flagName;
-                          }
-                      }
-                      this.loading = false;
-                      var msgs = res.json().msgs;
-                      var modal = document.getElementById('myModal');
-                      modal.style.display = "block";
-                      this.AlertTXT = msgs;
-                      document.querySelector('#myModal').scrollIntoView();
-                  }
-              } else {
-                  this.loading = false;
-                  return res.json();
-              }
-          });
-      }else{
-          let objSendBak = {};
-          objSendBak['orderNumber'] = this.orderNumberForSave;
-          return this.http.post('/CareLineTravel/travel-mbr/journey/getDataAfterLogin', objSendBak).map(res => {
-              if(res.json().isEx){
-                  if(res.json().kickout){
-                      this.route.navigate(['/']);
-                  }else{
-                      if (res.json().data) {
-                          // Server 回傳錯誤
-                          if (res.json().data && res.json().data.errorFlagName) {
-                              var flagName = res.json().data.errorFlagName;
-                              this.idToGoFlow = flagName;
-                          }
-                      }
-                      this.loading = false;
-                      var msgs = res.json().msgs;
-                      var modal = document.getElementById('myModal');
-                      modal.style.display = "block";
-                      this.AlertTXT = msgs;
-                      document.querySelector('#myModal').scrollIntoView();
-                  }
-              } else {
-                  this.loading = false;
-                  return res.json();
-              }
-          });
-      }
+    this.loading = true;
+    console.log(this.route.url.slice(0, 8));
+    if(this.backFromConfirm){
+        let objSendBak = {};
+        objSendBak['orderNumber'] = this.orderNumberForSave;
+        return this.http.post('/CareLineTravel/travel-mbr/journey/getDataAfterLogin', objSendBak).map(res => {
+            if(res.json().isEx){
+                if(res.json().kickout){
+                    this.route.navigate(['/']);
+                }else{
+                    if (res.json().data) {
+                        // Server 回傳錯誤
+                        if (res.json().data && res.json().data.errorFlagName) {
+                            var flagName = res.json().data.errorFlagName;
+                            this.idToGoFlow = flagName;
+                        }
+                    }
+                    this.loading = false;
+                    var msgs = res.json().msgs;
+                    var modal = document.getElementById('myModal');
+                    modal.style.display = "block";
+                    this.AlertTXT = msgs;
+                    document.querySelector('#myModal').scrollIntoView();
+                }
+            } else {
+                this.loading = false;
+                return res.json();
+            }
+        });
+    }else{
+        let objSendBak = {};
+        objSendBak['orderNumber'] = this.orderNumberForSave;
+        return this.http.post('/CareLineTravel/travel-mbr/journey/getDataAfterLogin', objSendBak).map(res => {
+            if(res.json().isEx){
+                if(res.json().kickout){
+                    this.route.navigate(['/']);
+                }else{
+                    if (res.json().data) {
+                        // Server 回傳錯誤
+                        if (res.json().data && res.json().data.errorFlagName) {
+                            var flagName = res.json().data.errorFlagName;
+                            this.idToGoFlow = flagName;
+                        }
+                    }
+                    this.loading = false;
+                    var msgs = res.json().msgs;
+                    var modal = document.getElementById('myModal');
+                    modal.style.display = "block";
+                    this.AlertTXT = msgs;
+                    document.querySelector('#myModal').scrollIntoView();
+                }
+            } else {
+                this.loading = false;
+                return res.json();
+            }
+        });
     }
+  }
 
-    toGetBakInfo() {
+  toGetBakInfo() {
         this.loading = true;
         if(this.backFromConfirm) {
             let objSendBak = {};
@@ -249,7 +287,7 @@ export class DataServiceService {
                 }
             });
         }
-    }
+  }
 
     failPaymentInfo(value){
         this.loading = true;
@@ -375,6 +413,60 @@ export class DataServiceService {
           });
       }, 400);
   }
+
+  toCallGoGoApi(data){
+    this.loading = true;
+    setTimeout(() => {
+        var i = this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/apIn/save', data).map(res => {
+            if (res.json().isEx) {
+                if(res.json().kickout){
+                    // this.route.navigate(['/']);
+                    this.loading = false;
+                }else{
+                    if (res.json().data) {
+                        // Server 回傳錯誤
+                        if (res.json().data && res.json().data.errorFlagName) {
+                            var flagName = res.json().data.errorFlagName;
+                            this.idToGoFlow = flagName;
+                        }
+                    }
+                    this.loading = false;
+                    var msgs = res.json().msgs;
+                    var modal = document.getElementById('myModal');
+                    modal.style.display = "block";
+                    this.AlertTXT = msgs;
+                    document.querySelector('#myModal').scrollIntoView();
+                }
+                return false;
+            } else{
+                return res.json();
+            }
+        });
+        i.subscribe((item)=>{
+           console.log(item['status']); 
+           if(item['status'] == 'ok'){
+            this.route.navigate(['/gogoout/confirm']);
+            this.loading = false;
+           } else {
+           }
+        });
+    }, 400);
+}
+
+getGoGoConfirmInfo() {
+    this.loading = true;
+    if(this.orderNumberForSave) {
+        let objSendBak = {};
+        objSendBak['orderNumber'] = this.orderNumberForSave;
+        return this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/confirm/initData', objSendBak).map(res => {
+            this.loading = false;
+            console.log(res.json());
+            return res.json();
+        });
+    }else{
+        // this.route.navigate(['/index']);
+    }
+}
 
   getConfirmInfo() {
       this.loading = true;

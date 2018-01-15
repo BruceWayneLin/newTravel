@@ -14,6 +14,7 @@ import { SuiSelectModule } from 'ng2-semantic-ui';
 import { MemberCreateComponent } from './components/member-create/member-create.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ConfirmInfoComponent } from './components/confirm-info/confirm-info.component';
+import { B2bCarGogooutComponent } from './components/b2b-car-gogoout/b2b-car-gogoout.component';
 
 import * as $ from 'jquery';
 
@@ -41,15 +42,55 @@ import { VersionComponent } from './components/version/version.component';
 import { RentalCarThemeModule } from './shared/theme/rental-car-theme/rental-car-theme.module';
 import { LayoutRoute } from 'cl-layout/src/app/shared/layout/layout';
 import { RentalCarThemeFactoryFactory } from './shared/theme/rental-car-theme/rental-car-theme-factory';
+import { GogooutComponent } from './components/gogoout/gogoout.component';
+import { SignatureComponent } from './components/signature/signature.component';
+import { PreviewPdfComponent } from './components/preview-pdf/preview-pdf.component';
 
 export const routes: LayoutRoute[] = [
+  {
+    path: 'gogoout',
+    data: {
+      component: {
+        factory: RentalCarThemeFactoryFactory
+      }
+      // breadcrumb: '首頁',
+    },
+    component: MemberCreateComponent
+  },
+  {
+    path: 'gogoout/confirm',
+    data: {
+      component: {
+        factory: RentalCarThemeFactoryFactory
+      }
+      // breadcrumb: '確認投保資訊',
+    },
+    component: ConfirmInfoComponent
+  },
+  {
+    path: 'gogoout/signature',
+    data: {
+      component: {
+        factory: RentalCarThemeFactoryFactory
+      }
+      // breadcrumb: '首頁',
+    },
+    component: SignatureComponent
+  },
+  {
+    path: 'gogoout/previewPdf',
+    data: {
+      component: {
+        factory: RentalCarThemeFactoryFactory
+      }
+      // breadcrumb: '首頁',
+    },
+    component: PreviewPdfComponent
+  },
   {
     path: '',
     data: {
       // breadcrumb: '首頁',
-      component: {
-        factory: RentalCarThemeFactoryFactory
-      }
     },
     component: HomePageComponent
   },
@@ -107,7 +148,11 @@ export const routes: LayoutRoute[] = [
     ConfirmInfoComponent,
     ThanksComponent,
     FailPaymentComponent,
-    VersionComponent
+    VersionComponent,
+    GogooutComponent,
+    B2bCarGogooutComponent,
+    SignatureComponent,
+    PreviewPdfComponent
   ],
   exports: [
   ],

@@ -1394,3 +1394,10 @@ button.form-control.btn-sm span{
   background: #c8c8c8!important;
 }
 
+.col-xs-12.firstColPArea.NeedToUpMaginMore {
+  padding-top: 0px;
+}
+
+#gogoOutNextBtn{
+  width:50%;
+}

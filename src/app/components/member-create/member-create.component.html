@@ -160,7 +160,7 @@
           <span class="formSubTxt">請填入正確地址，以利保單與活動贈品寄送</span>
         </div>
         <div class="col-xs-12 col-sm-6">
-          <input required maxlength="10" [ngClass]="{'inValidInput': MobileEl.touched && !MobileEl.valid}" type="tel" class="memberFormInput form-control input-lg" [(ngModel)]="Mobile" pattern="[0-9]*" #MobileEl="ngModel" value="" placeholder="行動電話 *">
+          <input required maxlength="10" [ngClass]="{'inValidInput': MobileEl.touched && !MobileEl.valid}" type="tel" class="memberFormInput form-control input-lg" [(ngModel)]="Mobile" pattern="[0-9]*" #MobileEl="ngModel" value="" placeholder="行動電話 *" [disabled]="mobileDisabled">
           <span class="pull-right"><img  *ngIf="MobileEl.touched && !MobileEl.valid" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
           <div class="inValid" *ngIf="MobileEl.touched && !MobileEl.valid">行動電話不正確。</div>
         </div>
@@ -215,6 +215,19 @@
           </label>
         </div>
       </div>
+      <div [hidden]="routeUrlGoGoNeedToHide">
+        <div class="col-lg-12 text-center" *ngIf="isShowCheckbox" style="margin-top:12px;">
+            <div class="col-xs-12 col-sm-6"></div>
+            <div class="col-xs-12 col-sm-6 text-left" id="aggreeToUpdate">
+              <label for="aggreeToUpdate" (click)="checkboxValue = !checkboxValue">
+                <div ngClass="{{aggreeToUpdate? 'checkBoxDiv' : 'checkBoxDiv noChecked' }}">
+                  <input type="checkbox" [hidden]="true" [checked]="checkboxValue" (click)="checkboxValue = !checkboxValue" class="aggreeToUpdate" id="aggreeToUpdate">
+                  <span class="aggreeToUpdate">{{gogooutCheckTxt}}</span>
+                </div>
+              </label>
+            </div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -230,8 +243,8 @@
     </div>
   </div>
 
-<div class="row" id="addInsuredAdd">
-  <div class="container-fluid insuredContent" style="">
+  <div class="row" id="addInsuredAdd" *ngIf="routeUrlGoGoNeedToHide">
+  <div class="container-fluid insuredContent">
     <div class="col-xs-12 text-center">
       <div class="col-xs-12 text-center insuredBtnArea">
         <div class="col-xs-12 text-center">
@@ -261,36 +274,13 @@
           <div class="col-xs-1"></div>
         </div>
       </div>
-      <!--<div class="col-xs-12">-->
-        <!--<div id="MobileChoicesHaoNoHao" class="col-xs-12">-->
-          <!--<div class="col-xs-6">-->
-            <!--<div id="choiceMobileOne" [ngClass]="{inputRadioChecked: !noGoWithYourFds}">-->
-            <!--<button name="withFds2" type="radio" class="form-control btn-sm" (click)="ToShowConfirmModal(false)" [ngClass]="{inputRadioChecked: !noGoWithYourFds}">-->
-              <!--<span class="widthFdsSpanOne" style="" [ngClass]="{inputRadioCheckedTxt: !noGoWithYourFds}">-->
-                <!--先不用-->
-              <!--</span>-->
-            <!--</button>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="col-xs-6">-->
-            <!--<div id="choiceMobileTwo">-->
-            <!--<button name="withFds2" type="radio" class="form-control btn-sm" (click)="ToShowConfirmModal(true)" [ngClass]="{inputRadioChecked: noGoWithYourFds}">-->
-              <!--<span class="widthFdsSpanTwo" [ngClass]="{inputRadioCheckedTxt: noGoWithYourFds}">-->
-                <!--好啊-->
-              <!--</span>-->
-            <!--</button>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
     </div>
   </div>
 </div>
 
 <ng-container *ngIf="(!noGoWithYourFds && (hiddenAtBegining !== 'hide'))">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12" *ngIf="routeUrlGoGoNeedToHide">
       <div class="col-xs-1">
       </div>
       <div class="col-xs-10">
@@ -302,7 +292,7 @@
     </div>
 
     <div class="col-xs-12" id="personalAreaPlaceForMobile">
-      <div class="col-xs-12 firstColPArea" style="">
+      <div class="col-xs-12 firstColPArea" [ngClass]="{'NeedToUpMaginMore': !routeUrlGoGoNeedToHide}">
         <div class="col-xs-2"></div>
         <div class="col-xs-4">
           <h2 class="formTitTxt">
@@ -490,7 +480,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="routeUrlGoGoNeedToHide">
     <div class="container">
       <div class="col-lg-12 text-center">
         <div class="col-xs-12 col-sm-6 col-lg-6">
@@ -502,5 +492,13 @@
       </div>
     </div>
   </div>
+
+      <div class="row" *ngIf="!routeUrlGoGoNeedToHide">
+        <div class="container">
+          <div class="col-lg-12 text-center">
+              <button id="gogoOutNextBtn" class="form-control goingCheckInfo" [ngClass]="{'specilAlreadiRead': !aggreeToUpdateAlreadyRead}" (click)="ToSaveGoGoInsured()" [disabled]="!aggreeToUpdateAlreadyRead">下一步</button>
+          </div>
+        </div>
+      </div>
   </div>
 </div>

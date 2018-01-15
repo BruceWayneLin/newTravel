@@ -1,0 +1,36 @@
+.logo-bg {
+    display: inline-block;
+    width: auto;
+    height: 50px;
+    margin-bottom: 0;
+}
+.col.logoOnTheRight p {
+    float:right;  
+}
+.col.logoOnTheRight {
+    padding-right: 0px;
+}
+.col.logoOnTheRight p:nth-child(2) {
+    margin-top: 22px;
+}
+.gogoBanner img {
+    left: 0;
+    height: auto;
+    position: relative;
+    width: 100%;
+}
+
+@media screen and (max-width:730px) {
+    .col.logoOnTheRight p:nth-child(2) {
+        margin-top: 0px;
+        float:none;
+        font-size: 12px;
+    }
+    .logo-bg {
+        width: 100%;
+        height: auto;
+    }
+    .col.logoOnTheRight {
+        padding-right: 15px;
+    }
+}

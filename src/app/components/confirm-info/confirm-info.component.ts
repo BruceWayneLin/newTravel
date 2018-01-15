@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Accordion} from "ngx-accordion";
+import {Router} from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service'
 declare var jquery:any;
 declare var $ :any;
@@ -24,6 +25,7 @@ export class ConfirmInfoComponent implements OnInit {
   insuredDateEnd: string;
   insuredLocation: string;
   insuredPurpose: string;
+  routeUrlGoGo: boolean = false;
 
   text4Activity: string;
   odPeriodDays: number;
@@ -34,7 +36,8 @@ export class ConfirmInfoComponent implements OnInit {
   @ViewChild(Accordion) MyAccordion: Accordion;
 
   constructor(
-      public dataService:DataServiceService
+      public dataService:DataServiceService,
+      private router:Router
   ) {
     // $('html, body').animate({scrollTop: '0px'}, 0);
   }
@@ -56,29 +59,55 @@ export class ConfirmInfoComponent implements OnInit {
         'width': '100%'
       });
     }else{
-
     }
 
-    this.dataService.getConfirmInfo().subscribe((item) => {
-      let info = item;
-      this.applicantName = info['apLastName'] + info['apFirstName'];
-      this.applicantMobile = info['apMobile'];
-      this.applicantPid = info['apPid'];
-      this.applicantAddr = info['apAddressFull'];
-      this.applicantBth = info['apBirthday']['year'] + '-' + info['apBirthday']['month'] + '-' + info['apBirthday']['day'];
-      this.applicantEmail = info['apEmail'];
-      this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'];
-      this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'];
-      this.insuredLocation = info['odLocation'];
-      this.insuredPurpose = info['odPurpose'];
-      this.inPackageButtonName = info['inPackageButtonName'];
-      this.insuredList = info['insuredList'];
-      this.text4Activity = info['text4Activity'];
-      this.odPeriodDays = info['odPeriodDays'];
-      this.odRate = info['odRate'];
-      this.dataService.purposeImageUrl = info['purposeImageUrl'];
-      document.querySelector('#flagTop').scrollIntoView();
-    });
+    if(this.router.url.slice(0, 8) == '/gogoout'){ 
+      console.log(this.dataService.orderNumber);
+      this.routeUrlGoGo = true;
+      this.dataService.getGoGoConfirmInfo().subscribe((item) => {
+        let info = item['data'];
+        this.applicantName = info['apLastName'] + info['apFirstName'];
+        this.applicantMobile = info['apMobile'];
+        this.applicantPid = info['apPid'];
+        this.applicantAddr = info['apAddressFull'];
+        this.applicantBth = info['apBirthday']['year'] + '-' + info['apBirthday']['month'] + '-' + info['apBirthday']['day'];
+        this.applicantEmail = info['apEmail'];
+        this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'];
+        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'];
+        this.insuredLocation = info['odLocation'];
+        this.insuredPurpose = info['odPurpose'];
+        this.inPackageButtonName = info['inPackageButtonName'];
+        this.insuredList = info['insuredList'];
+        this.text4Activity = info['text4Activity'];
+        this.odPeriodDays = info['odPeriodDays'];
+        // this.odRate = info['odRate'];
+        this.dataService.purposeImageUrl = info['purposeImageUrl'];
+        document.querySelector('#flagTop').scrollIntoView();
+
+      });
+    }else{
+      this.dataService.getConfirmInfo().subscribe((item) => {
+        let info = item;
+        this.applicantName = info['apLastName'] + info['apFirstName'];
+        this.applicantMobile = info['apMobile'];
+        this.applicantPid = info['apPid'];
+        this.applicantAddr = info['apAddressFull'];
+        this.applicantBth = info['apBirthday']['year'] + '-' + info['apBirthday']['month'] + '-' + info['apBirthday']['day'];
+        this.applicantEmail = info['apEmail'];
+        this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'];
+        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'];
+        this.insuredLocation = info['odLocation'];
+        this.insuredPurpose = info['odPurpose'];
+        this.inPackageButtonName = info['inPackageButtonName'];
+        this.insuredList = info['insuredList'];
+        this.text4Activity = info['text4Activity'];
+        this.odPeriodDays = info['odPeriodDays'];
+        this.odRate = info['odRate'];
+        this.dataService.purposeImageUrl = info['purposeImageUrl'];
+        document.querySelector('#flagTop').scrollIntoView();
+      });
+    }
+    
   }
 
   GetIEVersion() {
@@ -124,6 +153,15 @@ export class ConfirmInfoComponent implements OnInit {
 
   getBakInfo(){
     this.dataService.backFromConfirm = true;
+    if(this.router.url.slice(0, 8) == '/gogoout'){
+      this.router.navigate(['/gogoout']);
+    }else{
+      this.router.navigate(['/memberCreate']);
+    }
+  }
+
+  toGoSignature() {
+    this.router.navigate(['/gogoout/signature']);
   }
 
 }

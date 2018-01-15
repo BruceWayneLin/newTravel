@@ -112,96 +112,175 @@
   </div>
 
   <div class="row" id="accordionDiv">
-  <div class="container">
-    <div class="col-xs-12 text-center">
-      <!-- regular accordion -->
-      <accordion>
-        <ng-container *ngFor="let item of insuredList; let i = index;">
-          <i class="fa fa-chevron-circle-down" aria-hidden="true" style="pointer-events: none;" (click)="toTriggerCloseA()"></i>
-          <accordion-group class="clickAccordion" heading="{{' '+item['inLastName']+item['inFirstName']+' '+(item['inPackageButtonName'] == null? '' : item['inPackageButtonName'])+' '+item['inPackageName']+' NT$'+item['inRate']}}">
-            <div class="row packageInfo">
-              <div id="specialDropUpIdDiv" class="col-xs-12 text-right" style="z-index:999;left: -8%;top:-41px;">
-                <i class="fa fa-chevron-circle-up" aria-hidden="true" (click)="doSomethingOnClose()"></i>
-              </div>
-              <div class="container">
-                <div class="col-lg-12 text-left">
-                  <h2 class="touBaouTit">被保險人</h2>
-                  <div class="col-sm-2 col-xs-12"></div>
-                  <div id="spanBlack" class="col-sm-10 col-xs-12 text-left">
-                    <div class="col-xs-6 text-left">
-                      <ul>
-                        <li>
-                          <span class="liInsideSpanTitle">姓名:</span>
-                          <span>{{item['inLastName']+item['inFirstName']}}</span>
-                        </li>
-                        <li>
-                          <span class="liInsideSpanTitle">身份證字號:</span>
-                          <span>{{item['inPid']}}</span>
-                        </li>
-                        <li>
-                          <span class="liInsideSpanTitle">生日:</span>
-                          <span>{{item['inBirthday']['year']+'年'+item['inBirthday']['month']+'月'+ item['inBirthday']['day']+'日'}}</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="col-xs-6 text-left">
-                      <ul>
-                        <li>
-                          <span class="liInsideSpanTitle">與要保人關係:</span>
-                          <span>{{item['inRelation']}}</span>
-                        </li>
-                        <li>
-                          <span class="liInsideSpanTitle">受益人:</span>
-                          <span>法定繼承人</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+    <!-- membercreat -->
+    <div class="container" *ngIf="!routeUrlGoGo">
+      <div class="col-xs-12 text-center">
+        <!-- regular accordion -->
+        <accordion>
+          <ng-container *ngFor="let item of insuredList; let i = index;">
+            <i class="fa fa-chevron-circle-down" aria-hidden="true" style="pointer-events: none;" (click)="toTriggerCloseA()"></i>
+            <accordion-group class="clickAccordion" heading="{{' '+item['inLastName']+item['inFirstName']+' '+(item['inPackageButtonName'] == null? '' : item['inPackageButtonName'])+' '+item['inPackageName']+' NT$'+item['inRate']}}">
+              <div class="row packageInfo">
+                <div id="specialDropUpIdDiv" class="col-xs-12 text-right" style="z-index:999;left: -8%;top:-41px;">
+                  <i class="fa fa-chevron-circle-up" aria-hidden="true" (click)="doSomethingOnClose()"></i>
                 </div>
-
-                <div class="col-lg-12 text-center">
-                  <h2 class="touBaouTit" style="border-bottom: dotted #d4d4d4; padding-bottom: 10px;">{{item['inPackageName']}}</h2>
-                  <div class="col-sm-2 col-xs-12 text-left">
-                    <span class="blackSpanTitle"></span>
-                  </div>
-                  <div class="col-sm-10 col-xs-12 text-left">
-                    <ng-container *ngFor="let packagePri of item['itemList']; let x = index;">
-                      <div class="col-xs-12">
-                        <h4>{{packagePri['itemName']}}</h4>
+                <div class="container">
+                  <div class="col-lg-12 text-left">
+                    <h2 class="touBaouTit">被保險人</h2>
+                    <div class="col-sm-2 col-xs-12"></div>
+                    <div id="spanBlack" class="col-sm-10 col-xs-12 text-left">
+                      <div class="col-xs-6 text-left">
                         <ul>
-                          <li *ngFor="let listPri of packagePri['detailList']">
-                            <span>{{listPri['longDesc']}}</span>
+                          <li>
+                            <span class="liInsideSpanTitle">姓名:</span>
+                            <span>{{item['inLastName']+item['inFirstName']}}</span>
+                          </li>
+                          <li>
+                            <span class="liInsideSpanTitle">身份證字號:</span>
+                            <span>{{item['inPid']}}</span>
+                          </li>
+                          <li>
+                            <span class="liInsideSpanTitle">生日:</span>
+                            <span>{{item['inBirthday']['year']+'年'+item['inBirthday']['month']+'月'+ item['inBirthday']['day']+'日'}}</span>
                           </li>
                         </ul>
                       </div>
-                    </ng-container>
-                    <!--<ng-container *ngFor="let package of item['inPackageInfo']['secondaryItems']; let x = index;">-->
-                      <!--<div class="col-xs-12">-->
-                        <!--<h4>{{package['insItemName']}}</h4>-->
-                        <!--<ul>-->
-                          <!--<li *ngFor="let list of package['detailTableRowList']">-->
-                            <!--<span>{{list['detailName']}} {{list['detailValue']}}元</span>-->
-                          <!--</li>-->
-                        <!--</ul>-->
-                      <!--</div>-->
-                    <!--</ng-container>-->
+                      <div class="col-xs-6 text-left">
+                        <ul>
+                          <li>
+                            <span class="liInsideSpanTitle">與要保人關係:</span>
+                            <span>{{item['inRelation']}}</span>
+                          </li>
+                          <li>
+                            <span class="liInsideSpanTitle">受益人:</span>
+                            <span>法定繼承人</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 text-center">
+                    <h2 class="touBaouTit" style="border-bottom: dotted #d4d4d4; padding-bottom: 10px;">{{item['inPackageName']}}</h2>
+                    <div class="col-sm-2 col-xs-12 text-left">
+                      <span class="blackSpanTitle"></span>
+                    </div>
+                    <div class="col-sm-10 col-xs-12 text-left">
+                      <ng-container *ngFor="let packagePri of item['itemList']; let x = index;">
+                        <div class="col-xs-12">
+                          <h4>{{packagePri['itemName']}}</h4>
+                          <ul>
+                            <li *ngFor="let listPri of packagePri['detailList']">
+                              <span>{{listPri['longDesc']}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </ng-container>
+                      <!--<ng-container *ngFor="let package of item['inPackageInfo']['secondaryItems']; let x = index;">-->
+                        <!--<div class="col-xs-12">-->
+                          <!--<h4>{{package['insItemName']}}</h4>-->
+                          <!--<ul>-->
+                            <!--<li *ngFor="let list of package['detailTableRowList']">-->
+                              <!--<span>{{list['detailName']}} {{list['detailValue']}}元</span>-->
+                            <!--</li>-->
+                          <!--</ul>-->
+                        <!--</div>-->
+                      <!--</ng-container>-->
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12">
+                    <i id="ArrowDownCircle" class="fa fa-chevron-circle-up" aria-hidden="true" (click)="doSomethingOnClose()"></i>
                   </div>
                 </div>
-
-                <div class="col-xs-12">
-                  <i id="ArrowDownCircle" class="fa fa-chevron-circle-up" aria-hidden="true" (click)="doSomethingOnClose()"></i>
-                </div>
               </div>
-            </div>
-          </accordion-group>
-        </ng-container>
-      </accordion>
+            </accordion-group>
+          </ng-container>
+        </accordion>
 
+      </div>
     </div>
+    <!-- gogoout -->
+    <div class="container" *ngIf="routeUrlGoGo">
+        <div class="col-xs-12 text-center">
+          <!-- regular accordion -->
+          <accordion>
+            <ng-container *ngFor="let item of insuredList; let i = index;">
+              <i class="fa fa-chevron-circle-down" aria-hidden="true" style="pointer-events: none;" (click)="toTriggerCloseA()"></i>
+              <accordion-group class="clickAccordion" heading="{{' '+item['inLastName']+item['inFirstName']+' '+(item['inPackageButtonName'] == null? '' : item['inPackageButtonName'])+' '+item['inPackageName']}}">
+                <div class="row packageInfo">
+                  <div id="specialDropUpIdDiv" class="col-xs-12 text-right" style="z-index:999;left: -8%;top:-41px;">
+                    <i class="fa fa-chevron-circle-up" aria-hidden="true" (click)="doSomethingOnClose()"></i>
+                  </div>
+                  <div class="container">
+                    <div class="col-lg-12 text-left">
+                      <h2 class="touBaouTit">被保險人</h2>
+                      <div class="col-sm-2 col-xs-12"></div>
+                      <div id="spanBlack" class="col-sm-10 col-xs-12 text-left">
+                        <div class="col-xs-6 text-left">
+                          <ul>
+                            <li>
+                              <span class="liInsideSpanTitle">姓名:</span>
+                              <span>{{item['inLastName']+item['inFirstName']}}</span>
+                            </li>
+                            <li>
+                              <span class="liInsideSpanTitle">身份證字號:</span>
+                              <span>{{item['inPid']}}</span>
+                            </li>
+                            <li>
+                              <span class="liInsideSpanTitle">生日:</span>
+                              <span>{{item['inBirthday']['year']+'年'+item['inBirthday']['month']+'月'+ item['inBirthday']['day']+'日'}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-xs-6 text-left">
+                          <ul>
+                            <li>
+                              <span class="liInsideSpanTitle">與要保人關係:</span>
+                              <span>{{item['inRelation']}}</span>
+                            </li>
+                            <li>
+                              <span class="liInsideSpanTitle">受益人:</span>
+                              <span>法定繼承人</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="col-lg-12 text-center">
+                      <h2 class="touBaouTit" style="border-bottom: dotted #d4d4d4; padding-bottom: 10px;">{{item['inPackageName']}}</h2>
+                      <div class="col-sm-2 col-xs-12 text-left">
+                        <span class="blackSpanTitle"></span>
+                      </div>
+                      <div class="col-sm-10 col-xs-12 text-left">
+                        <ng-container *ngFor="let packagePri of item['itemList']; let x = index;">
+                          <div class="col-xs-12">
+                            <h4>{{packagePri['itemName']}}</h4>
+                            <ul>
+                              <li *ngFor="let listPri of packagePri['detailList']">
+                                <span>{{listPri['longDesc']}}</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+  
+                    <div class="col-xs-12">
+                      <i id="ArrowDownCircle" class="fa fa-chevron-circle-up" aria-hidden="true" (click)="doSomethingOnClose()"></i>
+                    </div>
+                  </div>
+                </div>
+              </accordion-group>
+            </ng-container>
+          </accordion>
+  
+        </div>
+      </div>
   </div>
-</div>
-
-  <div class="lastCon">
+<!-- membercreate -->
+  <div class="lastCon" *ngIf="!routeUrlGoGo">
     <div class="row">
       <div class="container">
         <div id="MobileUseIdForPrice" class="col-lg-12 text-center" style="padding-left:10%;">
@@ -211,8 +290,8 @@
       </div>
     </div>
   </div>
-
-  <div class="row">
+<!-- membercreate -->
+  <div class="row" *ngIf="!routeUrlGoGo">
     <div class="container">
       <div class="col-lg-12 text-center imgContain">
         <div style="display:block; margin: 0 auto;">
@@ -224,9 +303,9 @@
       </div>
     </div>
   </div>
-
+<!-- membercreate -->
   <div class="row">
-    <div class="container">
+    <div class="container" *ngIf="!routeUrlGoGo">
       <div class="col-lg-12 text-center">
         <div class="col-xs-12 col-sm-6 col-lg-6">
           <button class="form-control lastSubMit" (click)="getBakInfo()" id="goingCheckInfoBack" routerLink="/memberCreate" style="background-color:white;color:black;">上一步</button>
@@ -237,5 +316,17 @@
       </div>
     </div>
   </div>
-
+<!-- gogoout   -->
+<div class="row">
+    <div class="container" *ngIf="routeUrlGoGo">
+      <div class="col-lg-12 text-center">
+        <div class="col-xs-12 col-sm-6 col-lg-6">
+          <button class="form-control lastSubMit" (click)="getBakInfo()" id="goingCheckInfoBack" style="background-color:white;color:black;">返回修改</button>
+        </div>
+        <div id="ieNeedToCenter" class="col-xs-12 col-sm-6 col-lg-6">
+        <button class="form-control lastSubMit" (click)="toGoSignature()">簽名去</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
