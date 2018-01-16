@@ -258,7 +258,7 @@ input.memberFormInput.form-control.input-lg[disabled] {
 }
 
 #closebtn {
-  min-height: 51px;
+  min-height: 35px;
 }
 
 .addInsuredPP .addDoll i.fa-plus {
@@ -1138,7 +1138,7 @@ div.row.memberTitle {
 }
 
 /* Modal Content/Box */
-.modal-content {
+#myConfirmModal .modal-content, #myConfirmModal2 .modal-content {
   background-color: #fefefe;
   margin: auto; /* 15% from the top and centered */
   padding: 20px;
@@ -1148,7 +1148,7 @@ div.row.memberTitle {
 }
 
 @media screen and (max-width:414px) {
-  .modal-content {
+  #myConfirmModal .modal-content, #myConfirmModal2 .modal-content {
     top: 40%;
   }
 }

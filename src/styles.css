@@ -1789,3 +1789,37 @@ input[type="radio"]:checked + span{
 #btnOfPackages .selectedRadio {
   color: #e84466!important;
 }
+
+.modal-content {
+  display: block;
+  margin: 0 auto;
+}
+
+.modal-dialog.cl-modal .modal-content {
+  margin-top: 25%;
+}
+
+.modal-content hr {
+  border-top: none;
+}
+
+.modal-content .cl-btn {
+  border-color: gray;
+  cursor: pointer;
+  width: 10%;
+  border-radius: 25px;
+  border-width: 2px;
+  border-style: solid;
+  padding-left: 1.75vw;
+  padding-right: 1.75vw;
+  min-width: 100px;
+  color: #fff;
+  background: gray;
+  height: auto;
+}
+
+.modal-content .cl-btn:hover {
+  color: #fff;
+  background: gray;
+  height: auto;
+}

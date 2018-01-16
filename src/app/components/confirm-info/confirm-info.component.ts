@@ -161,7 +161,7 @@ export class ConfirmInfoComponent implements OnInit {
   }
 
   toGoSignature() {
-    this.router.navigate(['/gogoout/signature']);
+    this.dataService.toGoNextFromConfirm();
   }
 
 }

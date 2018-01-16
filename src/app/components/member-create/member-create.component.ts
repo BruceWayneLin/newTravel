@@ -818,6 +818,9 @@ export class MemberCreateComponent implements OnInit {
     }else{
       this.gogooutCheckTxt = '已是英國凱萊會員，可於英國凱萊會員專區檢視此次保單資料';
     }
+    this.birthdayMonths = this.birthMonths();
+    this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+    this.aloneBirthdayDays = this.birthdayDays;
     // lock inputs
     this.checkEmailDis = true;
     this.checkLastNameDis = true;
@@ -826,10 +829,14 @@ export class MemberCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('1234Url', this.router.url.slice(0, 13));
+
+    // this is when user back from confirm page then we check if calling api or not
     if(this.dataService.backFromConfirm && this.dataService.noGoWithYourFdsFlag !== undefined){
       this.hiddenAtBegining = false;
       this.firstTimeClickHaoA = true;
       this.noGoWithYourFds = this.dataService.noGoWithYourFdsFlag;
+      console.log('1234Url', this.router.url.slice(0, 13));
       if(!this.noGoWithYourFds && this.router.url.slice(0, 13) == '/memberCreate'){
         this.dataService.toGetBakInfo().subscribe((item) => {
           this.aggreeToUpdate = item['applicant']['isUpdate'];
@@ -1020,10 +1027,6 @@ export class MemberCreateComponent implements OnInit {
         });
       }
     }
-    this.birthdayMonths = this.birthMonths();
-    this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
-    this.aloneBirthdayDays = this.birthdayDays;
-
       var sendDataBak = {};
       sendDataBak['product'] = 'Travel';
       sendDataBak['pack'] = '';
@@ -1050,12 +1053,6 @@ export class MemberCreateComponent implements OnInit {
 
     //if it's membercreate page then run down below msg
     if(this.dataService.backFromConfirm){
-      // if(this.router.url.slice(0, 8) == '/gogoout'){
-      //   this.dataService.getIniData(sendDataBak).subscribe((data) => {
-      //     console.log('123443124', data);
-      //     this.toLoadGoGoData(data);
-      //   });  
-      // }
     }else{
       var Url = window.location.href;
       var turnBakUrl = this.toGetDataFromUrl(Url);
@@ -1141,6 +1138,9 @@ export class MemberCreateComponent implements OnInit {
             }
           }
         });
+        this.birthdayMonths = this.birthMonths();
+        this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+        this.aloneBirthdayDays = this.birthdayDays;
       }
     }
     this.owlAnanOne = this.dataService.owlAnanOne;

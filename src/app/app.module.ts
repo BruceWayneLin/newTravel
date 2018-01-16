@@ -14,7 +14,6 @@ import { SuiSelectModule } from 'ng2-semantic-ui';
 import { MemberCreateComponent } from './components/member-create/member-create.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ConfirmInfoComponent } from './components/confirm-info/confirm-info.component';
-import { B2bCarGogooutComponent } from './components/b2b-car-gogoout/b2b-car-gogoout.component';
 
 import * as $ from 'jquery';
 
@@ -42,11 +41,9 @@ import { VersionComponent } from './components/version/version.component';
 import { RentalCarThemeModule } from './shared/theme/rental-car-theme/rental-car-theme.module';
 import { LayoutRoute } from 'cl-layout/src/app/shared/layout/layout';
 import { RentalCarThemeFactoryFactory } from './shared/theme/rental-car-theme/rental-car-theme-factory';
-import { GogooutComponent } from './components/gogoout/gogoout.component';
 import { PreviewPdfComponent } from './components/preview-pdf/preview-pdf.component';
-import { SignatureGoGooutComponent } from './components/signature-go-goout/signature-go-goout.component';
 import { SignatureModule } from './components/signature/signature.module';
-
+import { SignatureComponent } from './components/signature/signature.component';
 
 export const routes: LayoutRoute[] = [
   {
@@ -77,7 +74,8 @@ export const routes: LayoutRoute[] = [
       }
       // breadcrumb: '首頁',
     },
-    component: SignatureGoGooutComponent
+    loadChildren: './components/signature/signature.module#SignatureModule',
+    // component: SignatureGoGooutComponent
   },
   {
     path: 'gogoout/previewPdf',
@@ -137,11 +135,11 @@ export const routes: LayoutRoute[] = [
       // breadcrumb: '檢查版本',
     },
     component: VersionComponent
-  },
-  {
-    path: 'signature',
-    loadChildren: './components/signature/signature.module#SignatureModule'
   }
+  // {
+  //   path: 'signature',
+  //   loadChildren: './components/signature/signature.module#SignatureModule'
+  // }
 ];
 
 @NgModule({
@@ -155,9 +153,6 @@ export const routes: LayoutRoute[] = [
     ThanksComponent,
     FailPaymentComponent,
     VersionComponent,
-    GogooutComponent,
-    B2bCarGogooutComponent,
-    SignatureGoGooutComponent,
     PreviewPdfComponent
   ],
   exports: [

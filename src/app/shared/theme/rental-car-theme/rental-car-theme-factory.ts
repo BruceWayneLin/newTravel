@@ -17,7 +17,7 @@ export class RentalCarThemeFactoryFactory implements LayoutDataSetting.DynamicSw
   }
   getFooterComponent() {
     // use customized header component
-    return RentalCarFooterComponent;
+    // return RentalCarFooterComponent;
 
     // use default footer component when you return null
     // return null;

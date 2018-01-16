@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 import { SignatureService } from './signature.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { DataServiceService } from '../../services/data-service.service'
 import { SignaturePeopleViewModel } from 'cl-layout/src/app/shared/tools/cl-signature/signature-pad/signature-pad';
 import { SignatureInputComponent } from 'cl-layout/src/app/shared/tools/cl-signature/signature-input/signature-input.component';
 
@@ -25,6 +26,7 @@ export class SignatureComponent implements OnInit {
   };
 
   constructor(
+    private dataService: DataServiceService,
     private activatedRoute: ActivatedRoute,
     private signatureService: SignatureService
   ) { }
@@ -32,10 +34,21 @@ export class SignatureComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams
       .switchMap((queryParams) => {
-        const orderNumber = queryParams[this.signatureService.routingKey.queryParam.orderNumber];
-        if (!orderNumber) {
-          return Observable.of(null);
+        var orderNumber;
+        if(!queryParams[this.signatureService.routingKey.queryParam.orderNumber]){
+          try{
+            orderNumber = sessionStorage.getItem('pid');
+          }catch(error){
+            orderNumber = this.dataService.gogoOrderNumber;
+          }
+          if (!orderNumber) {
+            return Observable.of(null);
+          }
+        }else{
+          orderNumber = queryParams[this.signatureService.routingKey.queryParam.orderNumber];
         }
+        
+        
         this.current.orderNumber = orderNumber;
 
         return this.signatureService.getList({
@@ -62,6 +75,10 @@ export class SignatureComponent implements OnInit {
     this.signatureInstance.next.active();
     //
     this.signatureInstance.prev = this.signatureInstance.next;
+  }
+
+  goToPreviewPdfPage(){
+    this.dataService.toGoPdfPage();
   }
 
 }

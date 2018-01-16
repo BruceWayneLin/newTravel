@@ -106,7 +106,7 @@ footer .col-xs-12, .navbar-brand {
 }
 
 /* Modal Content/Box */
-.modal-content {
+#myModal .modal-content {
   background-color: #fefefe;
   margin: -5% auto; /* 15% from the top and centered */
   /*padding: 20px;*/
@@ -114,7 +114,7 @@ footer .col-xs-12, .navbar-brand {
 }
 
 @media screen and (max-width:420px){
-  .modal-content {
+  #myModal .modal-content {
     margin: -15% auto!important;
   }
 }
