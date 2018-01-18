@@ -48,7 +48,9 @@ export class SignatureService {
     }
 
     upload(postParam: SignaturePad.UploadArguments): void {
-        this.dataService.uploadSignature(postParam);
+        if(postParam.base30){
+          this.dataService.uploadSignature(postParam);
+        }
     }
 
     getRealList() {

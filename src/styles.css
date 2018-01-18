@@ -1823,3 +1823,12 @@ input[type="radio"]:checked + span{
   background: gray;
   height: auto;
 }
+
+@media screen and (min-width:2085px) {
+  .modal-content .cl-btn span {
+    white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    right: 10%;
+  }
+}

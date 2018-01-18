@@ -1,3 +1,28 @@
-<p>
-  preview-pdf works!
-</p>
+<div class="container">
+    <div class="page-title careline-subtitle">
+      <span class="icon-cl-car"></span>
+        要保書預覽
+    </div>
+    <hr>
+    <div class="people-list-container">
+      <div class="pdfSvg">
+      </div>
+      
+      <a target="_blank" clPdfPreview href="{{pdfUrl}}">
+        <button class="previewYourPdfBtn">
+          檔案預覽
+          <i class="fa fa-search-plus" aria-hidden="true"></i>
+        </button>
+      </a>
+    </div> 
+    <hr> 
+    <div class="row">
+      <div class="col-12 text-center">
+        <button (click)="completeFunPreview()" class="btn careline-btn careline-btn-lg careline-btn-theme-1 mt-5">
+          <div class="careline-btn-text">
+            完成訂購
+          </div>
+        </button>
+      </div>
+    </div>
+</div>      

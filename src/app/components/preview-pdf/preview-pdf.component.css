@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'icomoon';
+    src:  url('fonts/icomoon.eot?m4tj28');
+    src:  url('fonts/icomoon.eot?m4tj28#iefix') format('embedded-opentype'),
+      url('fonts/icomoon.ttf?m4tj28') format('truetype'),
+      url('fonts/icomoon.woff?m4tj28') format('woff'),
+      url('fonts/icomoon.svg?m4tj28#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  [class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-cl-car:before {
+    color:#e84466;  
+    content: "\e90b";
+  }
+  .icon-cl-motorbike:before {
+    content: "\e90a";
+    color: #e84466;
+  }
+
+  .pdfSvg {
+     background: url('images/pdf-icon-0.svg');
+     background-repeat: no-repeat;
+     background-size: contain; 
+     background-position:center;
+     height: 127px;   
+  }
+
+  .previewYourPdfBtn {
+    -webkit-border-radius: 50px; 
+    -moz-border-radius: 50px; 
+    border-radius: 50px;  
+    border: 2px solid #808080;
+    color: #808080;
+    height: 47px;
+    min-width: 210px;
+    font-family: "Microsoft JhengHei", "Microsoft YaHei", "Heiti TC Light", 微软雅黑, "Arial Narrow Regular", stheititc, sans-serif;
+    font-weight: 400;
+    display: block;
+    margin: 20px auto;
+  }
+
+  .previewYourPdfBtn i {
+    font-size: 23px;  
+  }
+
+  button {
+    /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+    -webkit-border-radius: 25px; 
+  
+    /* Firefox 1-3.6 */
+    -moz-border-radius: 25px; 
+    
+    /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+    border-radius: 25px;   
+  }
+  
+  button:hover {
+     color:#fff;
+     font-weight: 400; 
+     background-color: #808080;
+  }
+
+  button:hover i {
+    font-weight: 300;
+  }

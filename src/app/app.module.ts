@@ -44,6 +44,7 @@ import { RentalCarThemeFactoryFactory } from './shared/theme/rental-car-theme/re
 import { PreviewPdfComponent } from './components/preview-pdf/preview-pdf.component';
 import { SignatureModule } from './components/signature/signature.module';
 import { SignatureComponent } from './components/signature/signature.component';
+import { GogooutErrorComponent } from './components/gogoout-error/gogoout-error.component';
 
 export const routes: LayoutRoute[] = [
   {
@@ -57,12 +58,22 @@ export const routes: LayoutRoute[] = [
     component: MemberCreateComponent
   },
   {
+    path: 'gogooutError',
+    data: {
+      component: {
+        factory: RentalCarThemeFactoryFactory
+      }
+      // breadcrumb: 'gogo error',
+    },
+    component: GogooutErrorComponent
+  },
+  {
     path: 'gogoout/confirm',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
       }
-      // breadcrumb: '確認投保資訊',
+      // breadcrumb: 'gogo確認投保資訊',
     },
     component: ConfirmInfoComponent
   },
@@ -72,7 +83,7 @@ export const routes: LayoutRoute[] = [
       component: {
         factory: RentalCarThemeFactoryFactory
       }
-      // breadcrumb: '首頁',
+      // breadcrumb: 'gogo signature',
     },
     loadChildren: './components/signature/signature.module#SignatureModule',
     // component: SignatureGoGooutComponent
@@ -83,7 +94,7 @@ export const routes: LayoutRoute[] = [
       component: {
         factory: RentalCarThemeFactoryFactory
       }
-      // breadcrumb: '首頁',
+      // breadcrumb: 'gogo pdf preview',
     },
     component: PreviewPdfComponent
   },
@@ -153,7 +164,8 @@ export const routes: LayoutRoute[] = [
     ThanksComponent,
     FailPaymentComponent,
     VersionComponent,
-    PreviewPdfComponent
+    PreviewPdfComponent,
+    GogooutErrorComponent
   ],
   exports: [
   ],

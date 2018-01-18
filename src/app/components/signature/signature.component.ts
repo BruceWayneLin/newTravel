@@ -78,7 +78,8 @@ export class SignatureComponent implements OnInit {
   }
 
   goToPreviewPdfPage(){
-    this.dataService.toGoPdfPage();
+    console.log('4321424routerouterpdf', this.activatedRoute.queryParams['value']['orderNumber']);
+    this.dataService.toGoPdfPage(this.activatedRoute.queryParams['value']['orderNumber']);
   }
 
 }

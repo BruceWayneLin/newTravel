@@ -461,7 +461,7 @@ export class DataServiceService {
             }
         }).subscribe((item)=>{
             if(item.status == 'ok'){
-                this.route.navigate(['gogoout/signature']);     
+                this.route.navigate(['gogoout/signature'], {queryParams: {orderNumber: this.gogoOrderNumber}});
             }
         });
     }
@@ -497,7 +497,7 @@ export class DataServiceService {
             i.subscribe((item)=>{
             console.log(item['status']); 
             if(item['status'] == 'ok'){
-                this.route.navigate(['/gogoout/confirm']);
+                this.route.navigate(['/gogoout/confirm'], {queryParams: {orderNumber: this.gogoOrderNumber}});
                 this.loading = false;
             } else {
             }
@@ -602,8 +602,14 @@ export class DataServiceService {
         return this.http.post('/CareLineTravel/travel-mbr/journey/getData4ThanksPage', objSendBak).map(res => res.text());
     }
 
-    toGoPdfPage(){
-        this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/sign/next', {"orderNumber": this.gogoOrderNumber}).map(res => {
+    toGoPdfPage(val){
+        var postData;
+        if(val){
+         postData = {"orderNumber": val};   
+        }else{
+         postData = {"orderNumber": this.gogoOrderNumber};   
+        }
+        this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/sign/next', postData).map(res => {
             if (res.json().isEx) {
                 if(res.json().kickout){
                     this.loading = false;
@@ -628,8 +634,55 @@ export class DataServiceService {
             }
         }).subscribe((item)=>{
             if(item.status == 'ok'){
-                this.route.navigate(['gogoout/previewPdf']);     
+                this.route.navigate(['gogoout/previewPdf'], {queryParams: {orderNumber: postData['orderNumber']}});
             }
+        });
+    }
+
+    getPdf(val){
+        var postData;
+        if(val){
+         postData = {"orderNumber": val};   
+        }else{
+         postData = {"orderNumber": this.gogoOrderNumber};   
+        }
+        return this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/previewPolicyDoc/initData', postData).map(res => {
+            if (res.json().isEx) {
+                if(res.json().kickout){
+                    this.loading = false;
+                }else{
+                    if (res.json().data) {
+                        // Server 回傳錯誤
+                        if (res.json().data && res.json().data.errorFlagName) {
+                            var flagName = res.json().data.errorFlagName;
+                            this.idToGoFlow = flagName;
+                        }
+                    }
+                    this.loading = false;
+                    var msgs = res.json().msgs;
+                    var modal = document.getElementById('myModal');
+                    modal.style.display = "block";
+                    this.AlertTXT = msgs;
+                    document.querySelector('#myModal').scrollIntoView();
+                }
+                return false;
+            } else {
+            return res.json(); 
+            }
+        })
+    }
+
+    completeFunPreview(val){
+        var postData;
+        if(val){
+         postData = {"orderNumber": val};   
+        }else{
+         postData = {"orderNumber": this.gogoOrderNumber};   
+        }
+        this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/previewPolicyDoc/next?orderNumber='+postData['orderNumber'], '').map(
+            res => {
+                window.location.href = 'https://gogoout.com/';
+        }).subscribe((item)=>{
         });
     }
 
