@@ -762,6 +762,7 @@ export class MemberCreateComponent implements OnInit {
     this.lastName = data['data']['applicant']['lastName'];
     this.firstName = data['data']['applicant']['firstName'];
     this.pid = data['data']['applicant']['pid'];
+    this.pdfUrl4Terms = data['data']['pdfUrl4Terms'];
     if(data['data'].applicant.birthday){
       data['data'].applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
       this.pBirthYear = data['data'].applicant.birthday.slice(0, 4);
