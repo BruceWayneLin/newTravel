@@ -829,14 +829,11 @@ export class MemberCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('1234Url', this.router.url.slice(0, 13));
-
     // this is when user back from confirm page then we check if calling api or not
     if(this.dataService.backFromConfirm && this.dataService.noGoWithYourFdsFlag !== undefined){
       this.hiddenAtBegining = false;
       this.firstTimeClickHaoA = true;
       this.noGoWithYourFds = this.dataService.noGoWithYourFdsFlag;
-      console.log('1234Url', this.router.url.slice(0, 13));
       if(!this.noGoWithYourFds && this.router.url.slice(0, 13) == '/memberCreate'){
         this.dataService.toGetBakInfo().subscribe((item) => {
           this.aggreeToUpdate = item['applicant']['isUpdate'];
@@ -951,7 +948,6 @@ export class MemberCreateComponent implements OnInit {
         this.dataService.toGetBakInfo().subscribe((item) => {
           this.aggreeToUpdate = item['applicant']['isUpdate'];
           this.insuredList = item['insuredList'];
-          console.log(item);
           this.relationShip = item.relationList;
           this.rateInfoList = item.rateInfoList;
           console.log('insuredAgeMax', item.companySetting['insuredAgeMax']);
@@ -1034,7 +1030,6 @@ export class MemberCreateComponent implements OnInit {
       var turnBakUrl = this.toGetDataFromUrl(Url);
       var idArray = this.toGetId(Url);
       if(idArray){
-        console.log('2');
         idArray['orderNumber'].forEach((item) => {
           sendDataBak['orderNumber'] = item;
           this.dataService.gogoOrderNumber = item;
@@ -1148,7 +1143,6 @@ export class MemberCreateComponent implements OnInit {
     this.owlAnanThree = this.dataService.owlAnanThree;
     this.owlAnanFour = this.dataService.owlAnanFour;
     this.owlAnanFifth = this.dataService.owlAnanFifth;
-    console.log('1234214321', this.router.url.slice(0, 8));
     if(this.router.url.slice(0, 8) == '/gogoout'){
       this.routeUrlGoGoNeedToHide = false;
     }else{

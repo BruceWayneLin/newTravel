@@ -675,15 +675,14 @@ export class DataServiceService {
     completeFunPreview(val){
         var postData;
         if(val){
-         postData = {"orderNumber": val};   
+         postData = {"orderNumber": val};
         }else{
-         postData = {"orderNumber": this.gogoOrderNumber};   
+         postData = {"orderNumber": this.gogoOrderNumber};
         }
-        this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/previewPolicyDoc/next?orderNumber='+postData['orderNumber'], '').map(
-            res => {
-                window.location.href = 'https://gogoout.com/';
-        }).subscribe((item)=>{
-        });
+        if(postData['orderNumber']){
+            window.location.href = '/CareLineTravel/travel-mbr/b2bCar/gogoout/previewPolicyDoc/next?orderNumber='+ 
+            encodeURIComponent(postData['orderNumber']);
+        }
     }
 
     uploadSignature(postParam){
