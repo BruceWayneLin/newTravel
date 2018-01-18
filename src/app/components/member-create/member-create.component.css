@@ -435,8 +435,37 @@ span.formSubTxt {
 .insuredBtnArea input {
   cursor: pointer;
 }
+@media screen and (min-width: 700px) {
+  #aggreeToUpdate #gogoOutTxt.aggreeToUpdate {
+    width: 2200%;
+  }
+}
+
+#aggreeToUpdate #gogoOutTxt.aggreeToUpdate {
+  white-space: initial;
+  display: block;
+  width: 2000%;
+}
+
+@media screen and (max-width: 415px) {
+  #aggreeToUpdate #gogoOutTxt.aggreeToUpdate {
+    top: -8px!important;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #aggreeToUpdate #gogoOutTxt.aggreeToUpdate {
+    top: -18px!important;
+  }
+}
 
 @media screen and (max-width: 500px) {
+  #aggreeToUpdate #gogoOutTxt.aggreeToUpdate {
+    white-space: initial;
+    display: block;
+    width: 1400%;
+    top: -18px;
+  }
   .insuredPersonalInfo {
     margin-top: 60px;
   }

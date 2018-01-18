@@ -811,12 +811,12 @@ export class MemberCreateComponent implements OnInit {
     this.hiddenAtBegining = '';
     this.relationship = data['data']['relationList'];
     this.personalSelectChange();
-    this.isShowCheckbox = data['data']['isShowCheckbox'];
-    this.checkboxValue = data['data']['checkboxValue'];
+    this.isShowCheckbox = data['isShowCheckbox'];
+    this.checkboxValue = data['checkboxValue'];
     if(this.checkboxValue){
-      this.gogooutCheckTxt = '我要同步加入英國凱萊會員，可於英國凱萊會員專區檢視保單資料';
-    }else{
       this.gogooutCheckTxt = '已是英國凱萊會員，可於英國凱萊會員專區檢視此次保單資料';
+    }else{
+      this.gogooutCheckTxt = '我要同步加入英國凱萊會員，可於英國凱萊會員專區檢視保單資料';
     }
     this.birthdayMonths = this.birthMonths();
     this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
