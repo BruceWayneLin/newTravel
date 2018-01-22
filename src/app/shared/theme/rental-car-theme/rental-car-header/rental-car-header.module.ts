@@ -11,4 +11,9 @@ import { RentalCarHeaderComponent } from './rental-car-header.component';
     RentalCarHeaderComponent
   ]
 })
-export class RentalCarHeaderModule { }
+export class RentalCarHeaderModule { 
+  time:any;
+  constructor(){
+    this.time = new Date().getTime();
+  }
+}

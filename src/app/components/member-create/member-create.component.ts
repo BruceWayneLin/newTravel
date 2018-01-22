@@ -201,6 +201,7 @@ export class MemberCreateComponent implements OnInit {
   changedData(year=null, month=null, day=null){
     this.userPidFail = this.pidCheck(this.pid);
     this.checkBirthday(year, month, day);
+    this.birthdayDays = this.birthDays(this.pBirthYear, this.pBirthMonth);
     this.dataService.clearData = false;
   }
 
@@ -890,6 +891,8 @@ export class MemberCreateComponent implements OnInit {
             this.applicantSelectBirth();
           }
           this.birthYears();
+          this.birthdayMonths = this.birthMonths();
+          this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
           this.pdfUrl4Terms = item.pdfUrl4Terms;
           this.relationship = item.relationList;
           this.email = item.applicant.email;
@@ -943,6 +946,7 @@ export class MemberCreateComponent implements OnInit {
               default:
             }
           })
+
         });
       }else{
         this.dataService.toGetBakInfo().subscribe((item) => {
@@ -1030,6 +1034,8 @@ export class MemberCreateComponent implements OnInit {
         this.areaList = data.areaList;
         this.toLoadArea('init');
         this.toZipCode(true, this.selectedDistrict);
+        this.birthdayMonths = this.birthMonths();
+        this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
       });
       this.dataService.toGetInsuredInfo(sendDataBak).subscribe((item) => {
         if (item) {
