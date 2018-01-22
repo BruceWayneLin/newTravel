@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { SignatureService } from './signature.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { DataServiceService } from '../../services/data-service.service'
 import { SignaturePeopleViewModel } from 'cl-layout/src/app/shared/tools/cl-signature/signature-pad/signature-pad';
@@ -28,7 +28,8 @@ export class SignatureComponent implements OnInit {
   constructor(
     private dataService: DataServiceService,
     private activatedRoute: ActivatedRoute,
-    private signatureService: SignatureService
+    private signatureService: SignatureService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -47,7 +48,6 @@ export class SignatureComponent implements OnInit {
         }else{
           orderNumber = queryParams[this.signatureService.routingKey.queryParam.orderNumber];
         }
-        
         
         this.current.orderNumber = orderNumber;
 
@@ -80,6 +80,10 @@ export class SignatureComponent implements OnInit {
   goToPreviewPdfPage(){
     console.log('4321424routerouterpdf', this.activatedRoute.queryParams['value']['orderNumber']);
     this.dataService.toGoPdfPage(this.activatedRoute.queryParams['value']['orderNumber']);
+  }
+
+  goPreviouslyStep(){
+    this.router.navigate(['gogoout/confirm'], {queryParams: {orderNumber: this.activatedRoute.queryParams['value']['orderNumber']}});
   }
 
 }

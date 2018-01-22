@@ -16,14 +16,21 @@
         <div class="w-100" *ngIf="signaturePeople.forceWrap"></div>
       </ng-container>
     </div>
-    <div class="row">
-      <div class="col-12 text-center">
-        <button class="btn careline-btn careline-btn-lg careline-btn-theme-1 mt-5">
-          <div class="careline-btn-text" (click)="goToPreviewPdfPage()">
-            完成
+    <div class="row" id="btns">
+        <div class="col-6 text-center">
+            <button id="previousStep" class="btn careline-btn careline-btn-lg careline-btn-theme-3 mt-5">
+                <div class="careline-btn-text" (click)="goPreviouslyStep()">
+                  上一步
+                </div>
+            </button>
           </div>
-        </button>
+        <div class="col-6 text-center">
+          <button class="btn careline-btn careline-btn-lg careline-btn-theme-1 mt-5">
+              <div class="careline-btn-text" (click)="goToPreviewPdfPage()">
+                送出
+              </div>
+          </button>
+        </div>
       </div>
-    </div>
   </div>
 </div>

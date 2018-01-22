@@ -7,7 +7,7 @@ import {
   ViewChild,
   ElementRef
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
 import { ShareService } from '../../services/share.service';
 
@@ -111,6 +111,10 @@ export class MemberCreateComponent implements OnInit {
   isShowCheckbox:boolean;
   gogooutCheckTxt: string;
   gogoOrderNumber: string;
+  gogoAddrCityFail: boolean;
+  gogoAddrAreaFail: boolean;
+  gogoAddrFail: boolean;
+  userPidFail: any;
 
   @ViewChild('emailElm') EmailEl:ElementRef;
   @ViewChild('lastNameEl') lastNameEl:ElementRef;
@@ -124,7 +128,8 @@ export class MemberCreateComponent implements OnInit {
     private componentFactoryResolver: ComponentFactoryResolver,
     private shareService: ShareService,
     private dataService: DataServiceService,
-    private router:Router
+    private router:Router,
+    private routerAct: ActivatedRoute
   ) {
     $('html, body').animate({scrollTop: '0px'}, 0);
   }
@@ -324,6 +329,7 @@ export class MemberCreateComponent implements OnInit {
     if(!addr){
       return true;
     } else {
+      this.gogoAddrFail = false;
       return false;
     }
   }
@@ -349,41 +355,6 @@ export class MemberCreateComponent implements OnInit {
         this.personalAgeOver = true;
       } else {
         this.personalAgeOver = false;
-
-        //   let currentDay = new Date().getDate();
-      //   let currentMonth = new Date().getMonth() + 1;
-      //   let currentYear = new Date().getFullYear();
-      //   let maxYear = new Date().getFullYear() - this.applicantAgeMax //old;
-      //   let minYear = new Date().getFullYear() - this.applicantAgeMin //young;
-      //   if (this.pBirthYear && this.pBirthMonth) {
-      //     this.birthdayDays = this.birthDays(this.pBirthYear, this.pBirthMonth);
-      //   }
-      //   if (year == maxYear) {
-      //     if ((this.pBirthYear <= maxYear && this.pBirthMonth <= currentMonth && this.pBirthDay <= currentDay)) {
-      //       this.personalAgeOver = true;
-      //     } else {
-      //       this.personalAgeOver = false;
-      //     }
-      //   } else if (year == minYear) {
-      //
-      //     if ((this.pBirthYear >= minYear && this.pBirthMonth >= currentMonth && this.pBirthDay >= currentDay)) {
-      //       this.personalAgeOver = true;
-      //     } else {
-      //       this.personalAgeOver = false;
-      //     }
-      //   } else if (year < maxYear && year > minYear) {
-      //     if (year < maxYear && this.pBirthMonth < currentMonth && this.pBirthDay < currentDay) {
-      //       this.personalAgeOver = false;
-      //     }
-      //     if ((year > minYear && this.pBirthMonth > currentMonth) || (year > minYear && this.pBirthMonth == currentMonth && this.pBirthDay < currentDay)) {
-      //       this.personalAgeOver = false;
-      //     } else {
-      //       this.personalAgeOver = true;
-      //     }
-      //   }
-      //   if ((year > maxYear && month > currentMonth && day > currentDay) && (year < minYear && month > currentMonth)) {
-      //     this.personalAgeOver = false;
-      //   }
       }
     } else {
       this.personalAgeOver = false;
@@ -391,6 +362,8 @@ export class MemberCreateComponent implements OnInit {
   }
 
   checkCityArea(city, area) {
+    this.gogoAddrAreaFail = false;
+    this.gogoAddrCityFail = false;
     if(!city || !area) {
       return true;
     }
@@ -406,7 +379,6 @@ export class MemberCreateComponent implements OnInit {
     }
   }
 
-  userPidFail: any;
   pidCheck(userid:string){
     if(userid){
       var tab = 'ABCDEFGHJKLMNPQRSTUVXYWZIO',
@@ -430,6 +402,7 @@ export class MemberCreateComponent implements OnInit {
   }
 
   toZipCode(value, areaId = null) {
+    this.checkCityArea(true, true);
     if(value){
      this.areaList.forEach((item) => {
        if(item.id == areaId){
@@ -442,6 +415,7 @@ export class MemberCreateComponent implements OnInit {
   }
 
   toLoadArea(value = null) {
+    this.checkCityArea('true', 'false');
     var emptyArray = [];
     if(this.selectedCity && value == 'init'){
       this.areaList.forEach((item) => {
@@ -756,80 +730,114 @@ export class MemberCreateComponent implements OnInit {
     return age;
   }
 
-  toLoadGoGoData(data){
-    this.hideUpinput = true;
-    this.email = data['data']['applicant']['email'];
-    this.lastName = data['data']['applicant']['lastName'];
-    this.firstName = data['data']['applicant']['firstName'];
-    this.pid = data['data']['applicant']['pid'];
-    this.pdfUrl4Terms = data['data']['pdfUrl4Terms'];
-    if(data['data'].applicant.birthday){
-      data['data'].applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
-      this.pBirthYear = data['data'].applicant.birthday.slice(0, 4);
-      this.pBirthMonth = data['data'].applicant.birthday.slice(5, 7);
-      if (this.pBirthMonth.slice(0, 1) == '0') {
-        this.pBirthMonth = this.pBirthMonth.slice(1, 2);
+  toLoadGoGoData(){
+    this.routeUrlGoGoNeedToHide = false;
+    var orderNum = this.routerAct.queryParams['value']['orderNumber'];
+    this.dataService.orderNumberForSave = orderNum;
+    this.dataService.gogoOrderNumber = orderNum;
+    var sendDataBak = {};
+    sendDataBak['product'] = 'Travel';
+    sendDataBak['pack'] = '';
+    sendDataBak['orderNumber'] = orderNum;
+    this.dataService.getIniData(sendDataBak).subscribe((data) => {
+      this.hideUpinput = true;
+      this.email = data['data']['applicant']['email'];
+      this.lastName = data['data']['applicant']['lastName'];
+      this.firstName = data['data']['applicant']['firstName'];
+      this.pid = data['data']['applicant']['pid'];
+      this.pdfUrl4Terms = data['data']['pdfUrl4Terms'];
+      if(data['data'].applicant.birthday){
+        data['data'].applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+        this.pBirthYear = data['data'].applicant.birthday.slice(0, 4);
+        this.pBirthMonth = data['data'].applicant.birthday.slice(5, 7);
+        if (this.pBirthMonth.slice(0, 1) == '0') {
+          this.pBirthMonth = this.pBirthMonth.slice(1, 2);
+        }
+        this.pBirthDay = data['data'].applicant.birthday.slice(8, 10);
+        if (this.pBirthDay.slice(0, 1) == '0') {
+          this.pBirthDay = this.pBirthDay.slice(1, 2);
+        }
       }
-      this.pBirthDay = data['data'].applicant.birthday.slice(8, 10);
-      if (this.pBirthDay.slice(0, 1) == '0') {
-        this.pBirthDay = this.pBirthDay.slice(1, 2);
+      this.applicantAgeMax = data['data']['companySetting']['applicantAgeMax'];
+      this.applicantAgeMin = data['data']['companySetting']['applicantAgeMin'];
+      this.countBrthDayFromSelectedBtn = data['data']['travelStartDate'];
+      this.cityList = data['data']['cityList'];
+      this.areaList = data['data']['areaList'];
+      this.toLoadArea('init');
+      this.toZipCode(true, this.selectedDistrict);
+      if(!data['data']['applicant']['mobile']){
+        this.Mobile = '';
+        this.mobileDisabled = false;
+      }else{
+        this.Mobile = data['data']['applicant']['mobile'];
+        this.mobileDisabled = true;
       }
-    }
-    this.applicantAgeMax = data['data']['companySetting']['applicantAgeMax'];
-    this.applicantAgeMin = data['data']['companySetting']['applicantAgeMin'];
-    this.countBrthDayFromSelectedBtn = data['data']['travelStartDate'];
-    this.cityList = data['data']['cityList'];
-    this.areaList = data['data']['areaList'];
-
-    if(!data['data']['applicant']['mobile']){
-      this.Mobile = '';
-      this.mobileDisabled = false;
-    }else{
-      this.Mobile = data['data']['applicant']['mobile'];
-      this.mobileDisabled = true;
-    }
-    if(!data['data']['applicant']['addressCityId']){
-      this.selectedCity = '';
-    }else{
-      this.selectedCity = data['data']['applicant']['addressCityId'];
-    }
-    if(!data['data']['applicant']['addressCityId']){
-      this.selectedCity = '';
-    }else{
-      this.selectedDistrict = data['data']['applicant']['addressAreaId'];
-    }
-    if(!data['data']['applicant']['address']){
-      this.addr = '';
-    }else{
-      this.addr = data['data']['applicant']['address'];
-    }
-    this.applicantSelectBirth();
-    this.insuredAgeMax = data['data']['companySetting']['insuredAgeMax'];
-    this.insuredAgeMin = data['data']['companySetting']['insuredAgeMin'];
-    this.insuredLimitedAge = data['data']['companySetting']['insuredAgeMax'] - data['data']['companySetting']['insuredAgeMin'];
-    this.birthYears();
-    this.noGoWithYourFds = false;
-    this.hiddenAtBegining = '';
-    this.relationship = data['data']['relationList'];
-    this.personalSelectChange();
-    this.isShowCheckbox = data['isShowCheckbox'];
-    this.checkboxValue = data['checkboxValue'];
-    if(this.checkboxValue){
-      this.gogooutCheckTxt = '已是英國凱萊會員，可於英國凱萊會員專區檢視此次保單資料';
-    }else{
-      this.gogooutCheckTxt = '我要同步加入英國凱萊會員，可於英國凱萊會員專區檢視保單資料';
-    }
-    this.birthdayMonths = this.birthMonths();
-    this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
-    this.aloneBirthdayDays = this.birthdayDays;
-    // lock inputs
-    this.checkEmailDis = true;
-    this.checkLastNameDis = true;
-    this.checkFirstNameDis = true;
-    this.checkPidDis = true;
+      if(!data['data']['applicant']['addressCityId']){
+        this.selectedCity = '';
+        document.querySelector('#AddrCityFlag').scrollIntoView();
+        this.gogoAddrCityFail = true;
+      }else{
+        this.selectedCity = data['data']['applicant']['addressCityId'];
+        this.toLoadArea('init');
+        this.toZipCode(true, this.selectedDistrict);
+      }
+      if(!data['data']['applicant']['addressAreaId']){
+        this.selectedCity = '';
+        document.querySelector('#AddrAreaFlag').scrollIntoView();
+        this.gogoAddrAreaFail = true;
+      }else{
+        this.selectedDistrict = data['data']['applicant']['addressAreaId'];
+        this.toLoadArea('init');
+        this.toZipCode(true, this.selectedDistrict);
+      }
+      if(!data['data']['applicant']['address']){
+        this.addr = '';
+        document.querySelector('#AddrFlag').scrollIntoView();
+        this.gogoAddrFail = true;
+      }else{
+        this.addr = data['data']['applicant']['address'];
+      }
+      this.applicantSelectBirth();
+      this.checkboxValue = data['data']['applicant']['isJoinMember'];
+      this.insuredAgeMax = data['data']['companySetting']['insuredAgeMax'];
+      this.insuredAgeMin = data['data']['companySetting']['insuredAgeMin'];
+      this.insuredLimitedAge = data['data']['companySetting']['insuredAgeMax'] - data['data']['companySetting']['insuredAgeMin'];
+      this.birthYears();
+      this.noGoWithYourFds = false;
+      this.hiddenAtBegining = '';
+      this.relationship = data['data']['relationList'];
+      this.personalSelectChange();
+      this.isShowCheckbox = data['isShowCheckbox'];
+     
+      if(this.checkboxValue){
+        this.gogooutCheckTxt = '已是英國凱萊會員，可至會員專區檢視保單資料 ';
+      }else{
+        this.gogooutCheckTxt = '同步加入英國凱萊，可於會員專區檢視保單資料';
+      }
+      this.birthdayMonths = this.birthMonths();
+      this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+      this.aloneBirthdayDays = this.birthdayDays;
+      // lock inputs
+      this.checkEmailDis = true;
+      this.checkLastNameDis = true;
+      this.checkFirstNameDis = true;
+      this.checkPidDis = true;
+    });
   }
 
-  ngOnInit() {
+  deterMineUrl(url){
+    if (url.slice(0, 13) == '/memberCreate') {
+      this.toLoadMemberCreat();
+    } else if (url.slice(0, 8) == '/gogoout') {
+      this.toLoadGoGoData();
+    }
+  }
+
+  toLoadMemberCreat() {
+    this.routeUrlGoGoNeedToHide = true;
+    this.gogoAddrAreaFail = false;
+    this.gogoAddrCityFail = false;
+    this.gogoAddrFail = false;
     // this is when user back from confirm page then we check if calling api or not
     if(this.dataService.backFromConfirm && this.dataService.noGoWithYourFdsFlag !== undefined){
       this.hiddenAtBegining = false;
@@ -844,29 +852,24 @@ export class MemberCreateComponent implements OnInit {
           this.rateInfoList = item.rateInfoList;
           console.log('insuredAgeMax', item.companySetting['insuredAgeMax']);
           console.log('insuredAgeMin', item.companySetting['insuredAgeMin']);
-
           this.insuredAgeMax = item.companySetting['insuredAgeMax'];
           this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
           this.insuredMinAge = item.companySetting['insuredAgeMin'];
-
           this.applicantAgeMax = item.companySetting['applicantAgeMax'];
           this.applicantAgeMin = item.companySetting['applicantAgeMin'];
           this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
           this.applicantAloneMinAge = item.companySetting['insuredAgeMin'];
           this.countBrthDayFromSelectedBtn = item['travelStartDate'];
-
           this.applicantAgeMin = item.companySetting['applicantAgeMin'];
           item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
           this.pBirthYear = item.applicant.birthday.slice(0, 4);
           this.pBirthMonth = item.applicant.birthday.slice(5, 7);
-
           this.relationship = item.relationList;
           this.applicantSelectBirth();
           if(item.applicant.birthday){
             item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
             this.pBirthYear = item.applicant.birthday.slice(0, 4);
             this.pBirthMonth = item.applicant.birthday.slice(5, 7);
-
             if (this.pBirthMonth.slice(0, 1) == '0') {
               this.pBirthMonth = this.pBirthMonth.slice(1, 2);
             }
@@ -876,7 +879,6 @@ export class MemberCreateComponent implements OnInit {
             }
           }
           this.birthYears();
-
           let personAge = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
           if(personAge < item.companySetting['applicantAgeMin']){
             this.applicantAgeMin = item.companySetting['applicantAgeMin'] - item.companySetting['applicantAgeMin'];
@@ -888,7 +890,6 @@ export class MemberCreateComponent implements OnInit {
             this.applicantSelectBirth();
           }
           this.birthYears();
-
           this.pdfUrl4Terms = item.pdfUrl4Terms;
           this.relationship = item.relationList;
           this.email = item.applicant.email;
@@ -899,7 +900,6 @@ export class MemberCreateComponent implements OnInit {
           this.firstName.length == 0 ? this.checkFirstNameDis = false : this.checkFirstNameDis = true;
           this.pid = item.applicant.pid;
           this.pid.length == 0 ? this.checkPidDis = false : this.checkPidDis = true;
-          
           this.Mobile = item.applicant.mobile;
           this.selectedCity = (item.applicant.addressCityId == 0 ? '' : item.applicant.addressCityId);
           this.toLoadArea('init');
@@ -911,7 +911,6 @@ export class MemberCreateComponent implements OnInit {
           } else {
             this.hideUpinput = false;
           }
-
           this.insuredList.forEach((item, index)=>{
             switch(index){
               case 0:
@@ -953,29 +952,24 @@ export class MemberCreateComponent implements OnInit {
           this.rateInfoList = item.rateInfoList;
           console.log('insuredAgeMax', item.companySetting['insuredAgeMax']);
           console.log('insuredAgeMin', item.companySetting['insuredAgeMin']);
-
           this.insuredAgeMax = item.companySetting['insuredAgeMax'];
           this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
           this.insuredMinAge = item.companySetting['insuredAgeMin'];
-
           this.applicantAgeMax = item.companySetting['applicantAgeMax'];
           this.applicantAgeMin = item.companySetting['applicantAgeMin'];
           this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
           this.applicantAloneMinAge = item.companySetting['insuredAgeMin'];
           this.countBrthDayFromSelectedBtn = item['travelStartDate'];
-
           this.applicantAgeMin = item.companySetting['applicantAgeMin'];
           item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
           this.pBirthYear = item.applicant.birthday.slice(0, 4);
           this.pBirthMonth = item.applicant.birthday.slice(5, 7);
-
           this.relationship = item.relationList;
           this.applicantSelectBirth();
           if(item.applicant.birthday){
             item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
             this.pBirthYear = item.applicant.birthday.slice(0, 4);
             this.pBirthMonth = item.applicant.birthday.slice(5, 7);
-
             if (this.pBirthMonth.slice(0, 1) == '0') {
               this.pBirthMonth = this.pBirthMonth.slice(1, 2);
             }
@@ -985,7 +979,6 @@ export class MemberCreateComponent implements OnInit {
             }
           }
           this.birthYears();
-
           let personAge = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
           if(personAge < item.companySetting['applicantAgeMin']){
             this.applicantAgeMin = item.companySetting['applicantAgeMin'] - item.companySetting['applicantAgeMin'];
@@ -997,7 +990,6 @@ export class MemberCreateComponent implements OnInit {
             this.applicantSelectBirth();
           }
           this.birthYears();
-
           this.pdfUrl4Terms = item.pdfUrl4Terms;
           this.relationship = item.relationList;
           this.email = item.applicant.email;
@@ -1008,7 +1000,6 @@ export class MemberCreateComponent implements OnInit {
           this.firstName.length == 0 ? this.checkFirstNameDis = false : this.checkFirstNameDis = true;
           this.pid = item.applicant.pid;
           this.pid.length == 0 ? this.checkPidDis = false : this.checkPidDis = true;
-
           this.Mobile = item.applicant.mobile;
           this.selectedCity = (item.applicant.addressCityId == 0 ? '' : item.applicant.addressCityId);
           this.toLoadArea('init');
@@ -1020,135 +1011,102 @@ export class MemberCreateComponent implements OnInit {
           } else {
             this.hideUpinput = false;
           }
-
         });
       }
-    }
+    }else{
+      this.owlAnanOne = this.dataService.owlAnanOne;
+      this.owlAnanTwo = this.dataService.owlAnanTwo;
+      this.owlAnanThree = this.dataService.owlAnanThree;
+      this.owlAnanFour = this.dataService.owlAnanFour;
+      this.owlAnanFifth = this.dataService.owlAnanFifth;
+      var orderNum = this.routerAct.queryParams['value']['orderNumber'];
+      this.dataService.orderNumberForSave = orderNum;
       var sendDataBak = {};
       sendDataBak['product'] = 'Travel';
       sendDataBak['pack'] = '';
-      var Url = window.location.href;
-      var turnBakUrl = this.toGetDataFromUrl(Url);
-      var idArray = this.toGetId(Url);
-      if(idArray){
-        idArray['orderNumber'].forEach((item) => {
-          sendDataBak['orderNumber'] = item;
-          this.dataService.gogoOrderNumber = item;
-        });
-      }
-
-    this.dataService.getIniData(sendDataBak).subscribe((data) => {
-      this.cityList = data.cityList;
-      this.areaList = data.areaList;
-      if(data['data'] && this.router.url.slice(0, 8) == '/gogoout'){
-        this.toLoadGoGoData(data);
-      }
-      this.toLoadArea('init');
-      this.toZipCode(true, this.selectedDistrict);
-    });
-
-    //if it's membercreate page then run down below msg
-    if(this.dataService.backFromConfirm){
-    }else{
-      var Url = window.location.href;
-      var turnBakUrl = this.toGetDataFromUrl(Url);
-      var idArray = this.toGetId(Url);
-      idArray['orderNumber'].forEach((item) => {
-        this.dataService.orderNumberForSave = item;
+      sendDataBak['orderNumber'] = orderNum;
+      this.dataService.getIniData(sendDataBak).subscribe((data) => {
+        this.cityList = data.cityList;
+        this.areaList = data.areaList;
+        this.toLoadArea('init');
+        this.toZipCode(true, this.selectedDistrict);
       });
-      if(this.router.url.slice(0, 13) == '/memberCreate'){
-        this.dataService.toGetInsuredInfo(idArray).subscribe((item) => {
-          if (item) {
-            console.log(item);
-            this.rateInfoList = item.rateInfoList;
-            this.relationShip = item['relationList'];
-            console.log('insuredAgeMax', item.companySetting['insuredAgeMax']);
-            console.log('insuredAgeMin', item.companySetting['insuredAgeMin']);
-  
-            this.insuredAgeMax = item.companySetting['insuredAgeMax'];
-            this.insuredAgeMin = item.companySetting['insuredAgeMin'];
-            this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
-            this.insuredMinAge = item.companySetting['insuredAgeMin'];
-  
-            this.applicantAgeMax = item.companySetting['applicantAgeMax'];
-            this.applicantAgeMin = item.companySetting['applicantAgeMin'];
-            this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
-            this.applicantAloneMinAge = item.companySetting['insuredAgeMin'];
-            this.countBrthDayFromSelectedBtn = item['travelStartDate'];
-  
-            this.applicantAgeMin = item.companySetting['applicantAgeMin'];
-  
-            this.relationship = item.relationList;
-            this.applicantSelectBirth();
-  
-            if(item.applicant.birthday){
-              item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
-              this.pBirthYear = item.applicant.birthday.slice(0, 4);
-              this.pBirthMonth = item.applicant.birthday.slice(5, 7);
-  
-              if (this.pBirthMonth.slice(0, 1) == '0') {
-                this.pBirthMonth = this.pBirthMonth.slice(1, 2);
-              }
-              this.pBirthDay = item.applicant.birthday.slice(8, 10);
-              if (this.pBirthDay.slice(0, 1) == '0') {
-                this.pBirthDay = this.pBirthDay.slice(1, 2);
-              }
+      this.dataService.toGetInsuredInfo(sendDataBak).subscribe((item) => {
+        if (item) {
+          console.log(item);
+          this.rateInfoList = item.rateInfoList;
+          this.relationShip = item['relationList'];
+          console.log('insuredAgeMax', item.companySetting['insuredAgeMax']);
+          console.log('insuredAgeMin', item.companySetting['insuredAgeMin']);
+          this.insuredAgeMax = item.companySetting['insuredAgeMax'];
+          this.insuredAgeMin = item.companySetting['insuredAgeMin'];
+          this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
+          this.insuredMinAge = item.companySetting['insuredAgeMin'];
+          this.applicantAgeMax = item.companySetting['applicantAgeMax'];
+          this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+          this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
+          this.applicantAloneMinAge = item.companySetting['insuredAgeMin'];
+          this.countBrthDayFromSelectedBtn = item['travelStartDate'];
+          this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+          this.relationship = item.relationList;
+          this.applicantSelectBirth();
+          if(item.applicant.birthday){
+            item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+            this.pBirthYear = item.applicant.birthday.slice(0, 4);
+            this.pBirthMonth = item.applicant.birthday.slice(5, 7);
+            if (this.pBirthMonth.slice(0, 1) == '0') {
+              this.pBirthMonth = this.pBirthMonth.slice(1, 2);
             }
-  
-  
-            this.birthYears();
-  
-            let personAge = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
-            console.log('要保人', personAge);
-            console.log('要保人最低要保年齡', item.companySetting['applicantAgeMin']);
-            if(personAge < item.companySetting['applicantAgeMin']){
-              this.applicantAgeMin = item.companySetting['applicantAgeMin'] - item.companySetting['applicantAgeMin'];
-              this.applicantSelectBirth();
-              this.applicantAgeMin = item.companySetting['applicantAgeMin'];
-              this.personalAgeOver = true;
-            } else {
-              this.applicantAgeMin = item.companySetting['applicantAgeMin'];
-              this.applicantSelectBirth();
-            }
-  
-            this.pdfUrl4Terms = item.pdfUrl4Terms;
-            this.relationship = item.relationList;
-            this.email = item.applicant.email;
-            this.email.length == 0 ? this.checkEmailDis = false : this.checkEmailDis = true;
-            this.lastName = item.applicant.lastName;
-            this.lastName.length == 0 ? this.checkLastNameDis = false : this.checkLastNameDis = true;
-            this.firstName = item.applicant.firstName;
-            this.firstName.length == 0 ? this.checkFirstNameDis = false : this.checkFirstNameDis = true;
-            this.pid = item.applicant.pid;
-            this.pid.length == 0 ? this.checkPidDis = false : this.checkPidDis = true;
-            this.Mobile = item.applicant.mobile;
-            this.selectedCity = (item.applicant.addressCityId == 0 ? '' : item.applicant.addressCityId);
-            this.toLoadArea('init');
-            this.selectedDistrict = (item.applicant.addressAreaId == 0 ? '' : item.applicant.addressAreaId);
-            this.toZipCode(true, this.selectedDistrict);
-            this.addr = item.applicant['address'];
-            if (!this.Mobile || !this.selectedCity || !this.selectedDistrict || !this.addr) {
-              this.hideUpinput = true;
-            } else {
-              this.hideUpinput = false;
+            this.pBirthDay = item.applicant.birthday.slice(8, 10);
+            if (this.pBirthDay.slice(0, 1) == '0') {
+              this.pBirthDay = this.pBirthDay.slice(1, 2);
             }
           }
-        });
-        this.birthdayMonths = this.birthMonths();
-        this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
-        this.aloneBirthdayDays = this.birthdayDays;
-      }
+          this.birthYears();
+          let personAge = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
+          console.log('要保人', personAge);
+          console.log('要保人最低要保年齡', item.companySetting['applicantAgeMin']);
+          if(personAge < item.companySetting['applicantAgeMin']){
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'] - item.companySetting['applicantAgeMin'];
+            this.applicantSelectBirth();
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+            this.personalAgeOver = true;
+          } else {
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+            this.applicantSelectBirth();
+          }
+          this.pdfUrl4Terms = item.pdfUrl4Terms;
+          this.relationship = item.relationList;
+          this.email = item.applicant.email;
+          this.email.length == 0 ? this.checkEmailDis = false : this.checkEmailDis = true;
+          this.lastName = item.applicant.lastName;
+          this.lastName.length == 0 ? this.checkLastNameDis = false : this.checkLastNameDis = true;
+          this.firstName = item.applicant.firstName;
+          this.firstName.length == 0 ? this.checkFirstNameDis = false : this.checkFirstNameDis = true;
+          this.pid = item.applicant.pid;
+          this.pid.length == 0 ? this.checkPidDis = false : this.checkPidDis = true;
+          this.Mobile = item.applicant.mobile;
+          this.selectedCity = (item.applicant.addressCityId == 0 ? '' : item.applicant.addressCityId);
+          this.toLoadArea('init');
+          this.selectedDistrict = (item.applicant.addressAreaId == 0 ? '' : item.applicant.addressAreaId);
+          this.toZipCode(true, this.selectedDistrict);
+          this.addr = item.applicant['address'];
+          if (!this.Mobile || !this.selectedCity || !this.selectedDistrict || !this.addr) {
+            this.hideUpinput = true;
+          } else {
+            this.hideUpinput = false;
+          }
+          this.birthdayMonths = this.birthMonths();
+          this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+          this.aloneBirthdayDays = this.birthdayDays;
+        }
+      });
     }
-    this.owlAnanOne = this.dataService.owlAnanOne;
-    this.owlAnanTwo = this.dataService.owlAnanTwo;
-    this.owlAnanThree = this.dataService.owlAnanThree;
-    this.owlAnanFour = this.dataService.owlAnanFour;
-    this.owlAnanFifth = this.dataService.owlAnanFifth;
-    if(this.router.url.slice(0, 8) == '/gogoout'){
-      this.routeUrlGoGoNeedToHide = false;
-    }else{
-      this.routeUrlGoGoNeedToHide = true;
-    }
+  }
+
+  ngOnInit() {
+    var url = this.router.url;
+    this.deterMineUrl(url);
   }
 
   deleteThisOne() {
@@ -1419,6 +1377,9 @@ export class MemberCreateComponent implements OnInit {
     dataToGoinSendBak['applicant']['address'] = this.addr;
     dataToGoinSendBak['applicant']['isJoinMember'] = this.checkboxValue;
     dataToGoinSendBak['insuredList'] = [];
+    this.gogoAddrCityFail = false;
+    this.gogoAddrAreaFail = false;
+    this.gogoAddrFail = false;
     let returnObj = {};
     returnObj['relation'] = this.personalInfoSelect;
     returnObj['lastName'] = this.applicantAloneLastName;
@@ -1426,6 +1387,67 @@ export class MemberCreateComponent implements OnInit {
     returnObj['pid'] = this.applicantAlonePid;
     returnObj['birthday'] = this.applicantAloneBirthYear + '-' + (this.applicantAloneBirthMonth.length == 1? '0'+ this.applicantAloneBirthMonth: this.applicantAloneBirthMonth) + '-' + (this.applicantAloneBirthDay.length == 1? '0'+ this.applicantAloneBirthDay: this.applicantAloneBirthDay);
     dataToGoinSendBak['insuredList'].push(returnObj);
+
+      if(
+        !this.personalInfoSelect ||
+        !this.applicantAloneLastName ||
+        !this.applicantAloneFirstName ||
+        !this.applicantAlonePid ||
+        this.alonePidTypeWrong ||
+        !this.applicantAloneBirthYear ||
+        !this.applicantAloneBirthMonth ||
+        !this.applicantAloneBirthDay
+    ){
+      if(!this.personalInfoSelect){
+      }else{
+      }
+      if(!this.applicantAloneLastName){
+        this.aloneLastNameEmpty = true;
+      }else{
+        this.aloneLastNameEmpty = false;
+      }
+      if(!this.applicantAloneFirstName){
+        this.aloneFirstNameEmpty = true;
+      }else{
+        this.aloneFirstNameEmpty = false;
+      }
+      if(!this.applicantAlonePid){
+        this.alonePidEmpty = true;
+      }else{
+        this.alonePidEmpty = false;
+      }
+      if(this.alonePidTypeWrong){
+        this.alonePidTypeWrong = true;
+      }else{
+        this.alonePidTypeWrong = false;
+      }
+      if(
+        !this.applicantAloneBirthYear ||
+        !this.applicantAloneBirthMonth ||
+        !this.applicantAloneBirthDay
+      ){
+        this.aloneBdEmpty = true;
+      }else{
+        this.aloneBdEmpty = false;
+      }
+      this.toRecheck = true;
+      var modal = document.getElementById('myModal');
+      modal.style.display = "block";
+      this.dataService.AlertTXT = [];
+      this.dataService.AlertTXT.push('請正確填入要保人資料');
+      var body = $("html, body");
+      this.dataService.idToGoFlow = 'addInsuredAdd';
+    }else{
+      this.dataService.SaveInsuredData['insuredList'] = [];
+      let returnObj = {};
+      returnObj['relation'] = this.personalInfoSelect;
+      returnObj['lastName'] = this.applicantAloneLastName;
+      returnObj['firstName'] = this.applicantAloneFirstName;
+      returnObj['pid'] = this.applicantAlonePid;
+      returnObj['birthday'] = this.applicantAloneBirthYear + '-' + (this.applicantAloneBirthMonth.length == 1? '0'+ this.applicantAloneBirthMonth: this.applicantAloneBirthMonth) + '-' + (this.applicantAloneBirthDay.length == 1? '0'+ this.applicantAloneBirthDay: this.applicantAloneBirthDay);
+      this.dataService.SaveInsuredData['insuredList'].push(returnObj);
+      this.dataService.toSaveInsuredData();
+    }
     console.log('1234bak', JSON.stringify(dataToGoinSendBak));
     this.dataService.toCallGoGoApi(dataToGoinSendBak);
   }

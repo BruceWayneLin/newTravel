@@ -154,9 +154,9 @@ export class ConfirmInfoComponent implements OnInit {
   getBakInfo(){
     this.dataService.backFromConfirm = true;
     if(this.router.url.slice(0, 8) == '/gogoout'){
-      this.router.navigate(['/gogoout']);
+      this.router.navigate(['/gogoout'], {queryParams: {orderNumber: this.dataService.gogoOrderNumber}});
     }else{
-      this.router.navigate(['/memberCreate']);
+      this.router.navigate(['/memberCreate'], {queryParams: {orderNumber: this.dataService.orderNumberForSave}});
     }
   }
 

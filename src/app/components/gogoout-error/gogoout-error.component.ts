@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-gogoout-error',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GogooutErrorComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private actRoute: ActivatedRoute
+  ) { }
 
+  text:string = '';
   ngOnInit() {
+    this.text = this.actRoute.queryParams['value']['msg'];
   }
 
   goBack() {

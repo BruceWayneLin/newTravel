@@ -80,13 +80,11 @@ export class DataServiceService {
 
     getIniData(val) {
         var apiCall = '';
-        console.log('12342424214214324124', this.gogoOrderNumber);
             try{
             if(this.gogoOrderNumber){
                 sessionStorage.setItem('pid', JSON.stringify(this.gogoOrderNumber));  
             }  
             }catch(error){
-
             }
         if(this.route.url.slice(0, 8) == '/gogoout'){
             if(!val['orderNumber']){
@@ -105,6 +103,41 @@ export class DataServiceService {
                 return res.json();
             });
         }
+    }
+
+    getGoGoInitCancel(val) {
+        this.loading = true;
+        var postData;
+        if(val){
+         postData = {"orderNumber": val};
+        }else{
+         postData = {"orderNumber": this.gogoOrderNumber};
+        }
+        return this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/cancel/initData', postData)
+        .map((result) => {
+            if(result.json().isEx == true){
+                if(result.json().kickout){ 
+                }else{
+                    if (result.json().data) {
+                        // Server 回傳錯誤
+                        if (result.json().data && result.json().data.errorFlagName) {
+                            var flagName = result.json().data.errorFlagName;
+                            this.idToGoFlow = flagName;
+                        }
+                    }
+                    this.loading = false;
+                    var msgs = result.json().msgs;
+                    var modal = document.getElementById('myModal');
+                    modal.style.display = "block";
+                    this.AlertTXT = msgs;
+                    document.querySelector('#myModal').scrollIntoView();
+                }
+                return 0;
+            } else {
+                this.loading = false;
+                return result.json();
+            }
+        });
     }
 
     getPkPrice(value) {
@@ -146,14 +179,6 @@ export class DataServiceService {
 
     getCusPkPrice(value) {
         this.loading = true;
-        // let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-        // let options = new RequestOptions({headers});
-        // let  body = new URLSearchParams();
-        // body.append('packageId', value['packageId']);
-        // body.append('days', value['days']);
-        // body.append('cusItemJson', value['cusItemJson']);
-        // console.log(JSON.stringify(value));
-
         return this.http.post('/CareLineTravel/travel-mbr/journey/calRateByCusPackage', value)
         .map((result) => {
             if(result.json().isEx == true){
@@ -712,6 +737,19 @@ export class DataServiceService {
         }).subscribe((item)=>{
             console.log(item);
         }); 
+    }
+
+    gogoCancelBak(val){
+        var postData;
+        if(val){
+         postData = {"orderNumber": val};
+        }else{
+         postData = {"orderNumber": this.gogoOrderNumber};
+        }
+        if(postData['orderNumber']){
+            window.location.href = '/CareLineTravel/travel-mbr/b2bCar/gogoout/cancel/next?orderNumber='+
+            encodeURIComponent(postData['orderNumber']);
+        } 
     }
 
 }

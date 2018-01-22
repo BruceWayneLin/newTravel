@@ -1,0 +1,63 @@
+h2 {
+    color: #e84466;
+    margin-bottom: 25px;
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
+}
+
+h3 {
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
+}
+
+h4 {
+  font-size: 20px;
+  font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
+}
+
+.content p, .content b {
+    font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
+}
+
+.content b {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+button {
+    background-color: #e84466!important;
+    border: 1px solid #ccc;
+    color: #fff;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    min-width: 100px;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    color: white;
+}
+
+.processImg {
+    background: url('/assets/images/dolls/failPayment.png') no-repeat;
+    height: 100px;
+    width: 90px;
+    background-size: contain;
+    margin: 0 auto;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 500px){
+    #failPay {
+        margin-top: 25% !important;
+    }
+    h3 {
+      font-size:18px;
+    }
+    .content p, .content b {
+       font-size: 18px;
+    }
+}

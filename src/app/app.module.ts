@@ -45,6 +45,7 @@ import { PreviewPdfComponent } from './components/preview-pdf/preview-pdf.compon
 import { SignatureModule } from './components/signature/signature.module';
 import { SignatureComponent } from './components/signature/signature.component';
 import { GogooutErrorComponent } from './components/gogoout-error/gogoout-error.component';
+import { GogooutCancelComponent } from './components/gogoout-cancel/gogoout-cancel.component';
 
 export const routes: LayoutRoute[] = [
   {
@@ -66,6 +67,16 @@ export const routes: LayoutRoute[] = [
       // breadcrumb: 'gogo error',
     },
     component: GogooutErrorComponent
+  },
+  {
+    path: 'gogooutCancel',
+    data: {
+      component: {
+        factory: RentalCarThemeFactoryFactory
+      }
+      // breadcrumb: 'gogo error',
+    },
+    component: GogooutCancelComponent
   },
   {
     path: 'gogoout/confirm',
@@ -165,7 +176,8 @@ export const routes: LayoutRoute[] = [
     FailPaymentComponent,
     VersionComponent,
     PreviewPdfComponent,
-    GogooutErrorComponent
+    GogooutErrorComponent,
+    GogooutCancelComponent
   ],
   exports: [
   ],

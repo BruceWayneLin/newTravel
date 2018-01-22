@@ -76,6 +76,12 @@
      background-color: #808080;
   }
 
+  .btn.careline-btn.careline-btn-lg.careline-btn-theme-1.mt-5:hover {
+    color:#ccc;
+    font-weight: 400; 
+    background-color: #D0596E;
+  }
+
   button:hover i {
     font-weight: 300;
   }
