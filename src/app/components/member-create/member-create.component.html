@@ -179,7 +179,6 @@
                 </option>
             </select>
           </div>
-          
           <div id="AddrAreaFlag" class="col-xs-4">
             <i class="fa fa-angle-down dropDown" style="font-size:36px;!important;z-index:999;"></i>
             <select [disabled]="selectedCity == ''" [ngClass]="{'inValidInput': birthdayCityEl.touched && birthdayDistrictEl.touched && checkCityArea(birthdayCityEl.value, birthdayDistrictEl.value) || gogoAddrAreaFail}" [(ngModel)]="selectedDistrict" #birthdayDistrictEl="ngModel" (change)="toZipCode(birthdayDistrictEl)" class="form-control">

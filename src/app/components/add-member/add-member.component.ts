@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ShareService } from '../../services/share.service';
 import { DataServiceService } from '../../services/data-service.service';
 import { MemberCreateComponent } from '../../components/member-create/member-create.component'
+import { ActivatedRoute } from '@angular/router';
 import {count} from "rxjs/operator/count";
 
 declare var jquery:any;
@@ -30,7 +31,8 @@ export class AddMemberComponent implements OnInit {
   constructor(
       private shareService:ShareService,
       private dataService:DataServiceService,
-      private memberCom: MemberCreateComponent
+      private memberCom: MemberCreateComponent,
+      private routerAct: ActivatedRoute
   ) {
     this.birthdayMonths = this.birthMonths();
     this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
@@ -55,8 +57,9 @@ export class AddMemberComponent implements OnInit {
 
   ngOnInit() {
     var Url = window.location.href;
-    var turnBakUrl = this.toGetDataFromUrl(Url);
-    this.dataService.toGetInsuredInfo(turnBakUrl).subscribe((item) => {
+    // var turnBakUrl = this.toGetDataFromUrl(Url);
+    
+    this.dataService.toGetInsuredInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
       if(item){
         console.log(item);
         this.relationShip = item.relationList;
@@ -78,7 +81,7 @@ export class AddMemberComponent implements OnInit {
           this.firstCardRelationship = '本人';
           this.changedRelationship('', '');
         }else{
-          this.dataService.toGetBakInfo().subscribe((item) => {
+          this.dataService.toGetBakInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
             this.insuredList = item['insuredList'];
             this.insuredList.forEach((item, index)=>{
               switch(index){

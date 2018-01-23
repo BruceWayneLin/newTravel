@@ -30,6 +30,7 @@ export class ConfirmInfoComponent implements OnInit {
   text4Activity: string;
   odPeriodDays: number;
   odRate: number;
+  gogoOutNeedToHideCol: boolean = false;
 
   insuredList: any[];
 
@@ -62,6 +63,7 @@ export class ConfirmInfoComponent implements OnInit {
     }
 
     if(this.router.url.slice(0, 8) == '/gogoout'){ 
+      this.gogoOutNeedToHideCol = true;
       console.log(this.dataService.orderNumber);
       this.routeUrlGoGo = true;
       this.dataService.getGoGoConfirmInfo().subscribe((item) => {

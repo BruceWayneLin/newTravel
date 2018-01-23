@@ -139,6 +139,7 @@ export class MemberCreateComponent implements OnInit {
     let currentYear = new Date(this.countBrthDayFromSelectedBtn).getFullYear();
     let currentMonth = new Date(this.countBrthDayFromSelectedBtn).getMonth() + 1;
     let currentDay = new Date(this.countBrthDayFromSelectedBtn).getDate();
+    
     if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
       this.aloneBirthdayDays =  this.birthDays(this.applicantAloneBirthYear, this.applicantAloneBirthMonth);
     }
@@ -201,7 +202,6 @@ export class MemberCreateComponent implements OnInit {
   changedData(year=null, month=null, day=null){
     this.userPidFail = this.pidCheck(this.pid);
     this.checkBirthday(year, month, day);
-    this.birthdayDays = this.birthDays(this.pBirthYear, this.pBirthMonth);
     this.dataService.clearData = false;
   }
 
@@ -228,13 +228,6 @@ export class MemberCreateComponent implements OnInit {
         }
       }
     }else{
-      // if(id == 'last'){
-      //   this.aloneLastNameEmpty = true;
-      //   this.aloneNameLastChinese = false;
-      // }else{
-      //   this.aloneFirstNameEmpty = true;
-      //   this.aloneNameFirstChinese = false;
-      // }
     }
   }
 
@@ -416,7 +409,9 @@ export class MemberCreateComponent implements OnInit {
   }
 
   toLoadArea(value = null) {
-    this.checkCityArea('true', 'false');
+    if(this.routeUrlGoGoNeedToHide){
+      this.checkCityArea('true', 'false');
+    }
     var emptyArray = [];
     if(this.selectedCity && value == 'init'){
       this.areaList.forEach((item) => {
@@ -472,19 +467,6 @@ export class MemberCreateComponent implements OnInit {
     }else{
       if(val && this.firstTimeClickHaoA){
         this.ModelClick(true);
-        // var modal = document.getElementById('myConfirmModal');
-        // modal.style.display = "block";
-        // $('.modal').css({
-        //   'height': $(document).height(),
-        //   'padding': '15% 0',
-        //   'text-align': 'center'
-        // });
-        // document.querySelector('#myConfirmModal .modal-content').scrollIntoView();
-        // if(window.innerWidth <= 500){
-        // }else{
-        // }
-        // above modal area
-        // document.getElementById('myConfirmModal').scrollIntoView({block: 'start', behavior: 'smooth'});
       }else if(!val && this.firstTimeClickHaoA){
         var modal = document.getElementById('myConfirmModal2');
         modal.style.display = "block";
@@ -706,7 +688,7 @@ export class MemberCreateComponent implements OnInit {
 
   reloadedAgain() {
     if(this.dataService.backFromConfirm){
-      this.dataService.toGetBakInfo().subscribe((item) => {
+      this.dataService.toGetBakInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
         this.aggreeToUpdate = item['isUpdate'];
       });
     }
@@ -839,13 +821,35 @@ export class MemberCreateComponent implements OnInit {
     this.gogoAddrAreaFail = false;
     this.gogoAddrCityFail = false;
     this.gogoAddrFail = false;
+    this.owlAnanOne = this.dataService.owlAnanOne;
+    this.owlAnanTwo = this.dataService.owlAnanTwo;
+    this.owlAnanThree = this.dataService.owlAnanThree;
+    this.owlAnanFour = this.dataService.owlAnanFour;
+    this.owlAnanFifth = this.dataService.owlAnanFifth;
+    var orderNum = this.routerAct.queryParams['value']['orderNumber'];
+    this.dataService.orderNumberForSave = orderNum;
+    var sendDataBak = {};
+    sendDataBak['product'] = 'Travel';
+    sendDataBak['pack'] = '';
+    sendDataBak['orderNumber'] = orderNum;
+    this.dataService.getIniData(sendDataBak).subscribe((data) => {
+      this.cityList = data.cityList;
+      this.areaList = data.areaList;
+      this.toLoadArea('init');
+      this.toZipCode(true, this.selectedDistrict);
+      this.birthdayMonths = this.birthMonths();
+      this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+      this.aloneBirthdayDays = this.birthdayDays;
+
+    });
     // this is when user back from confirm page then we check if calling api or not
     if(this.dataService.backFromConfirm && this.dataService.noGoWithYourFdsFlag !== undefined){
       this.hiddenAtBegining = false;
       this.firstTimeClickHaoA = true;
       this.noGoWithYourFds = this.dataService.noGoWithYourFdsFlag;
       if(!this.noGoWithYourFds && this.router.url.slice(0, 13) == '/memberCreate'){
-        this.dataService.toGetBakInfo().subscribe((item) => {
+        
+        this.dataService.toGetBakInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
           this.aggreeToUpdate = item['applicant']['isUpdate'];
           this.insuredList = item['insuredList'];
           console.log(item);
@@ -908,6 +912,10 @@ export class MemberCreateComponent implements OnInit {
           this.toLoadArea('init');
           this.selectedDistrict = (item.applicant.addressAreaId == 0 ? '' : item.applicant.addressAreaId);
           this.toZipCode(true, this.selectedDistrict);
+          this.birthdayMonths = this.birthMonths();
+          this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+          this.aloneBirthdayDays = this.birthdayDays;
+          this.personalSelectChange();
           this.addr = item.applicant['address'];
           if (!this.Mobile || !this.selectedCity || !this.selectedDistrict || !this.addr) {
             this.hideUpinput = true;
@@ -949,7 +957,7 @@ export class MemberCreateComponent implements OnInit {
 
         });
       }else{
-        this.dataService.toGetBakInfo().subscribe((item) => {
+        this.dataService.toGetBakInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
           this.aggreeToUpdate = item['applicant']['isUpdate'];
           this.insuredList = item['insuredList'];
           this.relationShip = item.relationList;
@@ -983,6 +991,7 @@ export class MemberCreateComponent implements OnInit {
             }
           }
           this.birthYears();
+
           let personAge = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
           if(personAge < item.companySetting['applicantAgeMin']){
             this.applicantAgeMin = item.companySetting['applicantAgeMin'] - item.companySetting['applicantAgeMin'];
@@ -1017,27 +1026,9 @@ export class MemberCreateComponent implements OnInit {
           }
         });
       }
-    }else{
-      this.owlAnanOne = this.dataService.owlAnanOne;
-      this.owlAnanTwo = this.dataService.owlAnanTwo;
-      this.owlAnanThree = this.dataService.owlAnanThree;
-      this.owlAnanFour = this.dataService.owlAnanFour;
-      this.owlAnanFifth = this.dataService.owlAnanFifth;
-      var orderNum = this.routerAct.queryParams['value']['orderNumber'];
-      this.dataService.orderNumberForSave = orderNum;
-      var sendDataBak = {};
-      sendDataBak['product'] = 'Travel';
-      sendDataBak['pack'] = '';
-      sendDataBak['orderNumber'] = orderNum;
-      this.dataService.getIniData(sendDataBak).subscribe((data) => {
-        this.cityList = data.cityList;
-        this.areaList = data.areaList;
-        this.toLoadArea('init');
-        this.toZipCode(true, this.selectedDistrict);
-        this.birthdayMonths = this.birthMonths();
-        this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
-      });
-      this.dataService.toGetInsuredInfo(sendDataBak).subscribe((item) => {
+    }else{    
+      var orderQuery = this.routerAct.queryParams['value']['orderNumber'];
+      this.dataService.toGetInsuredInfo(orderQuery).subscribe((item) => {
         if (item) {
           console.log(item);
           this.rateInfoList = item.rateInfoList;
@@ -1105,6 +1096,7 @@ export class MemberCreateComponent implements OnInit {
           this.birthdayMonths = this.birthMonths();
           this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
           this.aloneBirthdayDays = this.birthdayDays;
+          this.personalSelectChange();
         }
       });
     }
@@ -1393,7 +1385,6 @@ export class MemberCreateComponent implements OnInit {
     returnObj['pid'] = this.applicantAlonePid;
     returnObj['birthday'] = this.applicantAloneBirthYear + '-' + (this.applicantAloneBirthMonth.length == 1? '0'+ this.applicantAloneBirthMonth: this.applicantAloneBirthMonth) + '-' + (this.applicantAloneBirthDay.length == 1? '0'+ this.applicantAloneBirthDay: this.applicantAloneBirthDay);
     dataToGoinSendBak['insuredList'].push(returnObj);
-
       if(
         !this.personalInfoSelect ||
         !this.applicantAloneLastName ||
@@ -1444,17 +1435,16 @@ export class MemberCreateComponent implements OnInit {
       var body = $("html, body");
       this.dataService.idToGoFlow = 'addInsuredAdd';
     }else{
-      this.dataService.SaveInsuredData['insuredList'] = [];
-      let returnObj = {};
-      returnObj['relation'] = this.personalInfoSelect;
-      returnObj['lastName'] = this.applicantAloneLastName;
-      returnObj['firstName'] = this.applicantAloneFirstName;
-      returnObj['pid'] = this.applicantAlonePid;
-      returnObj['birthday'] = this.applicantAloneBirthYear + '-' + (this.applicantAloneBirthMonth.length == 1? '0'+ this.applicantAloneBirthMonth: this.applicantAloneBirthMonth) + '-' + (this.applicantAloneBirthDay.length == 1? '0'+ this.applicantAloneBirthDay: this.applicantAloneBirthDay);
-      this.dataService.SaveInsuredData['insuredList'].push(returnObj);
-      this.dataService.toSaveInsuredData();
+      // this.dataService.SaveInsuredData['insuredList'] = [];
+      // let returnObj = {};
+      // returnObj['relation'] = this.personalInfoSelect;
+      // returnObj['lastName'] = this.applicantAloneLastName;
+      // returnObj['firstName'] = this.applicantAloneFirstName;
+      // returnObj['pid'] = this.applicantAlonePid;
+      // returnObj['birthday'] = this.applicantAloneBirthYear + '-' + (this.applicantAloneBirthMonth.length == 1? '0'+ this.applicantAloneBirthMonth: this.applicantAloneBirthMonth) + '-' + (this.applicantAloneBirthDay.length == 1? '0'+ this.applicantAloneBirthDay: this.applicantAloneBirthDay);
+      // dataToGoinSendBak['insuredList'].push(returnObj);
+      console.log('1234bak', JSON.stringify(dataToGoinSendBak));
+      this.dataService.toCallGoGoApi(dataToGoinSendBak);
     }
-    console.log('1234bak', JSON.stringify(dataToGoinSendBak));
-    this.dataService.toCallGoGoApi(dataToGoinSendBak);
   }
 }

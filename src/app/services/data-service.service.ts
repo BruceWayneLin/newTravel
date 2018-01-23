@@ -251,11 +251,18 @@ export class DataServiceService {
     }
 
     toGetInsuredInfo(value) {
+        console.log('1234321', value);
         this.loading = true;
+        var postData;
+        if(value){
+         postData = {"orderNumber": value};
+        }else{
+         postData = {"orderNumber": this.orderNumberForSave};
+        }
         console.log(this.route.url.slice(0, 8));
         if(this.backFromConfirm){
             let objSendBak = {};
-            objSendBak['orderNumber'] = this.orderNumberForSave;
+            objSendBak['orderNumber'] = postData['orderNumber'];
             return this.http.post('/CareLineTravel/travel-mbr/journey/getDataAfterLogin', objSendBak).map(res => {
                 if(res.json().isEx){
                     if(res.json().kickout){
@@ -282,7 +289,12 @@ export class DataServiceService {
             });
         }else{
             let objSendBak = {};
-            objSendBak['orderNumber'] = this.orderNumberForSave;
+            if(value){
+            postData = {"orderNumber": value};
+            }else{
+            postData = {"orderNumber": this.orderNumberForSave};
+            }
+            objSendBak['orderNumber'] = postData['orderNumber'];
             return this.http.post('/CareLineTravel/travel-mbr/journey/getDataAfterLogin', objSendBak).map(res => {
                 if(res.json().isEx){
                     if(res.json().kickout){
@@ -310,11 +322,17 @@ export class DataServiceService {
         }
     }
 
-    toGetBakInfo() {
+    toGetBakInfo(value) {
             this.loading = true;
+            var postData;
+            if(value){
+            postData = {"orderNumber": value};
+            }else{
+            postData = {"orderNumber": this.orderNumberForSave};
+            }
             if(this.backFromConfirm) {
                 let objSendBak = {};
-                objSendBak['orderNumber'] = this.orderNumberForSave;
+                objSendBak['orderNumber'] = postData['orderNumber'];
                 return this.http.post('/CareLineTravel/travel-mbr/journey/getDataWhenBackFromConfirmPage', objSendBak).map(res => {
                     if(res.json().isEx){
                         if(res.json().kickout){
