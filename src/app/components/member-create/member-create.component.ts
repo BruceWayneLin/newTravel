@@ -115,11 +115,14 @@ export class MemberCreateComponent implements OnInit {
   gogoAddrAreaFail: boolean;
   gogoAddrFail: boolean;
   userPidFail: any;
+  showAddrDoll: boolean;
 
   @ViewChild('emailElm') EmailEl:ElementRef;
   @ViewChild('lastNameEl') lastNameEl:ElementRef;
   @ViewChild('firstNameEl') firstNameEl:ElementRef;
   @ViewChild('birthdayCityEl') birthdayCityEl:ElementRef;
+  @ViewChild('birthdayDistrictEl') birthdayDistrictEl:ElementRef;
+
   @ViewChild('MobileEl') mobileEl:ElementRef;
   @ViewChild('birthdayYAM') birthdayYAM:ElementRef;
 
@@ -133,6 +136,12 @@ export class MemberCreateComponent implements OnInit {
   ) {
     $('html, body').animate({scrollTop: '0px'}, 0);
   }
+
+  calculateAge(birthday) { // birthday is a date
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }  
 
   checkAloneBd(){
     this.toRecheckAgain();
@@ -320,10 +329,10 @@ export class MemberCreateComponent implements OnInit {
   }
 
   addrCheck(addr){
+    this.gogoAddrFail = false;
     if(!addr){
       return true;
     } else {
-      this.gogoAddrFail = false;
       return false;
     }
   }
@@ -409,9 +418,7 @@ export class MemberCreateComponent implements OnInit {
   }
 
   toLoadArea(value = null) {
-    if(this.routeUrlGoGoNeedToHide){
-      this.checkCityArea('true', 'false');
-    }
+    this.checkCityArea('true', 'false');
     var emptyArray = [];
     if(this.selectedCity && value == 'init'){
       this.areaList.forEach((item) => {
@@ -743,6 +750,11 @@ export class MemberCreateComponent implements OnInit {
       }
       this.applicantAgeMax = data['data']['companySetting']['applicantAgeMax'];
       this.applicantAgeMin = data['data']['companySetting']['applicantAgeMin'];
+      this.insuredList = data['data']['insuredList'];
+
+      this.insuredAgeMax = data['data'].companySetting['insuredAgeMax'];
+      this.insuredLimitedAge = data['data'].companySetting['insuredAgeMax'] - data['data'].companySetting['insuredAgeMin'];
+      this.insuredMinAge = data['data'].companySetting['insuredAgeMin'];
       this.countBrthDayFromSelectedBtn = data['data']['travelStartDate'];
       this.cityList = data['data']['cityList'];
       this.areaList = data['data']['areaList'];
@@ -773,6 +785,7 @@ export class MemberCreateComponent implements OnInit {
         this.toLoadArea('init');
         this.toZipCode(true, this.selectedDistrict);
       }
+      // data['data']['applicant']['address'] = 0;
       if(!data['data']['applicant']['address']){
         this.addr = '';
         document.querySelector('#AddrFlag').scrollIntoView();
@@ -781,15 +794,82 @@ export class MemberCreateComponent implements OnInit {
         this.addr = data['data']['applicant']['address'];
       }
       this.applicantSelectBirth();
-      this.checkboxValue = data['data']['applicant']['isJoinMember'];
-      this.insuredAgeMax = data['data']['companySetting']['insuredAgeMax'];
-      this.insuredAgeMin = data['data']['companySetting']['insuredAgeMin'];
-      this.insuredLimitedAge = data['data']['companySetting']['insuredAgeMax'] - data['data']['companySetting']['insuredAgeMin'];
+      this.checkboxValue = data['checkboxValue'];
+
+      this.applicantAgeMax = data['data'].companySetting['applicantAgeMax'];
+      this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
+      this.insuredLimitedAge = data['data'].companySetting['insuredAgeMax'] - data['data'].companySetting['insuredAgeMin'];
+      this.applicantAloneMinAge = data['data'].companySetting['insuredAgeMin'];
+      this.countBrthDayFromSelectedBtn = data['data']['travelStartDate'];
+      this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
+      data['data'].applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+      this.pBirthYear = data['data'].applicant.birthday.slice(0, 4);
+      this.pBirthMonth = data['data'].applicant.birthday.slice(5, 7);
+      this.relationship = data['data'].relationList;
+      this.applicantSelectBirth();
+      if(data['data'].applicant.birthday){
+        data['data'].applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+        this.pBirthYear = data['data'].applicant.birthday.slice(0, 4);
+        this.pBirthMonth = data['data'].applicant.birthday.slice(5, 7);
+        if (this.pBirthMonth.slice(0, 1) == '0') {
+          this.pBirthMonth = this.pBirthMonth.slice(1, 2);
+        }
+        this.pBirthDay = data['data'].applicant.birthday.slice(8, 10);
+        if (this.pBirthDay.slice(0, 1) == '0') {
+          this.pBirthDay = this.pBirthDay.slice(1, 2);
+        }
+      }
       this.birthYears();
+
+      let personAge = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
+      if(personAge < data['data'].companySetting['applicantAgeMin']){
+        this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'] - data['data'].companySetting['applicantAgeMin'];
+        this.applicantSelectBirth();
+        this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
+        this.personalAgeOver = true;
+      } else {
+        this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
+        this.applicantSelectBirth();
+      }
+      this.birthdayMonths = this.birthMonths();
+      this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+      this.aloneBirthdayDays = this.birthdayDays;
+
       this.noGoWithYourFds = false;
       this.hiddenAtBegining = '';
       this.relationship = data['data']['relationList'];
-      this.personalSelectChange();
+      this.insuredList.forEach((item, index)=>{
+        switch(index){
+          case 0:
+            if(item['relation']){
+              this.applicantAloneLockInput = true;
+            }else{
+              this.applicantAloneLockInput = false;
+            }
+            this.personalInfoSelect = item['relation'];
+            if(this.personalInfoSelect !== '本人'){
+              this.applicantAloneLockInput = false;
+            }
+            this.applicantAloneLastName = item['lastName'];
+            this.applicantAloneFirstName = item['firstName'];
+            this.applicantAlonePid = item['pid'];
+            this.applicantAloneBirthYear = item['birthday'].slice(0, 4);
+            this.applicantAloneBirthMonth = item['birthday'].slice(5,6) == 0? item['birthday'].slice(6,7): item['birthday'].slice(5,7);
+            this.applicantAloneBirthDay =  item['birthday'].slice(8,9) == 0? item['birthday'].slice(9,10): item['birthday'].slice(8,10);
+            this.aloneLastNameEmpty = false;
+            this.aloneFirstNameEmpty = false;
+            this.alonePidEmpty = false;
+            this.alonePidTypeWrong = false;
+            this.aloneBdEmpty = false;
+            this.alonePidWrong = false;
+            this.alonePidTypeWrong = false;
+            this.aloneBdWrong = false;
+            this.aloneNameFirstChinese = false;
+            this.aloneNameLastChinese = false;
+            break;
+          default:
+        }
+      })
       this.isShowCheckbox = data['isShowCheckbox'];
      
       if(this.checkboxValue){
@@ -954,7 +1034,6 @@ export class MemberCreateComponent implements OnInit {
               default:
             }
           })
-
         });
       }else{
         this.dataService.toGetBakInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
@@ -1162,10 +1241,11 @@ export class MemberCreateComponent implements OnInit {
   }
 
   birthYears() {
-    console.log(this.countBrthDayFromSelectedBtn);
-    console.log(this.insuredLimitedAge);
+    console.log('countbrth', this.countBrthDayFromSelectedBtn);
+    console.log('limit', this.insuredLimitedAge);
     var date = new Date(this.countBrthDayFromSelectedBtn);
     let limitAge = date.getFullYear() - this.applicantAloneMinAge;
+    console.log('1234321341234321142', this.applicantAloneMinAge);
     var returnVal = [];
     returnVal.push(limitAge);
     for (var i = 0; i <= (this.insuredLimitedAge+1); i++) {
@@ -1202,8 +1282,8 @@ export class MemberCreateComponent implements OnInit {
           returnArr.push(i);
         }
       return returnArr;
-      case 2:
-        if ((y % 4 === 0 && y % 100 !== 0) || y % 400 === 0) {
+      case 2:  
+      if ((y % 4 === 0 && y % 100 !== 0) || y % 400 === 0) {
           for(let i = 1; i <= 29; i++){
             returnArr.push(i);
           }
@@ -1283,7 +1363,7 @@ export class MemberCreateComponent implements OnInit {
     this.dataService.SaveInsuredData['applicant']['addressZipCode'] = this.areaZipCode;
     this.dataService.SaveInsuredData['applicant']['address'] = this.addr;
     this.dataService.SaveInsuredData['applicant']['isUpdate'] = this.aggreeToUpdate;
-
+    
     if(!this.noGoWithYourFds){
       if(
           !this.personalInfoSelect ||
@@ -1375,9 +1455,19 @@ export class MemberCreateComponent implements OnInit {
     dataToGoinSendBak['applicant']['address'] = this.addr;
     dataToGoinSendBak['applicant']['isJoinMember'] = this.checkboxValue;
     dataToGoinSendBak['insuredList'] = [];
-    this.gogoAddrCityFail = false;
-    this.gogoAddrAreaFail = false;
-    this.gogoAddrFail = false;
+    if(!this.addr){
+    this.gogoAddrFail == true;
+    this.showAddrDoll == true;
+    document.querySelector('#personalContentDiv').scrollIntoView();
+    return false;
+   }
+   if(!this.selectedCity || !this.selectedDistrict){
+      this.gogoAddrCityFail = true;
+      this.gogoAddrAreaFail = true;
+      document.querySelector('#personalContentDiv').scrollIntoView();
+      return false;
+   }
+    
     let returnObj = {};
     returnObj['relation'] = this.personalInfoSelect;
     returnObj['lastName'] = this.applicantAloneLastName;

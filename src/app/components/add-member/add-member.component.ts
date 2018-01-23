@@ -223,13 +223,6 @@ export class AddMemberComponent implements OnInit {
         if(this.pidCheck(value)){
           this.thirdPidTypeWrong = true;
           this.thirdPidWrongWords = '身份證格式錯誤。';
-          // if(value == this.firstCardPid.toUpperCase() || value == this.secondCardPid.toUpperCase() || value == this.fourthCardPid.toUpperCase() || value == this.fifthCardPid.toUpperCase() || value == this.sixthCardPid.toUpperCase()){
-          //   this.thirdPidTypeWrong = true;
-          //   this.thirdPidWrongWords = '身份證不可重複。';
-          //   this.thirdPidEmpty = false;
-          // }else{
-          //   this.thirdPidTypeWrong = false;
-          // }
         }else{
           if(value == this.firstCardPid.toUpperCase() || value == this.secondCardPid.toUpperCase() || value == this.fourthCardPid.toUpperCase() || value == this.fifthCardPid.toUpperCase() || value == this.sixthCardPid.toUpperCase()){
             this.thirdPidTypeWrong = true;
@@ -249,13 +242,6 @@ export class AddMemberComponent implements OnInit {
         if(this.pidCheck(value)){
           this.fourthPidTypeWrong = true;
           this.fourthPidWrongWords = '身份證格式錯誤。';
-          // if(value == this.firstCardPid.toUpperCase() || value == this.thirdCardPid.toUpperCase() || value == this.secondCardPid.toUpperCase() || value == this.fifthCardPid.toUpperCase() || value == this.sixthCardPid.toUpperCase()){
-          //   this.fourthPidTypeWrong = true;
-          //   this.fourthPidWrongWords = '身份證不可重複。';
-          //   this.fourthPidEmpty = false;
-          // }else{
-          //   this.fourthPidTypeWrong = false;
-          // }
         }else{
           if(value == this.firstCardPid.toUpperCase() || value == this.thirdCardPid.toUpperCase() || value == this.secondCardPid.toUpperCase() || value == this.fifthCardPid.toUpperCase() || value == this.sixthCardPid.toUpperCase()){
             this.fourthPidTypeWrong = true;

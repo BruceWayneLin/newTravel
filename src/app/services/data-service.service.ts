@@ -259,7 +259,6 @@ export class DataServiceService {
         }else{
          postData = {"orderNumber": this.orderNumberForSave};
         }
-        console.log(this.route.url.slice(0, 8));
         if(this.backFromConfirm){
             let objSendBak = {};
             objSendBak['orderNumber'] = postData['orderNumber'];
