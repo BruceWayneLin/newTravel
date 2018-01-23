@@ -729,7 +729,7 @@ export class DataServiceService {
     }
 
     uploadSignature(postParam){
-        this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/sign/upload', postParam).map(res => {
+       return this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/sign/upload', postParam).map(res => {
             if (res.json().isEx) {
                 if(res.json().kickout){
                     this.loading = false;
@@ -752,9 +752,7 @@ export class DataServiceService {
             } else {
             return res.json(); 
             } 
-        }).subscribe((item)=>{
-            console.log(item);
-        }); 
+        });
     }
 
     gogoCancelBak(val){
