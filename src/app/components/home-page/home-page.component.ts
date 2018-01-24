@@ -734,6 +734,8 @@ export class HomePageComponent implements OnInit {
 
   totalTimesTimes:number;
   onClickMe($event, classValueBtn, numberBtn, value) {
+  document.getElementById('calendarTable').style.display = 'none';
+  document.getElementById('calendarTable').style.display = 'block';
     if(this.startTravelDay) {
       if (this.startTravelDay == value) {
         var modal = document.getElementById('myModal');
