@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Accordion} from "ngx-accordion";
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service'
 declare var jquery:any;
 declare var $ :any;
@@ -37,8 +37,9 @@ export class ConfirmInfoComponent implements OnInit {
   @ViewChild(Accordion) MyAccordion: Accordion;
 
   constructor(
-      public dataService:DataServiceService,
-      private router:Router
+      public dataService: DataServiceService,
+      private router: Router,
+      private routerAct: ActivatedRoute
   ) {
     // $('html, body').animate({scrollTop: '0px'}, 0);
   }
@@ -63,8 +64,11 @@ export class ConfirmInfoComponent implements OnInit {
     }
 
     if(this.router.url.slice(0, 8) == '/gogoout'){ 
+      this.dataService.orderNumberForSave = this.routerAct.queryParams['value']['orderNumber'];
+      this.dataService.orderNumber = this.routerAct.queryParams['value']['orderNumber'];
+
       this.gogoOutNeedToHideCol = true;
-      console.log(this.dataService.orderNumber);
+      console.log('321654', this.dataService.orderNumber);
       this.routeUrlGoGo = true;
       this.dataService.getGoGoConfirmInfo().subscribe((item) => {
         let info = item['data'];
@@ -74,8 +78,8 @@ export class ConfirmInfoComponent implements OnInit {
         this.applicantAddr = info['apAddressFull'];
         this.applicantBth = info['apBirthday']['year'] + '-' + info['apBirthday']['month'] + '-' + info['apBirthday']['day'];
         this.applicantEmail = info['apEmail'];
-        this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'];
-        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'];
+        this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'] + ' ' + info['odStartDateHour']+':00';
+        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'] + ' ' + info['odEndDateHour']+':00';
         this.insuredLocation = info['odLocation'];
         this.insuredPurpose = info['odPurpose'];
         this.inPackageButtonName = info['inPackageButtonName'];

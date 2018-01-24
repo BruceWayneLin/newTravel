@@ -137,71 +137,73 @@ export class MemberCreateComponent implements OnInit {
     $('html, body').animate({scrollTop: '0px'}, 0);
   }
 
-  calculateAge(birthday) { // birthday is a date
-    var ageDifMs = Date.now() - birthday.getTime();
-    var ageDate = new Date(ageDifMs); // miliseconds from epoch
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }  
-
   checkAloneBd(){
     this.toRecheckAgain();
     let currentYear = new Date(this.countBrthDayFromSelectedBtn).getFullYear();
     let currentMonth = new Date(this.countBrthDayFromSelectedBtn).getMonth() + 1;
     let currentDay = new Date(this.countBrthDayFromSelectedBtn).getDate();
-    
-    if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
-      this.aloneBirthdayDays =  this.birthDays(this.applicantAloneBirthYear, this.applicantAloneBirthMonth);
-    }
-    if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay){
-      this.aloneBdEmpty = false;
-      let userAge = currentYear - this.applicantAloneBirthYear;
-      if((currentMonth >= this.applicantAloneBirthMonth) && (currentDay >= this.applicantAloneBirthDay)){
-        //生日過今天 保留原本選擇年紀
-      } else {
-        userAge = userAge - 1;
-        //未過今天 年紀扣一歲
+    if(!this.routeUrlGoGoNeedToHide){
+      var userAge = this.calculate_age(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+      if(userAge < this.insuredMinAge){
+        this.aloneBdWrong = true;
+      }else{
+        this.aloneBdWrong = false;
       }
-      if(this.insuredLimitedAge !== 0){
-        if(this.applicantAloneBirthYear <= (currentYear - (this.insuredLimitedAge+1))){
-          if((this.applicantAloneBirthMonth < currentMonth) && (this.applicantAloneBirthDay >= currentDay) || (this.applicantAloneBirthMonth <= currentMonth) && (this.applicantAloneBirthDay <= currentDay)){
-            this.aloneBdWrong = true;
-            console.log('12343214321', this.rateInfoList);
-          } else {
-            this.aloneBdWrong = false;
-            this.rateInfoList.forEach((item) => {
-              if((userAge >= item.ageMin) && (userAge <= item.ageMax)){
-                this.aloneWarningWord = item.tipText;
-              }
-            });
-          }
-        } else if(this.applicantAloneBirthYear >= (currentYear - this.insuredMinAge)){
-          if((this.applicantAloneBirthMonth >= currentMonth) && (this.applicantAloneBirthDay >= currentDay) || (this.applicantAloneBirthMonth > currentMonth) && (this.applicantAloneBirthDay <= currentDay)){
-            this.aloneBdWrong = true;
-            console.log('12343214321', this.rateInfoList);
-
-            console.log('3', userAge);
-          } else {
-            this.aloneBdWrong = false;
-            console.log('4', userAge);
-            this.rateInfoList.forEach((item) => {
-              if((userAge >= item.ageMin) && (userAge <= item.ageMax)){
-                this.aloneWarningWord = item.tipText;
-              }
-            });
-          }
+    }else{
+      if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
+        this.aloneBirthdayDays =  this.birthDays(this.applicantAloneBirthYear, this.applicantAloneBirthMonth);
+      }
+      if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay){
+        this.aloneBdEmpty = false;
+        let userAge = currentYear - this.applicantAloneBirthYear;
+        if((currentMonth >= this.applicantAloneBirthMonth) && (currentDay >= this.applicantAloneBirthDay)){
+          //生日過今天 保留原本選擇年紀
+        } else {
+          userAge = userAge - 1;
+          //未過今天 年紀扣一歲
         }
-        if(this.applicantAloneBirthYear <  (currentYear - this.insuredMinAge) && this.applicantAloneBirthYear > (currentYear - (this.insuredLimitedAge+1))){
-          this.aloneBdWrong = false;
-          this.rateInfoList.forEach((item) => {
-            if((userAge >= item.ageMin) && (userAge <= item.ageMax)){
-              this.aloneWarningWord = item.tipText;
+        if(this.insuredLimitedAge !== 0){
+          if(this.applicantAloneBirthYear <= (currentYear - (this.insuredLimitedAge+1))){
+            if((this.applicantAloneBirthMonth < currentMonth) && (this.applicantAloneBirthDay >= currentDay) || (this.applicantAloneBirthMonth <= currentMonth) && (this.applicantAloneBirthDay <= currentDay)){
+              this.aloneBdWrong = true;
+              console.log('12343214321', this.rateInfoList);
+            } else {
+              this.aloneBdWrong = false;
+              this.rateInfoList.forEach((item) => {
+                if((userAge >= item.ageMin) && (userAge <= item.ageMax)){
+                  this.aloneWarningWord = item.tipText;
+                }
+              });
             }
-          });
+          } else if(this.applicantAloneBirthYear >= (currentYear - this.insuredMinAge)){
+            if((this.applicantAloneBirthMonth >= currentMonth) && (this.applicantAloneBirthDay >= currentDay) || (this.applicantAloneBirthMonth > currentMonth) && (this.applicantAloneBirthDay <= currentDay)){
+              this.aloneBdWrong = true;
+              console.log('12343214321', this.rateInfoList);
+  
+              console.log('3', userAge);
+            } else {
+              this.aloneBdWrong = false;
+              console.log('4', userAge);
+              this.rateInfoList.forEach((item) => {
+                if((userAge >= item.ageMin) && (userAge <= item.ageMax)){
+                  this.aloneWarningWord = item.tipText;
+                }
+              });
+            }
+          }
+          if(this.applicantAloneBirthYear <  (currentYear - this.insuredMinAge) && this.applicantAloneBirthYear > (currentYear - (this.insuredLimitedAge+1))){
+            this.aloneBdWrong = false;
+            this.rateInfoList.forEach((item) => {
+              if((userAge >= item.ageMin) && (userAge <= item.ageMax)){
+                this.aloneWarningWord = item.tipText;
+              }
+            });
+          }
+  
         }
-
+      } else if (!this.applicantAloneBirthYear && !this.applicantAloneBirthMonth && !this.applicantAloneBirthDay) {
+        this.aloneBdEmpty = true;
       }
-    } else if (!this.applicantAloneBirthYear && !this.applicantAloneBirthMonth && !this.applicantAloneBirthDay) {
-      this.aloneBdEmpty = true;
     }
   }
 
@@ -920,7 +922,6 @@ export class MemberCreateComponent implements OnInit {
       this.birthdayMonths = this.birthMonths();
       this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
       this.aloneBirthdayDays = this.birthdayDays;
-
     });
     // this is when user back from confirm page then we check if calling api or not
     if(this.dataService.backFromConfirm && this.dataService.noGoWithYourFdsFlag !== undefined){

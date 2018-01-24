@@ -20,6 +20,11 @@
     width: 100%;
 }
 
+@media screen and (max-width: 480px) {
+    .gogoBanner {
+        margin-top: 20%;
+    }
+}
 .gogoBanner {
     margin-top: 77px;
 }
