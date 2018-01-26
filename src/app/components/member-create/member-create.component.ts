@@ -115,7 +115,9 @@ export class MemberCreateComponent implements OnInit {
   gogoAddrAreaFail: boolean;
   gogoAddrFail: boolean;
   userPidFail: any;
+  showAreaCityDoll: boolean;
   showAddrDoll: boolean;
+  alonePidRepeat: boolean;
 
   @ViewChild('emailElm') EmailEl:ElementRef;
   @ViewChild('lastNameEl') lastNameEl:ElementRef;
@@ -224,12 +226,14 @@ export class MemberCreateComponent implements OnInit {
           this.aloneNameLastChinese = false;
         } else {
           this.aloneNameLastChinese = true;
+          this.aloneLastNameEmpty = false;
         }
       } else if (value && id == 'first'){
         if (value.match(/[\u4E00-\u9FFF\u3400-\u4DFF\uF900-\uFAFF]+/g)) {
           this.aloneNameFirstChinese = false;
         } else {
           this.aloneNameFirstChinese = true;
+          this.aloneFirstNameEmpty = false;
         }
       } else if (value || id == ''){
         if (value.match(/[\u4E00-\u9FFF\u3400-\u4DFF\uF900-\uFAFF]+/g)) {
@@ -239,6 +243,13 @@ export class MemberCreateComponent implements OnInit {
         }
       }
     }else{
+      if(!value && id == 'last'){
+          this.aloneLastNameEmpty = true;
+          this.aloneNameLastChinese = false;
+        } else if (!value && id == 'first'){
+          this.aloneFirstNameEmpty = true;
+          this.aloneNameFirstChinese = false;
+      }
     }
   }
 
@@ -374,13 +385,20 @@ export class MemberCreateComponent implements OnInit {
     }
   }
 
-  checkAlonePid(value){
+  
+  checkAlonePid(value:any){
     if(this.pidCheck(value)){
       this.alonePidTypeWrong = true;
+      this.alonePidRepeat = false;
       this.toRecheckAgain();
     }else{
-      this.toRecheckAgain();
       this.alonePidTypeWrong = false;
+      if(value.toUpperCase() == this.pid && this.personalInfoSelect !== '本人'){
+        this.alonePidRepeat = true;
+      }else{
+        this.alonePidRepeat = false;
+      }
+      this.toRecheckAgain();
     }
   }
 
@@ -420,6 +438,7 @@ export class MemberCreateComponent implements OnInit {
   }
 
   toLoadArea(value = null) {
+    this.showAreaCityDoll = false;
     this.checkCityArea('true', 'false');
     var emptyArray = [];
     if(this.selectedCity && value == 'init'){
@@ -1305,35 +1324,37 @@ export class MemberCreateComponent implements OnInit {
 
   createInsuredCard() {
     var lengthOfOwls = $('#insuredInfoAppend').children('#insuredOneCard').length;
-    switch (lengthOfOwls) {
-      case 1:
-        this.dataService.owlAnanOne = false;
-        this.owlAnanOne = false;
-      break;
-      case 2:
-        this.dataService.owlAnanTwo = false;
-        this.owlAnanTwo = false;
-      break;
-      case 3:
-        this.dataService.owlAnanThree = false;
-        this.owlAnanThree = false;
-      break;
-      case 4:
-        this.dataService.owlAnanFour = false;
-        this.owlAnanFour = false;
-      break;
-      case 5:
-        this.dataService.owlAnanFifth = false;
-        this.owlAnanFifth = false;
-      break;
-      default:
+    var maxOwlsNumber = 6;
+    if(lengthOfOwls < maxOwlsNumber){
+      switch (lengthOfOwls) {
+        case 1:
+          this.dataService.owlAnanOne = false;
+          this.owlAnanOne = false;
+        break;
+        case 2:
+          this.dataService.owlAnanTwo = false;
+          this.owlAnanTwo = false;
+        break;
+        case 3:
+          this.dataService.owlAnanThree = false;
+          this.owlAnanThree = false;
+        break;
+        case 4:
+          this.dataService.owlAnanFour = false;
+          this.owlAnanFour = false;
+        break;
+        case 5:
+          this.dataService.owlAnanFifth = false;
+          this.owlAnanFifth = false;
+        break;
+        default:
+      }
     }
-    if(($('#insuredInfoAppend').children('#insuredOneCard').length) <= 5){
-    } else {
+    if(($('#insuredInfoAppend').children('#insuredOneCard').length) == maxOwlsNumber){
       var modal = document.getElementById('myModal');
       modal.style.display = "block";
       this.dataService.AlertTXT = [];
-      this.dataService.AlertTXT.push('您最多只能五位加保人');
+      this.dataService.AlertTXT.push('您最多只能'+ (maxOwlsNumber-1) +'位加保人');
       document.querySelector('#myModal').scrollIntoView();
     }
   }
@@ -1376,37 +1397,30 @@ export class MemberCreateComponent implements OnInit {
           !this.applicantAloneBirthMonth ||
           !this.applicantAloneBirthDay
       ){
-
         if(!this.personalInfoSelect){
-
         }else{
-
         }
-
         if(!this.applicantAloneLastName){
           this.aloneLastNameEmpty = true;
         }else{
           this.aloneLastNameEmpty = false;
         }
-
         if(!this.applicantAloneFirstName){
           this.aloneFirstNameEmpty = true;
         }else{
           this.aloneFirstNameEmpty = false;
         }
-
         if(!this.applicantAlonePid){
           this.alonePidEmpty = true;
+          this.alonePidRepeat = false;
         }else{
           this.alonePidEmpty = false;
         }
-
         if(this.alonePidTypeWrong){
           this.alonePidTypeWrong = true;
         }else{
           this.alonePidTypeWrong = false;
         }
-
         if(
           !this.applicantAloneBirthYear ||
           !this.applicantAloneBirthMonth ||
@@ -1416,14 +1430,19 @@ export class MemberCreateComponent implements OnInit {
         }else{
           this.aloneBdEmpty = false;
         }
-
+        if(this.applicantAlonePid.toUpperCase() == this.pid && this.personalInfoSelect !== '本人'){
+          this.alonePidRepeat = true;
+          this.alonePidEmpty = false;
+        }else{
+          this.alonePidRepeat = false;
+        }
         this.toRecheck = true;
         var modal = document.getElementById('myModal');
         modal.style.display = "block";
         this.dataService.AlertTXT = [];
-        this.dataService.AlertTXT.push('請正確填入要保人資料');
+        this.dataService.AlertTXT.push('請正確填寫被保險人資料');
         var body = $("html, body");
-        this.dataService.idToGoFlow = 'addInsuredAdd';
+        this.dataService.idToGoFlow = 'personalAreaPlaceForMobile';
       }else{
 
         this.dataService.SaveInsuredData['insuredList'] = [];
@@ -1457,16 +1476,26 @@ export class MemberCreateComponent implements OnInit {
     dataToGoinSendBak['applicant']['isJoinMember'] = this.checkboxValue;
     dataToGoinSendBak['insuredList'] = [];
     if(!this.addr){
-    this.gogoAddrFail == true;
-    this.showAddrDoll == true;
-    document.querySelector('#personalContentDiv').scrollIntoView();
-    return false;
+      this.gogoAddrFail = true;
+      this.showAddrDoll = true;
    }
    if(!this.selectedCity || !this.selectedDistrict){
       this.gogoAddrCityFail = true;
       this.gogoAddrAreaFail = true;
-      document.querySelector('#personalContentDiv').scrollIntoView();
-      return false;
+      this.showAreaCityDoll = true;
+   }
+   if(
+    !this.addr || 
+    !this.selectedCity ||
+    !this.selectedDistrict
+   ){
+    var modal = document.getElementById('myModal');
+    modal.style.display = "block";
+    this.dataService.AlertTXT = [];
+    this.dataService.AlertTXT.push('請正確填寫要保人資料');
+    var body = $("html, body");
+    this.dataService.idToGoFlow = 'specialBirthColxs';
+    return false;
    }
     
     let returnObj = {};
@@ -1484,7 +1513,8 @@ export class MemberCreateComponent implements OnInit {
         this.alonePidTypeWrong ||
         !this.applicantAloneBirthYear ||
         !this.applicantAloneBirthMonth ||
-        !this.applicantAloneBirthDay
+        !this.applicantAloneBirthDay ||
+        (this.applicantAlonePid.toUpperCase() == this.pid && this.personalInfoSelect !== '本人')
     ){
       if(!this.personalInfoSelect){
       }else{
@@ -1501,6 +1531,7 @@ export class MemberCreateComponent implements OnInit {
       }
       if(!this.applicantAlonePid){
         this.alonePidEmpty = true;
+        this.alonePidRepeat = false;
       }else{
         this.alonePidEmpty = false;
       }
@@ -1518,13 +1549,19 @@ export class MemberCreateComponent implements OnInit {
       }else{
         this.aloneBdEmpty = false;
       }
+      if(this.applicantAlonePid.toUpperCase() == this.pid && this.personalInfoSelect !== '本人'){
+        this.alonePidRepeat = true;
+        this.alonePidEmpty = false;
+      }else{
+        this.alonePidRepeat = false;
+      }
       this.toRecheck = true;
       var modal = document.getElementById('myModal');
       modal.style.display = "block";
       this.dataService.AlertTXT = [];
-      this.dataService.AlertTXT.push('請正確填入要保人資料');
+      this.dataService.AlertTXT.push('請正確填寫被保險人資料');
       var body = $("html, body");
-      this.dataService.idToGoFlow = 'addInsuredAdd';
+      this.dataService.idToGoFlow = 'personalAreaPlaceForMobile';
     }else{
       // this.dataService.SaveInsuredData['insuredList'] = [];
       // let returnObj = {};
