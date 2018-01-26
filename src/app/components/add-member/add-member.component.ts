@@ -323,11 +323,6 @@ export class AddMemberComponent implements OnInit {
       this.theTopAfterCheckRelate = '56%';
       this.thirdRelationshipInvalid = false;
     }
-    // if(!this.fifthCardRelationship && index == 5){
-    //   this.theTopAfterCheckRelate = '44%';
-    // }else{
-    //   this.theTopAfterCheckRelate = '56%';
-    // }
   }
 
   checkRelationShipRepeat(value, index){
@@ -474,10 +469,7 @@ export class AddMemberComponent implements OnInit {
         }
         break;
       default:
-
     }
-
-
   }
 
   pidCheck(userid:string){
