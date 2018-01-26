@@ -156,17 +156,17 @@ export class HomePageComponent implements OnInit {
     }
     this.product['pack'] = this.pakNum;
 
-    if(new Date().getDay() == 0 && !this.modifiedClicked){
-      var tmr = new Date().setDate(new Date().getDate() + 1);
-      this.firstMon = this.getMonday(new Date(tmr));
-    }else{
+    // if(new Date().getDay() == 0 && !this.modifiedClicked){
+    //   var tmr = new Date().setDate(new Date().getDate() + 1);
+    //   this.firstMon = this.getMonday(new Date(tmr));
+    // }else{
       if(new Date().getDay() == 0){
         var tmr = new Date().setDate(new Date().getDate() + 1);
         this.firstMon = this.getMonday(new Date(tmr));
       }else{
         this.firstMon = this.getMonday(new Date());
       }
-    }
+    // }
     this.toDeterminedIfDisabledDaysNeedToHide();
 
     if(this.dataService.orderNumberForSave){
@@ -424,32 +424,11 @@ export class HomePageComponent implements OnInit {
         returnArr.push(item);
       }
     })
-    // alert($('.noNeedClassForWord' + number).is(':visible'));
-    // $('#ele'+number+' .divAmtLong p').remove();
-    // $('.amtBtnClickToShow'+number).remove();
+    
     this.cusItemJson = returnArr;
     this.toGetCusPkgPrice();
     var idNum = $('#titlePkg .toShowContentAccordion').length;
 
-    // console.log(idNum);
-    // $('#specialWordDivDetail p').remove();
-    // for(let i = 0; i <= idNum; i++){
-    //   $('.amtBtnClickToShow'+i).slideUp();
-    // }
-
-    // this.selectedPackage['secondaryItems'].forEach((item)=>{
-    //   console.log(item);
-    // });
-
-    // $('.amtBtnClickToShow'+number).slideUp('fast');
-    // $('.needClassForWord'+number).slideUp('fast');
-    // for(let i = 0; i <= idNum; i++){
-    //   if ($('.amtBtnClickToShow'+i).is(':visible')) {
-    //     console.log('true', i);
-    //   } else {
-    //     console.log('false', i);
-    //   }
-    // }
     $('.noNeedClassForWord'+number).removeAttr('hidden');
 
     if(!this.doNotNeedToShow){
@@ -564,14 +543,6 @@ export class HomePageComponent implements OnInit {
         $('#ele'+number+' .divAmtLong').append(html);
       }
 
-      // if(!this.doNotNeedToShow){
-      //   this.doNotNeedToShow = true;
-      //   $('.noNeedClassForWord'+number).slideUp('fast');
-      //   $('.amtBtnClickToShow'+number).slideDown('fast');
-      // }else{
-      //   $('.amtBtnClickToShow'+number).slideDown('fast');
-      //
-      // }
       if(!this.doNotNeedToShow){
         this.doNotNeedToShow = true;
         $('.noNeedClassForWord'+number).slideUp('fast');
@@ -585,14 +556,6 @@ export class HomePageComponent implements OnInit {
   }
 
   toTogglePurposeBtn(clz, value) {
-    // var body = $("html, body");
-    // if(window.innerWidth <= 500){
-    //   body.stop().animate({scrollTop:1105}, 200, 'swing', function() {
-    //   });
-    // }else{
-    //   body.stop().animate({scrollTop:1265}, 200, 'swing', function() {
-    //   });
-    // }
     document.querySelector('#flagThree').scrollIntoView();
     this.purposeGo = value.name;
     this.doneSelPurpose = true;
@@ -617,11 +580,7 @@ export class HomePageComponent implements OnInit {
       $('#mainLongDetailDiv').hide();
       $('#mobileAmt').show();
     }, 100);  
-    // if(window.innerWidth <= 500){
-    //   setTimeout(function(){
-    //     $('.toShowContentAccordion').slideUp('fast');
-    //   }, 200);
-    // }
+  
     document.querySelector('#flagSix').scrollIntoView();
 
     if(this.pkgCustomGo){
@@ -650,15 +609,6 @@ export class HomePageComponent implements OnInit {
   }
 
   getDayArr(lastDay, firstDay){
-    // console.log(new Date(firstDay).getDay());
-    // var oneDay = 24*60*60*1000;
-    // var firstDate = new Date(this.getMonday(lastDay));
-    // var seconDate = new Date(firstDay);
-    // var diffDays = Math.round(Math.abs((firstDate.getTime() - seconDate.getTime())/(oneDay)));
-    // if(diffDays == 6){
-    //   diffDays++
-    // }
-
     let diffDays = new Date(firstDay).getDay();
     let returnArr = [];
     for(let i = 1; i <= diffDays; i++){
@@ -687,11 +637,6 @@ export class HomePageComponent implements OnInit {
         this.getDayFromBkend = diffDays2;
       }
     }
-    // if(this.getDayFromBkend == this.travelPeriodLimit){
-
-    // } else {
-    //   this.getDayFromBkend = this.getDayFromBkend + (this.travelPeriodLimit/5);
-    // }
   }
 
   toModifiedDays() {
@@ -704,6 +649,7 @@ export class HomePageComponent implements OnInit {
     }else{
       this.firstMon = this.getMonday(new Date());
     }
+    this.numberOfgetDayFromBkendLastSun = this.getDayFromBkend;
     this.startTravelDay = '';
     this.endTravelDay = '';
     this.theTimeClicked = 2;
@@ -713,29 +659,18 @@ export class HomePageComponent implements OnInit {
 
     this.textOfOverDays = '超過' + this.getDayFromBkend + '天後出發？';
 
-    // let countWeek = function(){
-    //   var date = new Date(),
-    //       prefixes = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
-    //   return prefixes[0 | date.getDate() / 8];
-    // }
-    // if(countWeek() == 'First') {
-    //   this.startTravelDayOn = true;
-    // }
-    // var body = $("html, body");
-    // if(window.innerWidth <= 500){
-    //   body.stop().animate({scrollTop:1105}, 200, 'swing', function() {
-    //   });
-    // }else{
-    //   body.stop().animate({scrollTop:1265}, 200, 'swing', function() {
-    //   });
-    // }
     document.querySelector('#flagFour').scrollIntoView();
   }
 
   totalTimesTimes:number;
   onClickMe($event, classValueBtn, numberBtn, value) {
-  document.getElementById('calendarTable').style.display = 'none';
-  document.getElementById('calendarTable').style.display = 'block';
+
+    var userAgent = window.navigator.userAgent;
+    if (userAgent.match(/iPhone/i)) {
+      document.getElementById('calendarTable').style.display = 'none';
+      document.getElementById('calendarTable').style.display = 'block';
+    }
+
     if(this.startTravelDay) {
       if (this.startTravelDay == value) {
         var modal = document.getElementById('myModal');
@@ -779,12 +714,13 @@ export class HomePageComponent implements OnInit {
             sendDataBak['product'] = 'Travel';
             sendDataBak['pack'] = this.pakNum;
             sendDataBak['startDate'] = this.startTravelDay;
+            this.endTravelDay = $event.target.value;
+
             if(!this.pkgCustomGo && this.startTravelDay && this.endTravelDay){
               this.dataService.ifOnlyStartDayOnly(sendDataBak).subscribe((item) => {
                 console.log(item);
                 this.cusPackageList = item['cusPackageList'];
                 this.packageList = item['packageList'];
-                // this.packageList.push(this.fourthBtn);
 
                 item.cusPackageList.filter(val => val.isDefaultPackage == true).map(
                     value => this.defaultCustomerPkg = value
@@ -818,11 +754,6 @@ export class HomePageComponent implements OnInit {
                 });
               });
             }
-
-            console.log(this.startTravelDay);
-            console.log(this.endTravelDay);
-            this.endTravelDay = $event.target.value;
-
             if (this.startTravelDay && this.endTravelDay) {
 
             document.querySelector('#flagFive').scrollIntoView({block: 'start', behavior: 'smooth'});
@@ -970,13 +901,6 @@ export class HomePageComponent implements OnInit {
       $('#mainLongDetailDiv').hide();
       $('.toShowContentAccordion').hide();
     }, 100);
-
-    // if(window.innerWidth <= 500){
-    //   setTimeout(function(){
-    //     $('#mainLongDetailDiv').slideUp('fast');
-    //     $('.toShowContentAccordion').slideUp('fast');
-    //   }, 300);
-    // }
   }
 
   returnIfNoNeedIsNeed(obj) {
