@@ -35,6 +35,7 @@
     z-index: 999;
     width: 100%;
     background-color: hsla(0,0%,100%,.8);
+    box-shadow: 1px 1px 3px #efefef;
 }
 
 @media screen and (max-width:730px) {
