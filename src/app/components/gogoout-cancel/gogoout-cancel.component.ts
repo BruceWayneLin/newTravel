@@ -22,7 +22,7 @@ export class GogooutCancelComponent implements OnInit {
 
     this.text = this.actRoute.queryParams['value']['msg'];
     this.dataService.getGoGoInitCancel(this.actRoute.queryParams['value']['orderNumber']).subscribe((item)=>{
-       this.text = item['gogooutOrderNumber'];
+       this.text = item['carelineOrderNumber'];
     });
   }
 

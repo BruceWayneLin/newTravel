@@ -14,7 +14,7 @@ export class GogooutErrorComponent implements OnInit {
 
   text:string = '';
   ngOnInit() {
-    this.text = this.actRoute.queryParams['value']['msg'];
+    this.text = this.actRoute.queryParams['value']['msg'].replace(new RegExp("\\+", 'g'), " ");
   }
 
   goBack() {
