@@ -559,4 +559,9 @@ span.priceSpanNT {
   .fa-chevron-circle-down {
     top:37px!important;
   }
+  #ArrowDownCircle {
+    margin-top: 15px;
+  }
 }
+
+
