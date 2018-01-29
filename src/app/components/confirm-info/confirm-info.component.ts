@@ -47,7 +47,6 @@ export class ConfirmInfoComponent implements OnInit {
   ngOnInit() {
     $(document).on('click', '.panel-heading', function(){
       document.querySelector('#flagInsuredPPlFlag').scrollIntoView();
-
       // var body = $("html, body");
       // body.stop().animate({scrollTop: 290}, 200, 'swing', function () {
       // });
@@ -78,8 +77,8 @@ export class ConfirmInfoComponent implements OnInit {
         this.applicantAddr = info['apAddressFull'];
         this.applicantBth = info['apBirthday']['year'] + '-' + info['apBirthday']['month'] + '-' + info['apBirthday']['day'];
         this.applicantEmail = info['apEmail'];
-        this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'] + ' ' + info['odStartDateHour']+':00';
-        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'] + ' ' + info['odEndDateHour']+':00';
+        this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'] + ' ' + (info['odStartDateHour'].length >= 2? info['odStartDateHour'] : '0' + info['odStartDateHour']) +':00';
+        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'] + ' ' + (info['odEndDateHour'].length >= 2? info['odEndDateHour'] : '0' + info['odEndDateHour']) +':00';
         this.insuredLocation = info['odLocation'];
         this.insuredPurpose = info['odPurpose'];
         this.inPackageButtonName = info['inPackageButtonName'];
@@ -89,7 +88,6 @@ export class ConfirmInfoComponent implements OnInit {
         // this.odRate = info['odRate'];
         this.dataService.purposeImageUrl = info['purposeImageUrl'];
         document.querySelector('#flagTop').scrollIntoView();
-
       });
     }else{
       this.dataService.getConfirmInfo().subscribe((item) => {
@@ -160,6 +158,12 @@ export class ConfirmInfoComponent implements OnInit {
   getBakInfo(){
     this.dataService.backFromConfirm = true;
     if(this.router.url.slice(0, 8) == '/gogoout'){
+      if(!this.dataService.gogoOrderNumber){
+        this.dataService.gogoOrderNumber = this.dataService.orderNumberForSave;
+      }
+      if(!this.dataService.orderNumberForSave){
+        this.dataService.gogoOrderNumber = this.dataService.orderNumber;
+      }
       this.router.navigate(['/gogoout'], {queryParams: {orderNumber: this.dataService.gogoOrderNumber}});
     }else{
       this.router.navigate(['/memberCreate'], {queryParams: {orderNumber: this.dataService.orderNumberForSave}});
