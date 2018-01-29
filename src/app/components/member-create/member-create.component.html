@@ -204,17 +204,21 @@
             <div class="inValid" *ngIf="addrEl.touched && addrCheck(addrEl.value) || gogoAddrFail">此欄位為必填。</div>
         </div>
       </div>
-      <div class="col-lg-12 text-center" [hidden]="hideUpinput" style="margin-top:12px;">
-        <div class="col-xs-12 col-sm-6"></div>
-        <div class="col-xs-12 col-sm-6 text-left" id="aggreeToUpdate">
-          <label for="aggreeToUpdate" (click)="aggreeToUpdate = !aggreeToUpdate">
-            <div ngClass="{{aggreeToUpdate? 'checkBoxDiv' : 'checkBoxDiv noChecked' }}">
-              <input type="checkbox" [hidden]="true" [checked]="aggreeToUpdate" (click)="aggreeToUpdate = !aggreeToUpdate" class="aggreeToUpdate" id="aggreeToUpdate">
-              <span class="aggreeToUpdate">更新聯絡資料</span>
-            </div>
-          </label>
+
+      <div [hidden]="!routeUrlGoGoNeedToHide">
+        <div class="col-lg-12 text-center" [hidden]="hideUpinput" style="margin-top:12px;">
+          <div class="col-xs-12 col-sm-6"></div>
+          <div class="col-xs-12 col-sm-6 text-left" id="aggreeToUpdate">
+            <label for="aggreeToUpdate" (click)="aggreeToUpdate = !aggreeToUpdate">
+              <div ngClass="{{aggreeToUpdate? 'checkBoxDiv' : 'checkBoxDiv noChecked' }}">
+                <input type="checkbox" [hidden]="true" [checked]="aggreeToUpdate" (click)="aggreeToUpdate = !aggreeToUpdate" class="aggreeToUpdate" id="aggreeToUpdate">
+                <span class="aggreeToUpdate">更新聯絡資料</span>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
+
       <div [hidden]="routeUrlGoGoNeedToHide">
         <div class="col-lg-12 text-center" *ngIf="isShowCheckbox" style="margin-top:12px;">
             <div class="col-xs-12 col-sm-6"></div>
@@ -229,9 +233,9 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
+  <div id="insuredPersonInfoArea" style="position: relative;top: -80px;"></div>
 
   <div class="row">
     <div class="container-fluid">

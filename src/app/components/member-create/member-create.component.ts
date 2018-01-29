@@ -145,11 +145,19 @@ export class MemberCreateComponent implements OnInit {
     let currentMonth = new Date(this.countBrthDayFromSelectedBtn).getMonth() + 1;
     let currentDay = new Date(this.countBrthDayFromSelectedBtn).getDate();
     if(!this.routeUrlGoGoNeedToHide){
-      var userAge = this.calculate_age(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
-      if(userAge < this.insuredMinAge){
-        this.aloneBdWrong = true;
+      if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay){
+        var userAge = this.calculate_age(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+        if(userAge < this.insuredMinAge || userAge > this.insuredAgeMax){
+          this.aloneBdWrong = true;
+          this.aloneBdEmpty = false;
+        }else{
+          this.aloneBdWrong = false;
+        }
       }else{
-        this.aloneBdWrong = false;
+        if (!this.applicantAloneBirthYear && !this.applicantAloneBirthMonth && !this.applicantAloneBirthDay) {
+          this.aloneBdEmpty = true;
+          this.aloneBdWrong = false;
+        }
       }
     }else{
       if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
@@ -205,6 +213,7 @@ export class MemberCreateComponent implements OnInit {
         }
       } else if (!this.applicantAloneBirthYear && !this.applicantAloneBirthMonth && !this.applicantAloneBirthDay) {
         this.aloneBdEmpty = true;
+        this.aloneBdWrong = false;
       }
     }
   }
@@ -816,7 +825,7 @@ export class MemberCreateComponent implements OnInit {
       }
       this.applicantSelectBirth();
       this.checkboxValue = data['checkboxValue'];
-
+      this.gogooutCheckTxt = data['checkboxText'];
       this.applicantAgeMax = data['data'].companySetting['applicantAgeMax'];
       this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
       this.insuredLimitedAge = data['data'].companySetting['insuredAgeMax'] - data['data'].companySetting['insuredAgeMin'];
@@ -893,11 +902,11 @@ export class MemberCreateComponent implements OnInit {
       })
       this.isShowCheckbox = data['isShowCheckbox'];
      
-      if(this.checkboxValue){
-        this.gogooutCheckTxt = '已是英國凱萊會員，可至會員專區檢視保單資料 ';
-      }else{
-        this.gogooutCheckTxt = '同步加入英國凱萊，可於會員專區檢視保單資料';
-      }
+      // if(this.checkboxValue){
+      //   this.gogooutCheckTxt = '已是英國凱萊會員，可至會員專區檢視保單資料 ';
+      // }else{
+      //   this.gogooutCheckTxt = '同步加入英國凱萊，可於會員專區檢視保單資料';
+      // }
       this.birthdayMonths = this.birthMonths();
       this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
       this.aloneBirthdayDays = this.birthdayDays;
@@ -1395,7 +1404,10 @@ export class MemberCreateComponent implements OnInit {
            this.alonePidTypeWrong ||
           !this.applicantAloneBirthYear ||
           !this.applicantAloneBirthMonth ||
-          !this.applicantAloneBirthDay
+          !this.applicantAloneBirthDay ||
+          this.aloneBdEmpty ||
+          this.aloneBdWrong ||
+          (this.applicantAlonePid.toUpperCase() == this.pid && this.personalInfoSelect !== '本人')
       ){
         if(!this.personalInfoSelect){
         }else{
@@ -1442,7 +1454,7 @@ export class MemberCreateComponent implements OnInit {
         this.dataService.AlertTXT = [];
         this.dataService.AlertTXT.push('請正確填寫被保險人資料');
         var body = $("html, body");
-        this.dataService.idToGoFlow = 'personalAreaPlaceForMobile';
+        this.dataService.idToGoFlow = 'insuredPersonInfoArea';
       }else{
 
         this.dataService.SaveInsuredData['insuredList'] = [];
@@ -1514,6 +1526,8 @@ export class MemberCreateComponent implements OnInit {
         !this.applicantAloneBirthYear ||
         !this.applicantAloneBirthMonth ||
         !this.applicantAloneBirthDay ||
+        this.aloneBdEmpty ||
+        this.aloneBdWrong ||
         (this.applicantAlonePid.toUpperCase() == this.pid && this.personalInfoSelect !== '本人')
     ){
       if(!this.personalInfoSelect){
@@ -1561,7 +1575,7 @@ export class MemberCreateComponent implements OnInit {
       this.dataService.AlertTXT = [];
       this.dataService.AlertTXT.push('請正確填寫被保險人資料');
       var body = $("html, body");
-      this.dataService.idToGoFlow = 'personalAreaPlaceForMobile';
+      this.dataService.idToGoFlow = 'insuredPersonInfoArea';
     }else{
       // this.dataService.SaveInsuredData['insuredList'] = [];
       // let returnObj = {};

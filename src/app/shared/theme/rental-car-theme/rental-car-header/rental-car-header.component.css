@@ -25,15 +25,23 @@
         margin-top: 20%;
     }
 }
-.gogoBanner {
-    margin-top: 77px;
+@media screen and (min-width: 480px) {
+    .gogoBanner {
+        margin-top: 77px;
+    }
 }
 
 .navbar {
+    
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #333;
     position: fixed;
-    padding: .5rem 1rem;
-    z-index: 999;
+    top: 0;
     width: 100%;
+    z-index:999;
     background-color: hsla(0,0%,100%,.8);
     box-shadow: 1px 1px 3px #efefef;
 }

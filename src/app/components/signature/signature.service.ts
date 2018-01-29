@@ -11,7 +11,7 @@ import { SignaturePreviewService } from 'cl-layout/src/app/shared/tools/cl-signa
 
 @Injectable()
 export class SignatureService {
-
+    allUploaded: boolean;
     public routingKey = {
         queryParam: {
             orderNumber: 'orderNumber'
@@ -55,9 +55,8 @@ export class SignatureService {
                 if (!signatureInfo || !signatureInfo.info || !signatureInfo.info.signatureList) {
                     return null;
                 }
-
+                this.allUploaded = signatureInfo.info['allUploaded'];
                 const signatureList = signatureInfo.info.signatureList;
-
                 return signatureList;
             });
 

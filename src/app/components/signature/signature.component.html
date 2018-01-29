@@ -5,32 +5,48 @@
   </div>
   <hr>
   <div class="people-list-container">
-    <div class="page-desc careline-description">可選擇
-      <span class="careline-text-red-light">線上簽名</span>或紙本要保書，
-      <span class="careline-text-red-light">下載要保書列印後簽名，掃描或拍照上傳要保書</span>，即可保障您的權益
+    <div class="page-desc careline-description">
+      <span class="careline-text-red-light">請於下方簽名 完成投保程序</span>
     </div>
-    <div class="row">
+
+    <div class="row" style="margin-bottom:50px;">
       <ng-container *ngFor="let signaturePeople of signaturePeopleList">
         <cl-signature-input class="col-12" [signaturePeople]="signaturePeople" [orderNumber]="current.orderNumber" #signInput
           (click)="signature(signInput)"></cl-signature-input>
         <div class="w-100" *ngIf="signaturePeople.forceWrap"></div>
       </ng-container>
     </div>
-    <div class="row" id="btns">
-        <div class="col-6 text-center">
-            <button id="previousStep" class="btn careline-btn careline-btn-lg careline-btn-theme-3 mt-5">
-                <div class="careline-btn-text" (click)="goPreviouslyStep()">
-                  上一步
-                </div>
-            </button>
+
+    <div class="row">
+      <div class="container">
+        <div class="col-lg-12 text-center">
+          <div class="col-xs-12 col-sm-6 col-lg-6">
+            <button (click)="goPreviouslyStep()" id="goingCheckInfoBack" class="form-control goingCheckInfo" style="background-color:white;color:black;">回方案選擇</button>
           </div>
-        <div class="col-6 text-center">
-          <button class="btn careline-btn careline-btn-lg careline-btn-theme-1 mt-5">
-              <div class="careline-btn-text" (click)="goToPreviewPdfPage()">
+          <div class="col-xs-12 col-sm-6 col-lg-6">
+            <button class="form-control goingCheckInfo" [ngClass]="{'specilAlreadiRead': !allUploaded()}" (click)="goToPreviewPdfPage()" [disabled]="!allUploaded()">送出</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="row" id="btns">
+      <div class="container">
+        <div class="col-lg-6 col-xs-12 text-center">
+          <button id="goingCheckInfoBack" class="form-control goingCheckInfo" style="background-color:white;color:black;">
+              <div class="careline-btn-text" >
+                上一步
+              </div>
+          </button>
+        </div>
+        <div class="col-lg-6 col-xs-12 text-center">
+          <button id="gogoOutNextBtn" class="form-control goingCheckInfo">
+              <div class="careline-btn-text" >
                 送出
               </div>
           </button>
         </div>
-      </div>
+      </div>    
+    </div> -->
   </div>
 </div>

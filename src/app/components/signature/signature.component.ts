@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 import { SignatureService } from './signature.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { DataServiceService } from '../../services/data-service.service'
+import { DataServiceService } from '../../services/data-service.service';
 import { SignaturePeopleViewModel } from 'cl-layout/src/app/shared/tools/cl-signature/signature-pad/signature-pad';
 import { SignatureInputComponent } from 'cl-layout/src/app/shared/tools/cl-signature/signature-input/signature-input.component';
 
@@ -12,7 +12,6 @@ import { SignatureInputComponent } from 'cl-layout/src/app/shared/tools/cl-signa
   styleUrls: ['./signature.component.scss']
 })
 export class SignatureComponent implements OnInit {
-
 
   signaturePeopleList = [] as SignaturePeopleViewModel[];
 
@@ -50,7 +49,6 @@ export class SignatureComponent implements OnInit {
         }
         
         this.current.orderNumber = orderNumber;
-
         return this.signatureService.getList({
           orderNumber: orderNumber
         });
@@ -59,11 +57,13 @@ export class SignatureComponent implements OnInit {
         if (!signInfoList) {
           return;
         }
-
         this.signaturePeopleList = signInfoList;
       });
   }
 
+  allUploaded() {
+    return this.signatureService.allUploaded;
+  } 
 
   signature(input: SignatureInputComponent) {
 

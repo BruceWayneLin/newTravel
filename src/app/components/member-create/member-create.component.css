@@ -1417,6 +1417,9 @@ button.form-control.btn-sm span{
   #rule1 {
     padding-left: 0px!important;
   }
+  #gogoOutNextBtn[_ngcontent-c7] {
+    width: 100%;
+  }
 }
 
 .form-control.goingCheckInfo.specilAlreadiRead:hover {
@@ -1429,4 +1432,17 @@ button.form-control.btn-sm span{
 
 #gogoOutNextBtn{
   width:50%;
+}
+
+.modal-dialog .cl-modal{
+  width: 60%!important;
+}
+
+@media screen and (max-width: 375px) {
+  #aggreeToUpdate {
+      position: relative;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      height: 50px;
+  }
 }
