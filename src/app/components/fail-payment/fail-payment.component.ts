@@ -21,6 +21,7 @@ export class FailPaymentComponent implements OnInit {
       idArray['orderNumber'].forEach((item) => {
           this.dataServiceService.orderNumberForSave = item;
       });
+      $('html, body').animate({scrollTop: '0px'}, 0);
       this.dataServiceService.failPaymentInfo(turnBakUrl).subscribe((item)=>{
         this.wrongMsg = item['msg'];
       })

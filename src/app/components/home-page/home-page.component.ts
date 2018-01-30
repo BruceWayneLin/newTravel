@@ -93,7 +93,8 @@ export class HomePageComponent implements OnInit {
   @ViewChild('thisSelect') thisSelect:ElementRef;
 
   constructor(
-    private dataService:DataServiceService
+    private dataService:DataServiceService,
+    private routerAct:ActivatedRoute
   ){
     $('body,html').animate({scrollTop: '0px'}, 0);
     var envi = 'local';
@@ -345,6 +346,11 @@ export class HomePageComponent implements OnInit {
           }, 1000);
         }
       } catch (e) {
+      }
+
+      if(this.routerAct.queryParams['value']['scrollDown']){
+        document.querySelector('#flagOne').scrollIntoView();
+      }else{
       }
     });
     this.changeCountries('');

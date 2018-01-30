@@ -47,6 +47,7 @@ export class ConfirmInfoComponent implements OnInit {
       private routerAct: ActivatedRoute
   ) {
     // this.reloadOneSec();
+    $('html, body').animate({scrollTop: '0px'}, 0);
     $('body').css({
       '-webkit-overflow-scrolling': 'auto'
     });
@@ -98,8 +99,7 @@ export class ConfirmInfoComponent implements OnInit {
         // }, 100);
         
         document.querySelector('#flagTop').scrollIntoView();
-      }).delay(1500).subscribe(()=>{
-        
+      }).delay(200).subscribe(()=>{
         $('body').css({
           '-webkit-overflow-scrolling': 'touch'
         });

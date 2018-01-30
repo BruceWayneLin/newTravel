@@ -1226,6 +1226,14 @@ export class MemberCreateComponent implements OnInit {
   ngOnInit() {
     var url = this.router.url;
     this.deterMineUrl(url);
+    $('body').css({
+      '-webkit-overflow-scrolling': 'auto'
+    });
+    setTimeout(function(){
+      $('body').css({
+        '-webkit-overflow-scrolling': 'touch'
+      });
+    }, 300);
   }
 
   deleteThisOne() {
@@ -1487,15 +1495,17 @@ export class MemberCreateComponent implements OnInit {
   checkBoxToggle() {
     this.checkboxValue = !this.checkboxValue;
     var userAgent = window.navigator.userAgent;
-    
+    $('body').css({
+      '-webkit-overflow-scrolling': 'auto'
+    });
+   
     setTimeout(function(){
       document.getElementById('checkBoxIdReload').style.display = 'none';
       document.getElementById('checkBoxIdReload').style.display = 'block';
-    }, 300);
-    // if (userAgent.match(/iPhone/i)) {
-      
-    //   document.querySelector('#checkBoxIdReload').scrollIntoView();
-    // }
+      $('body').css({
+        '-webkit-overflow-scrolling': 'touch'
+      });
+    }, 100);
   }
 
   ToSaveGoGoInsured(){

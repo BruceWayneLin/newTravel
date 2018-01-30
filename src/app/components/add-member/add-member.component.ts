@@ -42,7 +42,7 @@ export class AddMemberComponent implements OnInit {
     this.fourthBdayArr = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
     this.fifthBdayArr = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
     this.sixthBdayArr = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
-
+    $('html, body').animate({scrollTop: '0px'}, 0);
   }
 
   toGetDataFromUrl(url) {

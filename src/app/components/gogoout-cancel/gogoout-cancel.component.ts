@@ -14,7 +14,9 @@ export class GogooutCancelComponent implements OnInit {
     private actRoute: ActivatedRoute,
     private dataService: DataServiceService
 
-  ) { }
+  ) { 
+    $('html, body').animate({scrollTop: '0px'}, 0);
+  }
 
   text:string = '';
 

@@ -14,7 +14,9 @@ export class PreviewPdfComponent implements OnInit {
   constructor(
     private dataService: DataServiceService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) { 
+    $('html, body').animate({scrollTop: '0px'}, 0);
+  }
 
   ngOnInit() {
     this.dataService.getPdf(this.activatedRoute.queryParams['value']['orderNumber']).subscribe((item) => {

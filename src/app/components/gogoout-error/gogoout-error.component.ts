@@ -10,7 +10,9 @@ export class GogooutErrorComponent implements OnInit {
 
   constructor(
     private actRoute: ActivatedRoute
-  ) { }
+  ) { 
+    $('html, body').animate({scrollTop: '0px'}, 0);
+  }
 
   text:string = '';
   ngOnInit() {

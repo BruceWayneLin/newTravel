@@ -11,7 +11,9 @@ export class ThanksComponent implements OnInit {
   public couponList: any[];
   constructor(
       public dataService: DataServiceService
-  ) { }
+  ) { 
+    $('html, body').animate({scrollTop: '0px'}, 0);
+  }
 
   ngOnInit() {
     var Url = window.location.href;
