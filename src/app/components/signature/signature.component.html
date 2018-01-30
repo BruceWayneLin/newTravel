@@ -17,11 +17,11 @@
       </ng-container>
     </div>
 
-    <div class="row">
+    <div class="row" id="btnsArea">
       <div class="container">
         <div class="col-lg-12 text-center">
           <div class="col-xs-12 col-sm-6 col-lg-6">
-            <button (click)="goPreviouslyStep()" id="goingCheckInfoBack" class="form-control goingCheckInfo" style="background-color:white;color:black;">回方案選擇</button>
+            <button (click)="goPreviouslyStep()" id="goingCheckInfoBack" class="form-control goingCheckInfo" style="background-color:white;color:black;">上一步</button>
           </div>
           <div class="col-xs-12 col-sm-6 col-lg-6">
             <button class="form-control goingCheckInfo" [ngClass]="{'specilAlreadiRead': !allUploaded()}" (click)="goToPreviewPdfPage()" [disabled]="!allUploaded()">送出</button>

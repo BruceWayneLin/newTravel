@@ -981,6 +981,15 @@ input, input:before, input:after {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
   }
+  @media screen and (max-width: 480px) {
+    html, body {
+      transform: translate3d(0,0,0);
+      -webkit-transform: translateZ(0px);
+    }
+    element > * {
+      -webkit-transform: translateZ(0px);
+    }
+  }
   .checkBtnTxt{
     white-space: nowrap!important;
   }

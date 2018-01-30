@@ -1415,6 +1415,12 @@
   }
   
   @media screen and (max-width: 500px) {
+    #btnsArea .col-xs-12 {
+        padding: 0px;
+    }
+    .people-list-container {
+        padding: 0px!important;
+      }
     #rule1 {
       padding-left: 0px!important;
     }

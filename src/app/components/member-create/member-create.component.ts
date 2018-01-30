@@ -922,6 +922,19 @@ export class MemberCreateComponent implements OnInit {
     if (url.slice(0, 13) == '/memberCreate') {
       this.toLoadMemberCreat();
     } else if (url.slice(0, 8) == '/gogoout') {
+      setTimeout(function() {
+        var userAgent = window.navigator.userAgent;
+        if (true) {
+          document.getElementById('flagForEmpty').style.display = 'none';
+          document.getElementById('flagForEmpty').style.display = 'block';
+          var url = window.location.href; // get the current url of page into variable
+          if (url.indexOf('?') > -1) { // url has a '?'
+              if(url.indexOf('reloaded') < 0){ // url does not have the text 'reloaded'
+              this.router.navigate(['/gogoout'], {queryParams: {orderNumber: this.routerAct.queryParams['value']['orderNumber']}});
+              }
+          }
+        }
+      }, 300);
       this.toLoadGoGoData();
     }
   }
@@ -1469,6 +1482,20 @@ export class MemberCreateComponent implements OnInit {
 
       }
     }
+  }
+
+  checkBoxToggle() {
+    this.checkboxValue = !this.checkboxValue;
+    var userAgent = window.navigator.userAgent;
+    
+    setTimeout(function(){
+      document.getElementById('checkBoxIdReload').style.display = 'none';
+      document.getElementById('checkBoxIdReload').style.display = 'block';
+    }, 300);
+    // if (userAgent.match(/iPhone/i)) {
+      
+    //   document.querySelector('#checkBoxIdReload').scrollIntoView();
+    // }
   }
 
   ToSaveGoGoInsured(){

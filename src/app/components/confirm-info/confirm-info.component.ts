@@ -1,7 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Accordion} from "ngx-accordion";
 import {Router, ActivatedRoute} from '@angular/router';
-import { DataServiceService } from '../../services/data-service.service'
+import { DataServiceService } from '../../services/data-service.service';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/delay';
+
 declare var jquery:any;
 declare var $ :any;
 @Component({
@@ -41,6 +45,7 @@ export class ConfirmInfoComponent implements OnInit {
       private router: Router,
       private routerAct: ActivatedRoute
   ) {
+    // this.reloadOneSec();
     // $('html, body').animate({scrollTop: '0px'}, 0);
   }
 
@@ -61,11 +66,9 @@ export class ConfirmInfoComponent implements OnInit {
       });
     }else{
     }
-
     if(this.router.url.slice(0, 8) == '/gogoout'){ 
       this.dataService.orderNumberForSave = this.routerAct.queryParams['value']['orderNumber'];
       this.dataService.orderNumber = this.routerAct.queryParams['value']['orderNumber'];
-
       this.gogoOutNeedToHideCol = true;
       console.log('321654', this.dataService.orderNumber);
       this.routeUrlGoGo = true;
@@ -87,9 +90,13 @@ export class ConfirmInfoComponent implements OnInit {
         this.odPeriodDays = info['odPeriodDays'];
         // this.odRate = info['odRate'];
         this.dataService.purposeImageUrl = info['purposeImageUrl'];
+        
+        // Observable.setTimeout(() => {
+        // }, 100);
+        
         document.querySelector('#flagTop').scrollIntoView();
       });
-    }else{
+    } else {
       this.dataService.getConfirmInfo().subscribe((item) => {
         let info = item;
         this.applicantName = info['apLastName'] + info['apFirstName'];
@@ -111,7 +118,13 @@ export class ConfirmInfoComponent implements OnInit {
         document.querySelector('#flagTop').scrollIntoView();
       });
     }
-    
+  }
+
+  reloadOneSec(){
+      if(this.routerAct.queryParams['value']['reload']){ // url does not have the text 'reloaded'
+        window.location.href = 'gogoout/confirm?orderNumber='+this.dataService.orderNumberForSave;
+        // this.router.navigate(['/gogoout/confirm'], {queryParams: {orderNumber: this.routerAct.queryParams['value']['orderNumber']}});
+      }
   }
 
   GetIEVersion() {

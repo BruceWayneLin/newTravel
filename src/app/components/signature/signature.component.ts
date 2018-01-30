@@ -29,7 +29,9 @@ export class SignatureComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private signatureService: SignatureService,
     private router: Router
-  ) { }
+  ) {
+    $('html, body').animate({scrollTop: '0px'}, 0);
+   }
 
   ngOnInit() {
     this.activatedRoute.queryParams

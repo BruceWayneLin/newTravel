@@ -564,4 +564,10 @@ span.priceSpanNT {
   }
 }
 
+@media screen and (max-width: 480px) {
+  html, body {
+    overflow: auto;
+    -webkit-overflow-scrolling: auto!important;
+  }
+}
 

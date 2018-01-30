@@ -539,7 +539,12 @@ export class DataServiceService {
             i.subscribe((item)=>{
             console.log(item['status']); 
             if(item['status'] == 'ok'){
-                this.route.navigate(['/gogoout/confirm'], {queryParams: {orderNumber: this.gogoOrderNumber}});
+                var userAgent = window.navigator.userAgent;
+                if (userAgent.match(/iPhone/i)) {
+                    this.route.navigate(['/gogoout/confirm'], {queryParams: {orderNumber: this.gogoOrderNumber, reload: true}});
+                } else {
+                    this.route.navigate(['/gogoout/confirm'], {queryParams: {orderNumber: this.gogoOrderNumber}});
+                }
                 this.loading = false;
             } else {
             }
