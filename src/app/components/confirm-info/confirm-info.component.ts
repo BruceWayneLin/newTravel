@@ -5,6 +5,7 @@ import { DataServiceService } from '../../services/data-service.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
+import { SecurityContext } from '@angular/core/src/security';
 
 declare var jquery:any;
 declare var $ :any;
@@ -46,7 +47,9 @@ export class ConfirmInfoComponent implements OnInit {
       private routerAct: ActivatedRoute
   ) {
     // this.reloadOneSec();
-    // $('html, body').animate({scrollTop: '0px'}, 0);
+    $('body').css({
+      '-webkit-overflow-scrolling': 'auto'
+    });
   }
 
   ngOnInit() {
@@ -72,7 +75,7 @@ export class ConfirmInfoComponent implements OnInit {
       this.gogoOutNeedToHideCol = true;
       console.log('321654', this.dataService.orderNumber);
       this.routeUrlGoGo = true;
-      this.dataService.getGoGoConfirmInfo().subscribe((item) => {
+      this.dataService.getGoGoConfirmInfo().do((item) => {
         let info = item['data'];
         this.applicantName = info['apLastName'] + info['apFirstName'];
         this.applicantMobile = info['apMobile'];
@@ -95,6 +98,11 @@ export class ConfirmInfoComponent implements OnInit {
         // }, 100);
         
         document.querySelector('#flagTop').scrollIntoView();
+      }).delay(1500).subscribe(()=>{
+        
+        $('body').css({
+          '-webkit-overflow-scrolling': 'touch'
+        });
       });
     } else {
       this.dataService.getConfirmInfo().subscribe((item) => {
@@ -122,7 +130,14 @@ export class ConfirmInfoComponent implements OnInit {
 
   reloadOneSec(){
       if(this.routerAct.queryParams['value']['reload']){ // url does not have the text 'reloaded'
-        window.location.href = 'gogoout/confirm?orderNumber='+this.dataService.orderNumberForSave;
+        if(this.dataService.orderNumberForSave){
+          window.location.href = 'gogoout/confirm?orderNumber='+this.dataService.orderNumberForSave;
+        }else if(this.dataService.orderNumber){
+          window.location.href = 'gogoout/confirm?orderNumber='+this.dataService.orderNumberForSave;
+        }else if(this.dataService.gogoOrderNumber){
+          window.location.href = 'gogoout/confirm?orderNumber='+this.dataService.orderNumberForSave;
+        }
+
         // this.router.navigate(['/gogoout/confirm'], {queryParams: {orderNumber: this.routerAct.queryParams['value']['orderNumber']}});
       }
   }
@@ -184,7 +199,7 @@ export class ConfirmInfoComponent implements OnInit {
   }
 
   toGoSignature() {
-    this.dataService.toGoNextFromConfirm();
+    this.dataService.toGoNextFromConfirm(this.routerAct.queryParams['value']['orderNumber']);
   }
 
 }

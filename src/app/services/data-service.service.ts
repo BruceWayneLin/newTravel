@@ -48,7 +48,7 @@ export class DataServiceService {
         if(sessionStorage.getItem('pid')){
             val['orderNumber'] = JSON.parse(sessionStorage.getItem('pid'));  
         }else{
-            val['orderNumber'] = this.gogoOrderNumber;    
+            val['orderNumber'] = this.gogoOrderNumber;
         }
         return this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/sign/initData', val
         ).map(res => {
@@ -477,8 +477,14 @@ export class DataServiceService {
         }, 400);
     }
 
-    toGoNextFromConfirm(){
-        this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/confirm/next', {"orderNumber": this.gogoOrderNumber}).map(res => {
+    toGoNextFromConfirm(val){
+        var postData;
+        if(val){
+         postData = {"orderNumber": val};   
+        }else{
+         postData = {"orderNumber": this.gogoOrderNumber};   
+        }
+        this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/confirm/next', postData).map(res => {
             if (res.json().isEx) {
                 if(res.json().kickout){
                     this.loading = false;

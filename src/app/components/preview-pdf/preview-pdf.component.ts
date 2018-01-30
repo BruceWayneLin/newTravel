@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
+
 @Component({
   selector: 'app-preview-pdf',
   templateUrl: './preview-pdf.component.html',

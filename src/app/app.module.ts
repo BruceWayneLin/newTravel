@@ -46,7 +46,7 @@ import { SignatureModule } from './components/signature/signature.module';
 import { SignatureComponent } from './components/signature/signature.component';
 import { GogooutErrorComponent } from './components/gogoout-error/gogoout-error.component';
 import { GogooutCancelComponent } from './components/gogoout-cancel/gogoout-cancel.component';
-
+import { SharedDirectiveModule } from 'cl-layout/src/app/shared/directive/shared-directive.module';
 export const routes: LayoutRoute[] = [
   {
     path: 'gogoout',
@@ -197,7 +197,8 @@ export const routes: LayoutRoute[] = [
     AccordionModule,
     HttpModule,
     SuiSelectModule,
-    RentalCarThemeModule
+    RentalCarThemeModule,
+    SharedDirectiveModule
   ],
   providers: [
     DataServiceService,
