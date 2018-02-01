@@ -509,7 +509,7 @@ export class DataServiceService {
             }
         }).subscribe((item)=>{
             if(item.status == 'ok'){
-                this.route.navigate(['gogoout/signature'], {queryParams: {orderNumber: this.gogoOrderNumber}});
+                this.route.navigate(['gogoout/signature'], {queryParams: {orderNumber: postData['orderNumber']}});
             }
         });
     }

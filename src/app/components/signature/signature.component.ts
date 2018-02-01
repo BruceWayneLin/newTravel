@@ -31,7 +31,11 @@ export class SignatureComponent implements OnInit {
     private router: Router
   ) {
     $('html, body').animate({scrollTop: '0px'}, 0);
-   }
+    if(this.activatedRoute.queryParams['value']['orderNumber']){
+    }else{
+      this.router.navigate(['/']);
+    }
+  }
 
   ngOnInit() {
     this.activatedRoute.queryParams

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-gogoout-error',
@@ -9,17 +9,23 @@ import { ActivatedRoute } from '@angular/router';
 export class GogooutErrorComponent implements OnInit {
 
   constructor(
-    private actRoute: ActivatedRoute
+    private actRoute: ActivatedRoute,
+    private router: Router
   ) { 
+    window.scrollTo(0, 0);
     $('html, body').animate({scrollTop: '0px'}, 0);
   }
 
   text:string = '';
   ngOnInit() {
+    if(this.actRoute.queryParams['value']['msg']){
+    }else{
+      this.router.navigate(['/']);
+    }
     this.text = this.actRoute.queryParams['value']['msg'].replace(new RegExp("\\+", 'g'), " ");
   }
 
   goBack() {
-    window.history.back();
+    window.location.href = 'https://gogoout.com/';
   }
 }

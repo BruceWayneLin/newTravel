@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataServiceService } from '../../services/data-service.service'
+import { DataServiceService } from '../../services/data-service.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-thanks',
@@ -10,7 +11,9 @@ export class ThanksComponent implements OnInit {
   public purposeImgUrl: string;
   public couponList: any[];
   constructor(
-      public dataService: DataServiceService
+      public dataService: DataServiceService,
+      private routerAct: ActivatedRoute,
+      private router: Router
   ) { 
     $('html, body').animate({scrollTop: '0px'}, 0);
   }
@@ -22,6 +25,10 @@ export class ThanksComponent implements OnInit {
     idArray['orderNumber'].forEach((item) => {
       this.dataService.orderNumberForSave = item;
     });
+    if(this.routerAct.queryParams['value']['orderNumber']){
+    }else{
+      this.router.navigate(['/']);
+    }
 
     this.dataService.getActImgUrl(turnBakUrl).subscribe((item) => {
 

@@ -160,7 +160,7 @@
           <span class="formSubTxt">請填入正確地址，以利保單與活動贈品寄送</span>
         </div>
         <div class="col-xs-12 col-sm-6">
-          <input required maxlength="10" [ngClass]="{'inValidInput': MobileEl.touched && !MobileEl.valid}" type="tel" class="memberFormInput form-control input-lg" [(ngModel)]="Mobile" pattern="[0-9]*" #MobileEl="ngModel" value="" placeholder="行動電話 *" [disabled]="mobileDisabled">
+          <input required maxlength="10" type="tel" [ngClass]="{'inValidInput': MobileEl.touched && !MobileEl.valid}" class="memberFormInput form-control input-lg" [(ngModel)]="Mobile" pattern="((?=(09))[0-9]{10})$" #MobileEl="ngModel" value="" placeholder="行動電話 *" [disabled]="mobileDisabled">
           <span class="pull-right"><img  *ngIf="MobileEl.touched && !MobileEl.valid" class="errImg" src="assets/images/dolls/err.png" alt=""></span>
           <div class="inValid" *ngIf="MobileEl.touched && !MobileEl.valid">行動電話不正確。</div>
         </div>

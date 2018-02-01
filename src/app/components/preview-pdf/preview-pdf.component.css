@@ -85,3 +85,8 @@
   button:hover i {
     font-weight: 300;
   }
+
+  #btnFinishedPdf {
+    display: block;
+    margin: 0 auto;
+  }

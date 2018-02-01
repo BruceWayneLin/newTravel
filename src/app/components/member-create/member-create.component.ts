@@ -136,7 +136,14 @@ export class MemberCreateComponent implements OnInit {
     private router:Router,
     private routerAct: ActivatedRoute
   ) {
+    window.scrollTo(0, 0);
     $('html, body').animate({scrollTop: '0px'}, 0);
+    if(this.router.url.slice(0, 8) == '/gogoout'){
+      if(this.routerAct.queryParams['value']['orderNumber']){
+      }else{
+        this.router.navigate(['/']);
+      }
+    }
   }
 
   checkAloneBd(){
@@ -759,7 +766,7 @@ export class MemberCreateComponent implements OnInit {
     sendDataBak['product'] = 'Travel';
     sendDataBak['pack'] = '';
     sendDataBak['orderNumber'] = orderNum;
-    this.dataService.getIniData(sendDataBak).subscribe((data) => {
+    this.dataService.getIniData(sendDataBak).do((data) => {
       this.hideUpinput = true;
       this.email = data['data']['applicant']['email'];
       this.lastName = data['data']['applicant']['lastName'];
@@ -915,6 +922,9 @@ export class MemberCreateComponent implements OnInit {
       this.checkLastNameDis = true;
       this.checkFirstNameDis = true;
       this.checkPidDis = true;
+    }).delay(500).subscribe(()=>{
+      window.scrollTo(0, 0);
+      $('html, body').animate({scrollTop: '0px'}, 0);
     });
   }
 

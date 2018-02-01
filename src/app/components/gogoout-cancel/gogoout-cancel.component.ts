@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
-
 
 @Component({
   selector: 'app-gogoout-cancel',
@@ -12,9 +11,11 @@ export class GogooutCancelComponent implements OnInit {
 
   constructor(
     private actRoute: ActivatedRoute,
-    private dataService: DataServiceService
+    private dataService: DataServiceService,
+    private router: Router
 
   ) { 
+    window.scrollTo(0, 0);
     $('html, body').animate({scrollTop: '0px'}, 0);
   }
 
@@ -23,6 +24,10 @@ export class GogooutCancelComponent implements OnInit {
   ngOnInit() {
 
     this.text = this.actRoute.queryParams['value']['msg'];
+    if(this.actRoute.queryParams['value']['orderNumber']){
+    }else{
+      this.router.navigate(['/']);
+    }
     this.dataService.getGoGoInitCancel(this.actRoute.queryParams['value']['orderNumber']).subscribe((item)=>{
        this.text = item['carelineOrderNumber'];
     });

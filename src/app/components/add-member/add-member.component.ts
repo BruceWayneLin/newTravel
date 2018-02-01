@@ -753,41 +753,43 @@ export class AddMemberComponent implements OnInit {
 
     switch(index){
       case 1:
-        if(this.firstCardYear && this.firstCardMonth){
-          this.firstBdayArr = this.birthDays(this.firstCardYear, this.firstCardMonth);
+      if(this.firstCardYear && this.firstCardMonth){
+        this.firstBdayArr = this.birthDays(this.firstCardYear, this.firstCardMonth);
+      }
+      if(this.firstCardYear && this.firstCardMonth && this.firstCardDay){
+        console.log('1',this.firstCardYear);
+        console.log('2',this.firstCardMonth);
+        console.log('3',this.firstCardDay);
+        var userAge = this.calculate_age(this.firstCardMonth, this.firstCardDay, this.firstCardYear);
+        console.log('userAgecal', userAge);
+        console.log('max',this.insuredMaxAge);
+        console.log('min',this.insuredMinAge);
+
+        if(userAge > this.insuredMaxAge || userAge < this.insuredMinAge){
+          this.firstBdOverAge = true;
+        }else{
+          this.firstBdOverAge = false;
         }
-        if(this.firstCardYear && this.firstCardMonth && this.firstCardDay){
-          let userAge = currentYear - this.firstCardYear;
-          if((currentMonth >= this.firstCardMonth) && (currentDay >= this.firstCardDay)){
-            //生日過今天 保留原本選擇年紀
-          } else {
-            userAge = userAge - 1;
-            //未過今天 年紀扣一歲
-          }
 
-          if(this.insuredLimitedAge !== 0){
-            if(userAge > this.insuredMaxAge || userAge < this.insuredMinAge){
-              this.firstBdOverAge = true;
-            }else{
-              this.firstBdOverAge = false;
-            }
-
-            if(this.firstCardYear <  (currentYear - this.insuredMinAge) && this.firstCardYear > (currentYear - (this.insuredLimitedAge+1))){
-              this.firstBdOverAge = false;
-            }
-          }
-
-          this.rateInfoList.forEach((item) => {
-            if((userAge >= item.ageMin) && (userAge <= item.ageMax)){
-                this.firstCardInsuredPriceWord = this.numberWithCommas(item.rate);
-                this.firstCardInsuredPrice = item.rate;
-                this.firstCardWarningWord = item.tipText;
-                this.memberCom.finalPrice();
-            }
-          });
-        } else if (!this.firstCardYear && !this.firstCardMonth && !this.firstCardDay) {
+        if(this.firstCardYear <  (currentYear - this.insuredMinAge) && this.secondCardYear > (currentYear - (this.insuredLimitedAge+1))){
+          this.firstBdOverAge = false;
         }
-        break;
+
+        console.log('userage1', userAge);
+
+        this.rateInfoList.forEach((item) => {
+          console.log('ageMin', item.ageMin);
+          console.log('ageMax', item.ageMax);
+          if((userAge >= item.ageMin) && (userAge <= item.ageMax)){
+            this.firstCardInsuredPriceWord = this.numberWithCommas(item.rate);
+            this.firstCardInsuredPrice = item.rate;
+            this.firstCardWarningWord = item.tipText;
+            this.memberCom.finalPrice();
+          }
+        });
+      } else if (!this.firstCardYear && !this.firstCardMonth && !this.firstCardDay) {
+      }
+      break;
 
       case 2:
         if(this.secondCardYear && this.secondCardMonth){

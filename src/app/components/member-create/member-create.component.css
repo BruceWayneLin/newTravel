@@ -667,6 +667,7 @@ div.row.memberTitle {
   cursor: pointer;
   float: left;
   margin-top: 12px;
+  z-index: 10;
 }
 
 .checkBoxDiv.noChecked{

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataServiceService } from '../../services/data-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-fail-payment',
@@ -9,8 +10,11 @@ import { DataServiceService } from '../../services/data-service.service';
 export class FailPaymentComponent implements OnInit {
 
   constructor(
-      private dataServiceService:DataServiceService
-  ) { }
+      private dataServiceService:DataServiceService,
+      private router: Router,
+      private actRoute: ActivatedRoute
+  ) {
+   }
 
   wrongMsg: string = '';
 
@@ -21,6 +25,7 @@ export class FailPaymentComponent implements OnInit {
       idArray['orderNumber'].forEach((item) => {
           this.dataServiceService.orderNumberForSave = item;
       });
+      window.scrollTo(0, 0);
       $('html, body').animate({scrollTop: '0px'}, 0);
       this.dataServiceService.failPaymentInfo(turnBakUrl).subscribe((item)=>{
         this.wrongMsg = item['msg'];

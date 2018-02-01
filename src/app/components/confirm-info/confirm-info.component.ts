@@ -47,10 +47,16 @@ export class ConfirmInfoComponent implements OnInit {
       private routerAct: ActivatedRoute
   ) {
     // this.reloadOneSec();
-    $('html, body').animate({scrollTop: '0px'}, 0);
+   
     $('body').css({
       '-webkit-overflow-scrolling': 'auto'
     });
+    if(this.router.url.slice(0, 8) == '/gogoout'){
+      if(this.routerAct.queryParams['value']['orderNumber']){
+      }else{
+        this.router.navigate(['/']);
+      }
+    }
   }
 
   ngOnInit() {
@@ -84,8 +90,8 @@ export class ConfirmInfoComponent implements OnInit {
         this.applicantAddr = info['apAddressFull'];
         this.applicantBth = info['apBirthday']['year'] + '-' + info['apBirthday']['month'] + '-' + info['apBirthday']['day'];
         this.applicantEmail = info['apEmail'];
-        this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'] + ' ' + (info['odStartDateHour'].length >= 2? info['odStartDateHour'] : '0' + info['odStartDateHour']) +':00';
-        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'] + ' ' + (info['odEndDateHour'].length >= 2? info['odEndDateHour'] : '0' + info['odEndDateHour']) +':00';
+        this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'] + ' ' + (info['odStartDateHour'] < '10' ? '0' + info['odStartDateHour'] + ':00' : info['odStartDateHour'] + ':00');
+        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'] + ' ' + (info['odStartDateHour'] < '10' ? '0' + info['odEndDateHour'] + ':00' : info['odEndDateHour'] + ':00');
         this.insuredLocation = info['odLocation'];
         this.insuredPurpose = info['odPurpose'];
         this.inPackageButtonName = info['inPackageButtonName'];
@@ -103,6 +109,8 @@ export class ConfirmInfoComponent implements OnInit {
         $('body').css({
           '-webkit-overflow-scrolling': 'touch'
         });
+        window.scrollTo(0, 0);
+        $('html, body').animate({scrollTop: '0px'}, 0);
       });
     } else {
       this.dataService.getConfirmInfo().subscribe((item) => {

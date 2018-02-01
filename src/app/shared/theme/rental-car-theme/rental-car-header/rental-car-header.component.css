@@ -41,7 +41,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index:999;
+    z-index:1049;
     background-color: hsla(0,0%,100%,.8);
     box-shadow: 1px 1px 3px #efefef;
 }
@@ -58,5 +58,11 @@
     }
     .col.logoOnTheRight {
         padding-right: 15px;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    #extraBarDefault img {
+        max-width: 250px;
     }
 }

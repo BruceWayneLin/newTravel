@@ -39,16 +39,32 @@ button:hover {
     color: white;
 }
 
-.processImg {
-    background: url('/assets/images/dolls/failPayment.png') no-repeat;
-    height: 100px;
-    width: 90px;
-    background-size: contain;
-    margin: 0 auto;
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 15px;
+@media screen and (max-width:480px) {
+    .processImg {
+        background: url('/assets/images/dolls/kaiReading.png') no-repeat;
+        height: 100px;
+        width: 90px;
+        background-size: contain;
+        margin: 0 auto;
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }    
 }
+
+@media screen and (min-width:480px) {
+    .processImg {
+        background: url('/assets/images/dolls/kaiReading.png') no-repeat center;
+        height: 137px;
+        width: auto;
+        background-size: contain;
+        margin: 0 auto;
+        display: block;
+        margin-top: 42px;
+        margin-bottom: 25px;
+    }    
+}
+
 
 @media screen and (max-width: 500px){
     #failPay {

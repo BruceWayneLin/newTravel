@@ -2,7 +2,6 @@ import {Component, OnInit, AfterViewInit, ElementRef, ViewChild, ViewChildren, A
 import { ActivatedRoute, RouterModule, Routes } from "@angular/router";
 import { DataServiceService } from '../../services/data-service.service';
 
-
 declare var jquery:any;
 declare var $ :any;
 
@@ -96,6 +95,7 @@ export class HomePageComponent implements OnInit {
     private dataService:DataServiceService,
     private routerAct:ActivatedRoute
   ){
+    window.scrollTo(0, 0);
     $('body,html').animate({scrollTop: '0px'}, 0);
     var envi = 'local';
     if(envi == 'local'){
@@ -141,7 +141,6 @@ export class HomePageComponent implements OnInit {
     this.fourthBtn['companyCode'] = '';
     this.fourthBtn['primaryItems'] = [];
     this.fourthBtn['table'] = {};
-    this.toCompatibilityUse();
     this.CusDetailContent = true;
     this.product['product'] = 'Travel';
 
@@ -156,7 +155,7 @@ export class HomePageComponent implements OnInit {
       }
     }
     this.product['pack'] = this.pakNum;
-
+    
     // if(new Date().getDay() == 0 && !this.modifiedClicked){
     //   var tmr = new Date().setDate(new Date().getDate() + 1);
     //   this.firstMon = this.getMonday(new Date(tmr));
@@ -171,7 +170,7 @@ export class HomePageComponent implements OnInit {
     this.toDeterminedIfDisabledDaysNeedToHide();
 
     if(this.dataService.orderNumberForSave){
-      this.dataService.getCustomerHomePage().subscribe((item)=>{
+      this.dataService.getCustomerHomePage().do((item)=>{
         this.startTravelDay = item['dateFrom'];
         document.querySelector('#flagSix').scrollIntoView();
         let sendDataBak = {};
@@ -180,8 +179,6 @@ export class HomePageComponent implements OnInit {
         sendDataBak['startDate'] = this.startTravelDay;
         this.dataService.ifOnlyStartDayOnly(sendDataBak).subscribe((item) => {
           this.cusPackageList = item['cusPackageList'];
-          // this.packageList = item['packageList'];
-          // this.packageList.push(this.fourthBtn);
           item.cusPackageList.filter(val => val.isDefaultPackage == true).map(
               value => this.defaultCustomerPkg = value
           );
@@ -246,10 +243,12 @@ export class HomePageComponent implements OnInit {
           }
         } catch (e) {
         }
-      })
+      }).delay(500).subscribe(() => {
+        this.toCompatibilityUse();
+      });
     }
 
-    this.dataService.getIniData(this.product).subscribe((posts) => {
+    this.dataService.getIniData(this.product).do((posts) => {
       var array = [];
       posts.bannerList.forEach((item) => {
         let objImage = {};
@@ -347,14 +346,21 @@ export class HomePageComponent implements OnInit {
         }
       } catch (e) {
       }
-
-      if(this.routerAct.queryParams['value']['scrollDown']){
-        document.querySelector('#flagOne').scrollIntoView();
-      }else{
-      }
+    }).delay(500).subscribe(() => {
+      this.toCompatibilityUse();
     });
+
+    $('body').css({
+      '-webkit-overflow-scrolling': 'auto'
+    });
+    setTimeout(function(){
+      $('body').css({
+        '-webkit-overflow-scrolling': 'touch'
+      });
+    }, 500);
     this.changeCountries('');
   }
+
   firstWeekLastDay: any;
   toDeterminedIfDisabledDaysNeedToHide() {
     var d = new Date(this.firstMon);
@@ -381,6 +387,10 @@ export class HomePageComponent implements OnInit {
   }
 
   toCompatibilityUse(){
+      if(this.routerAct.queryParams['value']['scrollDown']){
+        document.querySelector('#flagOne').scrollIntoView();
+      }else{
+      }
   }
 
   toGetCusPkgPrice() {
@@ -586,9 +596,24 @@ export class HomePageComponent implements OnInit {
       $('#mainLongDetailDiv').hide();
       $('#mobileAmt').show();
     }, 100);  
-  
     document.querySelector('#flagSix').scrollIntoView();
-
+    var iOSMobile = !!navigator.platform && /iPhone/.test(navigator.platform);
+    if(window.innerWidth <= 500 && iOSMobile){
+      $('#btnOfPackages').find('.selectedRadio').removeClass('selectedRadio');
+      $('.packageButton' + '3').siblings('span').addClass('selectedRadio');
+      $('#btnOfPackages').find('.fa-check').addClass('hidden');
+      $('.packageButton' + '3').siblings('span').empty();
+      $('.packageButton' + '3').siblings('span').append('<i class="fa fa-check"></i>'+this.selectedPackage['packageButtonName']).css(
+        {
+          'text-align': 'center',
+          'display': 'block',
+          'margin': '0 auto'
+        }
+      ); 
+      $('#btnOfPackages span').css({
+        'left': '10%'
+      });
+    }
     if(this.pkgCustomGo){
       this.selPkgH2 = '自由配';
       this.pkgCustomTxt = '回選擇方案挑選';
@@ -678,6 +703,9 @@ export class HomePageComponent implements OnInit {
     }
 
     if(this.startTravelDay) {
+      console.log('startDay', this.startTravelDay);
+      console.log('value', value);
+
       if (this.startTravelDay == value) {
         var modal = document.getElementById('myModal');
         modal.style.display = "block";

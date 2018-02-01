@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-preview-pdf',
@@ -13,9 +14,14 @@ export class PreviewPdfComponent implements OnInit {
   pdfUrl: string = '';
   constructor(
     private dataService: DataServiceService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { 
     $('html, body').animate({scrollTop: '0px'}, 0);
+    if(this.activatedRoute.queryParams['value']['orderNumber']){
+    }else{
+      this.router.navigate(['/']);
+    }
   }
 
   ngOnInit() {
