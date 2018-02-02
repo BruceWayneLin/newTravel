@@ -328,7 +328,11 @@ export class HomePageComponent implements OnInit {
         this.disabledDays.push(item.date);
       });
       posts.disabledDateList.forEach((item) => {
-        this.disabledReason.push(item.reason);
+        // this.disabledReason.push(item.reason);
+        if(item.reason){
+          this.disabledReason = item.reason;
+        }
+        console.log(this.disabledReason);
       });
       this.numberOfgetDayFromBkendLastSun = this.getDayFromBkend;
       // console.log(posts.disabledDateList);
@@ -961,7 +965,9 @@ export class HomePageComponent implements OnInit {
     if(link){
       window.location.href = link;
     }
-    document.querySelector('#flagOne').scrollIntoView();
+    if(value){
+      document.querySelector('#flagOne').scrollIntoView();
+    }
   }
 
   toCloseAll(val) {

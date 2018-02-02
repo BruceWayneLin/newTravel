@@ -1,6 +1,6 @@
 <!-- carousel -->
   <cl-owl-carousel-progress [options]="{autoplay: true, loop: true, nav: true, items: 1, dots: true, navigation: true, touchDrag: true, onLoadedLazy: true}" >
-  <div class="item" *ngFor="let image of images;let i = index" style="cursor:pointer;">
+  <div class="item" *ngFor="let image of images;let i = index" [ngStyle]="{'cursor': (image.clickAndGoToAncher == true || image.linkUrl !== null) ? 'pointer' : 'default'}">
       <div title="{{image.hoverText}}" (click)="clickWannaInsuredBtn(image.clickAndGoToAncher, image.linkUrl)">
         <img class="img-responsive" src="{{image.imageUrl}}" alt="{{image.hoverText}}">
       </div>
@@ -16,7 +16,7 @@
         <div class="immediatelyGo" >
   
         </div>
-        <h2 style="margin-bottom:20px;margin-top:15px;cursor:pointer;" (click)="clickWannaInsuredBtn('', '')">
+        <h2 style="margin-bottom:20px;margin-top:15px;cursor:pointer;" (click)="clickWannaInsuredBtn(true, '')">
           <a class="immediateH2" href="#" onclick="return false;" style="color:#e84466;text-decoration: underline;">
             點我試算保費
           </a>
@@ -199,7 +199,7 @@
                   <h4><i class="checkBtn fa fa-check hidden" aria-hidden="true" style="pointer-events: none;"></i></h4>
                   {{firstMon | amLocal | amAdd:i : 'days' | amDateFormat: 'DD'}}
                   <h4><span class="checkBtnTxt hidden" style="pointer-events: none;">出發日</span></h4>
-                  <h4 *ngIf="buttonToDisabledTwo(btnStartDay.value)"><span class="typhoonDay" style="pointer-events: none;">颱風日</span></h4>
+                  <h4 *ngIf="buttonToDisabledTwo(btnStartDay.value)"><span class="typhoonDay" style="pointer-events: none;">{{disabledReason}}</span></h4>
                 </button>
               </td>
           </ng-container>
