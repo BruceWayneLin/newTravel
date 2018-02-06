@@ -42,7 +42,6 @@ export class AddMemberComponent implements OnInit {
     this.fourthBdayArr = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
     this.fifthBdayArr = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
     this.sixthBdayArr = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
-    $('html, body').animate({scrollTop: '0px'}, 0);
   }
 
   toGetDataFromUrl(url) {
@@ -58,7 +57,8 @@ export class AddMemberComponent implements OnInit {
   ngOnInit() {
     var Url = window.location.href;
     // var turnBakUrl = this.toGetDataFromUrl(Url);
-    
+    document.getElementById('addInsuredAdd').scrollIntoView({block: 'start', behavior: 'smooth'});
+
     this.dataService.toGetInsuredInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
       if(item){
         console.log(item);
