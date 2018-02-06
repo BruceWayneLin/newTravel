@@ -373,10 +373,14 @@ export class MemberCreateComponent implements OnInit {
   }
 
   checkBirthday(year, month, day){
+    if(this.pBirthYear && this.pBirthMonth){
+      this.birthdayDays = this.birthDays(new Date(this.pBirthYear).getFullYear(), new Date(this.pBirthMonth).getMonth()+1);
+    }
     if (!year && !month && !day) {
 
     } else if(year && month && day) {
       let personAge2 = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
+
       console.log(this.pBirthYear);
       console.log(this.pBirthMonth);
       console.log(this.pBirthDay);
