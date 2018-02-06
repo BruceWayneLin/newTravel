@@ -116,19 +116,19 @@
             <span class="pull-right txtBirth" style="padding-top:15px;">生日</span>
           </div>
           <div class="col-xs-5">
-            <select required [(ngModel)]="pBirthYear" [ngClass]="{'inValidInput':birthdayYEl.touched && !birthdayYEl.valid && birthdayMEl.touched && !birthdayMEl.valid &&  birthdayDEl.touched && !birthdayDEl.valid || personalAgeOver}" (change)="changedData(birthdayYEl.value, birthdayMEl.value, birthdayDEl.value)" #birthdayYEl="ngModel" class="form-control" [disabled]="checkBDay">
+            <select required [(ngModel)]="pBirthYear" [ngClass]="{'inValidInput':birthdayYEl.touched && !birthdayYEl.valid && birthdayMEl.touched && !birthdayMEl.valid &&  birthdayDEl.touched && !birthdayDEl.valid || personalAgeOver}" (change)="changedData(birthdayYEl.value, birthdayMEl.value, birthdayDEl.value) && toReEnterFun()" #birthdayYEl="ngModel" class="form-control" [disabled]="checkBDay">
               <option value="">年</option>
               <option *ngFor="let year of applicantSelectListYear" value="{{year}}">{{year}}</option>
             </select>
           </div>
           <div id="specialBirthColxs" class="col-xs-3">
-            <select required [(ngModel)]="pBirthMonth"  [ngClass]="{'inValidInput':birthdayYEl.touched && !birthdayYEl.valid && birthdayMEl.touched && !birthdayMEl.valid &&  birthdayDEl.touched && !birthdayDEl.valid || personalAgeOver}" (change)="changedData(birthdayYEl.value, birthdayMEl.value, birthdayDEl.value)"  #birthdayMEl="ngModel" class="form-control" [disabled]="checkBDay">
+            <select required [(ngModel)]="pBirthMonth"  [ngClass]="{'inValidInput':birthdayYEl.touched && !birthdayYEl.valid && birthdayMEl.touched && !birthdayMEl.valid &&  birthdayDEl.touched && !birthdayDEl.valid || personalAgeOver}" (change)="changedData(birthdayYEl.value, birthdayMEl.value, birthdayDEl.value) && toReEnterFun()"  #birthdayMEl="ngModel" class="form-control" [disabled]="checkBDay">
               <option value="">月</option>
               <option *ngFor="let month of birthdayMonths" value="{{month}}">{{month}}</option>
             </select>
           </div>
           <div id="specialBirthColxs" class="col-xs-3" style="padding-right:0px;">
-            <select required  [(ngModel)]="pBirthDay"  (change)="changedData(birthdayYEl.value, birthdayMEl.value, birthdayDEl.value)"  [ngClass]="{'inValidInput':birthdayYEl.touched && !birthdayYEl.valid && birthdayMEl.touched && !birthdayMEl.valid &&  birthdayDEl.touched && !birthdayDEl.valid || personalAgeOver}" #birthdayDEl="ngModel" class="form-control" [disabled]="checkBDay">
+            <select required  [(ngModel)]="pBirthDay"  (change)="changedData(birthdayYEl.value, birthdayMEl.value, birthdayDEl.value)"  [ngClass]="{'inValidInput':birthdayYEl.touched && !birthdayYEl.valid && birthdayMEl.touched && !birthdayMEl.valid &&  birthdayDEl.touched && !birthdayDEl.valid || personalAgeOver} && toReEnterFun()" #birthdayDEl="ngModel" class="form-control" [disabled]="checkBDay">
               <option value="">日</option>
               <option *ngFor="let day of birthdayDays" value="{{day}}">{{day}}</option>
             </select>
@@ -348,19 +348,19 @@
               <span class="pull-right txtBirth" style="padding-top:15px;">生日</span>
             </div>
             <div class="col-xs-5">
-              <select [(ngModel)]="applicantAloneBirthYear" (change)="checkAloneBd() && changedData()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}" #birthdayYAE="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
+              <select [(ngModel)]="applicantAloneBirthYear" (change)="checkAloneBd() && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}" #birthdayYAE="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
                 <option value="">年</option>
                 <option *ngFor="let year of birthdayYears" value="{{year}}" selected>{{year}}</option>
               </select>
             </div>
             <div class="col-xs-3" style="">
-              <select [(ngModel)]="applicantAloneBirthMonth" (change)="checkAloneBd() && changedData()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}"  #birthdayYAM="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
+              <select [(ngModel)]="applicantAloneBirthMonth" (change)="checkAloneBd() && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}"  #birthdayYAM="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
                 <option value="">月</option>
                 <option *ngFor="let month of birthdayMonths" value="{{month}}" selected>{{month}}</option>
               </select>
             </div>
             <div class="col-xs-3">
-              <select  [(ngModel)]="applicantAloneBirthDay" (change)="checkAloneBd() && changedData()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}"  #birthdayYAD="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
+              <select  [(ngModel)]="applicantAloneBirthDay" (change)="checkAloneBd() && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}"  #birthdayYAD="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
                 <option value="">日</option>
                 <option *ngFor="let day of aloneBirthdayDays" value="{{day}}" selected>{{day}}</option>
               </select>

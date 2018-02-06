@@ -372,10 +372,16 @@ export class MemberCreateComponent implements OnInit {
     }
   }
 
-  checkBirthday(year, month, day){
+  toReEnterFun() {
     if(this.pBirthYear && this.pBirthMonth){
       this.birthdayDays = this.birthDays(new Date(this.pBirthYear).getFullYear(), new Date(this.pBirthMonth).getMonth()+1);
     }
+    if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
+      this.aloneBirthdayDays = this.birthDays(new Date(this.applicantAloneBirthYear).getFullYear(), new Date(this.applicantAloneBirthMonth).getMonth()+1);
+    }
+  }
+
+  checkBirthday(year, month, day){
     if (!year && !month && !day) {
 
     } else if(year && month && day) {
