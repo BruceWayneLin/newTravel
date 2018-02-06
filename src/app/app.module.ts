@@ -47,10 +47,11 @@ import { SignatureComponent } from './components/signature/signature.component';
 import { GogooutErrorComponent } from './components/gogoout-error/gogoout-error.component';
 import { GogooutCancelComponent } from './components/gogoout-cancel/gogoout-cancel.component';
 import { SharedDirectiveModule } from 'cl-layout/src/app/shared/directive/shared-directive.module';
-import { BtobtoComponent } from './components/btobto/btobto.component';
+import { BtobtoCComponent } from './components/btobtoc/btobtoc.component';
+import { RentalCarServiceService } from './services/rental-car-service.service';
 export const routes: LayoutRoute[] = [
   {
-    path: 'gogoout',
+    path: 'travel/gogoout',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
@@ -60,7 +61,7 @@ export const routes: LayoutRoute[] = [
     component: MemberCreateComponent
   },
   {
-    path: 'gogooutError',
+    path: 'travel/gogooutError',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
@@ -70,7 +71,7 @@ export const routes: LayoutRoute[] = [
     component: GogooutErrorComponent
   },
   {
-    path: 'gogooutCancel',
+    path: 'travel/gogooutCancel',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
@@ -80,7 +81,7 @@ export const routes: LayoutRoute[] = [
     component: GogooutCancelComponent
   },
   {
-    path: 'gogoout/confirm',
+    path: 'travel/gogoout/confirm',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
@@ -90,7 +91,7 @@ export const routes: LayoutRoute[] = [
     component: ConfirmInfoComponent
   },
   {
-    path: 'gogoout/signature',
+    path: 'travel/gogoout/signature',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
@@ -101,7 +102,7 @@ export const routes: LayoutRoute[] = [
     // component: SignatureGoGooutComponent
   },
   {
-    path: 'gogoout/previewPdf',
+    path: 'travel/gogoout/previewPdf',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
@@ -118,35 +119,42 @@ export const routes: LayoutRoute[] = [
     component: HomePageComponent
   },
   {
-    path: 'index',
+    path: 'travel',
     data: {
       // breadcrumb: '首頁',
     },
     component: HomePageComponent
   },
   {
-    path: 'memberCreate',
+    path: 'travel/index',
+    data: {
+      // breadcrumb: '首頁',
+    },
+    component: HomePageComponent
+  },
+  {
+    path: 'travel/memberCreate',
     data: {
       // breadcrumb: '會員',
     },
     component: MemberCreateComponent
   },
   {
-    path: 'confirmPage',
+    path: 'travel/confirmPage',
     data: {
       // breadcrumb: '確認投保資訊',
     },
     component: ConfirmInfoComponent
   },
   {
-    path: 'thanksPage',
+    path: 'travel/thanksPage',
     data: {
       // breadcrumb: '投保感謝',
     },
     component: ThanksComponent
   },
   {
-    path: 'failPayment',
+    path: 'travel/failPayment',
     data: {
       // breadcrumb: '付款失敗',
     },
@@ -160,16 +168,12 @@ export const routes: LayoutRoute[] = [
     component: VersionComponent
   },
   {
-    path: 'BtoBtoC',
+    path: 'RentCar/BtoBtoC',
     data: {
       // breadcrumb: '檢查版本',
     },
-    component: BtobtoComponent
+    component: BtobtoCComponent
   }
-  // {
-  //   path: 'signature',
-  //   loadChildren: './components/signature/signature.module#SignatureModule'
-  // }
 ];
 
 @NgModule({
@@ -186,7 +190,7 @@ export const routes: LayoutRoute[] = [
     PreviewPdfComponent,
     GogooutErrorComponent,
     GogooutCancelComponent,
-    BtobtoComponent
+    BtobtoCComponent
   ],
   exports: [
   ],
@@ -211,7 +215,8 @@ export const routes: LayoutRoute[] = [
   ],
   providers: [
     DataServiceService,
-    ShareService
+    ShareService,
+    RentalCarServiceService
   ],
   bootstrap: [AppComponent]
 })

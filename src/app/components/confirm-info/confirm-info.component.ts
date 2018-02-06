@@ -51,10 +51,10 @@ export class ConfirmInfoComponent implements OnInit {
     $('body').css({
       '-webkit-overflow-scrolling': 'auto'
     });
-    if(this.router.url.slice(0, 8) == '/gogoout'){
+    if(this.router.url.slice(7, 15) == '/gogoout'){
       if(this.routerAct.queryParams['value']['orderNumber']){
       }else{
-        this.router.navigate(['/']);
+        this.router.navigate(['travel/index']);
       }
     }
   }
@@ -76,7 +76,7 @@ export class ConfirmInfoComponent implements OnInit {
       });
     }else{
     }
-    if(this.router.url.slice(0, 8) == '/gogoout'){ 
+    if(this.router.url.slice(7, 15) == '/gogoout'){ 
       this.dataService.orderNumberForSave = this.routerAct.queryParams['value']['orderNumber'];
       this.dataService.orderNumber = this.routerAct.queryParams['value']['orderNumber'];
       this.gogoOutNeedToHideCol = true;
@@ -193,16 +193,16 @@ export class ConfirmInfoComponent implements OnInit {
 
   getBakInfo(){
     this.dataService.backFromConfirm = true;
-    if(this.router.url.slice(0, 8) == '/gogoout'){
+    if(this.router.url.slice(7, 15) == '/gogoout'){
       if(!this.dataService.gogoOrderNumber){
         this.dataService.gogoOrderNumber = this.dataService.orderNumberForSave;
       }
       if(!this.dataService.orderNumberForSave){
         this.dataService.gogoOrderNumber = this.dataService.orderNumber;
       }
-      this.router.navigate(['/gogoout'], {queryParams: {orderNumber: this.dataService.gogoOrderNumber}});
+      this.router.navigate(['travel/gogoout'], {queryParams: {orderNumber: this.dataService.gogoOrderNumber}});
     }else{
-      this.router.navigate(['/memberCreate'], {queryParams: {orderNumber: this.dataService.orderNumberForSave}});
+      this.router.navigate(['travel/memberCreate'], {queryParams: {orderNumber: this.dataService.orderNumberForSave}});
     }
   }
 

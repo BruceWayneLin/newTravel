@@ -1,0 +1,10 @@
+<!-- carousel -->
+<cl-owl-carousel-progress [options]="{autoplay: true, loop: true, nav: true, items: 1, dots: true, navigation: true, touchDrag: true, onLoadedLazy: true}" >
+  <div class="item" *ngFor="let image of images;let i = index" [ngStyle]="{'cursor': (image.clickAndGoToAncher == true || image.linkUrl !== null) ? 'pointer' : 'default'}">
+      <div title="{{image.hoverText}}" (click)="clickWannaInsuredBtn(image.clickAndGoToAncher, image.linkUrl)">
+        <img class="img-responsive" src="{{image.imageUrl}}" alt="{{image.hoverText}}">
+      </div>
+  </div>
+</cl-owl-carousel-progress>
+  
+<div id="flagOne" style="position:relative; top: -25px;"></div>

@@ -27,7 +27,7 @@ export class ThanksComponent implements OnInit {
     });
     if(this.routerAct.queryParams['value']['orderNumber']){
     }else{
-      this.router.navigate(['/']);
+      this.router.navigate(['travel']);
     }
 
     this.dataService.getActImgUrl(turnBakUrl).subscribe((item) => {

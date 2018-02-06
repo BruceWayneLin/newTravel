@@ -138,10 +138,10 @@ export class MemberCreateComponent implements OnInit {
   ) {
     window.scrollTo(0, 0);
     $('html, body').animate({scrollTop: '0px'}, 0);
-    if(this.router.url.slice(0, 8) == '/gogoout'){
+    if(this.router.url.slice(7, 15) == '/gogoout'){
       if(this.routerAct.queryParams['value']['orderNumber']){
       }else{
-        this.router.navigate(['/']);
+        this.router.navigate(['travel']);
       }
     }
   }
@@ -929,9 +929,9 @@ export class MemberCreateComponent implements OnInit {
   }
 
   deterMineUrl(url){
-    if (url.slice(0, 13) == '/memberCreate') {
+    if (url.slice(7, 20) == '/memberCreate') {
       this.toLoadMemberCreat();
-    } else if (url.slice(0, 8) == '/gogoout') {
+    } else if (url.slice(7, 15) == '/gogoout') {
       setTimeout(function() {
         var userAgent = window.navigator.userAgent;
         if (true) {
@@ -940,7 +940,7 @@ export class MemberCreateComponent implements OnInit {
           var url = window.location.href; // get the current url of page into variable
           if (url.indexOf('?') > -1) { // url has a '?'
               if(url.indexOf('reloaded') < 0){ // url does not have the text 'reloaded'
-              this.router.navigate(['/gogoout'], {queryParams: {orderNumber: this.routerAct.queryParams['value']['orderNumber']}});
+              this.router.navigate(['travel/gogoout'], {queryParams: {orderNumber: this.routerAct.queryParams['value']['orderNumber']}});
               }
           }
         }
@@ -979,8 +979,7 @@ export class MemberCreateComponent implements OnInit {
       this.hiddenAtBegining = false;
       this.firstTimeClickHaoA = true;
       this.noGoWithYourFds = this.dataService.noGoWithYourFdsFlag;
-      if(!this.noGoWithYourFds && this.router.url.slice(0, 13) == '/memberCreate'){
-        
+      if(!this.noGoWithYourFds && this.router.url.slice(7, 20) == '/memberCreate'){
         this.dataService.toGetBakInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
           this.aggreeToUpdate = item['applicant']['isUpdate'];
           this.insuredList = item['insuredList'];

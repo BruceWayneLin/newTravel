@@ -54,7 +54,7 @@ export class DataServiceService {
         ).map(res => {
             if (res.json().isEx) {
                 if(res.json().kickout){
-                    this.route.navigate(['/']);
+                    this.route.navigate(['travel']);
                 }else{
                     if (res.json().data) {
                         // Server 回傳錯誤
@@ -86,7 +86,7 @@ export class DataServiceService {
             }  
             }catch(error){
             }
-        if(this.route.url.slice(0, 8) == '/gogoout'){
+        if(this.route.url.slice(7, 15) == '/gogoout'){
             if(!val['orderNumber']){
                 val['orderNumber'] = this.gogoOrderNumber;
             }  
@@ -152,7 +152,7 @@ export class DataServiceService {
         .map((result) => {
             if(result.json().isEx == true){
                 if(result.json().kickout){
-                    this.route.navigate(['/']);
+                    this.route.navigate(['travel']);
                 }else{
                     if (result.json().data) {
                         // Server 回傳錯誤
@@ -183,7 +183,7 @@ export class DataServiceService {
         .map((result) => {
             if(result.json().isEx == true){
                 if(result.json().kickout){
-                    this.route.navigate(['/']);
+                    this.route.navigate(['travel']);
                 }else{
                     if (result.json().data) {
                         // Server 回傳錯誤
@@ -218,7 +218,7 @@ export class DataServiceService {
         var i = this.http.post('/CareLineTravel/travel-mbr/journey/savePackage', value).map(res => {
             if (res.json().isEx) {
                 if(res.json().kickout){
-                    this.route.navigate(['/']);
+                    this.route.navigate(['travel']);
                 }else{
                     if (res.json().data) {
                         // Server 回傳錯誤
@@ -265,7 +265,7 @@ export class DataServiceService {
             return this.http.post('/CareLineTravel/travel-mbr/journey/getDataAfterLogin', objSendBak).map(res => {
                 if(res.json().isEx){
                     if(res.json().kickout){
-                        this.route.navigate(['/']);
+                        this.route.navigate(['travel']);
                     }else{
                         if (res.json().data) {
                             // Server 回傳錯誤
@@ -297,7 +297,7 @@ export class DataServiceService {
             return this.http.post('/CareLineTravel/travel-mbr/journey/getDataAfterLogin', objSendBak).map(res => {
                 if(res.json().isEx){
                     if(res.json().kickout){
-                        this.route.navigate(['/']);
+                        this.route.navigate(['travel']);
                     }else{
                         if (res.json().data) {
                             // Server 回傳錯誤
@@ -335,7 +335,7 @@ export class DataServiceService {
                 return this.http.post('/CareLineTravel/travel-mbr/journey/getDataWhenBackFromConfirmPage', objSendBak).map(res => {
                     if(res.json().isEx){
                         if(res.json().kickout){
-                            this.route.navigate(['/']);
+                            this.route.navigate(['travel']);
                         }else{
                             this.loading = false;
                             var msgs = res.json().msgs;
@@ -359,7 +359,7 @@ export class DataServiceService {
         return this.http.post('/CareLineTravel/travel-mbr/journey/getData4FailPayment', objSendBak).map(res => {
             if(res.json().isEx){
                 if(res.json().kickout){
-                    this.route.navigate(['/']);
+                    this.route.navigate(['travel']);
                 }else{
                     this.loading = false;
                     var msgs = res.json().msgs;
@@ -380,7 +380,7 @@ export class DataServiceService {
         return this.http.post('/CareLineTravel/travel-mbr/journey/filterPackage', value).map(res => {
             if(res.json().isEx){
                 if(res.json().kickout){
-                    this.route.navigate(['/']);
+                    this.route.navigate(['travel']);
                 }else{
                     this.loading = false;
                     var msgs = res.json().msgs;
@@ -410,7 +410,7 @@ export class DataServiceService {
                 }
                 if (res.json().isEx) {
                     if(res.json().kickout){
-                        this.route.navigate(['/']);
+                        this.route.navigate(['travel']);
                         this.loading = false;
                     }else{
                         if (res.json().data) {
@@ -434,44 +434,9 @@ export class DataServiceService {
             });
             i.subscribe((item)=>{
                 if(item == 'ok'){
-                    this.route.navigate(['/confirmPage']);
+                    this.route.navigate(['travel/confirmPage']);
                     this.loading = false;
                 } else {
-                    // this.loading = false;
-                    // let replyObj = JSON.parse(item);
-                    // if(replyObj.isEx){
-                    //     if(replyObj.kickout){
-                    //         this.route.navigate(['/']);
-                    //     }else{
-                    //         if (replyObj.json().data) {
-                    //             // Server 回傳錯誤
-                    //             if (replyObj.data && replyObj.json().data.errorFlagName) {
-                    //                 var flagName = replyObj.json().data.errorFlagName;
-                    //                 this.idToGoFlow = flagName;
-                    //             }
-                    //         }
-                    //         this.loading = false;
-                    //         var msgs = replyObj.msgs;
-                    //         var modal = document.getElementById('myModal');
-                    //         modal.style.display = "block";
-                    //         this.AlertTXT = msgs;
-                    //         document.querySelector('#myModal').scrollIntoView();
-                    //     }
-                    // }else{
-                    //     if (replyObj.data) {
-                    //         // Server 回傳錯誤
-                    //         if (replyObj.json().data && replyObj.json().data.errorFlagName) {
-                    //             var flagName = replyObj.json().data.errorFlagName;
-                    //             this.idToGoFlow = flagName;
-                    //         }
-                    //     }
-                    //     this.loading = false;
-                    //     var msgs = replyObj.msgs;
-                    //     var modal = document.getElementById('myModal');
-                    //     modal.style.display = "block";
-                    //     this.AlertTXT = msgs;
-                    //     document.querySelector('#myModal').scrollIntoView();
-                    // }
                 }
             });
         }, 400);
@@ -509,7 +474,7 @@ export class DataServiceService {
             }
         }).subscribe((item)=>{
             if(item.status == 'ok'){
-                this.route.navigate(['gogoout/signature'], {queryParams: {orderNumber: postData['orderNumber']}});
+                this.route.navigate(['travel/gogoout/signature'], {queryParams: {orderNumber: postData['orderNumber']}});
             }
         });
     }
@@ -547,9 +512,9 @@ export class DataServiceService {
             if(item['status'] == 'ok'){
                 var userAgent = window.navigator.userAgent;
                 if (userAgent.match(/iPhone/i)) {
-                    this.route.navigate(['/gogoout/confirm'], {queryParams: {orderNumber: this.gogoOrderNumber, reload: true}});
+                    this.route.navigate(['travel/gogoout/confirm'], {queryParams: {orderNumber: this.gogoOrderNumber, reload: true}});
                 } else {
-                    this.route.navigate(['/gogoout/confirm'], {queryParams: {orderNumber: this.gogoOrderNumber}});
+                    this.route.navigate(['travel/gogoout/confirm'], {queryParams: {orderNumber: this.gogoOrderNumber}});
                 }
                 this.loading = false;
             } else {
@@ -584,7 +549,7 @@ export class DataServiceService {
                 return res.json();
             });
         }else{
-            this.route.navigate(['/index']);
+            this.route.navigate(['travel/index']);
         }
     }
 
@@ -603,7 +568,7 @@ export class DataServiceService {
                 let replyObj = JSON.parse(item);
                 if(replyObj.isEx){
                     if(replyObj.kickout){
-                        this.route.navigate(['/']);
+                        this.route.navigate(['travel']);
                     }else{
                         if (replyObj.data) {
                             // Server 回傳錯誤
@@ -687,7 +652,7 @@ export class DataServiceService {
             }
         }).subscribe((item)=>{
             if(item.status == 'ok'){
-                this.route.navigate(['gogoout/previewPdf'], {queryParams: {orderNumber: postData['orderNumber']}});
+                this.route.navigate(['travel/gogoout/previewPdf'], {queryParams: {orderNumber: postData['orderNumber']}});
             }
         });
     }
