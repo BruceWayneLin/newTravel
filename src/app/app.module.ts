@@ -47,6 +47,7 @@ import { SignatureComponent } from './components/signature/signature.component';
 import { GogooutErrorComponent } from './components/gogoout-error/gogoout-error.component';
 import { GogooutCancelComponent } from './components/gogoout-cancel/gogoout-cancel.component';
 import { SharedDirectiveModule } from 'cl-layout/src/app/shared/directive/shared-directive.module';
+import { BtobtoComponent } from './components/btobto/btobto.component';
 export const routes: LayoutRoute[] = [
   {
     path: 'gogoout',
@@ -157,6 +158,13 @@ export const routes: LayoutRoute[] = [
       // breadcrumb: '檢查版本',
     },
     component: VersionComponent
+  },
+  {
+    path: 'BtoBtoC',
+    data: {
+      // breadcrumb: '檢查版本',
+    },
+    component: BtobtoComponent
   }
   // {
   //   path: 'signature',
@@ -177,7 +185,8 @@ export const routes: LayoutRoute[] = [
     VersionComponent,
     PreviewPdfComponent,
     GogooutErrorComponent,
-    GogooutCancelComponent
+    GogooutCancelComponent,
+    BtobtoComponent
   ],
   exports: [
   ],
