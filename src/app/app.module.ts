@@ -49,6 +49,8 @@ import { GogooutCancelComponent } from './components/gogoout-cancel/gogoout-canc
 import { SharedDirectiveModule } from 'cl-layout/src/app/shared/directive/shared-directive.module';
 import { BtobtoCComponent } from './components/btobtoc/btobtoc.component';
 import { RentalCarServiceService } from './services/rental-car-service.service';
+import { brandFilterPipe } from './components/btobtoc/filter/filter-brand';
+
 export const routes: LayoutRoute[] = [
   {
     path: 'travel/gogoout',
@@ -180,6 +182,7 @@ export const routes: LayoutRoute[] = [
   declarations: [
     AddMemberComponent,
     filterPipe,
+    brandFilterPipe,
     AppComponent,
     MemberCreateComponent,
     HomePageComponent,
