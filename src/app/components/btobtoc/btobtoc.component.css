@@ -1,0 +1,93 @@
+@import '../home-page/home-page.component.css';
+
+input[type="search"] {
+    width: 196px;
+    height: 36px;
+    padding: 0;
+    line-height: 32px;
+    background: white;
+    color: gray;
+    border: 0;
+    font-size: 0.9em;
+    text-indent: 12px;
+    outline: none;
+    -webkit-appearance: textfield;
+    border: 1px solid #ddd!important;
+    padding-right: 20px;
+  }
+  
+  input[type="search"]::-webkit-input-placeholder {
+    color: #ddd;
+    font-weight: 400;
+    font-size: 1.2em;
+  }
+  input[type="search"]::-moz-input-placeholder {
+    color: #ddd;
+    font-weight: 400;
+    font-size: 1.2em;
+  }
+  input[type="search"]:-ms-input-placeholder {
+    color: #ddd;
+    font-weight: 400;
+    font-size: 1.2em;
+  }
+  
+  input[type="search"]+ i{
+      position: relative;
+      top: -44px;
+      left: 65px;
+  }
+  
+  input[type="search"]::-webkit-calendar-picker-indicator {
+      display:none;
+  }
+  
+  #brandListName {
+    display: inline-block;
+    position: relative;
+    margin:0px;
+    padding:5px;
+    border: 1px solid #e84466;
+    width:196px;
+    overflow: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    display:none;
+  }
+  
+  #brandListName li {
+    list-style-type: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  
+  #brandListName>li:hover {
+    background: #e84466;
+    color:white;
+  }
+  
+  #brandInputSelect {
+    height: 50px;
+  }
+  
+  #brandListName::-webkit-scrollbar
+  {
+      width: 12px;
+      background-color: white;
+  }
+  
+  #brandListName::-webkit-scrollbar-thumb
+  {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: #e84466;
+  }
+
+  .fa-angle-down, .fa-angle-up {
+    color:#01a29a;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  
+  
