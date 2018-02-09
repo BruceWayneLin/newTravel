@@ -142,11 +142,6 @@ export class DataServiceService {
 
     getPkPrice(value) {
         this.loading = true;
-        // let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-        // let options = new RequestOptions({headers});
-        // let  body = new URLSearchParams();
-        // body.append('packageId', value['packageId']);
-        // body.append('days', value['days']);
 
         return this.http.post('/CareLineTravel/travel-mbr/journey/calRateByPackage', value)
         .map((result) => {

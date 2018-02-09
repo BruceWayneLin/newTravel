@@ -33,14 +33,25 @@
 <div class="row">
   <div class="container oneCon">
     <div class="place app-index col-lg-12 text-center">
-        <h2>這次租車去哪呢？</h2>
+        <h2>請選擇車行</h2>
+        <ng-container *ngIf="!isDoneSelectedBrand">
         <div id="brandInputSelect" for="brand-filter">
-          <input [(ngModel)]="selectBrandTxt" list="brandListName" type="search" class="form-control" id="brand-filter" (keydown)="changeClassStatus(true)" (mouseleave)="changeClassStatus(false)" (focus)="changeClassStatus(true)" placeholder="請輸入您的車廠" name="brands" />
-          <i class="fa " (click)="openUl(true)" [ngClass]="changeTheIcon ? 'fa-search' : 'fa-angle-down'"></i>
+          <input [(ngModel)]="selectBrandTxt" list="brandListName" type="search" class="form-control" id="brand-filter" (keydown)="changeClassStatus(true)" (mouseleave)="changeClassStatus(false)" (focus)="changeClassStatus(true)" placeholder="輸入車行名稱" name="brands" />
+          <i class="fa " (click)="openUl()" [ngClass]="changeTheIcon ? 'fa-search' : 'fa-angle-down'"></i>
         </div>
         <ul id="brandListName" (mouseleave)="changeClassStatus(false)" (mouseover)="changeClassStatus(true)">
-            <li (click)="toAddLiVal(brandLiVal.value)" #brandLiVal data-value="{{item.value}}" *ngFor="let item of brandList | brandfilter: selectBrandTxt">{{item['name']}}</li>
+            <li (click)="toAddLiVal(item['value'])" #brandLiVal *ngFor="let item of brandList | brandfilter: selectBrandTxt">{{item['name']}}</li>
         </ul>
+        <ul id="brandListName2" (mouseleave)="closeUl(false)">
+          <li (click)="toAddLiVal(item['value'])" #brandLiVal *ngFor="let item of brandList">{{item['name']}}</li>
+        </ul>
+        </ng-container>
+        <ng-container *ngIf="isDoneSelectedBrand">
+          <div class="col-sm-12 col-xs-12 text-center myFavCon">
+            <span class="spanOfSelectedCountry">{{selectBrandTxt}}</span>
+            <button class="form-control modifiedDays" (click)="modifiedBrand()">更改車行</button>
+          </div>
+        </ng-container>
     </div>
   </div>
 </div>
@@ -62,7 +73,7 @@
     <div id="tableEndDivRow" class="row">
       <div class="container">
         <div class="col-sm-12 text-center">
-          <h3>{{startTravelDay}} ~ {{endTravelDay}}</h3>
+          <h3>{{startTravelDay}} {{startHour+':00'}} ~ {{endTravelDay}} {{endHour+':00'}}</h3>
           <h1 class="diffDayH1"><span>總共</span>{{diffDays}}<span>天</span></h1>
           <button class="form-control modifiedDays" (click)="toModifiedDays()">更改日期</button>
         </div>
@@ -131,3 +142,345 @@
   </div>
 </div>
 <!-- end of calendar -->
+
+<!-- package area -->
+<div id="flagSix" style="position:relative; top: -40px;"></div>
+<div class="row" >
+  <div class="container oneCon" style="padding-bottom: 50px;">
+  </div>
+</div>
+<div class="imAline"></div>
+<div class="row">
+  <div class="container">
+    <div class="place app-index col-lg-12 text-center">
+      <h2 class="selPkgH2">{{selPkgH2}}</h2>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <div *ngIf="!pkgCustomGo" style="margin-top:5px; margin-bottom:5px;" class="col-xs-12 text-center">
+      <h4 id="featureDescH3" class="featureDescH3">{{featureDesc}}</h4>
+    </div>
+    <div *ngIf="pkgCustomGo" class="col-xs-12 text-center">
+      <h4 class="featureDescH3">自行點選各項保障，組合需要的方案</h4>
+    </div>
+    <div *ngIf="pkgCustomGo" class="col-xs-12 text-center">
+      <div class="col-xs-4"></div>
+      <div class="col-xs-4 text-center">
+        <img id="customerLogo" [ngClass]="{'toTop':showPkgDestail}" src="{{logoImgSrc}}" class="logo img-responsive pull-left" alt="" style="margin-bottom:0px;">
+      </div>
+      <div class="col-xs-4"></div>
+    </div>
+    <div class="col-xs-1"></div>
+    <div id="btnOfPackages" class="col-xs-10 text-center">
+      <ng-container>
+        <div class="col-xs-3" *ngFor="let package of packageList; let i = index;">
+          <label class="specialPkgLabel" style="cursor:pointer;">
+          <input style="cursor:pointer;" name="packageButton" [checked]="package['isDefaultPackage']" class="form-control text-center" type="radio" ngClass="{{'packageButton'+ i}}" (click)="toGetPackageContent(package, 'remove'+ i, i)" value="{{package.packageButtonName}}"/>
+            <span style="cursor:pointer;"><i class="fa fa-check"></i> {{package.packageButtonName}}</span>
+            <div id="{{'remove'+ i}}" class="longTri" ngClass="{{package['isDefaultPackage'] == true? '' : 'hidden'}}"><img class="img-responsive" src="assets/images/pkg/triangle.png" alt=""></div>
+          </label>
+        </div>
+        <div class="col-xs-3">
+          <label class="specialPkgLabel" style="cursor:pointer;">
+          <input style="cursor:pointer;" name="packageButton" class="form-control text-center packageButton3" type="radio" (click)="pkgCustomToggle()" value=""/>
+            <span style="cursor:pointer;" class="freeChoice"><i class="fa fa-check"></i> 自由配 </span>
+            <div id="remove3" class="longTri hidden"><img class="img-responsive" src="assets/images/pkg/triangle.png" alt=""></div>
+          </label>
+        </div>
+      </ng-container>
+    </div>
+    <div class="col-xs-1"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="container packageContent">
+    <ng-container *ngIf="!pkgCustomGo">
+      <div class="packageTit place app-index col-lg-12 text-center">
+      <div class="row">
+        <div class="col-xs-3 text-center">
+          <img [ngClass]="{'toTop':showPkgDestail}" src="{{logoImgSrc}}" class="logo img-responsive pull-left" alt="">
+        </div>
+        <div class="col-xs-6 text-center">
+          <h2 id="selectNameTitle">{{selectedPackageName}}</h2>
+        </div>
+        <div class="col-xs-3 text-center" id="detailDivShift">
+          <button class="form-control detailExplian" (click)="toShowPkgDetail()">
+            詳細說明
+            <i class="fa " [ngClass]="{'fa-angle-up': showPkgDestail, 'fa-angle-down': !showPkgDestail}" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <ng-container *ngIf="!showPkgDestail">
+        <div class="secondaryPackageCon col-xs-12">
+          <div id="secondCol2" class="col-xs-2 text-center" *ngFor="let item of secondaryItems; let i = index;">
+            <img src="{{'assets/images/pkg/pkimg/' + item['pictureCode'] + '.png'}}" alt="" class="img-responsive img-center">
+            <h3 class="imgSrcH3Item">
+              {{item['insItemName']}}
+            </h3>
+            <div class="col-xs-12" style="padding:0px;" *ngFor="let obj of item['shortDetailList']; let x = index;">
+              <ul class="insItemUl">
+                <li>{{obj['desc']}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="showPkgDestail">
+        <table id="detailTabletbl" class='table-striped' style="width: 100%; text-align: left;">
+          <tr><th style="width:25%">項目</th><th style="width:50%;">險種細項</th><th style="width:25%;">理賠額度</th></tr>
+          <tr *ngFor="let item of tableList['rowList']; let i = index;">
+            <td>{{item['itemName']}}</td>
+            <td>{{item['detailName']}}</td>
+            <td>{{item['detailValue']}}</td>
+          </tr>
+        </table>
+      </ng-container>
+    </div>
+    </ng-container>
+
+    <ng-container *ngIf="pkgCustomGo">
+      <div id="titlePkg" class="packageTit place app-index col-lg-12 text-center" #eleTest [ngClass]="{'noBottom': paddingBottonZero}">
+        <div id="mobileCusPkg">
+          <div id="paddingSpe" class="row">
+            <div class="col-xs-12 text-center">
+              <div class="form-group">
+                <label style="font-size:18px;">身故殘廢</label>
+                <a (click)="toShowCusDetailContent('changefa')"><span class="shanshiContent">詳細內容</span></a>
+                <i (click)="toShowCusDetailContent('changefa')" id="changefa" ngClass="{{toggleClazForAngle == false ? 'fa fa-angle-down': 'fa fa-angle-up'}}"></i>
+                <i class="fa fa-angle-down dropDown" style="font-size:36px;top:42px!important;z-index:999;"></i>
+                <select class="form-control text-center input-md" #selectedCusPkgddd (change)="toGetCustomPackageContent(selectedCusPkgddd.value)">
+                  <option>請選擇方案金額</option>
+                  <option [selected]="package['isDefaultPackage']" [value]="package['packageId']" *ngFor="let package of cusPackageList; let i = index;">{{package['packageName']}}</option>
+                </select>
+              </div>
+              <ng-container *ngIf="windowSizeCheck()">
+                <div id="mainLongDetailDiv" class="mainLongDetail" [hidden]="!CusDetailContent">
+                  <div style="margin-right: 15px;" class="pull-right" (click)="toCloseAll()">
+                    <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                  </div>
+                  <ng-container *ngFor="let package of cusPrimaryItem; let i = index;">
+                    <ul>
+                      <ng-container *ngFor="let list of package['longDetailList']; let i = index;">
+                        <li>{{list['desc']}}</li>
+                      </ng-container>
+                    </ul>
+                  </ng-container>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row" id="paddingSpe"  *ngFor="let seconItem of cusSecondItemNa; let x = index;">
+            <div class="col-xs-12 text-center">
+              <div class="form-group">
+                <label style="font-size:18px;">
+                  {{seconItem['insItemName']}}
+                </label>
+                <a #aGotClick (click)="toGetShowContentOfPkg('ele'+x, x, aGotClick)">
+                  <span class="shanshiContent">詳細內容</span>
+                  <i class="fa fa-angle-down"></i>
+                </a>
+                <i class="fa fa-angle-down dropDown" style="font-size:36px;top:42px!important;z-index:999;"></i>
+                <select (change)="amountBtnClick(x, seconItem['amountList'][x], seconItem['insItemCode'], thisSelect.value, thisSelect)" #thisSelect class="form-control text-center input-md">
+                  <option value="dunNeed" *ngIf="!returnIfNoNeedIsNeed(seconItem['textWhenNotPickList'])">不需要</option>
+                  <option [selected]="item['isDefaultOption']" [ngValue]="seconItem" *ngFor="let item of seconItem['amountList']">
+                    {{item['amountName']}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!--mobile detail-->
+            <ng-container *ngIf="windowSizeCheck()">
+            <div class="row toShowContentAccordion" id="{{'ele' + x}}" [hidden]="!CusDetailContent"  #noNeedArea style="display: flex;">
+              <div class="mainLongDetail" class="col-xs-12 text-left">
+                <div class="pull-right" (click)="toCloseAll(x)">
+                  <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                </div>
+                <div style="margin-left: 19%;" id="mobileAmt" class="{{'amtBtnClickToShow' + x}}">
+                  <ng-container >
+                    <ng-container *ngFor="let list of seconItem['amountList']">
+                      <ng-container *ngIf="list['isDefaultOption']">
+                        <p *ngFor="let p of list['longDetailList']">
+                          {{p.desc}}
+                        </p>
+                      </ng-container>
+                    </ng-container>
+                  </ng-container>
+                </div>
+                <div class="{{'divAmtLong needClassForWord' + x}}">
+                </div>
+
+                <div class="{{'noNeedClassForWord' + x}}" [hidden]="!determineHideOrShow(seconItem['amountList'], x)" >
+                  <ng-container *ngFor="let p of seconItem['textWhenNotPickList'];let i = index;">
+                    <p>
+                      {{p}}
+                    </p>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            </ng-container>
+
+          </div>
+        </div>
+
+        <div id="deskCusPkg" *ngIf="!windowSizeCheck()">
+          <div class="row" id="rowOfBtn">
+            <div class="col-xs-2">
+              <img src="assets/images/pkg/dead.png" alt="" class="img-responsive img-center">
+            </div>
+            <div class="col-xs-2" id="paddingSpe" style="padding-right:0px;" #getUpClz>
+              <h2>身故殘廢</h2>
+              <a (click)="toShowCusDetailContent()"><span class="shanshiContent">詳細內容</span></a>
+              <i (click)="toShowCusDetailContent()" class="fa fa-angle-down"></i>
+            </div>
+            <div class="col-xs-2" *ngFor="let package of cusPackageList; let i = index;">
+            <label class="specialPkgLabel" ngClass="{{pkgCustomGo == true? 'toCusBtn' : ''}}">
+            <input name="cusPkg" [checked]="package['isDefaultPackage']" class="form-control" type="radio" ngClass="{{'packageButton'+ i}}" (click)="toGetCustomPackageContent(package)" class="form-control purposeBtn" value="{{package.packageButtonName}}"/>
+            <span><i class="fa fa-check"></i>{{package.packageButtonName}}</span>
+            </label>
+            </div>
+          </div>
+          <ng-container>
+            <div id="mainLongDetailDiv" class="mainLongDetail" [hidden]="!CusDetailContent">
+              <div style="margin-right: 15px;" class="pull-right" (click)="toCloseAll()">
+                <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+              </div>
+              <ng-container *ngFor="let package of cusPrimaryItem; let i = index;">
+                <ul>
+                  <ng-container *ngFor="let list of package['longDetailList']; let i = index;">
+                    <li>{{list['desc']}}</li>
+                  </ng-container>
+                </ul>
+              </ng-container>
+            </div>
+          </ng-container>
+
+          <ng-container *ngFor="let seconItem of cusSecondItemNa; let x = index;" #arrowUp>
+            <div class="{{'row rowOfBtn'+x}}" id="rowOfBtn">
+              <div class="col-xs-2">
+                <img src="{{'assets/images/pkg/pkimg/' + seconItem['pictureCode'] + '.png'}}" alt="" class="img-responsive img-center">
+              </div>
+              <div class="col-xs-2 text-center" id="paddingSpe" style="padding-right:0px;">
+                <h2>{{seconItem['insItemName']}}</h2>
+                <a #aGotClick (click)="toGetShowContentOfPkg('ele'+x, x, aGotClick)">
+                  <span class="shanshiContent">詳細內容</span>
+                  <i class="fa fa-angle-down"></i>
+                </a>
+              </div>
+                <div id="cusAmtBtn" class="col-xs-1">
+                  <ng-container *ngIf="seconItem['textWhenNotPickList'].length !== 0">
+                    <label (click)="doNotNeed(x, seconItem['insItemCode'])"  class="specialPkgLabel" ngClass="{{pkgCustomGo == true? 'toCusBtn' : ''}}">
+                      <input type="radio" [checked]="determineHideOrShow(seconItem['amountList'])" name="{{'btnAmt' + x}}" id="cusBtn" class="form-control purposeBtn btn btn-sm" >
+                      <span class="amtName" ><i class="checkBtn fa fa-check"></i> 不需要 </span>
+                    </label>
+                  </ng-container>
+                </div>
+              <div id="cutAmtBtn" class="col-xs-7" [ngClass]="{'NoPaddingLeft':returnIfNoNeedIsNeed(seconItem['textWhenNotPickList'])}">
+                <ng-container  *ngFor="let item of seconItem['amountList']">
+                  <div class="col-xs-3">
+                    <label (click)="amountBtnClick(x, item, seconItem['insItemCode'])" class="specialPkgLabel" ngClass="{{pkgCustomGo == true? 'toCusBtn' : ''}}">
+                      <input [checked]="item['isDefaultOption']" type="radio" name="{{'btnAmt' + x}}" id="cusBtn" class="form-control" class="form-control purposeBtn btn btn-sm" >
+                      <span class="amtName"><i class="checkBtn fa fa-check"></i>{{item['amountName']}} </span>
+                    </label>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="row toShowContentAccordion" id="{{'ele' + x}}" [hidden]="!CusDetailContent"  #noNeedArea>
+              <div class="mainLongDetail" class="col-xs-12 text-left">
+                  <div class="pull-right" (click)="toCloseAll(x)">
+                    <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                  </div>
+                <div style="margin-left: 19%;" class="{{'amtBtnClickToShow' + x}}">
+                 <ng-container >
+                  <ng-container *ngFor="let list of seconItem['amountList']">
+                    <ng-container *ngIf="list['isDefaultOption']">
+                      <p *ngFor="let p of list['longDetailList']">
+                          {{p.desc}}
+                      </p>
+                    </ng-container>
+                  </ng-container>
+                 </ng-container>
+                </div>
+                  <div class="{{'divAmtLong needClassForWord' + x}}">
+                  </div>
+
+                <div id="specialWordDivDetail" class="{{'noNeedClassForWord' + x}}" [hidden]="!determineHideOrShow(seconItem['amountList'], x)" >
+                  <ng-container *ngFor="let p of seconItem['textWhenNotPickList'];let i = index;">
+                      <p>
+                        {{p}}
+                      </p>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+      </div>
+    </ng-container>
+
+  </div>
+</div>
+
+<div class="row" id="feltNotEnoRow" class="hidden">
+    <div class="col-xs-12">
+      <div class="col-md-6 col-xs-12 text-center"></div>
+      <div id="feltNotEnoughCol" class="col-xs-12 col-md-6">
+        <span class="feltNotEnoughBtn pull-right" (click)="pkgCustomToggle()">{{pkgCustomTxt}}</span>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <div class="col-xs-12 text-center">
+      <h2 class="finalPrice">NT$ {{finalPrice}}</h2>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <div class="col-xs-12 text-center">
+      <button class="lastButtonAndGoInsured" (click)="RentalCarIsGoingToInusre()">我要投保</button>
+    </div>
+  </div>
+</div>
+<!-- end package are -->
+
+<!-- The Modal -->
+<div id="calendarModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <p>
+      <span class="close" style="margin:15px;margin-top:5px;" (click)="closeUlTimeModal()">&times;</span>
+    </p>
+    <div class="col-xs-12 text-cetner">
+      <h2>{{theDayUserSelected}}</h2>
+    </div>
+
+    <div id="timeContainer" class="col-xs-12 text-center">
+       <span>
+          <select (change)="finishSelectHr()" name="" [(ngModel)]="selectValueHour" id="" class="form-control text-center">
+              <option value="">請選擇</option>
+              <option [value]="item" *ngFor="let item of timesHr">
+                {{item+':00'}}
+              </option>
+          </select>
+       </span>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <div style="min-height:50px;" ></div>
+      </div>
+    </div>
+  </div>
+</div>
