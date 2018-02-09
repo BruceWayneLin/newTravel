@@ -929,7 +929,7 @@ export class MemberCreateComponent implements OnInit {
   }
 
   deterMineUrl(url){
-    if (url.slice(7, 20) == '/memberCreate') {
+    if (url.slice(7, 20) == '/memberCreate' || url.slice(0, 8) == '/RentCar') {
       this.toLoadMemberCreat();
     } else if (url.slice(7, 15) == '/gogoout') {
       setTimeout(function() {

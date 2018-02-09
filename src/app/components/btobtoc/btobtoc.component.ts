@@ -208,6 +208,14 @@ export class BtobtoCComponent implements OnInit {
         this.toAddLiVal(this.trackNum);
       }
     });
+    $('body').css({
+      '-webkit-overflow-scrolling': 'auto'
+    });
+    setTimeout(function(){
+      $('body').css({
+        '-webkit-overflow-scrolling': 'touch'
+      });
+    }, 500);
   }
 
   toDeterminedIfDisabledDaysNeedToHide() {
@@ -632,7 +640,7 @@ export class BtobtoCComponent implements OnInit {
       }
       //責任
       if(item['pictureCode'] == 'RESP'){
-        item['pictureCode'] = 'carBody';
+        item['pictureCode'] = 'responsibility';
       }
     })
   }
@@ -1124,7 +1132,7 @@ export class BtobtoCComponent implements OnInit {
 
   RentalCarIsGoingToInusre(){
       const dataToSendBack = {};
-      dataToSendBack['orderNumber'] = this.routerAct.queryParams['value']['orderNumber'];
+      dataToSendBack['orderNumber'] = this.routerAct.queryParams['value']['orderNumber'] ? this.routerAct.queryParams['value']['orderNumber'] : '';
       dataToSendBack['countryCode'] = '';
       dataToSendBack['cityId'] = 0;
       dataToSendBack['purpose'] = '觀光';
@@ -1150,7 +1158,7 @@ export class BtobtoCComponent implements OnInit {
         dataToSendBack['cusPackageId'] = 0;
         dataToSendBack['packageId'] = this.selectedPackage['packageId'];
       }
-      console.log(dataToSendBack);
+      // console.log(JSON.stringify(dataToSendBack));
       this.rentalCarService.RentalCarIsGoingToInusre(dataToSendBack);
   }
 }

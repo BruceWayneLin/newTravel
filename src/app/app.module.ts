@@ -68,7 +68,7 @@ export const routes: LayoutRoute[] = [
       component: {
         factory: RentalCarThemeFactoryFactory
       }
-      // breadcrumb: 'gogo error',
+      // breadcrumb: 'gogoout error頁',
     },
     component: GogooutErrorComponent
   },
@@ -78,7 +78,7 @@ export const routes: LayoutRoute[] = [
       component: {
         factory: RentalCarThemeFactoryFactory
       }
-      // breadcrumb: 'gogo error',
+      // breadcrumb: 'gogoout 取消頁',
     },
     component: GogooutCancelComponent
   },
@@ -98,10 +98,9 @@ export const routes: LayoutRoute[] = [
       component: {
         factory: RentalCarThemeFactoryFactory
       }
-      // breadcrumb: 'gogo signature',
+      // breadcrumb: 'gogoout signature',
     },
     loadChildren: './components/signature/signature.module#SignatureModule',
-    // component: SignatureGoGooutComponent
   },
   {
     path: 'travel/gogoout/previewPdf',
@@ -109,7 +108,7 @@ export const routes: LayoutRoute[] = [
       component: {
         factory: RentalCarThemeFactoryFactory
       }
-      // breadcrumb: 'gogo pdf preview',
+      // breadcrumb: 'gogoout PDF preview',
     },
     component: PreviewPdfComponent
   },
@@ -137,7 +136,7 @@ export const routes: LayoutRoute[] = [
   {
     path: 'travel/memberCreate',
     data: {
-      // breadcrumb: '會員',
+      // breadcrumb: '要保人/被保人會員',
     },
     component: MemberCreateComponent
   },
@@ -172,9 +171,16 @@ export const routes: LayoutRoute[] = [
   {
     path: 'RentCar/BtoBtoC',
     data: {
-      // breadcrumb: '檢查版本',
+      // breadcrumb: '租車B2B2C',
     },
     component: BtobtoCComponent
+  },
+  {
+    path: 'RentCar/BtoBtoC/memberCreate',
+    data: {
+      // breadcrumb: '租車會員',
+    },
+    component: MemberCreateComponent
   }
 ];
 

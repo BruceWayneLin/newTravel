@@ -28,6 +28,7 @@ export class RentalCarServiceService {
   }
 
   RentalCarIsGoingToInusre(value) {
+    console.log(JSON.stringify(value));
     const i = this.http.post('/CareLineTravel/travel-mbr/journey/savePackage', value).map(res => {
         if (res.json().isEx) {
             if(res.json().kickout){
@@ -57,7 +58,7 @@ export class RentalCarServiceService {
         if(!item){
         } else {
             this.dataService.loading = true;
-            window.location.href = '/CareLineTravel/travel-mbr/journey/loginMember?orderNumber=' + encodeURIComponent(value['orderNumber'])+ '?' + timeStampInMs;
+            window.location.href = '/CareLineTravel/travel-mbr/journey/loginMember?orderNumber=' + encodeURIComponent(item)+ '?' + timeStampInMs;
         }
     });
   }
