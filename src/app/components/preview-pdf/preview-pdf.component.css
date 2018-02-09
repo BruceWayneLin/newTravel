@@ -1,3 +1,5 @@
+@import './../member-create/member-create.component.css';
+
 @font-face {
     font-family: 'icomoon';
     src:  url('fonts/icomoon.eot?m4tj28');
@@ -102,7 +104,7 @@
     margin-right: auto;
     left: 80px;
     right: 0;
-    top: -40px;
+    top: 128px;
     z-index: 10;
   }
   
@@ -137,3 +139,41 @@
       transform: scale(0.8);
     }
   }
+
+  @media screen and (max-width:1024px){
+    hr {
+      margin: 0px;
+    }
+    .people-list-container {
+      margin-top: 15px;
+      height: 215px;
+    }
+    .fingerDiv {
+      top:60px;
+    }
+    #btnFinishedPdf {
+      margin-top: 15px!important;
+    }
+    .people-list-container .previewYourPdfBtn {
+      margin-bottom: 0px!important;
+    }
+  }
+
+  /* @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape) {
+    hr {
+      margin: 0px;
+    }
+    .people-list-container {
+      margin-top: 15px;
+      height: 215px;
+    }
+    .fingerDiv {
+      top:60px;
+    }
+    #btnFinishedPdf {
+      margin-top: 15px!important;
+    }
+    .people-list-container .previewYourPdfBtn {
+      margin-bottom: 0px!important;
+    }
+  } */
