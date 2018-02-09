@@ -90,3 +90,50 @@
     display: block;
     margin: 0 auto;
   }
+
+  .fingerDiv {
+    background: url(./images/clickHand.png);
+    background-size: contain;
+    width: 45px;
+    height: 45px;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    left: 80px;
+    right: 0;
+    top: -40px;
+    z-index: 10;
+  }
+  
+  #fingerDiv.fingerDiv.animateInite {
+    -webkit-animation: changeSizeMove 0.5s infinite; /* Safari 4+ */
+    -moz-animation:    changeSizeMove 0.5s infinite; /* Fx 5+ */
+    -o-animation:      changeSizeMove 0.5s infinite; /* Opera 12+ */
+    animation:         changeSizeMove 0.5s infinite; /* IE 10+, Fx 29+ */
+  }
+
+  @-moz-keyframes changeSizeMove {
+    0% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(0.8);
+    }
+  }
+  @-o-keyframes changeSizeMove {
+    0% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(0.8);
+    }
+  }
+  @keyframes changeSizeMove {
+    0% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(0.8);
+    }
+  }
