@@ -468,7 +468,7 @@
 
     <div id="timeContainer" class="col-xs-12 text-center">
        <span>
-          <select (change)="finishSelectHr()" name="" [(ngModel)]="selectValueHour" id="" class="form-control text-center">
+          <select (change)="finishSelectHr()" name="" [(ngModel)]="selectValueHour" id="selectValHour" class="form-control text-center">
               <option value="">請選擇</option>
               <option [value]="item" *ngFor="let item of timesHr">
                 {{item+':00'}}

@@ -480,7 +480,7 @@ export class BtobtoCComponent implements OnInit {
   }
 
   toOpenHrsSel() {
-    this.selectValueHour = '';
+    // this.selectValueHour = '';
     let modal = document.getElementById('calendarModal');
     modal.style.display = 'block';
     document.querySelector('#calendarModal').scrollIntoView();
@@ -615,7 +615,7 @@ export class BtobtoCComponent implements OnInit {
           item['pictureCode'] == 'C_ITEM_MEDICAL' ||
           item['pictureCode'] == 'MEDICAL'
       ){
-        item['pictureCode'] = 'ITEM_MEDICAL_BILL';
+        item['pictureCode'] = 'smallerKai';
       }
       if(item['pictureCode'] == 'ITEM_INCONVENIENT'){
         item['pictureCode'] = 'TAK002';
