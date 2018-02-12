@@ -181,6 +181,20 @@ export const routes: LayoutRoute[] = [
       // breadcrumb: '租車會員',
     },
     component: MemberCreateComponent
+  },
+  {
+    path: 'RentCar/BtoBtoC/confirmPage',
+    data: {
+      // breadcrumb: '租車確定',
+    },
+    component: ConfirmInfoComponent
+  },
+  {
+    path: 'RentCar/BtoBtoC/thanksPage',
+    data: {
+      // breadcrumb: '租車確定',
+    },
+    component: ThanksComponent
   }
 ];
 

@@ -111,111 +111,118 @@ export class BtobtoCComponent implements OnInit {
     this.returnObj['source'] = 'CAR_STORE_ONLINE';
     this.returnObj['pack'] = this.routerAct.queryParams['value']['pack'];
     this.trackNum = this.routerAct.queryParams['value']['__track'];
-   
     this.toLoadRentalCar();
   }
 
-  toLoadRentalCar(){
-    this.fourthBtn = {};
-    this.fourthBtn['packageId'] = '';
-    this.fourthBtn['packageName'] = '自訂方案';
-    this.fourthBtn['packageButtonName'] = '自訂方案';
-    this.fourthBtn['featureDesc'] = '選擇最符合自己需要的方案';
-    this.fourthBtn['secondaryItems'] = [];
-    this.fourthBtn['companyCode'] = '';
-    this.fourthBtn['primaryItems'] = [];
-    this.fourthBtn['table'] = {};
-    this.CusDetailContent = true;
-    this.rentalCarService.getIniData(this.returnObj).do((posts) => {
-      // banner images
-      const array = [];
-      posts.bannerList.forEach((item) => {
-        const objImage = {};
-        objImage['imageUrl'] =  item.imageUrl;
-        objImage['hoverText'] = item.hoverText;
-        objImage['linkUrl'] = item.linkUrl;
-        objImage['clickAndGoToAncher'] = item.clickAndGoToAncher;
-        array.push(objImage);
-      });
-      this.images = array;
-      this.brandList = posts['carRentalBrandInfo']['brandList'];
+  toLoadRentalCar() {
+    // at begining we call init data first
+      this.fourthBtn = {};
+      this.fourthBtn['packageId'] = '';
+      this.fourthBtn['packageName'] = '自訂方案';
+      this.fourthBtn['packageButtonName'] = '自訂方案';
+      this.fourthBtn['featureDesc'] = '選擇最符合自己需要的方案';
+      this.fourthBtn['secondaryItems'] = [];
+      this.fourthBtn['companyCode'] = '';
+      this.fourthBtn['primaryItems'] = [];
+      this.fourthBtn['table'] = {};
+      this.CusDetailContent = true;
+      this.rentalCarService.getIniData(this.returnObj).do((posts) => {
+        // banner images
+        const array = [];
+        posts.bannerList.forEach((item) => {
+          const objImage = {};
+          objImage['imageUrl'] =  item.imageUrl;
+          objImage['hoverText'] = item.hoverText;
+          objImage['linkUrl'] = item.linkUrl;
+          objImage['clickAndGoToAncher'] = item.clickAndGoToAncher;
+          array.push(objImage);
+        });
+        this.images = array;
+        this.brandList = posts['carRentalBrandInfo']['brandList'];
 
-      // calendar
-      if(new Date().getDay() == 0){
-        var tmr = new Date().setDate(new Date().getDate() + 1);
-        this.firstMon = this.getMonday(new Date(tmr));
-      }else{
-        this.firstMon = this.getMonday(new Date());
-      }
-      this.toDeterminedIfDisabledDaysNeedToHide();
+        // calendar
+        if(new Date().getDay() == 0){
+          var tmr = new Date().setDate(new Date().getDate() + 1);
+          this.firstMon = this.getMonday(new Date(tmr));
+        }else{
+          this.firstMon = this.getMonday(new Date());
+        }
+        this.toDeterminedIfDisabledDaysNeedToHide();
 
-      var d = new Date();
-      var n = d.getDay();
+        var d = new Date();
+        var n = d.getDay();
 
-      this.getDayFromBkend = (posts.productSetting['startDateLimit'] + n);
-      this.theDayBeginingNeedToRun = this.getDayFromBkend + 10;
-      this.startDayPlusLastDayNum = this.theDayBeginingNeedToRun;
-      this.startDayLimit = posts.productSetting['startDateLimit'];
-      this.ifTheStartIsPlusOneMoreDay = posts.productSetting['start'];
-      this.systemDate = posts.systemDate;
-      this.systemDateTime = posts['systemDateTime'];
-      this.textOfOverDays = '超過' + (this.getDayFromBkend - n) + '天後才出發？';
-      this.disabledDays = posts.disabledDateList;
-      this.packageList = posts.packageList;
-      this.cusPackageList = posts.cusPackageList;
-      //
-      posts.cusPackageList.filter(val => val.isDefaultPackage == true).map(
-        value => this.defaultCustomerPkg = value
-      );
-      posts.packageList.filter(val => val && val.isDefaultPackage).map(value =>
-          this.selectedPackage = value
-      );
-      this.selectedPackageName = this.selectedPackage['packageName'];
-      this.secondaryItems = this.selectedPackage['secondaryItems'];
-      this.toGetImgUrl(this.secondaryItems);
-      this.pkgPrimary = this.selectedPackage['primaryItems'];
-      this.featureDesc = this.selectedPackage['featureDesc'];
-      this.toGetLogo(this.selectedPackage['companyCode']);
-      this.fireInTheHole(this.selectedPackage['packageId'] - 1);
-      this.tableList = this.selectedPackage['table'];
-      this.purposeList = posts.purposeList;
-      this.cusPackageList = posts.cusPackageList;
-      this.defaultCustomerPkg['secondaryItems'].forEach((item) => {
-        var objBack = {};
-        item['amountList'].forEach((unit) => {
-          if(unit['isDefaultOption'] == true) {
-            objBack['companyCode'] = item['companyCode'];
-            objBack['itemCode'] = item['insItemCode'];
-            objBack['amountCode'] = unit['amountCode'];
-            this.cusItemJson.push(objBack);
+        this.getDayFromBkend = (posts.productSetting['startDateLimit'] + n);
+        this.theDayBeginingNeedToRun = this.getDayFromBkend + 10;
+        this.startDayPlusLastDayNum = this.theDayBeginingNeedToRun;
+        this.startDayLimit = posts.productSetting['startDateLimit'];
+        this.ifTheStartIsPlusOneMoreDay = posts.productSetting['start'];
+        this.systemDate = posts.systemDate;
+        this.systemDateTime = posts['systemDateTime'];
+        this.textOfOverDays = '超過' + (this.getDayFromBkend - n) + '天後才出發？';
+        this.disabledDays = posts.disabledDateList;
+        this.packageList = posts.packageList;
+        this.cusPackageList = posts.cusPackageList;
+        //
+        posts.cusPackageList.filter(val => val.isDefaultPackage == true).map(
+          value => this.defaultCustomerPkg = value
+        );
+        posts.packageList.filter(val => val && val.isDefaultPackage).map(value =>
+            this.selectedPackage = value
+        );
+        this.selectedPackageName = this.selectedPackage['packageName'];
+        this.secondaryItems = this.selectedPackage['secondaryItems'];
+        this.toGetImgUrl(this.secondaryItems);
+        this.pkgPrimary = this.selectedPackage['primaryItems'];
+        this.featureDesc = this.selectedPackage['featureDesc'];
+        this.toGetLogo(this.selectedPackage['companyCode']);
+        this.fireInTheHole(this.selectedPackage['packageId'] - 1);
+        this.tableList = this.selectedPackage['table'];
+        this.purposeList = posts.purposeList;
+        this.cusPackageList = posts.cusPackageList;
+        this.defaultCustomerPkg['secondaryItems'].forEach((item) => {
+          var objBack = {};
+          item['amountList'].forEach((unit) => {
+            if(unit['isDefaultOption'] == true) {
+              objBack['companyCode'] = item['companyCode'];
+              objBack['itemCode'] = item['insItemCode'];
+              objBack['amountCode'] = unit['amountCode'];
+              this.cusItemJson.push(objBack);
+            }
+          });
+        });
+        posts.disabledDateList.forEach((item) => {
+          this.disabledDays.push(item.date);
+        });
+        posts.disabledDateList.forEach((item) => {
+          if (item.reason) {
+            this.disabledReason = item.reason;
           }
         });
-      });
-      posts.disabledDateList.forEach((item) => {
-        this.disabledDays.push(item.date);
-      });
-      posts.disabledDateList.forEach((item) => {
-        if (item.reason) {
-          this.disabledReason = item.reason;
+      
+        this.numberOfgetDayFromBkendLastSun = this.getDayFromBkend;
+        this.travelPeriodLimit = posts.productSetting['travelPeriodLimit'];
+        this.clickAddedTotalNum = this.travelPeriodLimit + this.getDayFromBkend + 10;
+      }).delay(500).subscribe((item)=>{
+        if(this.trackNum){
+          this.toAddLiVal(this.trackNum);
         }
       });
-     
-      this.numberOfgetDayFromBkendLastSun = this.getDayFromBkend;
-      this.travelPeriodLimit = posts.productSetting['travelPeriodLimit'];
-      this.clickAddedTotalNum = this.travelPeriodLimit + this.getDayFromBkend + 10;
-    }).delay(500).subscribe((item)=>{
-      if(this.trackNum){
-        this.toAddLiVal(this.trackNum);
-      }
-    });
-    $('body').css({
-      '-webkit-overflow-scrolling': 'auto'
-    });
-    setTimeout(function(){
       $('body').css({
-        '-webkit-overflow-scrolling': 'touch'
+        '-webkit-overflow-scrolling': 'auto'
       });
-    }, 500);
+      setTimeout(function(){
+        $('body').css({
+          '-webkit-overflow-scrolling': 'touch'
+        });
+      }, 500);
+    if(this.routerAct.queryParams['value']['orderNumber']){
+      this.dataService.orderNumberForSave = this.routerAct.queryParams['value']['orderNumber'];
+      this.dataService.getCustomerHomePage().do((item)=>{
+        console.log(item);
+      }).delay(500).subscribe(()=>{
+      });
+    }
   }
 
   toDeterminedIfDisabledDaysNeedToHide() {
@@ -249,8 +256,10 @@ export class BtobtoCComponent implements OnInit {
     this.changeTheIcon = value;
     if (value) {
       document.getElementById('brandListName').style.display = 'inline-block';
+      document.getElementById('brandListName2').style.display = 'none';
     } else {
       document.getElementById('brandListName').style.display = 'none';
+      document.getElementById('brandListName2').style.display = 'inline-block';
     }
   }
 
@@ -494,10 +503,10 @@ export class BtobtoCComponent implements OnInit {
       if (this.startTravelDay === this.systemDate) {
         const maxhr = new Date(this.systemDateTime).getHours()+1;
         for(let i = maxhr; i <= 23; i++ ) {
-          if(i <= 9){
+          if(i <= 9) {
             const hrNUmber = '0' + i.toString();
             this.timesHr.push(hrNUmber);
-          }else{
+          }else {
             const hrNUmber = i.toString();
             this.timesHr.push(hrNUmber);
           }
@@ -516,7 +525,7 @@ export class BtobtoCComponent implements OnInit {
     } else if (this.endTravelDay && this.startTravelDay && this.startHour && !this.endHour) {
       this.theDayUserSelected = '選擇返回時間';
       for(let i = 0; i <= 23; i++ ) {
-        if(i <= 9){
+        if(i <= 9) {
           const hrNUmber = '0' + i.toString();
           this.timesHr.push(hrNUmber);
         }else{
@@ -581,6 +590,9 @@ export class BtobtoCComponent implements OnInit {
             } 
           }
         } else if(this.startTravelDay && !this.startHour){
+          this.toOpenHrsSel();
+        }
+        if(this.startTravelDay && this.startHour && this.endTravelDay && !this.endHour) {
           this.toOpenHrsSel();
         }
       }

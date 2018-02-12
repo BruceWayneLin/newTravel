@@ -394,7 +394,7 @@ export class DataServiceService {
     toSaveInsuredData(){
         this.loading = true;
         this.SaveInsuredData['orderNumber'] = this.orderNumberForSave;
-        console.log('132421343214233', this.SaveInsuredData);
+        console.log('saveinsuredData', this.SaveInsuredData);
         // let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
         // let options = new RequestOptions({headers});
         // let  body = new URLSearchParams();
@@ -429,7 +429,12 @@ export class DataServiceService {
             });
             i.subscribe((item)=>{
                 if(item == 'ok'){
-                    this.route.navigate(['travel/confirmPage']);
+                    if(this.route.url.slice(0, 8) == '/RentCar'){
+                        this.route.navigate(['RentCar/BtoBtoC/confirmPage'], {queryParams: {orderNumber: this.orderNumberForSave}});
+                    }
+                    if(this.route.url.slice(7, 20) == '/memberCreate'){
+                        this.route.navigate(['travel/confirmPage'], {queryParams: {orderNumber: this.orderNumberForSave}});
+                    }
                     this.loading = false;
                 } else {
                 }

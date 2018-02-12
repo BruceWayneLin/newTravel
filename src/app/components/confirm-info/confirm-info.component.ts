@@ -202,7 +202,12 @@ export class ConfirmInfoComponent implements OnInit {
       }
       this.router.navigate(['travel/gogoout'], {queryParams: {orderNumber: this.dataService.gogoOrderNumber}});
     }else{
-      this.router.navigate(['travel/memberCreate'], {queryParams: {orderNumber: this.dataService.orderNumberForSave}});
+      if(this.router.url.slice(0, 8) === '/RentCar'){
+        this.router.navigate(['RentCar/BtoBtoC/memberCreate'], {queryParams: {orderNumber: this.dataService.orderNumberForSave}});
+      }
+      if(this.router.url.slice(7, 20) === '/memberCreate'){
+        this.router.navigate(['travel/memberCreate'], {queryParams: {orderNumber: this.dataService.orderNumberForSave}});
+      }
     }
   }
 
