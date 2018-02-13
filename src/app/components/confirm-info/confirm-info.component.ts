@@ -31,11 +31,11 @@ export class ConfirmInfoComponent implements OnInit {
   insuredLocation: string;
   insuredPurpose: string;
   routeUrlGoGo: boolean = false;
-
   text4Activity: string;
   odPeriodDays: number;
   odRate: number;
   gogoOutNeedToHideCol: boolean = false;
+  rentalCarTemp: boolean;
 
   insuredList: any[];
 
@@ -121,8 +121,8 @@ export class ConfirmInfoComponent implements OnInit {
         this.applicantAddr = info['apAddressFull'];
         this.applicantBth = info['apBirthday']['year'] + '-' + info['apBirthday']['month'] + '-' + info['apBirthday']['day'];
         this.applicantEmail = info['apEmail'];
-        this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'];
-        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'];
+        this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'] + ' ' + (info['odStartDateHour'] < '10' ? '0' + info['odStartDateHour'] + ':00' : info['odStartDateHour'] + ':00');
+        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'] + ' ' + (info['odStartDateHour'] < '10' ? '0' + info['odEndDateHour'] + ':00' : info['odEndDateHour'] + ':00');
         this.insuredLocation = info['odLocation'];
         this.insuredPurpose = info['odPurpose'];
         this.inPackageButtonName = info['inPackageButtonName'];
@@ -133,6 +133,9 @@ export class ConfirmInfoComponent implements OnInit {
         this.dataService.purposeImageUrl = info['purposeImageUrl'];
         document.querySelector('#flagTop').scrollIntoView();
       });
+      if(this.router.url.slice(0, 8) == '/RentCar') {
+        this.rentalCarTemp = true;
+      }
     }
   }
 

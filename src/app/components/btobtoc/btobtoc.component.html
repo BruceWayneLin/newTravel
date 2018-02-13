@@ -9,7 +9,7 @@
   
 <div id="flagOne" style="position:relative; top: -25px;"></div>
 
-<!-- where'd like to go -->
+<!-- click me to calculate -->
 <div class="row" id="animateFlag">
   <div class="app-index container" style="padding-left:0px; padding-right:0px;">
     <div class="whereDgo col-lg-12 text-center" style="padding-top: 0px;padding-bottom: 0px;">
@@ -29,11 +29,11 @@
   </div>
 </div>
 
-<!-- place -->
+<!-- brand -->
 <div class="row">
   <div class="container oneCon">
     <div class="place app-index col-lg-12 text-center">
-        <h2>請選擇車行</h2>
+        <h2>去哪租車呢？</h2>
         <ng-container *ngIf="!isDoneSelectedBrand">
         <div id="brandInputSelect" for="brand-filter">
           <input [(ngModel)]="selectBrandTxt" list="brandListName" type="search" class="form-control" id="brand-filter" (keydown)="changeClassStatus(true)" (mouseleave)="changeClassStatus(false)" (focus)="changeClassStatus(true)" placeholder="輸入車行名稱" name="brands" />
@@ -73,7 +73,7 @@
     <div id="tableEndDivRow" class="row">
       <div class="container">
         <div class="col-sm-12 text-center">
-          <h3>{{startTravelDay}} {{startHour+':00'}} ~ {{endTravelDay}} {{endHour+':00'}}</h3>
+          <h3>{{startTravelDay}} {{startHour+':00'}} ~ {{endTravelDay}} {{endHour}}{{endMin? endMin:':00'}}</h3>
           <h1 class="diffDayH1"><span>總共</span>{{diffDays}}<span>天</span></h1>
           <button class="form-control modifiedDays" (click)="toModifiedDays()">更改日期</button>
         </div>
@@ -458,23 +458,22 @@
 <!-- The Modal -->
 <div id="calendarModal" class="modal">
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-content" style="max-width:220px;margin-top:8%!important;">
     <p>
       <span class="close" style="margin:15px;margin-top:5px;" (click)="closeUlTimeModal()">&times;</span>
     </p>
-    <div class="col-xs-12 text-cetner hidden">
-      <h2>{{theDayUserSelected}}</h2>
+    <div class="col-xs-12 text-cetner">
+      <h2 style="margin-left:0px;">{{theDayUserSelected}}</h2>
     </div>
 
-    <div id="timeContainer" class="col-xs-12 text-center">
-       <span>
-          <select (change)="finishSelectHr()" name="" [(ngModel)]="selectValueHour" id="selectValHour" class="form-control text-center">
-              <option value="">請選擇</option>
-              <option [value]="item" *ngFor="let item of timesHr">
+    <div id="timeContainer" class="col-xs-12 text-center" style="padding:0px;">
+          <ul id="selectValHour" class="form-control text-center">
+              <li value="">請選擇</li>
+              <li *ngIf="!startHour && !endHour && startTravelDay && !endTravelDay" (click)="finishSelectHr('25')">當天還車</li>
+              <li (click)="finishSelectHr(item)" *ngFor="let item of timesHr">
                 {{item+':00'}}
-              </option>
-          </select>
-       </span>
+              </li>
+          </ul>
     </div>
 
     <div class="row">
@@ -482,5 +481,28 @@
         <div style="min-height:50px;" ></div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- The Current Day Modal -->
+<div id="currentModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content" style="margin-top:18%;">
+      <p>
+        <span class="close" style="margin:15px;margin-top:5px;" (click)="closeUlTimeModal()">&times;</span>
+      </p>
+      <div class="col-xs-12 text-cetner">
+        <h2 style="display:none;"></h2>
+      </div>
+  
+      <div id="timeContainer" class="col-xs-12 text-center" style="padding:0px;">
+          <p>確定為當天還車?</p>
+      </div>
+  
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <button id="closebtn" class="closebtn2" (click)="finishSelectHr('25')">確定</button>
+        </div>
+      </div>
   </div>
 </div>

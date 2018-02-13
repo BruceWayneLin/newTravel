@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ThanksComponent implements OnInit {
   public purposeImgUrl: string;
   public couponList: any[];
+  rentalCarTemp: boolean = false;
   constructor(
       public dataService: DataServiceService,
       private routerAct: ActivatedRoute,
@@ -19,6 +20,9 @@ export class ThanksComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.router.url.slice(0, 8) == '/RentCar') {
+      this.rentalCarTemp = true;
+    }  
     var Url = window.location.href;
     var idArray = this.toGetId(Url);
     var turnBakUrl = this.toGetDataFromUrl(Url);

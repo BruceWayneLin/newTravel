@@ -1129,7 +1129,11 @@ input, input:before, input:after {
 
 /* firefox */
 @-moz-document url-prefix() {
-
+  @media screen and (min-width: 570px) {
+    #calendarTable td .checkBtn {
+      left: 25px!important;
+    }
+  }
   @media screen and (max-width: 570px) {
     #calendarTable td button {
       font-size: 18px!important;

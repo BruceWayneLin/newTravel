@@ -45,7 +45,7 @@ input[type="search"] {
     display: inline-block;
     position: relative;
     margin:0px;
-    padding:5px;
+    padding:0px;
     border: 1px solid #e84466;
     width:196px;
     overflow: auto;
@@ -59,6 +59,7 @@ input[type="search"] {
     padding-top: 5px;
     padding-bottom: 5px;
     text-align: left;
+    cursor: pointer;
   }
   
   #brandListName>li:hover {
@@ -93,6 +94,10 @@ input[type="search"] {
   #calendarModal {
     background-color: rgba(0,0,0,0.4);  
   }
+
+  #currentModal {
+    background-color: rgba(0,0,0,0.4);  
+  }
   
   #closebtn {
     color: white;
@@ -120,11 +125,20 @@ input[type="search"] {
 
   /* brandlist 2 */
 
+  @media screen and (max-width: 480px) {
+    #brandListName2 {
+      width: 250px;
+    }
+    #brandListName {
+      width: 250px;  
+    }
+  }
+
   #brandListName2 {
     display: inline-block;
     position: relative;
     margin:0px;
-    padding:5px;
+    padding:0px;
     border: 1px solid #e84466;
     width:196px;
     overflow: auto;
@@ -138,11 +152,13 @@ input[type="search"] {
     padding-top: 5px;
     padding-bottom: 5px;
     text-align: left;
+    cursor: pointer;
   }
   
   #brandListName2>li:hover {
     background: #e84466;
     color:white;
+    cursor: pointer;
   }
   
   #brandInputSelect {
@@ -161,3 +177,53 @@ input[type="search"] {
       -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
       background-color: #e84466;
   }
+
+  #selectValHour {
+    display: inline-block;
+    position: relative;
+    margin:0px;
+    padding:0px;
+    border: 1px solid #e84466;
+    width:196px;
+    overflow: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    min-height: 300px;
+    z-index: 11;
+  }
+  
+  #selectValHour li {
+    list-style-type: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  #selectValHour>li:hover {
+    background: #e84466;
+    color:white;
+    cursor: pointer;
+  }
+  #selectValHour::-webkit-scrollbar
+  {
+      width: 12px;
+      background-color: white;
+  }
+  
+  #selectValHour::-webkit-scrollbar-thumb
+  {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: #e84466;
+  }
+
+    ::-moz-scrollbar {
+      background-color: white;
+    }
+    ::-moz-scrollbar-track {
+      background-color: white;
+    }
+    ::-moz-scrollbar-thumb {
+      background-color: white;
+    }

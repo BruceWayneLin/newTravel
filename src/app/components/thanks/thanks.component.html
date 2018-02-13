@@ -1,3 +1,15 @@
+<ng-container *ngIf="rentalCarTemp">
+<div class="row firstRow" >
+  <div class="container">
+    <div class="col-xs-12 text-center">
+      <div class="image-center">
+        <img src="./assets/images/rentalCarThanks.png" alt="" class="img-responsive">
+      </div>
+    </div>
+  </div>
+</div>
+</ng-container>
+<ng-container *ngIf="!rentalCarTemp">
 <div class="row firstRow" >
   <div class="container">
     <div class="col-xs-12 text-center">
@@ -7,6 +19,7 @@
     </div>
   </div>
 </div>
+</ng-container>
 
 <div class="row">
   <div class="container imgH2">
