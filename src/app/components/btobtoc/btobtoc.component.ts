@@ -89,6 +89,7 @@ export class BtobtoCComponent implements OnInit {
   secondSelectOn: Boolean;
   trackNum: any;
   endMin: String;
+  systemHour: any;
   fourthBtn: {};
 
   @ViewChild('eleTest')  el:ElementRef;
@@ -193,6 +194,7 @@ export class BtobtoCComponent implements OnInit {
         this.disabledDays = posts.disabledDateList;
         this.packageList = posts.packageList;
         this.cusPackageList = posts.cusPackageList;
+        this.systemHour = posts['systemDateTimeHour'] + 1;
         //
         posts.cusPackageList.filter(val => val.isDefaultPackage == true).map(
           value => this.defaultCustomerPkg = value
@@ -522,11 +524,12 @@ export class BtobtoCComponent implements OnInit {
     console.log(this.endTravelDay);
     console.log(this.startHour);
     console.log(this.endHour);
+
     if (this.startTravelDay && !this.endTravelDay && !this.startHour && !this.endHour) {
-      this.theDayUserSelected = '選擇出發時間';
+      this.theDayUserSelected = '出發時間';
       if (this.startTravelDay === this.systemDate) {
-        const maxhr = new Date(this.systemDateTime).getHours()+1;
-        for(let i = maxhr; i <= 23; i++ ) {
+        // const maxhr = this.systemHour + 1;
+        for(let i = this.systemHour; i <= 23; i++ ) {
           if(i <= 9) {
             const hrNUmber = '0' + i.toString();
             this.timesHr.push(hrNUmber);
@@ -547,7 +550,7 @@ export class BtobtoCComponent implements OnInit {
         }
       }
     } else if (this.endTravelDay && this.startTravelDay && this.startHour && !this.endHour) {
-      this.theDayUserSelected = '選擇返回時間';
+      this.theDayUserSelected = '還車時間';
       for(let i = 0; i <= 23; i++ ) {
         if(i <= 9) {
           const hrNUmber = '0' + i.toString();
@@ -765,7 +768,7 @@ export class BtobtoCComponent implements OnInit {
       this.startTravelDay = new Date(this.systemDate).getFullYear().toString() + '-' + ((new Date(this.systemDate).getMonth()+1) < 10 ? '0'+(new Date(this.systemDate).getMonth()+1).toString(): (new Date(this.systemDate).getMonth()+1).toString()) + '-' + new Date(this.systemDate).getDate().toString();
       this.endTravelDay = this.startTravelDay;
       this.endMin = ':59';
-      this.startHour = new Date(this.systemDateTime).getHours()+1;
+      this.startHour = this.systemHour;
       this.endHour = '23';
       this.selectTravelDayIsDone = true;
       this.tableShowHidden = true;

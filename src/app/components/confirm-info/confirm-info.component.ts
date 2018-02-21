@@ -113,8 +113,17 @@ export class ConfirmInfoComponent implements OnInit {
         $('html, body').animate({scrollTop: '0px'}, 0);
       });
     } else {
+      // rentcar and travel
       this.dataService.getConfirmInfo().subscribe((item) => {
-        let info = item;
+        const info = item;
+        if (info['text4AdjustStartTime'].length > 0) {
+            const modal = document.getElementById('myModal');
+            modal.style.display = 'block';
+            const returnAlertArr = [];
+            returnAlertArr.push(info['text4AdjustStartTime']);
+            this.dataService.AlertTXT = returnAlertArr;
+            document.querySelector('#myModal').scrollIntoView();
+        }
         this.applicantName = info['apLastName'] + info['apFirstName'];
         this.applicantMobile = info['apMobile'];
         this.applicantPid = info['apPid'];

@@ -545,7 +545,6 @@ export class DataServiceService {
             objSendBak['orderNumber'] = this.orderNumberForSave;
             return this.http.post('/CareLineTravel/travel-mbr/journey/getData4ConfirmPage', objSendBak).map(res => {
                 this.loading = false;
-                console.log(res.json());
                 return res.json();
             });
         }else{

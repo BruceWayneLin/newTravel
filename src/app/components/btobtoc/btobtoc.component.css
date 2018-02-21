@@ -227,3 +227,42 @@ input[type="search"] {
     ::-moz-scrollbar-thumb {
       background-color: white;
     }
+
+#currentModal .modal-content {
+  margin-top:18%;
+}
+#calendarModal .modal-content {
+  margin-top:8%;
+}
+
+@media screen and (max-width:480px) {
+  #calendarModal .modal-content {
+    margin-top:15%;
+  }
+  #currentModal .modal-content {
+    margin-top:50%;
+  }
+  #secondCol2 {
+    min-height: 250px;
+  }
+}
+
+
+@-moz-document url-prefix() { 
+  @media screen and (min-width: 1200px) {
+    #btnOfPackages .col-xs-3:nth-child(3) .specialPkgLabel span {
+      left: 25%!important;
+    }
+    #calendarTable .checkBtnTxt {
+      left: 19%!important;
+    }
+    #calendarTable td .checkBtn {
+      top: -30px!important;
+    }
+    #rowOfBtn .specialPkgLabel input:checked + span, .col-xs-7.NoPaddingLeft#cutAmtBtn .specialPkgLabel.toCusBtn span {
+      display: inline-block;
+      width: 63%;
+      vertical-align:top;
+    }
+  }
+}
