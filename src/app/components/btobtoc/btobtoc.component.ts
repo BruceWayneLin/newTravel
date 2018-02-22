@@ -763,17 +763,33 @@ export class BtobtoCComponent implements OnInit {
     var modal = document.getElementById('calendarModal');
     modal.style.display = "none";
     if(this.selectValueHour === '25'){
-      //same day return
-      this.closeUlTimeModal();
-      this.startTravelDay = new Date(this.systemDate).getFullYear().toString() + '-' + ((new Date(this.systemDate).getMonth()+1) < 10 ? '0'+(new Date(this.systemDate).getMonth()+1).toString(): (new Date(this.systemDate).getMonth()+1).toString()) + '-' + new Date(this.systemDate).getDate().toString();
-      this.endTravelDay = this.startTravelDay;
-      this.endMin = ':59';
-      this.startHour = this.systemHour;
-      this.endHour = '23';
-      this.selectTravelDayIsDone = true;
-      this.tableShowHidden = true;
-      this.diffDays = 1;
-      this.toSendHours();
+      const systemDayForScope = new Date(this.systemDate).getFullYear().toString() + '-' + ((new Date(this.systemDate).getMonth()+1) < 10 ? '0'+(new Date(this.systemDate).getMonth()+1).toString(): (new Date(this.systemDate).getMonth()+1).toString()) + '-' + new Date(this.systemDate).getDate().toString();
+      if(this.startTravelDay !== systemDayForScope){
+        //same day return
+        this.closeUlTimeModal();
+        this.endTravelDay = this.startTravelDay;
+        this.endMin = ':59';
+        this.startHour = '00';
+        this.endHour = '23';
+        this.selectTravelDayIsDone = true;
+        this.tableShowHidden = true;
+        this.diffDays = 1;
+        this.toSendHours();
+      } else {
+        //same day return
+        this.closeUlTimeModal();
+        this.startTravelDay = new Date(this.systemDate).getFullYear().toString() + '-' + ((new Date(this.systemDate).getMonth()+1) < 10 ? '0'+(new Date(this.systemDate).getMonth()+1).toString(): (new Date(this.systemDate).getMonth()+1).toString()) + '-' + new Date(this.systemDate).getDate().toString();
+        this.endTravelDay = this.startTravelDay;
+        this.endMin = ':59';
+        if(!this.startHour){
+          this.startHour = this.systemHour;
+        }
+        this.endHour = '23';
+        this.selectTravelDayIsDone = true;
+        this.tableShowHidden = true;
+        this.diffDays = 1;
+        this.toSendHours();
+      }
     }else{
       this.endMin = '';
       //normal select option 
