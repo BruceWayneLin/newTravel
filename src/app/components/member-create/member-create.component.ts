@@ -162,12 +162,21 @@ export class MemberCreateComponent implements OnInit {
 
   checkAloneBd(){
     this.toRecheckAgain();
-    let currentYear = new Date(this.countBrthDayFromSelectedBtn).getFullYear();
-    let currentMonth = new Date(this.countBrthDayFromSelectedBtn).getMonth() + 1;
-    let currentDay = new Date(this.countBrthDayFromSelectedBtn).getDate();
+    const currentYear = new Date(this.countBrthDayFromSelectedBtn).getFullYear();
+    const currentMonth = new Date(this.countBrthDayFromSelectedBtn).getMonth() + 1;
+    const currentDay = new Date(this.countBrthDayFromSelectedBtn).getDate();
     if(!this.routeUrlGoGoNeedToHide){
       if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay){
-        var userAge = this.calculate_age(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+        if(this.router.url.slice(7, 15) == '/gogoout'){
+          const userAge = this.calculate_for_BT_TR_age_From_(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+        } else {
+          const userAge = this.calculate_age(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+        }
+        console.log('被保險人', userAge);
+        console.log('出發日年', currentYear);
+        console.log('出發日月', currentMonth);
+        console.log('出發日日', currentDay);
+
         if(userAge < this.insuredMinAge || userAge > this.insuredAgeMax){
           this.aloneBdWrong = true;
           this.aloneBdEmpty = false;
@@ -363,6 +372,7 @@ export class MemberCreateComponent implements OnInit {
       this.applicantAloneBirthYear = this.pBirthYear;
       this.applicantAloneBirthMonth = this.pBirthMonth;
       this.applicantAloneBirthDay = this.pBirthDay;
+      this.checkAloneBd();
 
       this.aloneLastNameEmpty = false;
       this.aloneFirstNameEmpty = false;
@@ -759,6 +769,25 @@ export class MemberCreateComponent implements OnInit {
   calculate_age(birth_month,birth_day,birth_year)
   {
     let today_date = new Date();
+    let today_year = today_date.getFullYear();
+    let today_month = today_date.getMonth();
+    let today_day = today_date.getDate();
+    let age = today_year - birth_year;
+
+    if ( today_month < (birth_month - 1))
+    {
+      age--;
+    }
+    if (((birth_month - 1) == today_month) && (today_day < birth_day))
+    {
+      age--;
+    }
+    return age;
+  }
+
+  calculate_for_BT_TR_age_From_(birth_month,birth_day,birth_year)
+  {
+    let today_date = new Date(this.countBrthDayFromSelectedBtn);
     let today_year = today_date.getFullYear();
     let today_month = today_date.getMonth();
     let today_day = today_date.getDate();
