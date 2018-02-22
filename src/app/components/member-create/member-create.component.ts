@@ -363,7 +363,6 @@ export class MemberCreateComponent implements OnInit {
       this.aloneBdWrong = false;
       this.aloneNameFirstChinese = false;
       this.aloneNameLastChinese = false;
-      this.checkAloneBd();
 
     } else {
       // this.checkVal();
