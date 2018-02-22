@@ -168,9 +168,9 @@ export class MemberCreateComponent implements OnInit {
     if(!this.routeUrlGoGoNeedToHide){
       if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay){
         if(this.router.url.slice(7, 15) == '/gogoout'){
-          const userAge = this.calculate_for_BT_TR_age_From_(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+          var userAge = this.calculate_for_BT_TR_age_From_(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
         } else {
-          const userAge = this.calculate_age(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+          var userAge = this.calculate_age(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
         }
         console.log('被保險人', userAge);
         console.log('出發日年', currentYear);
@@ -363,6 +363,8 @@ export class MemberCreateComponent implements OnInit {
       this.aloneBdWrong = false;
       this.aloneNameFirstChinese = false;
       this.aloneNameLastChinese = false;
+      this.checkAloneBd();
+
     } else {
       // this.checkVal();
       this.applicantAloneLockInput = true;
