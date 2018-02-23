@@ -130,8 +130,14 @@ export class ConfirmInfoComponent implements OnInit {
         this.applicantAddr = info['apAddressFull'];
         this.applicantBth = info['apBirthday']['year'] + '-' + info['apBirthday']['month'] + '-' + info['apBirthday']['day'];
         this.applicantEmail = info['apEmail'];
-        this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'] + ' ' + (info['odStartDateHour'] < '10' ? '0' + info['odStartDateHour'] + ':00' : info['odStartDateHour'] + ':00');
-        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'] + ' ' + (info['odStartDateHour'] < '10' ? '0' + info['odEndDateHour'] + ':00' : info['odEndDateHour'] + ':00');
+        if(this.router.url.slice(0, 8) == '/RentCar') {
+          this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'] + ' ' + (info['odStartDateHour'] < '10' ? '0' + info['odStartDateHour'] + ':00' : info['odStartDateHour'] + ':00');
+          this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'] + ' ' + (info['odStartDateHour'] < '10' ? '0' + info['odEndDateHour'] + ':00' : info['odEndDateHour'] + ':00');
+        }else{
+          this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'];
+        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'];
+        }
+        
         this.insuredLocation = info['odLocation'];
         this.insuredPurpose = info['odPurpose'];
         this.inPackageButtonName = info['inPackageButtonName'];
@@ -204,6 +210,7 @@ export class ConfirmInfoComponent implements OnInit {
   }
 
   getBakInfo(){
+    console.log(this.router.url.slice(0, 8));
     this.dataService.backFromConfirm = true;
     if(this.router.url.slice(7, 15) == '/gogoout'){
       if(!this.dataService.gogoOrderNumber){
@@ -217,7 +224,7 @@ export class ConfirmInfoComponent implements OnInit {
       if(this.router.url.slice(0, 8) === '/RentCar'){
         this.router.navigate(['RentCar/BtoBtoC/memberCreate'], {queryParams: {orderNumber: this.dataService.orderNumberForSave}});
       }
-      if(this.router.url.slice(7, 20) === '/memberCreate'){
+      if(this.router.url.slice(0, 19) === '/travel/confirmPage'){
         this.router.navigate(['travel/memberCreate'], {queryParams: {orderNumber: this.dataService.orderNumberForSave}});
       }
     }

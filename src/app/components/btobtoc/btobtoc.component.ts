@@ -10,7 +10,7 @@ import {
 import { DataServiceService } from '../../services/data-service.service';
 import { RentalCarServiceService } from '../../services/rental-car-service.service';
 import { ActivatedRoute, RouterModule, Router } from "@angular/router";
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-btobtoc',
@@ -91,6 +91,8 @@ export class BtobtoCComponent implements OnInit {
   endMin: String;
   systemHour: any;
   fourthBtn: {};
+  startMinute: any = '00';
+  endMinute: any = '00';
 
   @ViewChild('eleTest')  el:ElementRef;
   @ViewChild('getUpClz') getUpClz:ElementRef;
@@ -123,6 +125,7 @@ export class BtobtoCComponent implements OnInit {
     this.diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     if(this.startTravelDay === this.endTravelDay){
       this.endMin = ':59';
+      this.endMinute = '59';
     }else{
       this.endMin = '';
     }
@@ -417,6 +420,7 @@ export class BtobtoCComponent implements OnInit {
   }
 
   toModifiedDays() {
+    this.textOfSelectingDays = '請點選租車出發日與歸還日';
     this.tableShowHidden = false;
     this.selectTravelDayIsDone = false;
     this.modifiedClicked = true;
@@ -500,7 +504,7 @@ export class BtobtoCComponent implements OnInit {
     if(this.theTimeClicked == this.totalTimesTimes){
       this.getDayFromBkend = this.travelPeriodLimit;
       this.selectTravelDayIsDone = false;
-      this.toShowMoreDays = false;
+      this.toShowMoreDays = true;
       this.textOfOverDays = '出國超過' + this.travelPeriodLimit + '天？';
     }else{
       let testDayAddOneMonth = new Date(new Date().getFullYear(), new Date().getMonth()+this.theTimeClicked, 0);
@@ -580,6 +584,8 @@ export class BtobtoCComponent implements OnInit {
         this.firstMon = new Date(this.startTravelDay);
         this.theDayBeginingNeedToRun = this.clickAddedTotalNum;
         this.totalTimesTimes = Math.round(this.travelPeriodLimit / 30);
+        // only temp click times for 30 days limit only so we turn the total times to 2
+        this.totalTimesTimes = 2;
         this.selectTravelDayIsDone = true;
         if(this.totalTimesTimes === 2){
           this.toShowMoreDays = false;
@@ -769,6 +775,7 @@ export class BtobtoCComponent implements OnInit {
         this.closeUlTimeModal();
         this.endTravelDay = this.startTravelDay;
         this.endMin = ':59';
+        this.endMinute = '59';
         this.startHour = '00';
         this.endHour = '23';
         this.selectTravelDayIsDone = true;
@@ -781,6 +788,7 @@ export class BtobtoCComponent implements OnInit {
         this.startTravelDay = new Date(this.systemDate).getFullYear().toString() + '-' + ((new Date(this.systemDate).getMonth()+1) < 10 ? '0'+(new Date(this.systemDate).getMonth()+1).toString(): (new Date(this.systemDate).getMonth()+1).toString()) + '-' + new Date(this.systemDate).getDate().toString();
         this.endTravelDay = this.startTravelDay;
         this.endMin = ':59';
+        this.endMinute = '59';
         if(!this.startHour){
           this.startHour = this.systemHour;
         }
@@ -851,10 +859,24 @@ export class BtobtoCComponent implements OnInit {
         const oneDay = 24*60*60*1000;
         const firstDate = new Date(this.startTravelDay);
         const secondDate = new Date(this.endTravelDay);
-        console.log(firstDate);
-        console.log(secondDate);
-        const diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay))) + 1;
-        this.diffDays = diffDays;
+        const startHrScope = (Number(this.startHour)+1).toString();
+        const endHrScope = (Number(this.endHour)+1).toString();
+        var firstDay = this.startTravelDay + ' ' + startHrScope + ':00';
+        var secondDay = this.endTravelDay + ' ' + endHrScope + ':00';
+        console.log('startHrScope', firstDay);
+        console.log('endHrScope', secondDay);
+
+        var a = moment(firstDay);
+        var b = moment(secondDay);
+       
+        var diffDays = Math.ceil(b.diff(a, 'hours')/24);
+        console.log(diffDays);
+        // 1
+        if(diffDays === 0) {
+          this.diffDays = 1;
+        } else {
+          this.diffDays = diffDays;
+        }
         if(this.pkgCustomGo === false){
             this.getPriceServiceData();
         } else {
@@ -1251,8 +1273,11 @@ export class BtobtoCComponent implements OnInit {
         dataToSendBack['startDate'] = this.startTravelDay;
         dataToSendBack['endDate'] = this.endTravelDay;
         dataToSendBack['startHour'] = this.startHour;
+        dataToSendBack['startMinute'] = this.startMinute;
+        dataToSendBack['endMinute'] = this.endMinute;
         dataToSendBack['endHour'] = this.endHour;
         dataToSendBack['trackingId'] = this.selectedBrand;
+
 
         dataToSendBack['packageId'] = this.selectedPackage['packageId'];
 
@@ -1270,6 +1295,5 @@ export class BtobtoCComponent implements OnInit {
         }
         this.rentalCarService.RentalCarIsGoingToInusre(dataToSendBack);
       }
-      
   }
 }

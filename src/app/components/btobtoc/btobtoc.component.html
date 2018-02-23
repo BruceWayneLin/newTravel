@@ -37,7 +37,7 @@
         <ng-container *ngIf="!isDoneSelectedBrand">
         <div id="brandInputSelect" for="brand-filter">
           <input [(ngModel)]="selectBrandTxt" list="brandListName" type="search" class="form-control" id="brand-filter" (keydown)="changeClassStatus(true)" (mouseleave)="changeClassStatus(false)" (focus)="changeClassStatus(true)" placeholder="輸入車行名稱" name="brands" />
-          <i class="fa " (click)="openUl()" [ngClass]="changeTheIcon ? 'fa-search' : 'fa-angle-down'"></i>
+          <i class="fa " (click)="openUl()" [ngClass]="changeTheIcon ? 'fa-search' : 'fa-angle-down'" style="font-size: 28px;top:-46px;"></i>
         </div>
         <ul id="brandListName" (mouseleave)="changeClassStatus(false)" (mouseover)="changeClassStatus(true)">
             <li (click)="toAddLiVal(item['value'])" #brandLiVal *ngFor="let item of brandList | brandfilter: selectBrandTxt">{{item['name']}}</li>
@@ -489,19 +489,19 @@
     <!-- Modal content -->
     <div class="modal-content">
       <p>
-        <span class="close" style="margin:15px;margin-top:5px;" (click)="closeUlTimeModal()">&times;</span>
+        <span class="close" style="margin:15px;margin-top:5px;z-index:2;position:relative;" (click)="closeUlTimeModal()">&times;</span>
       </p>
-      <div class="col-xs-12 text-cetner">
-        <h2 style="display:none;"></h2>
+      <div class="col-xs-12 text-cetner" style="position: absolute; top: -15px;z-index:1;">
+        <h2>提示訊息！</h2>
       </div>
   
-      <div id="timeContainer" class="col-xs-12 text-center" style="padding:0px;">
+      <div id="timeContainer" class="col-xs-12 text-center" style="padding:0px;margin-top:30px;margin-bottom:15px;">
           <p>確定為當天還車?</p>
       </div>
   
       <div class="row">
         <div class="col-xs-12 text-center">
-          <button id="closebtn" class="closebtn2" (click)="finishSelectHr('25')">確定</button>
+          <button style="border-color: #e84466; background-color:#e84466; color:white;" id="closebtn" class="closebtn2" (click)="finishSelectHr('25')">確定</button>
         </div>
       </div>
   </div>

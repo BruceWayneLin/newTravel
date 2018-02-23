@@ -24,9 +24,13 @@ h2 {
   font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
 }
 
+.imgH2 b {
+  color: #e84466;
+}
+
 .imgH2 h3 {
   font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif;
-  color: #e84466;
+  color: #808080;
   font-weight: 400;
   font-size: 20px;
 }

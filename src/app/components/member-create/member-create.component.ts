@@ -167,11 +167,12 @@ export class MemberCreateComponent implements OnInit {
     const currentDay = new Date(this.countBrthDayFromSelectedBtn).getDate();
     if(!this.routeUrlGoGoNeedToHide){
       if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay){
-        if(this.router.url.slice(7, 15) == '/gogoout'){
-          var userAge = this.calculate_for_BT_TR_age_From_(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
-        } else {
-          var userAge = this.calculate_age(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
-        }
+        var userAge = this.calculate_for_BT_TR_age_From_(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+
+        // if(this.router.url.slice(7, 15) == '/gogoout'){
+        // } else {
+        //   var userAge = this.calculate_for_BT_TR_age_From_(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+        // }
         console.log('被保險人', userAge);
         console.log('出發日年', currentYear);
         console.log('出發日月', currentMonth);
@@ -1287,6 +1288,9 @@ export class MemberCreateComponent implements OnInit {
   toLoadRentalCar() {
     this.rentalCarTemplate = true;
     this.routeUrlGoGoNeedToHide = false;
+    this.hiddenAtBegining = false;
+    this.firstTimeClickHaoA = false;
+    this.noGoWithYourFds = false;
     this.gogoAddrAreaFail = false;
     this.gogoAddrCityFail = false;
     this.gogoAddrFail = false;

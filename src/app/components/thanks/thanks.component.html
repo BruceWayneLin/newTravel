@@ -37,22 +37,23 @@
     </div>
   </div>
 </div>
-
-<div class="row">
-  <div class="container">
-    <div class="div col-xs-12 text-center">
-      <h2>您獲得的優惠券 (可至會員專區查詢)</h2>
+<div [hidden]="rentalCarTemp">
+  <div class="row">
+    <div class="container">
+      <div class="div col-xs-12 text-center">
+        <h2>您獲得的優惠券 (可至會員專區查詢)</h2>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="row couponArea">
-  <div class="container">
-    <div class="col-xs-12 text-center">
-      <div class="col-xs-6" *ngFor="let item of couponList; let i = index;">
-        <div class="inner">
-          <div class="couponIma col-xs-12">
-            <img style="margin:auto;" class="img-responsive" [src]="item['imageUrl']" alt="">
+  <div class="row couponArea">
+    <div class="container">
+      <div class="col-xs-12 text-center">
+        <div class="col-xs-6" *ngFor="let item of couponList; let i = index;">
+          <div class="inner">
+            <div class="couponIma col-xs-12">
+              <img style="margin:auto;" class="img-responsive" [src]="item['imageUrl']" alt="">
+            </div>
           </div>
         </div>
       </div>
