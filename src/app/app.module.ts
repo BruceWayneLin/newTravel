@@ -50,7 +50,7 @@ import { SharedDirectiveModule } from 'cl-layout/src/app/shared/directive/shared
 import { BtobtoCComponent } from './components/btobtoc/btobtoc.component';
 import { RentalCarServiceService } from './services/rental-car-service.service';
 import { brandFilterPipe } from './components/btobtoc/filter/filter-brand';
-import { NavigationModule } from './shared/navigation/navigation.module';
+import { RouterJumperComponent } from './components/router-jumper/router-jumper.component';
 
 export const routes: LayoutRoute[] = [
   {
@@ -196,6 +196,13 @@ export const routes: LayoutRoute[] = [
       // breadcrumb: '租車確定',
     },
     component: ThanksComponent
+  },
+  {
+    path: '**',
+    data: {
+      // breadcrumb: '租車確定',
+    },
+    component: RouterJumperComponent
   }
 ];
 
@@ -214,7 +221,8 @@ export const routes: LayoutRoute[] = [
     PreviewPdfComponent,
     GogooutErrorComponent,
     GogooutCancelComponent,
-    BtobtoCComponent
+    BtobtoCComponent,
+    RouterJumperComponent
   ],
   exports: [
   ],
@@ -223,7 +231,6 @@ export const routes: LayoutRoute[] = [
     LayoutModule.forRoot({
       carelineProjectType: CarelineProjectType.travel
     }),
-    NavigationModule,
     // BreadcrumbsModule,
     OwlCarouselModule,
     ReactiveFormsModule,
