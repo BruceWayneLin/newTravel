@@ -14,6 +14,7 @@ import { SuiSelectModule } from 'ng2-semantic-ui';
 import { MemberCreateComponent } from './components/member-create/member-create.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ConfirmInfoComponent } from './components/confirm-info/confirm-info.component';
+import { NavigationModule } from './shared/navigation/navigation.module';
 
 import * as $ from 'jquery';
 
@@ -47,9 +48,14 @@ import { SignatureComponent } from './components/signature/signature.component';
 import { GogooutErrorComponent } from './components/gogoout-error/gogoout-error.component';
 import { GogooutCancelComponent } from './components/gogoout-cancel/gogoout-cancel.component';
 import { SharedDirectiveModule } from 'cl-layout/src/app/shared/directive/shared-directive.module';
+import { BtobtoCComponent } from './components/btobtoc/btobtoc.component';
+import { RentalCarServiceService } from './services/rental-car-service.service';
+import { brandFilterPipe } from './components/btobtoc/filter/filter-brand';
+import { RouterJumperComponent } from './components/router-jumper/router-jumper.component';
+
 export const routes: LayoutRoute[] = [
   {
-    path: 'gogoout',
+    path: 'travel/gogoout',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
@@ -59,27 +65,27 @@ export const routes: LayoutRoute[] = [
     component: MemberCreateComponent
   },
   {
-    path: 'gogooutError',
+    path: 'travel/gogooutError',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
       }
-      // breadcrumb: 'gogo error',
+      // breadcrumb: 'gogoout error頁',
     },
     component: GogooutErrorComponent
   },
   {
-    path: 'gogooutCancel',
+    path: 'travel/gogooutCancel',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
       }
-      // breadcrumb: 'gogo error',
+      // breadcrumb: 'gogoout 取消頁',
     },
     component: GogooutCancelComponent
   },
   {
-    path: 'gogoout/confirm',
+    path: 'travel/gogoout/confirm',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
@@ -89,23 +95,22 @@ export const routes: LayoutRoute[] = [
     component: ConfirmInfoComponent
   },
   {
-    path: 'gogoout/signature',
+    path: 'travel/gogoout/signature',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
       }
-      // breadcrumb: 'gogo signature',
+      // breadcrumb: 'gogoout signature',
     },
     loadChildren: './components/signature/signature.module#SignatureModule',
-    // component: SignatureGoGooutComponent
   },
   {
-    path: 'gogoout/previewPdf',
+    path: 'travel/gogoout/previewPdf',
     data: {
       component: {
         factory: RentalCarThemeFactoryFactory
       }
-      // breadcrumb: 'gogo pdf preview',
+      // breadcrumb: 'gogoout PDF preview',
     },
     component: PreviewPdfComponent
   },
@@ -117,35 +122,42 @@ export const routes: LayoutRoute[] = [
     component: HomePageComponent
   },
   {
-    path: 'index',
+    path: 'travel',
     data: {
       // breadcrumb: '首頁',
     },
     component: HomePageComponent
   },
   {
-    path: 'memberCreate',
+    path: 'travel/index',
     data: {
-      // breadcrumb: '會員',
+      // breadcrumb: '首頁',
+    },
+    component: HomePageComponent
+  },
+  {
+    path: 'travel/memberCreate',
+    data: {
+      // breadcrumb: '要保人/被保人會員',
     },
     component: MemberCreateComponent
   },
   {
-    path: 'confirmPage',
+    path: 'travel/confirmPage',
     data: {
       // breadcrumb: '確認投保資訊',
     },
     component: ConfirmInfoComponent
   },
   {
-    path: 'thanksPage',
+    path: 'travel/thanksPage',
     data: {
       // breadcrumb: '投保感謝',
     },
     component: ThanksComponent
   },
   {
-    path: 'failPayment',
+    path: 'travel/failPayment',
     data: {
       // breadcrumb: '付款失敗',
     },
@@ -157,17 +169,49 @@ export const routes: LayoutRoute[] = [
       // breadcrumb: '檢查版本',
     },
     component: VersionComponent
+  },
+  {
+    path: 'RentCar/BtoBtoC',
+    data: {
+      // breadcrumb: '租車B2B2C',
+    },
+    component: BtobtoCComponent
+  },
+  {
+    path: 'RentCar/BtoBtoC/memberCreate',
+    data: {
+      // breadcrumb: '租車會員',
+    },
+    component: MemberCreateComponent
+  },
+  {
+    path: 'RentCar/BtoBtoC/confirmPage',
+    data: {
+      // breadcrumb: '租車確定',
+    },
+    component: ConfirmInfoComponent
+  },
+  {
+    path: 'RentCar/BtoBtoC/thanksPage',
+    data: {
+      // breadcrumb: '租車確定',
+    },
+    component: ThanksComponent
+  },
+  {
+    path: '**',
+    data: {
+      // breadcrumb: '租車確定',
+    },
+    component: RouterJumperComponent
   }
-  // {
-  //   path: 'signature',
-  //   loadChildren: './components/signature/signature.module#SignatureModule'
-  // }
 ];
 
 @NgModule({
   declarations: [
     AddMemberComponent,
     filterPipe,
+    brandFilterPipe,
     AppComponent,
     MemberCreateComponent,
     HomePageComponent,
@@ -177,7 +221,9 @@ export const routes: LayoutRoute[] = [
     VersionComponent,
     PreviewPdfComponent,
     GogooutErrorComponent,
-    GogooutCancelComponent
+    GogooutCancelComponent,
+    BtobtoCComponent,
+    RouterJumperComponent
   ],
   exports: [
   ],
@@ -193,6 +239,7 @@ export const routes: LayoutRoute[] = [
     RouterModule.forRoot(routes),
     FormsModule,
     MomentModule,
+    NavigationModule,
     // InMemoryWebApiModule.forRoot(InMockDbService),
     AccordionModule,
     HttpModule,
@@ -202,7 +249,8 @@ export const routes: LayoutRoute[] = [
   ],
   providers: [
     DataServiceService,
-    ShareService
+    ShareService,
+    RentalCarServiceService
   ],
   bootstrap: [AppComponent]
 })

@@ -33,7 +33,7 @@ export class SignatureComponent implements OnInit {
     $('html, body').animate({scrollTop: '0px'}, 0);
     if(this.activatedRoute.queryParams['value']['orderNumber']){
     }else{
-      this.router.navigate(['/']);
+      this.router.navigate(['travel']);
     }
   }
 
@@ -89,7 +89,7 @@ export class SignatureComponent implements OnInit {
   }
 
   goPreviouslyStep(){
-    this.router.navigate(['gogoout/confirm'], {queryParams: {orderNumber: this.activatedRoute.queryParams['value']['orderNumber']}});
+    this.router.navigate(['travel/gogoout/confirm'], {queryParams: {orderNumber: this.activatedRoute.queryParams['value']['orderNumber']}});
   }
 
 }

@@ -15,7 +15,11 @@ declare namespace ScrollMagic {
     namespace Controller {
         interface Instance {
 
-            (): void;
+            (config: Config): void;
+        }
+
+        interface Config{
+            addIndicators : boolean
         }
     }
 
@@ -47,24 +51,41 @@ declare namespace ScrollMagic {
              * Add visual indicators for a ScrollMagic.Scene.
              */
             addIndicators(): Scene.Instance;
+
+            /**
+             * Destroy the scene and everything.
+             * @param reset If true the pin and tween (if existent) will be reset.
+             */
+            destroy(reset?:boolean) ;
         }
 
         interface Options {
             /**
              * Selector or DOM object that defines the start of the scene. If undefined the scene will start right at the start of the page (unless an offset is set).
              */
-            triggerElement: ElementType;
+            triggerElement?: ElementType;
 
 
 
             /**
              *  Offset Value for the Trigger Position. If no triggerElement is defined this will be the scroll distance from the start of the page, after which the scene will start.
              */
-            offset: OffsetType;
+            offset?: OffsetType;
+
+            /**
+             * Can be a number between 0 and 1 defining the position of the trigger Hook in relation to the viewport.
+Can also be defined using a string:
+                - "onEnter" => 1
+                - "onCenter" => 0.5
+                - "onLeave" => 0
+             */
+            triggerHook?: TriggerHook;
         }
 
 
         type ElementType = string | HTMLElement;
         type OffsetType = number;
+
+        type TriggerHook = number | 'onEnter' | 'onCenter' | 'onLeave';
     }
 }

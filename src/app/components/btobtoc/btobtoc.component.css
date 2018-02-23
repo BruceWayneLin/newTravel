@@ -1,0 +1,271 @@
+@import '../home-page/home-page.component.css';
+input[type="search"] {
+    width: 196px;
+    height: 36px;
+    padding: 0;
+    line-height: 32px;
+    background: white;
+    color: gray;
+    border: 0;
+    font-size: 0.9em;
+    text-indent: 12px;
+    outline: none;
+    -webkit-appearance: textfield;
+    border: 1px solid #ddd!important;
+    padding-right: 20px;
+  }
+  
+  input[type="search"]::-webkit-input-placeholder {
+    color: #ddd;
+    font-weight: 400;
+    font-size: 1.2em;
+  }
+  input[type="search"]::-moz-input-placeholder {
+    color: #ddd;
+    font-weight: 400;
+    font-size: 1.2em;
+  }
+  input[type="search"]:-ms-input-placeholder {
+    color: #ddd;
+    font-weight: 400;
+    font-size: 1.2em;
+  }
+  
+  input[type="search"]+ i{
+      position: relative;
+      top: -44px;
+      left: 65px;
+  }
+  
+  input[type="search"]::-webkit-calendar-picker-indicator {
+      display:none;
+  }
+  
+  #brandListName {
+    display: inline-block;
+    position: relative;
+    margin:0px;
+    padding:0px;
+    border: 1px solid #e84466;
+    width:196px;
+    overflow: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    display:none;
+  }
+  
+  #brandListName li {
+    list-style-type: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  #brandListName>li:hover {
+    background: #e84466;
+    color:white;
+  }
+  
+  #brandInputSelect {
+    height: 50px;
+  }
+  
+  #brandListName::-webkit-scrollbar
+  {
+      width: 12px;
+      background-color: white;
+  }
+  
+  #brandListName::-webkit-scrollbar-thumb
+  {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: #e84466;
+  }
+
+  .fa-angle-down, .fa-angle-up {
+    color:#01a29a;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  
+  #calendarModal {
+    background-color: rgba(0,0,0,0.4);  
+  }
+
+  #currentModal {
+    background-color: rgba(0,0,0,0.4);  
+  }
+  
+  #closebtn {
+    color: white;
+    background: #808080;
+    border-color: #808080;
+    cursor: pointer;
+    width: 10%;
+    height: auto;
+    border-radius: 25px;
+    border-width: 2px;
+    border-style: solid;
+    padding-left: 1.75vw;
+    padding-right: 1.75vw;
+    min-width: 100px;
+    margin: 30px 0px;
+  }
+
+  .modal-content {
+    margin-top: 15%;
+  }
+
+  #timeContainer span {
+    display: inline-block;
+  }
+
+  /* brandlist 2 */
+
+  @media screen and (max-width: 480px) {
+    #brandListName2 {
+      width: 250px;
+    }
+    #brandListName {
+      width: 250px;  
+    }
+  }
+
+  #brandListName2 {
+    display: inline-block;
+    position: relative;
+    margin:0px;
+    padding:0px;
+    border: 1px solid #e84466;
+    width:196px;
+    overflow: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    display:none;
+  }
+  
+  #brandListName2 li {
+    list-style-type: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  #brandListName2>li:hover {
+    background: #e84466;
+    color:white;
+    cursor: pointer;
+  }
+  
+  #brandInputSelect {
+    height: 50px;
+  }
+  
+  #brandListName2::-webkit-scrollbar
+  {
+      width: 12px;
+      background-color: white;
+  }
+  
+  #brandListName2::-webkit-scrollbar-thumb
+  {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: #e84466;
+  }
+
+  #selectValHour {
+    display: inline-block;
+    position: relative;
+    margin:0px;
+    padding:0px;
+    border: 1px solid #e84466;
+    width:196px;
+    overflow: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    min-height: 300px;
+    z-index: 11;
+  }
+  
+  #selectValHour li {
+    list-style-type: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  #selectValHour>li:hover {
+    background: #e84466;
+    color:white;
+    cursor: pointer;
+  }
+  #selectValHour::-webkit-scrollbar
+  {
+      width: 12px;
+      background-color: white;
+  }
+  
+  #selectValHour::-webkit-scrollbar-thumb
+  {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: #e84466;
+  }
+
+    ::-moz-scrollbar {
+      background-color: white;
+    }
+    ::-moz-scrollbar-track {
+      background-color: white;
+    }
+    ::-moz-scrollbar-thumb {
+      background-color: white;
+    }
+
+#currentModal .modal-content {
+  margin-top:18%;
+}
+#calendarModal .modal-content {
+  margin-top:8%;
+}
+
+@media screen and (max-width:480px) {
+  #calendarModal .modal-content {
+    margin-top:15%;
+  }
+  #currentModal .modal-content {
+    margin-top:50%;
+  }
+  #secondCol2 {
+    min-height: 250px;
+  }
+  input[type="search"]:focus {
+    font-size: 18px!important;
+  }
+}
+
+
+@-moz-document url-prefix() { 
+  @media screen and (min-width: 1200px) {
+    #btnOfPackages .col-xs-3:nth-child(3) .specialPkgLabel span {
+      left: 25%!important;
+    }
+    #calendarTable .checkBtnTxt {
+      left: 19%!important;
+    }
+    #calendarTable td .checkBtn {
+      top: -30px!important;
+    }
+    #rowOfBtn .specialPkgLabel input:checked + span, .col-xs-7.NoPaddingLeft#cutAmtBtn .specialPkgLabel.toCusBtn span {
+      display: inline-block;
+      width: 63%;
+      vertical-align:top;
+    }
+  }
+}

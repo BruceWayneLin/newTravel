@@ -291,24 +291,26 @@
     </div>
   </div>
 <!-- membercreate -->
-  <div class="row" *ngIf="!routeUrlGoGo">
-    <div class="container">
-      <div class="col-lg-12 text-center imgContain">
-        <div style="display:block; margin: 0 auto;">
-          <div class="imageCla">
-            <img src="assets/images/dolls/kaiowlTalking.png" alt="" class="img-responsive">
-            <span>{{text4Activity}}</span>
+<ng-container *ngIf="!rentalCarTemp">
+    <div class="row" *ngIf="!routeUrlGoGo">
+        <div class="container">
+          <div class="col-lg-12 text-center imgContain">
+            <div style="display:block; margin: 0 auto;">
+              <div class="imageCla">
+                <img src="assets/images/dolls/kaiowlTalking.png" alt="" class="img-responsive">
+                <span>{{text4Activity}}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+</ng-container>
 <!-- membercreate -->
   <div class="row">
     <div class="container" *ngIf="!routeUrlGoGo">
       <div class="col-lg-12 text-center">
         <div class="col-xs-12 col-sm-6 col-lg-6">
-          <button class="form-control lastSubMit" (click)="getBakInfo()" id="goingCheckInfoBack" routerLink="/memberCreate" style="background-color:white;color:black;">上一步</button>
+          <button class="form-control lastSubMit" (click)="getBakInfo()" id="goingCheckInfoBack" style="background-color:white;color:black;">上一步</button>
         </div>
         <div id="ieNeedToCenter" class="col-xs-12 col-sm-6 col-lg-6">
         <button class="form-control lastSubMit" (click)="confirmPaying()">訂單確認，付款去</button>
