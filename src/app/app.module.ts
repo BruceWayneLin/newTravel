@@ -50,6 +50,7 @@ import { SharedDirectiveModule } from 'cl-layout/src/app/shared/directive/shared
 import { BtobtoCComponent } from './components/btobtoc/btobtoc.component';
 import { RentalCarServiceService } from './services/rental-car-service.service';
 import { brandFilterPipe } from './components/btobtoc/filter/filter-brand';
+import { NavigationModule } from './shared/navigation/navigation.module';
 
 export const routes: LayoutRoute[] = [
   {
@@ -222,6 +223,7 @@ export const routes: LayoutRoute[] = [
     LayoutModule.forRoot({
       carelineProjectType: CarelineProjectType.travel
     }),
+    NavigationModule,
     // BreadcrumbsModule,
     OwlCarouselModule,
     ReactiveFormsModule,
