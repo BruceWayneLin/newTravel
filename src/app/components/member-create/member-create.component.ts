@@ -254,6 +254,7 @@ export class MemberCreateComponent implements OnInit {
 
   changedData(year=null, month=null, day=null){
     this.userPidFail = this.pidCheck(this.pid);
+    this.personalSelectChange();
     this.checkBirthday(year, month, day);
     this.dataService.clearData = false;
   }
@@ -1294,6 +1295,7 @@ export class MemberCreateComponent implements OnInit {
     this.gogoAddrAreaFail = false;
     this.gogoAddrCityFail = false;
     this.gogoAddrFail = false;
+
     this.dataService.orderNumberForSave = this.routerAct.queryParams['value']['orderNumber'];
     this.owlAnanOne = this.dataService.owlAnanOne;
     this.owlAnanTwo = this.dataService.owlAnanTwo;
@@ -1490,6 +1492,7 @@ export class MemberCreateComponent implements OnInit {
           this.selectedDistrict = (item.applicant.addressAreaId == 0 ? '' : item.applicant.addressAreaId);
           this.toZipCode(true, this.selectedDistrict);
           this.addr = item.applicant['address'];
+
           if (!this.Mobile || !this.selectedCity || !this.selectedDistrict || !this.addr) {
             this.hideUpinput = true;
           } else {

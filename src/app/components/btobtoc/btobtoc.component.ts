@@ -861,16 +861,14 @@ export class BtobtoCComponent implements OnInit {
         const secondDate = new Date(this.endTravelDay);
         const startHrScope = (Number(this.startHour)+1).toString();
         const endHrScope = (Number(this.endHour)+1).toString();
-        var firstDay = this.startTravelDay + ' ' + startHrScope + ':00';
-        var secondDay = this.endTravelDay + ' ' + endHrScope + ':00';
-        console.log('startHrScope', firstDay);
-        console.log('endHrScope', secondDay);
+        var firstDay = this.startTravelDay + ' ' + (startHrScope.length == 1 ? '0' + startHrScope : startHrScope) + ':00:00';
+        var secondDay = this.endTravelDay + ' ' + (endHrScope.length == 1 ? '0' + endHrScope : endHrScope) + ':00:00';
 
         var a = moment(firstDay);
         var b = moment(secondDay);
-       
         var diffDays = Math.ceil(b.diff(a, 'hours')/24);
         console.log(diffDays);
+
         // 1
         if(diffDays === 0) {
           this.diffDays = 1;
