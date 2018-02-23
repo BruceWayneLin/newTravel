@@ -11,7 +11,8 @@ export class NavLogoutTravelService {
 
   constructor(
     private navBaseService: CarelineNavigationBaseService
-  ) { }
+  ) {
+   }
 
   click() {
     if (this.isInBtoBtoC()) {

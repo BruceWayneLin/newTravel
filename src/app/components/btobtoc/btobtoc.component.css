@@ -245,6 +245,9 @@ input[type="search"] {
   #secondCol2 {
     min-height: 250px;
   }
+  input[type="search"]:focus {
+    font-size: 18px!important;
+  }
 }
 
 

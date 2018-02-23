@@ -14,6 +14,7 @@ import { SuiSelectModule } from 'ng2-semantic-ui';
 import { MemberCreateComponent } from './components/member-create/member-create.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ConfirmInfoComponent } from './components/confirm-info/confirm-info.component';
+import { NavigationModule } from './shared/navigation/navigation.module';
 
 import * as $ from 'jquery';
 
@@ -238,6 +239,7 @@ export const routes: LayoutRoute[] = [
     RouterModule.forRoot(routes),
     FormsModule,
     MomentModule,
+    NavigationModule,
     // InMemoryWebApiModule.forRoot(InMockDbService),
     AccordionModule,
     HttpModule,
