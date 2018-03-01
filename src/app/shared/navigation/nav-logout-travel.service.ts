@@ -6,7 +6,8 @@ export class NavLogoutTravelService {
 
   private prefixUrlPath = {
     default: 'travel',
-    btoBtoC: 'RentCar/BtoBtoC'
+    btoBtoC: 'RentCar/BtoBtoC',
+    homePage: ''
   };
 
   constructor(
@@ -16,7 +17,7 @@ export class NavLogoutTravelService {
 
   click() {
     if (this.isInBtoBtoC()) {
-      location.href = `${this.navBaseService.prefixUrlPath.travle}/${this.prefixUrlPath.btoBtoC}`;
+      location.href = `/`;
     } else {
       location.href = `${this.navBaseService.prefixUrlPath.travle}/${this.prefixUrlPath.default}`;
     }

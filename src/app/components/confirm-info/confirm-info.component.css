@@ -571,3 +571,7 @@ span.priceSpanNT {
   }
 }
 
+.crossLine {
+  text-decoration: line-through;
+  display:none!important;
+}

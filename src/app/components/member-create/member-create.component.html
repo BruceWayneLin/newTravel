@@ -362,13 +362,13 @@
               <span class="pull-right txtBirth" style="padding-top:15px;">生日</span>
             </div>
             <div class="col-xs-5">
-              <select [(ngModel)]="applicantAloneBirthYear" (change)="checkAloneBd() && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}" #birthdayYAE="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
+              <select [(ngModel)]="applicantAloneBirthYear" (change)="checkAloneBd('reset') && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}" #birthdayYAE="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
                 <option value="">年</option>
                 <option *ngFor="let year of birthdayYears" value="{{year}}" selected>{{year}}</option>
               </select>
             </div>
             <div class="col-xs-3" style="">
-              <select [(ngModel)]="applicantAloneBirthMonth" (change)="checkAloneBd() && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}"  #birthdayYAM="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
+              <select [(ngModel)]="applicantAloneBirthMonth" (change)="checkAloneBd('reset') && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}"  #birthdayYAM="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
                 <option value="">月</option>
                 <option *ngFor="let month of birthdayMonths" value="{{month}}" selected>{{month}}</option>
               </select>

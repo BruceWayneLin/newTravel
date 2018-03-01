@@ -36,6 +36,11 @@ export class ConfirmInfoComponent implements OnInit {
   odRate: number;
   gogoOutNeedToHideCol: boolean = false;
   rentalCarTemp: boolean;
+  adjustNewEndDateTime: string;
+  adjustNewStartDateTime: string;
+  adjustTimeBoolean: boolean = false;
+  insuredCarBrand: any;
+  insuredCarBrandShow: Boolean = false;
 
   insuredList: any[];
 
@@ -119,9 +124,11 @@ export class ConfirmInfoComponent implements OnInit {
         if (info['text4AdjustStartTime'].length > 0) {
             const modal = document.getElementById('myModal');
             modal.style.display = 'block';
-            const returnAlertArr = [];
-            returnAlertArr.push(info['text4AdjustStartTime']);
-            this.dataService.AlertTXT = returnAlertArr;
+            var txt = info['text4AdjustStartTime'];
+            // var txt = '<p>因即將超過選擇的投保時間，您的保險起始時間將調整為下個整點</p><p>2018-02-27 <span>11:00</span>起算，請點選確認後繼續。</p>';
+            var htmlObject = document.createElement('div');
+            htmlObject.innerHTML = txt;
+            $('#timeAdjTxtArea').append(htmlObject);
             document.querySelector('#myModal').scrollIntoView();
         }
         this.applicantName = info['apLastName'] + info['apFirstName'];
@@ -131,13 +138,21 @@ export class ConfirmInfoComponent implements OnInit {
         this.applicantBth = info['apBirthday']['year'] + '-' + info['apBirthday']['month'] + '-' + info['apBirthday']['day'];
         this.applicantEmail = info['apEmail'];
         if(this.router.url.slice(0, 8) == '/RentCar') {
+          this.adjustNewEndDateTime = info['adjustNewEndDateTime'];
+          this.adjustNewStartDateTime = info['adjustNewStartDateTime'];
+          this.insuredCarBrand = info['rentalCarBranch'];
+          if (this.insuredCarBrand.length > 1) {
+            this.insuredCarBrandShow = true;
+          }
+          if (this.adjustNewEndDateTime && this.adjustNewStartDateTime) {
+            this.adjustTimeBoolean = true;
+          }
           this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'] + ' ' + (info['odStartDateHour'] < '10' ? '0' + info['odStartDateHour'] + ':00' : info['odStartDateHour'] + ':00');
           this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'] + ' ' + (info['odStartDateHour'] < '10' ? '0' + info['odEndDateHour'] + ':00' : info['odEndDateHour'] + ':00');
-        }else{
+        } else {
           this.insuredDateStart = info['odStartDate']['year'] + '-' + info['odStartDate']['month'] + '-' + info['odStartDate']['day'];
-        this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'];
+          this.insuredDateEnd = info['odEndDate']['year'] + '-' + info['odEndDate']['month'] + '-' + info['odEndDate']['day'];
         }
-        
         this.insuredLocation = info['odLocation'];
         this.insuredPurpose = info['odPurpose'];
         this.inPackageButtonName = info['inPackageButtonName'];
@@ -148,13 +163,13 @@ export class ConfirmInfoComponent implements OnInit {
         this.dataService.purposeImageUrl = info['purposeImageUrl'];
         document.querySelector('#flagTop').scrollIntoView();
       });
-      if(this.router.url.slice(0, 8) == '/RentCar') {
+      if(this.router.url.slice(0, 8) === '/RentCar') {
         this.rentalCarTemp = true;
       }
     }
   }
 
-  reloadOneSec(){
+  reloadOneSec() {
       if(this.routerAct.queryParams['value']['reload']){ // url does not have the text 'reloaded'
         if(this.dataService.orderNumberForSave){
           window.location.href = 'gogoout/confirm?orderNumber='+this.dataService.orderNumberForSave;
@@ -163,7 +178,6 @@ export class ConfirmInfoComponent implements OnInit {
         }else if(this.dataService.gogoOrderNumber){
           window.location.href = 'gogoout/confirm?orderNumber='+this.dataService.orderNumberForSave;
         }
-
         // this.router.navigate(['/gogoout/confirm'], {queryParams: {orderNumber: this.routerAct.queryParams['value']['orderNumber']}});
       }
   }
@@ -212,7 +226,7 @@ export class ConfirmInfoComponent implements OnInit {
   getBakInfo(){
     console.log(this.router.url.slice(0, 8));
     this.dataService.backFromConfirm = true;
-    if(this.router.url.slice(7, 15) == '/gogoout'){
+    if(this.router.url.slice(7, 15) === '/gogoout'){
       if(!this.dataService.gogoOrderNumber){
         this.dataService.gogoOrderNumber = this.dataService.orderNumberForSave;
       }

@@ -49,7 +49,7 @@ export class BtobtoCComponent implements OnInit {
   modifiedClicked: Boolean = false;
   toShowMoreDays: Boolean = false;
   testDay: any = new Date();
-  textOfSelectingDays: String = '請點選租車出發日與歸還日';
+  textOfSelectingDays: String = '請點選租車出發日與還車日';
   pakNum: any = '';
   pkgCustomGo: Boolean = false;
   cusPackageList: any;
@@ -241,6 +241,9 @@ export class BtobtoCComponent implements OnInit {
       }).delay(500).subscribe((item)=>{
         if(this.trackNum){
           this.toAddLiVal(this.trackNum);
+        }
+        if(this.trackNum.length > 3){
+          this.clickWannaInsuredBtn(true, '');
         }
       });
       $('body').css({
@@ -457,7 +460,11 @@ export class BtobtoCComponent implements OnInit {
   buttonToDisabled(calVal) {
     var startDaysDisabled = new Date(this.startTravelDay);
     var buttonDate = new Date(calVal);
-    var todayPlusStartDayLimitAndDisaster = new Date().setDate(new Date().getDate() + this.startDayLimit);
+    if(!this.startTravelDay){
+      var todayPlusStartDayLimitAndDisaster = new Date().setDate(new Date().getDate() + this.startDayLimit-1);
+    }else{
+      var todayPlusStartDayLimitAndDisaster = new Date().setDate(new Date().getDate() + this.startDayLimit);
+    }
     var startDayPlusLimitedDay = new Date(this.startTravelDay).setDate(new Date(this.startTravelDay).getDate() + this.travelPeriodLimit - 1);
 
     if(this.startTravelDay){
@@ -578,7 +585,7 @@ export class BtobtoCComponent implements OnInit {
       document.getElementById('calendarTable').style.display = 'block';
     }
     if (this.selectTravelDayIsDone === false && !this.startTravelDay) {
-        this.textOfSelectingDays = '請點選租車出發日與歸還日';
+        this.textOfSelectingDays = '請點選租車出發日與還車日';
         this.startTravelDay = $event.target.value;
         this.toOpenHrsSel();
         this.firstMon = new Date(this.startTravelDay);
@@ -776,7 +783,11 @@ export class BtobtoCComponent implements OnInit {
         this.endTravelDay = this.startTravelDay;
         this.endMin = ':59';
         this.endMinute = '59';
-        this.startHour = '00';
+        if(!this.startHour){
+          this.startHour = this.systemHour;
+        }else{
+
+        }
         this.endHour = '23';
         this.selectTravelDayIsDone = true;
         this.tableShowHidden = true;
@@ -813,7 +824,7 @@ export class BtobtoCComponent implements OnInit {
     }
   }
 
-  toSendHours(){
+  toSendHours() {
     if(this.startTravelDay && this.endTravelDay){
       this.returnObj['startDate'] = this.startTravelDay;
       console.log('321456', this.returnObj);
@@ -884,12 +895,14 @@ export class BtobtoCComponent implements OnInit {
   }
 
   toGetCustomPackageContent(val) {
-    // console.log(JSON.stringify(val));
     this.defaultCustomerPkg = val;
-    if(val.length == 1){
+    console.log(val.length);
+    if(val.length <= 2) {
       this.cusPackageList.forEach((item)=>{
         if(item['packageId'] == val){
           this.defaultCustomerPkg = item;
+          console.log('default', this.defaultCustomerPkg);
+
           this.selectedCustomePkg = item;
           this.cusItemJson = [];
           this.defaultCustomerPkg['secondaryItems'].forEach((item) => {
@@ -916,20 +929,22 @@ export class BtobtoCComponent implements OnInit {
           this.toGetLogo(this.selectedCustomePkg['companyCode']);
         }
       });
-    }else{
+    } else {
       this.cusItemJson = [];
-      console.log('secondaryItems', this.defaultCustomerPkg['secondaryItems'])
-      this.defaultCustomerPkg['secondaryItems'].forEach((item) => {
-        var objBack = {};
-        item['amountList'].forEach((unit) => {
-          if(unit['isDefaultOption'] == true) {
-            objBack['companyCode'] = item['companyCode'];
-            objBack['itemCode'] = item['insItemCode'];
-            objBack['amountCode'] = unit['amountCode'];
-            this.cusItemJson.push(objBack);
-          }
+      if(this.defaultCustomerPkg['secondaryItems']){
+        this.defaultCustomerPkg['secondaryItems'].forEach((item) => {
+          var objBack = {};
+          item['amountList'].forEach((unit) => {
+            if(unit['isDefaultOption'] == true) {
+              objBack['companyCode'] = item['companyCode'];
+              objBack['itemCode'] = item['insItemCode'];
+              objBack['amountCode'] = unit['amountCode'];
+              this.cusItemJson.push(objBack);
+            }
+          });
         });
-      });
+      }
+      
       this.toGetCusPkgPrice();
 
       this.selectedCustomePkg = val;
@@ -1224,6 +1239,7 @@ export class BtobtoCComponent implements OnInit {
 
   modifiedBrand() {
     this.selectBrandTxt = '';
+    this.selectedBrand = '';
     this.isDoneSelectedBrand = false;
   }
 
@@ -1235,63 +1251,74 @@ export class BtobtoCComponent implements OnInit {
     modal.style.display = "none";
   }
 
-  RentalCarIsGoingToInusre(){
-      if(!this.selectedBrand){
+  RentalCarIsGoingToInusre() {
+      if(!this.selectedBrand) {
         let modal = document.getElementById('myModal');
         modal.style.display = 'block';
         this.dataService.AlertTXT = [];
         this.dataService.AlertTXT.push('請輸入車行');
         this.dataService.idToGoFlow = 'flagOne';
-      }
-      if(
-        !this.startTravelDay ||
-        !this.endTravelDay ||
-        !this.startHour ||
-        !this.endHour
-      ){ 
-        let modal = document.getElementById('myModal');
-        modal.style.display = 'block';
-        this.dataService.AlertTXT = [];
-        this.dataService.AlertTXT.push('請輸入車行');
-        this.dataService.idToGoFlow = 'calendarTableDiv';
-      }
-      if(
-        this.selectedBrand &&
-        this.startTravelDay &&
-        this.endTravelDay &&
-        this.startHour &&
-        this.endHour
-      ) {
-        const dataToSendBack = {};
-        dataToSendBack['orderNumber'] = this.routerAct.queryParams['value']['orderNumber'] ? this.routerAct.queryParams['value']['orderNumber'] : '';
-        dataToSendBack['countryCode'] = '';
-        dataToSendBack['cityId'] = 0;
-        dataToSendBack['purpose'] = '觀光';
-        dataToSendBack['transport'] = '汽車';
-        dataToSendBack['startDate'] = this.startTravelDay;
-        dataToSendBack['endDate'] = this.endTravelDay;
-        dataToSendBack['startHour'] = this.startHour;
-        dataToSendBack['startMinute'] = this.startMinute;
-        dataToSendBack['endMinute'] = this.endMinute;
-        dataToSendBack['endHour'] = this.endHour;
-        dataToSendBack['trackingId'] = this.selectedBrand;
-
-
-        dataToSendBack['packageId'] = this.selectedPackage['packageId'];
-
-        const uniqueItemJson = [];
-        $.each(this.cusItemJson, function(i, el){
-          if($.inArray(el, uniqueItemJson) === -1) uniqueItemJson.push(el);
-        });
-        dataToSendBack['cusItemList'] = uniqueItemJson;
-        if(this.pkgCustomGo) {
-          dataToSendBack['packageId'] = 0;
-          dataToSendBack['cusPackageId'] = this.defaultCustomerPkg['packageId'];
-        } else {
-          dataToSendBack['cusPackageId'] = 0;
-          dataToSendBack['packageId'] = this.selectedPackage['packageId'];
+      }else{
+        if(
+          !this.startTravelDay ||
+          !this.endTravelDay ||
+          !this.startHour ||
+          !this.endHour
+        ) { 
+          if(!this.startTravelDay || !this.startHour) {
+            let modal = document.getElementById('myModal');
+            modal.style.display = 'block';
+            this.dataService.AlertTXT = [];
+            this.dataService.AlertTXT.push('請選擇出發日期');
+            this.dataService.idToGoFlow = 'calendarTableDiv';
+          } else if(!this.endTravelDay || !this.endHour) {
+            let modal = document.getElementById('myModal');
+            modal.style.display = 'block';
+            this.dataService.AlertTXT = [];
+            this.dataService.AlertTXT.push('選擇還車日期');
+            this.dataService.idToGoFlow = 'calendarTableDiv';
+          }
+        }else{
+          if(
+            this.selectedBrand &&
+            this.startTravelDay &&
+            this.endTravelDay &&
+            this.startHour &&
+            this.endHour
+          ) {
+            const dataToSendBack = {};
+            dataToSendBack['orderNumber'] = this.routerAct.queryParams['value']['orderNumber'] ? this.routerAct.queryParams['value']['orderNumber'] : '';
+            dataToSendBack['countryCode'] = '';
+            dataToSendBack['cityId'] = 0;
+            dataToSendBack['purpose'] = '觀光';
+            dataToSendBack['transport'] = '汽車';
+            dataToSendBack['startDate'] = this.startTravelDay;
+            dataToSendBack['endDate'] = this.endTravelDay;
+            dataToSendBack['startHour'] = this.startHour;
+            dataToSendBack['startMinute'] = this.startMinute;
+            dataToSendBack['endMinute'] = this.endMinute;
+            dataToSendBack['endHour'] = this.endHour;
+            dataToSendBack['trackingId'] = this.selectedBrand;
+    
+    
+            dataToSendBack['packageId'] = this.selectedPackage['packageId'];
+    
+            var uniqueItemJson = [];
+            $.each(this.cusItemJson, function(i, el){
+              if($.inArray(el, uniqueItemJson) === -1) uniqueItemJson.push(el);
+            });
+            dataToSendBack['cusItemList'] = uniqueItemJson;
+            if(this.pkgCustomGo) {
+              dataToSendBack['packageId'] = 0;
+              dataToSendBack['cusPackageId'] = this.defaultCustomerPkg['packageId'];
+            } else {
+              dataToSendBack['cusPackageId'] = 0;
+              dataToSendBack['packageId'] = this.selectedPackage['packageId'];
+            }
+            console.log(dataToSendBack);
+            this.rentalCarService.RentalCarIsGoingToInusre(dataToSendBack);
         }
-        this.rentalCarService.RentalCarIsGoingToInusre(dataToSendBack);
+      }
       }
   }
 }

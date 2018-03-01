@@ -10,7 +10,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ThanksComponent implements OnInit {
   public purposeImgUrl: string;
   public couponList: any[];
-  rentalCarTemp: boolean = false;
+  rentalCarTemp: Boolean = false;
+  memberLinkDe: String = '/CareLineMember/member/member/travelorder';
+  orderNumber: any;
+  btnTxt: String = '會員專區';
   constructor(
       public dataService: DataServiceService,
       private routerAct: ActivatedRoute,
@@ -20,9 +23,6 @@ export class ThanksComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url.slice(0, 8) == '/RentCar') {
-      this.rentalCarTemp = true;
-    }  
     var Url = window.location.href;
     var idArray = this.toGetId(Url);
     var turnBakUrl = this.toGetDataFromUrl(Url);
@@ -45,6 +45,12 @@ export class ThanksComponent implements OnInit {
         }else{
           this.purposeImgUrl = replyObj['purposeImageUrl'];
           this.couponList = replyObj['couponList'];
+          this.orderNumber = replyObj['orderNumber'];
+          if (this.router.url.slice(0, 8) == '/RentCar') {
+            this.rentalCarTemp = true;
+            this.btnTxt = '簽名去';
+            this.memberLinkDe = '/CareLineMember/member/member/carrentalorder?orderNumber=' + this.orderNumber;
+          }  
         }
     });
   }

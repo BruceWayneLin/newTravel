@@ -38,6 +38,7 @@ export class AppComponent {
         document.querySelector('#'+id).scrollIntoView();
         this.dataService.idToGoFlow = '';
     }
+    $('#timeAdjTxtArea').empty();
     var modal = document.getElementById('myModal');
     modal.style.display = "none";
   }

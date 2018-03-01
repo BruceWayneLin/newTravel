@@ -98,3 +98,69 @@ button.goingMemberArea {
     margin-top: 10px;
   }
 }
+
+.fingerDiv {
+    background: url(../preview-pdf/images/clickHand.png);
+    background-size: contain;
+    width: 45px;
+    height: 45px;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    left: 80px;
+    right: 0;
+    top: -8vh;
+    z-index: 10;
+  }
+  
+  #fingerDiv.fingerDiv.animateInite {
+    -webkit-animation: changeSizeMove 0.5s infinite; /* Safari 4+ */
+    -moz-animation:    changeSizeMove 0.5s infinite; /* Fx 5+ */
+    -o-animation:      changeSizeMove 0.5s infinite; /* Opera 12+ */
+    animation:         changeSizeMove 0.5s infinite; /* IE 10+, Fx 29+ */
+  }
+
+  @-moz-keyframes changeSizeMove {
+    0% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(0.8);
+    }
+  }
+  @-o-keyframes changeSizeMove {
+    0% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(0.8);
+    }
+  }
+  @keyframes changeSizeMove {
+    0% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(0.8);
+    }
+  }
+
+  @media screen and (max-width:1024px){
+    hr {
+      margin: 0px;
+    }
+    .people-list-container {
+      margin-top: 15px;
+      height: 215px;
+    }
+    .fingerDiv {
+      top: -70px;
+    }
+    #btnFinishedPdf {
+      margin-top: 15px!important;
+    }
+    .people-list-container .previewYourPdfBtn {
+      margin-bottom: 0px!important;
+    }
+  }

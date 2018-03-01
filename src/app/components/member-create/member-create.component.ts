@@ -160,13 +160,17 @@ export class MemberCreateComponent implements OnInit {
     }, 300);
   }
 
-  checkAloneBd(){
+  checkAloneBd(val?){
     this.toRecheckAgain();
-    const currentYear = new Date(this.countBrthDayFromSelectedBtn).getFullYear();
-    const currentMonth = new Date(this.countBrthDayFromSelectedBtn).getMonth() + 1;
-    const currentDay = new Date(this.countBrthDayFromSelectedBtn).getDate();
+    var currentYear = new Date(this.countBrthDayFromSelectedBtn).getFullYear();
+    var currentMonth = new Date(this.countBrthDayFromSelectedBtn).getMonth() + 1;
+    var currentDay = new Date(this.countBrthDayFromSelectedBtn).getDate();
+    if(val == 'reset'){
+      this.applicantAloneBirthDay = '';
+      this.aloneBirthdayDays =  this.birthDays(this.applicantAloneBirthYear, (this.applicantAloneBirthMonth < 10 ? '0'+this.applicantAloneBirthMonth:this.applicantAloneBirthMonth));
+    }
     if(!this.routeUrlGoGoNeedToHide){
-      if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay){
+      if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay) {
         var userAge = this.calculate_for_BT_TR_age_From_(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
 
         // if(this.router.url.slice(7, 15) == '/gogoout'){
@@ -192,7 +196,7 @@ export class MemberCreateComponent implements OnInit {
       }
     }else{
       if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
-        this.aloneBirthdayDays =  this.birthDays(this.applicantAloneBirthYear, this.applicantAloneBirthMonth);
+        // this.aloneBirthdayDays =  this.birthDays(this.applicantAloneBirthYear, this.applicantAloneBirthMonth);
       }
       if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay){
         this.aloneBdEmpty = false;
@@ -409,9 +413,9 @@ export class MemberCreateComponent implements OnInit {
     if(this.pBirthYear && this.pBirthMonth){
       this.birthdayDays = this.birthDays(new Date(this.pBirthYear).getFullYear(), new Date(this.pBirthMonth).getMonth()+1);
     }
-    if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
-      this.aloneBirthdayDays = this.birthDays(new Date(this.applicantAloneBirthYear).getFullYear(), new Date(this.applicantAloneBirthMonth).getMonth()+1);
-    }
+    // if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
+    //   this.aloneBirthdayDays = this.birthDays(new Date(this.applicantAloneBirthYear).getFullYear(), new Date(this.applicantAloneBirthMonth).getMonth()+1);
+    // }
   }
 
   checkBirthday(year, month, day){

@@ -33,7 +33,7 @@
 <div class="row">
   <div class="container oneCon">
     <div class="place app-index col-lg-12 text-center">
-        <h2>去哪租車呢？</h2>
+        <h2 id="whereYouLikeToRent">去哪租車呢？<span>(＊限特約車行)</span></h2>
         <ng-container *ngIf="!isDoneSelectedBrand">
         <div id="brandInputSelect" for="brand-filter">
           <input [(ngModel)]="selectBrandTxt" list="brandListName" type="search" class="form-control" id="brand-filter" (keydown)="changeClassStatus(true)" (mouseleave)="changeClassStatus(false)" (focus)="changeClassStatus(true)" placeholder="輸入車行名稱" name="brands" />

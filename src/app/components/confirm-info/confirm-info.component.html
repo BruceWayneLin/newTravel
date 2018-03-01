@@ -79,7 +79,7 @@
           <span style="font-weight:bolder">日期</span>
         </div>
         <div class="col-xs-10 text-left">
-          <span style="color: #333;font-weight:normal;">{{insuredDateStart}} ~ {{insuredDateEnd}} 總共{{odPeriodDays}}天</span>
+          <span style="color: #333;font-weight:normal;"><span [ngClass]="adjustTimeBoolean? 'crossLine':''">{{insuredDateStart}} ~ {{insuredDateEnd}}</span> <span style="color:#e84466;font-weight:bold" *ngIf="adjustTimeBoolean">{{adjustNewStartDateTime}} ~ {{adjustNewEndDateTime}}</span> 總共{{odPeriodDays}}天</span>
         </div>
       </div>
     </div>
@@ -110,6 +110,19 @@
       </div>
     </div>
   </div>
+
+  <div class="row" id="titleWithoutPadding" *ngIf="insuredCarBrandShow">
+      <div class="container">
+        <div class="col-lg-12 text-center">
+          <div class="col-xs-2 text-left">
+            <span style="font-weight:bolder">車行</span>
+          </div>
+          <div class="col-xs-10 text-left">
+            <span style="color: #333;font-weight:normal;">{{insuredCarBrand}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <div class="row" id="accordionDiv">
     <!-- membercreat -->
