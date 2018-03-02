@@ -199,6 +199,13 @@ export const routes: LayoutRoute[] = [
     component: ThanksComponent
   },
   {
+    path: 'RentCar/BtoBtoC/failPayment',
+    data: {
+      // breadcrumb: '租車付款失敗頁',
+    },
+    component: FailPaymentComponent
+  },
+  {
     path: '**',
     data: {
       // breadcrumb: '租車確定',

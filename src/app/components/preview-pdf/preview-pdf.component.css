@@ -140,24 +140,23 @@
     }
   }
 
-  @media screen and (max-width:1024px){
-    hr {
-      margin: 0px;
-    }
-    .people-list-container {
-      margin-top: 15px;
-      height: 215px;
-    }
-    .fingerDiv {
-      top:60px;
-    }
-    #btnFinishedPdf {
-      margin-top: 15px!important;
-    }
-    .people-list-container .previewYourPdfBtn {
-      margin-bottom: 0px!important;
-    }
+  hr {
+    margin: 0px;
   }
+  .people-list-container {
+    margin-top: 15px;
+    height: 215px;
+  }
+  .fingerDiv {
+    top:60px;
+  }
+  #btnFinishedPdf {
+    margin-top: 15px!important;
+  }
+  .people-list-container .previewYourPdfBtn {
+    margin-bottom: 0px!important;
+  }
+  
 
   /* @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape) {
     hr {

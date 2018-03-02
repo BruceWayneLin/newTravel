@@ -1330,6 +1330,11 @@ export class MemberCreateComponent implements OnInit {
       this.birthdayMonths = this.birthMonths();
       this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
       this.aloneBirthdayDays = this.birthdayDays;
+      if(this.personalInfoSelect !== '本人'){
+        this.applicantAloneLockInput = false;
+      }else{
+        this.applicantAloneLockInput = true;
+      }
     });
     // this is when user back from confirm page then we check if calling api or not
     if(this.dataService.backFromConfirm && this.dataService.noGoWithYourFdsFlag !== undefined){
@@ -1421,6 +1426,8 @@ export class MemberCreateComponent implements OnInit {
                 this.personalInfoSelect = item['relation'];
                 if(this.personalInfoSelect !== '本人'){
                   this.applicantAloneLockInput = false;
+                }else{
+                  this.applicantAloneLockInput = true;
                 }
                 this.applicantAloneLastName = item['lastName'];
                 this.applicantAloneFirstName = item['firstName'];
@@ -1442,7 +1449,7 @@ export class MemberCreateComponent implements OnInit {
               default:
             }
           })
-        });
+        })
       }else{
         this.dataService.toGetBakInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
           this.aggreeToUpdate = item['applicant']['isUpdate'];
@@ -1506,13 +1513,12 @@ export class MemberCreateComponent implements OnInit {
           this.selectedDistrict = (item.applicant.addressAreaId == 0 ? '' : item.applicant.addressAreaId);
           this.toZipCode(true, this.selectedDistrict);
           this.addr = item.applicant['address'];
-
           if (!this.Mobile || !this.selectedCity || !this.selectedDistrict || !this.addr) {
             this.hideUpinput = true;
           } else {
             this.hideUpinput = false;
           }
-        });
+        })
       }
     }else{    
       var orderQuery = this.routerAct.queryParams['value']['orderNumber'];
@@ -1588,8 +1594,9 @@ export class MemberCreateComponent implements OnInit {
           this.hiddenAtBegining = false;
           this.personalSelectChange();
         }
-      });
+      })
     }
+    
   }
 
   deleteThisOne() {

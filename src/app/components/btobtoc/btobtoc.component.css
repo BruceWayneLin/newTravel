@@ -352,7 +352,17 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
  #whereYouLikeToRent span {
    color: #e84466;
-   font-size: 1.2rem;
+   position: relative;
+   top: -5vh;
+   text-align: center;
+   margin: 0 auto;
+   padding-right: 22px;
+   display: block;
+   font-size: 1.1rem;
+ }
+
+ #flagTwo{
+   
  }
 
  

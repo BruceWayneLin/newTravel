@@ -243,7 +243,7 @@ export class BtobtoCComponent implements OnInit {
           this.toAddLiVal(this.trackNum);
         }
         if(this.trackNum.length > 3){
-          this.clickWannaInsuredBtn(true, '');
+          document.querySelector('#flagOne').scrollIntoView();
         }
       });
       $('body').css({
@@ -307,13 +307,15 @@ export class BtobtoCComponent implements OnInit {
 
   toAddLiVal(val:string) {
     console.log('this.brandlist', this.brandList);
-    this.brandList.forEach((item)=>{
+    this.brandList.forEach((item) => {
       if(item.value == val){
         this.selectBrandTxt = item.name;
       }
     });
     this.selectedBrand = val;
     this.isDoneSelectedBrand = true;
+    document.querySelector('#flagTwo').scrollIntoView();
+
   }
 
   createRange(number) {
@@ -613,23 +615,22 @@ export class BtobtoCComponent implements OnInit {
         document.querySelector('#flagFour').scrollIntoView();
       } else {
         if (this.startTravelDay && this.startHour) {
-          if (this.startTravelDay === $event.target.value) {
-            if(!this.startHour && this.startTravelDay === $event.target.value) {
+          if (this.startTravelDay === value) {
+            if(!this.startHour && this.startTravelDay === value) {
               this.toOpenHrsSel();
             // } else {
             //   this.startHour = '';
             //   this.toOpenHrsSel();
-            }else if(this.startHour && this.startTravelDay === $event.target.value){
+            }else if(this.startHour && this.startTravelDay === value){
               let modal = document.getElementById('currentModal');
               modal.style.display = 'block';
-              
               document.querySelector('#currentModal').scrollIntoView();
               return false;
             }
           } else {
             if(this.startTravelDay && this.startHour && !this.endTravelDay && !this.endHour){
               this.returnObj['startDate'] = this.startTravelDay;
-              this.endTravelDay = $event.target.value;
+              this.endTravelDay = value;
               if(this.startTravelDay && this.startHour && this.endTravelDay && !this.endHour){
                 this.toOpenHrsSel();
               }  
@@ -776,9 +777,9 @@ export class BtobtoCComponent implements OnInit {
     var modal = document.getElementById('calendarModal');
     modal.style.display = "none";
     if(this.selectValueHour === '25'){
-      const systemDayForScope = new Date(this.systemDate).getFullYear().toString() + '-' + ((new Date(this.systemDate).getMonth()+1) < 10 ? '0'+(new Date(this.systemDate).getMonth()+1).toString(): (new Date(this.systemDate).getMonth()+1).toString()) + '-' + new Date(this.systemDate).getDate().toString();
-      if(this.startTravelDay !== systemDayForScope){
-        //same day return
+      const systemDayForScope = new Date(this.systemDate).getFullYear().toString() + '-' + ((new Date(this.systemDate).getMonth()+1) < 10 ? '0'+(new Date(this.systemDate).getMonth()+1).toString(): (new Date(this.systemDate).getMonth()+1).toString()) + '-' + ((new Date(this.systemDate).getDate()) < 10 ? '0'+(new Date(this.systemDate).getDate()).toString(): (new Date(this.systemDate).getDate()).toString());
+      if(this.startTravelDay == systemDayForScope){
+        //differ day return
         this.closeUlTimeModal();
         this.endTravelDay = this.startTravelDay;
         this.endMin = ':59';
@@ -786,7 +787,7 @@ export class BtobtoCComponent implements OnInit {
         if(!this.startHour){
           this.startHour = this.systemHour;
         }else{
-
+          // this.startHour = '00';
         }
         this.endHour = '23';
         this.selectTravelDayIsDone = true;
@@ -796,12 +797,14 @@ export class BtobtoCComponent implements OnInit {
       } else {
         //same day return
         this.closeUlTimeModal();
-        this.startTravelDay = new Date(this.systemDate).getFullYear().toString() + '-' + ((new Date(this.systemDate).getMonth()+1) < 10 ? '0'+(new Date(this.systemDate).getMonth()+1).toString(): (new Date(this.systemDate).getMonth()+1).toString()) + '-' + new Date(this.systemDate).getDate().toString();
+        // this.startTravelDay = new Date(this.systemDate).getFullYear().toString() + '-' + ((new Date(this.systemDate).getMonth()+1) < 10 ? '0'+(new Date(this.systemDate).getMonth()+1).toString(): (new Date(this.systemDate).getMonth()+1).toString()) + '-' + ((new Date(this.systemDate).getDate()) < 10 ? '0'+(new Date(this.systemDate).getDate()).toString(): (new Date(this.systemDate).getDate()).toString());
         this.endTravelDay = this.startTravelDay;
         this.endMin = ':59';
         this.endMinute = '59';
         if(!this.startHour){
-          this.startHour = this.systemHour;
+          this.startHour = '00';
+        } else {
+          // this.startHour = this.systemHour;
         }
         this.endHour = '23';
         this.selectTravelDayIsDone = true;
@@ -827,6 +830,11 @@ export class BtobtoCComponent implements OnInit {
   toSendHours() {
     if(this.startTravelDay && this.endTravelDay){
       this.returnObj['startDate'] = this.startTravelDay;
+      this.returnObj['endDate'] = this.endTravelDay;
+      this.returnObj['startHour'] = this.startHour;
+      this.returnObj['startMinute'] = this.startMinute;
+      this.returnObj['endMinute'] = this.endMinute;
+      this.returnObj['endHour'] = this.endHour;
       console.log('321456', this.returnObj);
       this.dataService.ifOnlyStartDayOnly(this.returnObj).subscribe((item) => {
         console.log(item);

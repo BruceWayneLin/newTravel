@@ -538,18 +538,17 @@ export class DataServiceService {
         }
     }
 
-    getConfirmInfo() {
+    getConfirmInfo(val:any) {
+        this.orderNumberForSave = val;
+        this.gogoOrderNumber = val;
+        this.orderNumber = val;
         this.loading = true;
-        if(this.orderNumberForSave) {
-            let objSendBak = {};
-            objSendBak['orderNumber'] = this.orderNumberForSave;
-            return this.http.post('/CareLineTravel/travel-mbr/journey/getData4ConfirmPage', objSendBak).map(res => {
-                this.loading = false;
-                return res.json();
-            });
-        }else{
-            this.route.navigate(['travel/index']);
-        }
+        let objSendBak = {};
+        objSendBak['orderNumber'] = val;
+        return this.http.post('/CareLineTravel/travel-mbr/journey/getData4ConfirmPage', objSendBak).map(res => {
+            this.loading = false;
+            return res.json();
+        });
     }
 
     confirmPaying(){

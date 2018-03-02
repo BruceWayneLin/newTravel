@@ -34,6 +34,7 @@ export class AppComponent {
   }
 
   cancelThisModal(id){
+    $('#myModal').attr('style', 'padding-top:50%!important;');
     if(id){
         document.querySelector('#'+id).scrollIntoView();
         this.dataService.idToGoFlow = '';
