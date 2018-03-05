@@ -171,7 +171,7 @@
         </div>
         <div class="col-xs-12 col-sm-6">
           <div id="AddrCityFlag" class="col-xs-4" style="padding-left:0px;">
-            <i class="fa fa-angle-down dropDown" style="font-size:36px;!important;z-index:999;"></i>
+            <i class="fa fa-angle-down dropDown" style="font-size:1.85em!important;z-index:999;"></i>
             <select class="form-control" [ngClass]="{'inValidInput': birthdayCityEl.touched && birthdayDistrictEl.touched && checkCityArea(birthdayCityEl.value, birthdayDistrictEl.value) || gogoAddrCityFail}"  [(ngModel)]="selectedCity"  #birthdayCityEl="ngModel" (change)="toLoadArea()">
               <option value="">縣市</option>
                 <option *ngFor="let item of cityList; let i = index;" [ngValue]="item.id">
@@ -180,7 +180,7 @@
             </select>
           </div>
           <div id="AddrAreaFlag" class="col-xs-4">
-            <i class="fa fa-angle-down dropDown" style="font-size:36px;!important;z-index:999;"></i>
+            <i class="fa fa-angle-down dropDown" style="font-size:1.85em!important;z-index:999;"></i>
             <select [disabled]="selectedCity == ''" [ngClass]="{'inValidInput': birthdayCityEl.touched && birthdayDistrictEl.touched && checkCityArea(birthdayCityEl.value, birthdayDistrictEl.value) || gogoAddrAreaFail}" [(ngModel)]="selectedDistrict" #birthdayDistrictEl="ngModel" (change)="toZipCode(birthdayDistrictEl)" class="form-control">
               <option value="">區</option>
               <option *ngFor="let item of filteredArea; let i = index;" [ngValue]="item.id">
@@ -218,6 +218,20 @@
           </div>
         </div>
       </div>
+
+      <ng-container *ngIf="rentalCarTemplate">
+        <div class="col-lg-12 text-center" [hidden]="hideUpinput" style="margin-top:12px;">
+          <div class="col-xs-12 col-sm-6"></div>
+          <div class="col-xs-12 col-sm-6 text-left" id="aggreeToUpdate">
+            <label for="aggreeToUpdate" (click)="aggreeToUpdate = !aggreeToUpdate">
+              <div ngClass="{{aggreeToUpdate? 'checkBoxDiv' : 'checkBoxDiv noChecked' }}">
+                <input type="checkbox" [hidden]="true" [checked]="aggreeToUpdate" (click)="aggreeToUpdate = !aggreeToUpdate" class="aggreeToUpdate" id="aggreeToUpdate">
+                <span class="aggreeToUpdate">更新聯絡資料</span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </ng-container>
 
       <div [hidden]="routeUrlGoGoNeedToHide">
         <div class="col-lg-12 text-center" *ngIf="isShowCheckbox" style="margin-top:12px;">
@@ -310,7 +324,7 @@
           </div>
 
           <div class="col-xs-12 pull-left">
-            <i class="fa fa-angle-down dropDown" id="topSpeArrow" style="font-size:36px;left:80%!important;!important;z-index:999;"></i>
+            <i class="fa fa-angle-down dropDown" id="topSpeArrow" style="font-size:1.85em;left:80%!important;!important;z-index:999;"></i>
             <select name="" [ngClass]="{inValidInput: aloneRela.touched && !aloneRela.valid}" #aloneRela="ngModel" (change)="personalSelectChange()" id="relationShipSelect" class="form-control" [(ngModel)]="personalInfoSelect" required>
               <option [ngValue]="item.value" *ngFor="let item of relationship;let i = index;">{{item.text}}</option>
             </select>
@@ -348,13 +362,13 @@
               <span class="pull-right txtBirth" style="padding-top:15px;">生日</span>
             </div>
             <div class="col-xs-5">
-              <select [(ngModel)]="applicantAloneBirthYear" (change)="checkAloneBd() && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}" #birthdayYAE="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
+              <select [(ngModel)]="applicantAloneBirthYear" (change)="checkAloneBd('reset') && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}" #birthdayYAE="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
                 <option value="">年</option>
                 <option *ngFor="let year of birthdayYears" value="{{year}}" selected>{{year}}</option>
               </select>
             </div>
             <div class="col-xs-3" style="">
-              <select [(ngModel)]="applicantAloneBirthMonth" (change)="checkAloneBd() && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}"  #birthdayYAM="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
+              <select [(ngModel)]="applicantAloneBirthMonth" (change)="checkAloneBd('reset') && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}"  #birthdayYAM="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
                 <option value="">月</option>
                 <option *ngFor="let month of birthdayMonths" value="{{month}}" selected>{{month}}</option>
               </select>
@@ -485,7 +499,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="routeUrlGoGoNeedToHide">
+  <div class="row" *ngIf="routeUrlGoGoNeedToHide || rentalCarTemplate">
     <div class="container">
       <div class="col-lg-12 text-center">
         <div class="col-xs-12 col-sm-6 col-lg-6">
@@ -497,7 +511,7 @@
       </div>
     </div>
   </div>
-
+    <div [hidden]="rentalCarTemplate">
       <div class="row" *ngIf="!routeUrlGoGoNeedToHide">
         <div class="container">
           <div class="col-lg-12 text-center">
@@ -505,5 +519,6 @@
           </div>
         </div>
       </div>
+    </div>  
   </div>
 </div>

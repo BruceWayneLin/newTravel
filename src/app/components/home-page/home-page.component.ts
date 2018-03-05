@@ -25,7 +25,7 @@ export class HomePageComponent implements OnInit {
   defaultCustomerPkg: any;
   purposeList: Array<any> = [];
   selectedPackage: {};
-  selectedPackageName: string = '';
+  selectedPackageName: String = '';
   firstMon: any;
   data: any;
   packageList: Array<any> = [];
@@ -156,17 +156,13 @@ export class HomePageComponent implements OnInit {
     }
     this.product['pack'] = this.pakNum;
     
-    // if(new Date().getDay() == 0 && !this.modifiedClicked){
-    //   var tmr = new Date().setDate(new Date().getDate() + 1);
-    //   this.firstMon = this.getMonday(new Date(tmr));
-    // }else{
-      if(new Date().getDay() == 0){
-        var tmr = new Date().setDate(new Date().getDate() + 1);
-        this.firstMon = this.getMonday(new Date(tmr));
-      }else{
-        this.firstMon = this.getMonday(new Date());
-      }
-    // }
+    
+    if(new Date().getDay() == 0){
+      var tmr = new Date().setDate(new Date().getDate() + 1);
+      this.firstMon = this.getMonday(new Date(tmr));
+    }else{
+      this.firstMon = this.getMonday(new Date());
+    }
     this.toDeterminedIfDisabledDaysNeedToHide();
 
     if(this.dataService.orderNumberForSave){
@@ -474,7 +470,6 @@ export class HomePageComponent implements OnInit {
   }
 
   determineHideOrShow(lists, number) {
-
     var reArray = [];
     lists.forEach((item) => {
       reArray.push(item['isDefaultOption'])
@@ -607,7 +602,7 @@ export class HomePageComponent implements OnInit {
       $('.packageButton' + '3').siblings('span').addClass('selectedRadio');
       $('#btnOfPackages').find('.fa-check').addClass('hidden');
       $('.packageButton' + '3').siblings('span').empty();
-      $('.packageButton' + '3').siblings('span').append('<i class="fa fa-check"></i>'+this.selectedPackage['packageButtonName']).css(
+      $('.packageButton' + '3').siblings('span').append('<i class="fa fa-check"></i>自由配').css(
         {
           'text-align': 'center',
           'display': 'block',
@@ -1372,11 +1367,10 @@ export class HomePageComponent implements OnInit {
         return false;
       }
     }else{
-      var theBeginingDay = new Date().setDate(new Date().getDate() + (this.ifTheStartIsPlusOneMoreDay - 1));
+      const theBeginingDay = new Date().setDate((new Date().getDate() - 1) + (this.ifTheStartIsPlusOneMoreDay));
       if(
           buttonDate < new Date(theBeginingDay) ||
           buttonDate >= new Date(todayPlusStartDayLimitAndDisaster) ||
-          buttonDate < new Date() ||
           buttonDate == new Date(this.systemDate)
       ){
         return true;

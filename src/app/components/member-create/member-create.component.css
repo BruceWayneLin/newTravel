@@ -1308,8 +1308,8 @@ div.row.memberTitle {
 
 .dropDown {
   position: absolute;
-  top: 13px;
-  left: 75%;
+  top: 17px;
+  left: 72%;
   color: #ddd;
   pointer-events:none!important;
 }

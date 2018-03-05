@@ -861,7 +861,7 @@ div.text {
   font-weight: bold;
   position: absolute;
   top: 60%;
-  z-index: 999;
+  z-index: 9999;
   width: 100%;
   text-align: center;
   font-family: "segoe ui", "microsoft jhenghei", "microsoft mhei", stheititc, sans-serif!important;
@@ -1129,7 +1129,11 @@ input, input:before, input:after {
 
 /* firefox */
 @-moz-document url-prefix() {
-
+  @media screen and (min-width: 570px) {
+    #calendarTable td .checkBtn {
+      left: 25px!important;
+    }
+  }
   @media screen and (max-width: 570px) {
     #calendarTable td button {
       font-size: 18px!important;
@@ -1845,4 +1849,12 @@ input[type="radio"]:checked + span{
   .migration-to-bs4 .modal.show .modal-dialog.cl-modal .modal-content{
     width:60%!important;  
   }  
+}
+
+h2.selectStartBakH2#backToPoint {
+  margin-bottom: 50px!important;
+}
+
+#timeAdjTxtArea span {
+  color: red;
 }

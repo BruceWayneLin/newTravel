@@ -118,6 +118,7 @@ export class MemberCreateComponent implements OnInit {
   showAreaCityDoll: boolean;
   showAddrDoll: boolean;
   alonePidRepeat: boolean;
+  rentalCarTemplate: Boolean = false;
 
   @ViewChild('emailElm') EmailEl:ElementRef;
   @ViewChild('lastNameEl') lastNameEl:ElementRef;
@@ -138,22 +139,49 @@ export class MemberCreateComponent implements OnInit {
   ) {
     window.scrollTo(0, 0);
     $('html, body').animate({scrollTop: '0px'}, 0);
-    if(this.router.url.slice(0, 8) == '/gogoout'){
+    if(this.router.url.slice(7, 15) == '/gogoout'){
       if(this.routerAct.queryParams['value']['orderNumber']){
       }else{
-        this.router.navigate(['/']);
+        this.router.navigate(['travel']);
       }
     }
   }
 
-  checkAloneBd(){
+  ngOnInit() {
+    var url = this.router.url;
+    this.deterMineUrl(url);
+    $('body').css({
+      '-webkit-overflow-scrolling': 'auto'
+    });
+    setTimeout(function(){
+      $('body').css({
+        '-webkit-overflow-scrolling': 'touch'
+      });
+    }, 300);
+  }
+
+  checkAloneBd(val?){
     this.toRecheckAgain();
-    let currentYear = new Date(this.countBrthDayFromSelectedBtn).getFullYear();
-    let currentMonth = new Date(this.countBrthDayFromSelectedBtn).getMonth() + 1;
-    let currentDay = new Date(this.countBrthDayFromSelectedBtn).getDate();
+    var currentYear = new Date(this.countBrthDayFromSelectedBtn).getFullYear();
+    var currentMonth = new Date(this.countBrthDayFromSelectedBtn).getMonth() + 1;
+    var currentDay = new Date(this.countBrthDayFromSelectedBtn).getDate();
+    if(val == 'reset'){
+      this.applicantAloneBirthDay = '';
+      this.aloneBirthdayDays =  this.birthDays(this.applicantAloneBirthYear, (this.applicantAloneBirthMonth < 10 ? '0'+this.applicantAloneBirthMonth:this.applicantAloneBirthMonth));
+    }
     if(!this.routeUrlGoGoNeedToHide){
-      if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay){
-        var userAge = this.calculate_age(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+      if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay) {
+        var userAge = this.calculate_for_BT_TR_age_From_(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+
+        // if(this.router.url.slice(7, 15) == '/gogoout'){
+        // } else {
+        //   var userAge = this.calculate_for_BT_TR_age_From_(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+        // }
+        console.log('被保險人', userAge);
+        console.log('出發日年', currentYear);
+        console.log('出發日月', currentMonth);
+        console.log('出發日日', currentDay);
+
         if(userAge < this.insuredMinAge || userAge > this.insuredAgeMax){
           this.aloneBdWrong = true;
           this.aloneBdEmpty = false;
@@ -168,7 +196,7 @@ export class MemberCreateComponent implements OnInit {
       }
     }else{
       if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
-        this.aloneBirthdayDays =  this.birthDays(this.applicantAloneBirthYear, this.applicantAloneBirthMonth);
+        // this.aloneBirthdayDays =  this.birthDays(this.applicantAloneBirthYear, this.applicantAloneBirthMonth);
       }
       if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay){
         this.aloneBdEmpty = false;
@@ -230,6 +258,7 @@ export class MemberCreateComponent implements OnInit {
 
   changedData(year=null, month=null, day=null){
     this.userPidFail = this.pidCheck(this.pid);
+    this.personalSelectChange();
     this.checkBirthday(year, month, day);
     this.dataService.clearData = false;
   }
@@ -271,6 +300,12 @@ export class MemberCreateComponent implements OnInit {
 
   toGoDownWindow(){
     this.dataService.toGoDown = true;
+    if(this.router.url.slice(0, 8) == '/RentCar'){
+      this.router.navigate(['RentCar/BtoBtoC'], {queryParams: {'orderNumber': this.routerAct.queryParams['value']['orderNumber']}});
+    }
+    if(this.router.url.slice(7, 20) == '/memberCreate'){
+      this.router.navigate(['travel'], {queryParams: {'orderNumber': this.routerAct.queryParams['value']['orderNumber']}});
+    }
     try {
       sessionStorage.setItem('bak', JSON.stringify(true))
     } catch (e) {
@@ -334,6 +369,7 @@ export class MemberCreateComponent implements OnInit {
       this.aloneBdWrong = false;
       this.aloneNameFirstChinese = false;
       this.aloneNameLastChinese = false;
+
     } else {
       // this.checkVal();
       this.applicantAloneLockInput = true;
@@ -343,6 +379,7 @@ export class MemberCreateComponent implements OnInit {
       this.applicantAloneBirthYear = this.pBirthYear;
       this.applicantAloneBirthMonth = this.pBirthMonth;
       this.applicantAloneBirthDay = this.pBirthDay;
+      this.checkAloneBd();
 
       this.aloneLastNameEmpty = false;
       this.aloneFirstNameEmpty = false;
@@ -374,11 +411,12 @@ export class MemberCreateComponent implements OnInit {
 
   toReEnterFun() {
     if(this.pBirthYear && this.pBirthMonth){
-      this.birthdayDays = this.birthDays(new Date(this.pBirthYear).getFullYear(), new Date(this.pBirthMonth).getMonth()+1);
+      this.birthdayDays =  this.birthDays(this.pBirthYear, (this.pBirthMonth < 10 ? '0'+this.pBirthMonth:this.pBirthMonth));
+      // this.birthdayDays = this.birthDays(new Date(this.pBirthYear).getFullYear(), new Date(this.pBirthMonth).getMonth()+1);
     }
-    if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
-      this.aloneBirthdayDays = this.birthDays(new Date(this.applicantAloneBirthYear).getFullYear(), new Date(this.applicantAloneBirthMonth).getMonth()+1);
-    }
+    // if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
+    //   this.aloneBirthdayDays = this.birthDays(new Date(this.applicantAloneBirthYear).getFullYear(), new Date(this.applicantAloneBirthMonth).getMonth()+1);
+    // }
   }
 
   checkBirthday(year, month, day){
@@ -411,7 +449,6 @@ export class MemberCreateComponent implements OnInit {
     }
   }
 
-  
   checkAlonePid(value:any){
     if(this.pidCheck(value)){
       this.alonePidTypeWrong = true;
@@ -683,7 +720,6 @@ export class MemberCreateComponent implements OnInit {
     }
   };
 
-
   ModelCancel(){
       var modal = document.getElementById('myConfirmModal');
       modal.style.display = "none";
@@ -767,181 +803,30 @@ export class MemberCreateComponent implements OnInit {
     return age;
   }
 
-  toLoadGoGoData(){
-    this.routeUrlGoGoNeedToHide = false;
-    var orderNum = this.routerAct.queryParams['value']['orderNumber'];
-    this.dataService.orderNumberForSave = orderNum;
-    this.dataService.gogoOrderNumber = orderNum;
-    var sendDataBak = {};
-    sendDataBak['product'] = 'Travel';
-    sendDataBak['pack'] = '';
-    sendDataBak['orderNumber'] = orderNum;
-    this.dataService.getIniData(sendDataBak).do((data) => {
-      this.hideUpinput = true;
-      this.email = data['data']['applicant']['email'];
-      this.lastName = data['data']['applicant']['lastName'];
-      this.firstName = data['data']['applicant']['firstName'];
-      this.pid = data['data']['applicant']['pid'];
-      this.pdfUrl4Terms = data['data']['pdfUrl4Terms'];
-      if(data['data'].applicant.birthday){
-        data['data'].applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
-        this.pBirthYear = data['data'].applicant.birthday.slice(0, 4);
-        this.pBirthMonth = data['data'].applicant.birthday.slice(5, 7);
-        if (this.pBirthMonth.slice(0, 1) == '0') {
-          this.pBirthMonth = this.pBirthMonth.slice(1, 2);
-        }
-        this.pBirthDay = data['data'].applicant.birthday.slice(8, 10);
-        if (this.pBirthDay.slice(0, 1) == '0') {
-          this.pBirthDay = this.pBirthDay.slice(1, 2);
-        }
-      }
-      this.applicantAgeMax = data['data']['companySetting']['applicantAgeMax'];
-      this.applicantAgeMin = data['data']['companySetting']['applicantAgeMin'];
-      this.insuredList = data['data']['insuredList'];
+  calculate_for_BT_TR_age_From_(birth_month,birth_day,birth_year)
+  {
+    let today_date = new Date(this.countBrthDayFromSelectedBtn);
+    let today_year = today_date.getFullYear();
+    let today_month = today_date.getMonth();
+    let today_day = today_date.getDate();
+    let age = today_year - birth_year;
 
-      this.insuredAgeMax = data['data'].companySetting['insuredAgeMax'];
-      this.insuredLimitedAge = data['data'].companySetting['insuredAgeMax'] - data['data'].companySetting['insuredAgeMin'];
-      this.insuredMinAge = data['data'].companySetting['insuredAgeMin'];
-      this.countBrthDayFromSelectedBtn = data['data']['travelStartDate'];
-      this.cityList = data['data']['cityList'];
-      this.areaList = data['data']['areaList'];
-      this.toLoadArea('init');
-      this.toZipCode(true, this.selectedDistrict);
-      if(!data['data']['applicant']['mobile']){
-        this.Mobile = '';
-        this.mobileDisabled = false;
-      }else{
-        this.Mobile = data['data']['applicant']['mobile'];
-        this.mobileDisabled = true;
-      }
-      if(!data['data']['applicant']['addressCityId']){
-        this.selectedCity = '';
-        document.querySelector('#AddrCityFlag').scrollIntoView();
-        this.gogoAddrCityFail = true;
-      }else{
-        this.selectedCity = data['data']['applicant']['addressCityId'];
-        this.toLoadArea('init');
-        this.toZipCode(true, this.selectedDistrict);
-      }
-      if(!data['data']['applicant']['addressAreaId']){
-        this.selectedCity = '';
-        document.querySelector('#AddrAreaFlag').scrollIntoView();
-        this.gogoAddrAreaFail = true;
-      }else{
-        this.selectedDistrict = data['data']['applicant']['addressAreaId'];
-        this.toLoadArea('init');
-        this.toZipCode(true, this.selectedDistrict);
-      }
-      // data['data']['applicant']['address'] = 0;
-      if(!data['data']['applicant']['address']){
-        this.addr = '';
-        document.querySelector('#AddrFlag').scrollIntoView();
-        this.gogoAddrFail = true;
-      }else{
-        this.addr = data['data']['applicant']['address'];
-      }
-      this.applicantSelectBirth();
-      this.checkboxValue = data['checkboxValue'];
-      this.gogooutCheckTxt = data['checkboxText'];
-      this.applicantAgeMax = data['data'].companySetting['applicantAgeMax'];
-      this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
-      this.insuredLimitedAge = data['data'].companySetting['insuredAgeMax'] - data['data'].companySetting['insuredAgeMin'];
-      this.applicantAloneMinAge = data['data'].companySetting['insuredAgeMin'];
-      this.countBrthDayFromSelectedBtn = data['data']['travelStartDate'];
-      this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
-      data['data'].applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
-      this.pBirthYear = data['data'].applicant.birthday.slice(0, 4);
-      this.pBirthMonth = data['data'].applicant.birthday.slice(5, 7);
-      this.relationship = data['data'].relationList;
-      this.applicantSelectBirth();
-      if(data['data'].applicant.birthday){
-        data['data'].applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
-        this.pBirthYear = data['data'].applicant.birthday.slice(0, 4);
-        this.pBirthMonth = data['data'].applicant.birthday.slice(5, 7);
-        if (this.pBirthMonth.slice(0, 1) == '0') {
-          this.pBirthMonth = this.pBirthMonth.slice(1, 2);
-        }
-        this.pBirthDay = data['data'].applicant.birthday.slice(8, 10);
-        if (this.pBirthDay.slice(0, 1) == '0') {
-          this.pBirthDay = this.pBirthDay.slice(1, 2);
-        }
-      }
-      this.birthYears();
-
-      let personAge = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
-      if(personAge < data['data'].companySetting['applicantAgeMin']){
-        this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'] - data['data'].companySetting['applicantAgeMin'];
-        this.applicantSelectBirth();
-        this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
-        this.personalAgeOver = true;
-      } else {
-        this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
-        this.applicantSelectBirth();
-      }
-      this.birthdayMonths = this.birthMonths();
-      this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
-      this.aloneBirthdayDays = this.birthdayDays;
-
-      this.noGoWithYourFds = false;
-      this.hiddenAtBegining = '';
-      this.relationship = data['data']['relationList'];
-      this.insuredList.forEach((item, index)=>{
-        switch(index){
-          case 0:
-            if(item['relation']){
-              this.applicantAloneLockInput = true;
-            }else{
-              this.applicantAloneLockInput = false;
-            }
-            this.personalInfoSelect = item['relation'];
-            if(this.personalInfoSelect !== '本人'){
-              this.applicantAloneLockInput = false;
-            }
-            this.applicantAloneLastName = item['lastName'];
-            this.applicantAloneFirstName = item['firstName'];
-            this.applicantAlonePid = item['pid'];
-            this.applicantAloneBirthYear = item['birthday'].slice(0, 4);
-            this.applicantAloneBirthMonth = item['birthday'].slice(5,6) == 0? item['birthday'].slice(6,7): item['birthday'].slice(5,7);
-            this.applicantAloneBirthDay =  item['birthday'].slice(8,9) == 0? item['birthday'].slice(9,10): item['birthday'].slice(8,10);
-            this.aloneLastNameEmpty = false;
-            this.aloneFirstNameEmpty = false;
-            this.alonePidEmpty = false;
-            this.alonePidTypeWrong = false;
-            this.aloneBdEmpty = false;
-            this.alonePidWrong = false;
-            this.alonePidTypeWrong = false;
-            this.aloneBdWrong = false;
-            this.aloneNameFirstChinese = false;
-            this.aloneNameLastChinese = false;
-            break;
-          default:
-        }
-      })
-      this.isShowCheckbox = data['isShowCheckbox'];
-     
-      // if(this.checkboxValue){
-      //   this.gogooutCheckTxt = '已是英國凱萊會員，可至會員專區檢視保單資料 ';
-      // }else{
-      //   this.gogooutCheckTxt = '同步加入英國凱萊，可於會員專區檢視保單資料';
-      // }
-      this.birthdayMonths = this.birthMonths();
-      this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
-      this.aloneBirthdayDays = this.birthdayDays;
-      // lock inputs
-      this.checkEmailDis = true;
-      this.checkLastNameDis = true;
-      this.checkFirstNameDis = true;
-      this.checkPidDis = true;
-    }).delay(500).subscribe(()=>{
-      window.scrollTo(0, 0);
-      $('html, body').animate({scrollTop: '0px'}, 0);
-    });
+    if ( today_month < (birth_month - 1))
+    {
+      age--;
+    }
+    if (((birth_month - 1) == today_month) && (today_day < birth_day))
+    {
+      age--;
+    }
+    return age;
   }
 
   deterMineUrl(url){
-    if (url.slice(0, 13) == '/memberCreate') {
+    if (url.slice(7, 20) == '/memberCreate') {
       this.toLoadMemberCreat();
-    } else if (url.slice(0, 8) == '/gogoout') {
+    }
+    if (url.slice(7, 15) == '/gogoout') {
       setTimeout(function() {
         var userAgent = window.navigator.userAgent;
         if (true) {
@@ -950,12 +835,15 @@ export class MemberCreateComponent implements OnInit {
           var url = window.location.href; // get the current url of page into variable
           if (url.indexOf('?') > -1) { // url has a '?'
               if(url.indexOf('reloaded') < 0){ // url does not have the text 'reloaded'
-              this.router.navigate(['/gogoout'], {queryParams: {orderNumber: this.routerAct.queryParams['value']['orderNumber']}});
+              this.router.navigate(['travel/gogoout'], {queryParams: {orderNumber: this.routerAct.queryParams['value']['orderNumber']}});
               }
           }
         }
       }, 300);
       this.toLoadGoGoData();
+    }
+    if(url.slice(0, 8) == '/RentCar') {
+      this.toLoadRentalCar();
     }
   }
 
@@ -989,8 +877,7 @@ export class MemberCreateComponent implements OnInit {
       this.hiddenAtBegining = false;
       this.firstTimeClickHaoA = true;
       this.noGoWithYourFds = this.dataService.noGoWithYourFdsFlag;
-      if(!this.noGoWithYourFds && this.router.url.slice(0, 13) == '/memberCreate'){
-        
+      if(!this.noGoWithYourFds && this.router.url.slice(7, 20) == '/memberCreate'){
         this.dataService.toGetBakInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
           this.aggreeToUpdate = item['applicant']['isUpdate'];
           this.insuredList = item['insuredList'];
@@ -1243,17 +1130,474 @@ export class MemberCreateComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    var url = this.router.url;
-    this.deterMineUrl(url);
-    $('body').css({
-      '-webkit-overflow-scrolling': 'auto'
+  toLoadGoGoData(){
+    this.routeUrlGoGoNeedToHide = false;
+    var orderNum = this.routerAct.queryParams['value']['orderNumber'];
+    this.dataService.orderNumberForSave = orderNum;
+    this.dataService.gogoOrderNumber = orderNum;
+    var sendDataBak = {};
+    sendDataBak['product'] = 'Travel';
+    sendDataBak['pack'] = '';
+    sendDataBak['orderNumber'] = orderNum;
+    this.dataService.getIniData(sendDataBak).do((data) => {
+      this.hideUpinput = true;
+      this.email = data['data']['applicant']['email'];
+      this.lastName = data['data']['applicant']['lastName'];
+      this.firstName = data['data']['applicant']['firstName'];
+      this.pid = data['data']['applicant']['pid'];
+      this.pdfUrl4Terms = data['data']['pdfUrl4Terms'];
+      if(data['data'].applicant.birthday){
+        data['data'].applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+        this.pBirthYear = data['data'].applicant.birthday.slice(0, 4);
+        this.pBirthMonth = data['data'].applicant.birthday.slice(5, 7);
+        if (this.pBirthMonth.slice(0, 1) == '0') {
+          this.pBirthMonth = this.pBirthMonth.slice(1, 2);
+        }
+        this.pBirthDay = data['data'].applicant.birthday.slice(8, 10);
+        if (this.pBirthDay.slice(0, 1) == '0') {
+          this.pBirthDay = this.pBirthDay.slice(1, 2);
+        }
+      }
+      this.applicantAgeMax = data['data']['companySetting']['applicantAgeMax'];
+      this.applicantAgeMin = data['data']['companySetting']['applicantAgeMin'];
+      this.insuredList = data['data']['insuredList'];
+
+      this.insuredAgeMax = data['data'].companySetting['insuredAgeMax'];
+      this.insuredLimitedAge = data['data'].companySetting['insuredAgeMax'] - data['data'].companySetting['insuredAgeMin'];
+      this.insuredMinAge = data['data'].companySetting['insuredAgeMin'];
+      this.countBrthDayFromSelectedBtn = data['data']['travelStartDate'];
+      this.cityList = data['data']['cityList'];
+      this.areaList = data['data']['areaList'];
+      this.toLoadArea('init');
+      this.toZipCode(true, this.selectedDistrict);
+      if(!data['data']['applicant']['mobile']){
+        this.Mobile = '';
+        this.mobileDisabled = false;
+      }else{
+        this.Mobile = data['data']['applicant']['mobile'];
+        this.mobileDisabled = true;
+      }
+      if(!data['data']['applicant']['addressCityId']){
+        this.selectedCity = '';
+        document.querySelector('#AddrCityFlag').scrollIntoView();
+        this.gogoAddrCityFail = true;
+      }else{
+        this.selectedCity = data['data']['applicant']['addressCityId'];
+        this.toLoadArea('init');
+        this.toZipCode(true, this.selectedDistrict);
+      }
+      if(!data['data']['applicant']['addressAreaId']){
+        this.selectedCity = '';
+        document.querySelector('#AddrAreaFlag').scrollIntoView();
+        this.gogoAddrAreaFail = true;
+      }else{
+        this.selectedDistrict = data['data']['applicant']['addressAreaId'];
+        this.toLoadArea('init');
+        this.toZipCode(true, this.selectedDistrict);
+      }
+      // data['data']['applicant']['address'] = 0;
+      if(!data['data']['applicant']['address']){
+        this.addr = '';
+        document.querySelector('#AddrFlag').scrollIntoView();
+        this.gogoAddrFail = true;
+      }else{
+        this.addr = data['data']['applicant']['address'];
+      }
+      this.applicantSelectBirth();
+      this.checkboxValue = data['checkboxValue'];
+      this.gogooutCheckTxt = data['checkboxText'];
+      this.applicantAgeMax = data['data'].companySetting['applicantAgeMax'];
+      this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
+      this.insuredLimitedAge = data['data'].companySetting['insuredAgeMax'] - data['data'].companySetting['insuredAgeMin'];
+      this.applicantAloneMinAge = data['data'].companySetting['insuredAgeMin'];
+      this.countBrthDayFromSelectedBtn = data['data']['travelStartDate'];
+      this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
+      data['data'].applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+      this.pBirthYear = data['data'].applicant.birthday.slice(0, 4);
+      this.pBirthMonth = data['data'].applicant.birthday.slice(5, 7);
+      this.relationship = data['data'].relationList;
+      this.applicantSelectBirth();
+      if(data['data'].applicant.birthday){
+        data['data'].applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+        this.pBirthYear = data['data'].applicant.birthday.slice(0, 4);
+        this.pBirthMonth = data['data'].applicant.birthday.slice(5, 7);
+        if (this.pBirthMonth.slice(0, 1) == '0') {
+          this.pBirthMonth = this.pBirthMonth.slice(1, 2);
+        }
+        this.pBirthDay = data['data'].applicant.birthday.slice(8, 10);
+        if (this.pBirthDay.slice(0, 1) == '0') {
+          this.pBirthDay = this.pBirthDay.slice(1, 2);
+        }
+      }
+      this.birthYears();
+
+      let personAge = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
+      if(personAge < data['data'].companySetting['applicantAgeMin']){
+        this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'] - data['data'].companySetting['applicantAgeMin'];
+        this.applicantSelectBirth();
+        this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
+        this.personalAgeOver = true;
+      } else {
+        this.applicantAgeMin = data['data'].companySetting['applicantAgeMin'];
+        this.applicantSelectBirth();
+      }
+      this.birthdayMonths = this.birthMonths();
+      this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+      this.aloneBirthdayDays = this.birthdayDays;
+
+      this.noGoWithYourFds = false;
+      this.hiddenAtBegining = '';
+      this.relationship = data['data']['relationList'];
+      this.insuredList.forEach((item, index)=>{
+        switch(index){
+          case 0:
+            if(item['relation']){
+              this.applicantAloneLockInput = true;
+            }else{
+              this.applicantAloneLockInput = false;
+            }
+            this.personalInfoSelect = item['relation'];
+            if(this.personalInfoSelect !== '本人'){
+              this.applicantAloneLockInput = false;
+            }
+            this.applicantAloneLastName = item['lastName'];
+            this.applicantAloneFirstName = item['firstName'];
+            this.applicantAlonePid = item['pid'];
+            this.applicantAloneBirthYear = item['birthday'].slice(0, 4);
+            this.applicantAloneBirthMonth = item['birthday'].slice(5,6) == 0? item['birthday'].slice(6,7): item['birthday'].slice(5,7);
+            this.applicantAloneBirthDay =  item['birthday'].slice(8,9) == 0? item['birthday'].slice(9,10): item['birthday'].slice(8,10);
+            this.aloneLastNameEmpty = false;
+            this.aloneFirstNameEmpty = false;
+            this.alonePidEmpty = false;
+            this.alonePidTypeWrong = false;
+            this.aloneBdEmpty = false;
+            this.alonePidWrong = false;
+            this.alonePidTypeWrong = false;
+            this.aloneBdWrong = false;
+            this.aloneNameFirstChinese = false;
+            this.aloneNameLastChinese = false;
+            break;
+          default:
+        }
+      })
+      this.isShowCheckbox = data['isShowCheckbox'];
+     
+      // if(this.checkboxValue){
+      //   this.gogooutCheckTxt = '已是英國凱萊會員，可至會員專區檢視保單資料 ';
+      // }else{
+      //   this.gogooutCheckTxt = '同步加入英國凱萊，可於會員專區檢視保單資料';
+      // }
+      this.birthdayMonths = this.birthMonths();
+      this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+      this.aloneBirthdayDays = this.birthdayDays;
+      // lock inputs
+      this.checkEmailDis = true;
+      this.checkLastNameDis = true;
+      this.checkFirstNameDis = true;
+      this.checkPidDis = true;
+    }).delay(500).subscribe(()=>{
+      window.scrollTo(0, 0);
+      $('html, body').animate({scrollTop: '0px'}, 0);
     });
-    setTimeout(function(){
-      $('body').css({
-        '-webkit-overflow-scrolling': 'touch'
-      });
-    }, 300);
+  }
+
+  toLoadRentalCar() {
+    this.rentalCarTemplate = true;
+    this.routeUrlGoGoNeedToHide = false;
+    this.hiddenAtBegining = false;
+    this.firstTimeClickHaoA = false;
+    this.noGoWithYourFds = false;
+    this.gogoAddrAreaFail = false;
+    this.gogoAddrCityFail = false;
+    this.gogoAddrFail = false;
+
+    this.dataService.orderNumberForSave = this.routerAct.queryParams['value']['orderNumber'];
+    this.owlAnanOne = this.dataService.owlAnanOne;
+    this.owlAnanTwo = this.dataService.owlAnanTwo;
+    this.owlAnanThree = this.dataService.owlAnanThree;
+    this.owlAnanFour = this.dataService.owlAnanFour;
+    this.owlAnanFifth = this.dataService.owlAnanFifth;
+    var orderNum = this.routerAct.queryParams['value']['orderNumber'];
+    this.dataService.orderNumberForSave = orderNum;
+    var sendDataBak = {};
+    sendDataBak['product'] = 'Travel';
+    sendDataBak['pack'] = '';
+    sendDataBak['orderNumber'] = orderNum;
+    this.dataService.getIniData(sendDataBak).subscribe((data) => {
+      this.cityList = data.cityList;
+      this.areaList = data.areaList;
+      this.toLoadArea('init');
+      this.toZipCode(true, this.selectedDistrict);
+      this.birthdayMonths = this.birthMonths();
+      this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+      this.aloneBirthdayDays = this.birthdayDays;
+      if(this.personalInfoSelect !== '本人'){
+        this.applicantAloneLockInput = false;
+      }else{
+        this.applicantAloneLockInput = true;
+      }
+    });
+    // this is when user back from confirm page then we check if calling api or not
+    if(this.dataService.backFromConfirm && this.dataService.noGoWithYourFdsFlag !== undefined){
+      this.hiddenAtBegining = false;
+      this.firstTimeClickHaoA = true;
+      this.noGoWithYourFds = this.dataService.noGoWithYourFdsFlag;
+      if(!this.noGoWithYourFds){
+        this.dataService.toGetBakInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
+          this.aggreeToUpdate = item['applicant']['isUpdate'];
+          this.insuredList = item['insuredList'];
+          console.log(item);
+          this.relationShip = item.relationList;
+          this.rateInfoList = item.rateInfoList;
+          console.log('insuredAgeMax', item.companySetting['insuredAgeMax']);
+          console.log('insuredAgeMin', item.companySetting['insuredAgeMin']);
+          this.insuredAgeMax = item.companySetting['insuredAgeMax'];
+          this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
+          this.insuredMinAge = item.companySetting['insuredAgeMin'];
+          this.applicantAgeMax = item.companySetting['applicantAgeMax'];
+          this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+          this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
+          this.applicantAloneMinAge = item.companySetting['insuredAgeMin'];
+          this.countBrthDayFromSelectedBtn = item['travelStartDate'];
+          this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+          item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+          this.pBirthYear = item.applicant.birthday.slice(0, 4);
+          this.pBirthMonth = item.applicant.birthday.slice(5, 7);
+          this.relationship = item.relationList;
+          this.applicantSelectBirth();
+          if(item.applicant.birthday){
+            item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+            this.pBirthYear = item.applicant.birthday.slice(0, 4);
+            this.pBirthMonth = item.applicant.birthday.slice(5, 7);
+            if (this.pBirthMonth.slice(0, 1) == '0') {
+              this.pBirthMonth = this.pBirthMonth.slice(1, 2);
+            }
+            this.pBirthDay = item.applicant.birthday.slice(8, 10);
+            if (this.pBirthDay.slice(0, 1) == '0') {
+              this.pBirthDay = this.pBirthDay.slice(1, 2);
+            }
+          }
+          this.birthYears();
+          let personAge = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
+          if(personAge < item.companySetting['applicantAgeMin']){
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'] - item.companySetting['applicantAgeMin'];
+            this.applicantSelectBirth();
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+            this.personalAgeOver = true;
+          } else {
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+            this.applicantSelectBirth();
+          }
+          this.birthYears();
+          this.birthdayMonths = this.birthMonths();
+          this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+          this.pdfUrl4Terms = item.pdfUrl4Terms;
+          this.relationship = item.relationList;
+          this.email = item.applicant.email;
+          this.email.length == 0 ? this.checkEmailDis = false : this.checkEmailDis = true;
+          this.lastName = item.applicant.lastName;
+          this.lastName.length == 0 ? this.checkLastNameDis = false : this.checkLastNameDis = true;
+          this.firstName = item.applicant.firstName;
+          this.firstName.length == 0 ? this.checkFirstNameDis = false : this.checkFirstNameDis = true;
+          this.pid = item.applicant.pid;
+          this.pid.length == 0 ? this.checkPidDis = false : this.checkPidDis = true;
+          this.Mobile = item.applicant.mobile;
+          this.selectedCity = (item.applicant.addressCityId == 0 ? '' : item.applicant.addressCityId);
+          this.toLoadArea('init');
+          this.selectedDistrict = (item.applicant.addressAreaId == 0 ? '' : item.applicant.addressAreaId);
+          this.toZipCode(true, this.selectedDistrict);
+          this.birthdayMonths = this.birthMonths();
+          this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+          this.aloneBirthdayDays = this.birthdayDays;
+          this.personalSelectChange();
+          this.addr = item.applicant['address'];
+          if (!this.Mobile || !this.selectedCity || !this.selectedDistrict || !this.addr) {
+            this.hideUpinput = true;
+          } else {
+            this.hideUpinput = false;
+          }
+          this.insuredList.forEach((item, index)=>{
+            switch(index){
+              case 0:
+                if(item['relation']){
+                  this.applicantAloneLockInput = true;
+                }else{
+                  this.applicantAloneLockInput = false;
+                }
+                this.personalInfoSelect = item['relation'];
+                if(this.personalInfoSelect !== '本人'){
+                  this.applicantAloneLockInput = false;
+                }else{
+                  this.applicantAloneLockInput = true;
+                }
+                this.applicantAloneLastName = item['lastName'];
+                this.applicantAloneFirstName = item['firstName'];
+                this.applicantAlonePid = item['pid'];
+                this.applicantAloneBirthYear = item['birthday'].slice(0, 4);
+                this.applicantAloneBirthMonth = item['birthday'].slice(5,6) == 0? item['birthday'].slice(6,7): item['birthday'].slice(5,7);
+                this.applicantAloneBirthDay =  item['birthday'].slice(8,9) == 0? item['birthday'].slice(9,10): item['birthday'].slice(8,10);
+                this.aloneLastNameEmpty = false;
+                this.aloneFirstNameEmpty = false;
+                this.alonePidEmpty = false;
+                this.alonePidTypeWrong = false;
+                this.aloneBdEmpty = false;
+                this.alonePidWrong = false;
+                this.alonePidTypeWrong = false;
+                this.aloneBdWrong = false;
+                this.aloneNameFirstChinese = false;
+                this.aloneNameLastChinese = false;
+                break;
+              default:
+            }
+          })
+        })
+      }else{
+        this.dataService.toGetBakInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
+          this.aggreeToUpdate = item['applicant']['isUpdate'];
+          this.insuredList = item['insuredList'];
+          this.relationShip = item.relationList;
+          this.rateInfoList = item.rateInfoList;
+          console.log('insuredAgeMax', item.companySetting['insuredAgeMax']);
+          console.log('insuredAgeMin', item.companySetting['insuredAgeMin']);
+          this.insuredAgeMax = item.companySetting['insuredAgeMax'];
+          this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
+          this.insuredMinAge = item.companySetting['insuredAgeMin'];
+          this.applicantAgeMax = item.companySetting['applicantAgeMax'];
+          this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+          this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
+          this.applicantAloneMinAge = item.companySetting['insuredAgeMin'];
+          this.countBrthDayFromSelectedBtn = item['travelStartDate'];
+          this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+          item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+          this.pBirthYear = item.applicant.birthday.slice(0, 4);
+          this.pBirthMonth = item.applicant.birthday.slice(5, 7);
+          this.relationship = item.relationList;
+          this.applicantSelectBirth();
+          if(item.applicant.birthday){
+            item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+            this.pBirthYear = item.applicant.birthday.slice(0, 4);
+            this.pBirthMonth = item.applicant.birthday.slice(5, 7);
+            if (this.pBirthMonth.slice(0, 1) == '0') {
+              this.pBirthMonth = this.pBirthMonth.slice(1, 2);
+            }
+            this.pBirthDay = item.applicant.birthday.slice(8, 10);
+            if (this.pBirthDay.slice(0, 1) == '0') {
+              this.pBirthDay = this.pBirthDay.slice(1, 2);
+            }
+          }
+          this.birthYears();
+
+          let personAge = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
+          if(personAge < item.companySetting['applicantAgeMin']){
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'] - item.companySetting['applicantAgeMin'];
+            this.applicantSelectBirth();
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+            this.personalAgeOver = true;
+          } else {
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+            this.applicantSelectBirth();
+          }
+          this.birthYears();
+          this.pdfUrl4Terms = item.pdfUrl4Terms;
+          this.relationship = item.relationList;
+          this.email = item.applicant.email;
+          this.email.length == 0 ? this.checkEmailDis = false : this.checkEmailDis = true;
+          this.lastName = item.applicant.lastName;
+          this.lastName.length == 0 ? this.checkLastNameDis = false : this.checkLastNameDis = true;
+          this.firstName = item.applicant.firstName;
+          this.firstName.length == 0 ? this.checkFirstNameDis = false : this.checkFirstNameDis = true;
+          this.pid = item.applicant.pid;
+          this.pid.length == 0 ? this.checkPidDis = false : this.checkPidDis = true;
+          this.Mobile = item.applicant.mobile;
+          this.selectedCity = (item.applicant.addressCityId == 0 ? '' : item.applicant.addressCityId);
+          this.toLoadArea('init');
+          this.selectedDistrict = (item.applicant.addressAreaId == 0 ? '' : item.applicant.addressAreaId);
+          this.toZipCode(true, this.selectedDistrict);
+          this.addr = item.applicant['address'];
+          if (!this.Mobile || !this.selectedCity || !this.selectedDistrict || !this.addr) {
+            this.hideUpinput = true;
+          } else {
+            this.hideUpinput = false;
+          }
+        })
+      }
+    }else{    
+      var orderQuery = this.routerAct.queryParams['value']['orderNumber'];
+      this.dataService.toGetInsuredInfo(orderQuery).subscribe((item) => {
+        if (item) {
+          console.log(item);
+          this.rateInfoList = item.rateInfoList;
+          this.relationShip = item['relationList'];
+          console.log('insuredAgeMax', item.companySetting['insuredAgeMax']);
+          console.log('insuredAgeMin', item.companySetting['insuredAgeMin']);
+          this.insuredAgeMax = item.companySetting['insuredAgeMax'];
+          this.insuredAgeMin = item.companySetting['insuredAgeMin'];
+          this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
+          this.insuredMinAge = item.companySetting['insuredAgeMin'];
+          this.applicantAgeMax = item.companySetting['applicantAgeMax'];
+          this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+          this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
+          this.applicantAloneMinAge = item.companySetting['insuredAgeMin'];
+          this.countBrthDayFromSelectedBtn = item['travelStartDate'];
+          this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+          this.relationship = item.relationList;
+          this.applicantSelectBirth();
+          if(item.applicant.birthday){
+            item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
+            this.pBirthYear = item.applicant.birthday.slice(0, 4);
+            this.pBirthMonth = item.applicant.birthday.slice(5, 7);
+            if (this.pBirthMonth.slice(0, 1) == '0') {
+              this.pBirthMonth = this.pBirthMonth.slice(1, 2);
+            }
+            this.pBirthDay = item.applicant.birthday.slice(8, 10);
+            if (this.pBirthDay.slice(0, 1) == '0') {
+              this.pBirthDay = this.pBirthDay.slice(1, 2);
+            }
+          }
+          this.birthYears();
+          let personAge = this.calculate_age(this.pBirthMonth, this.pBirthDay, this.pBirthYear);
+          console.log('要保人', personAge);
+          console.log('要保人最低要保年齡', item.companySetting['applicantAgeMin']);
+          if(personAge < item.companySetting['applicantAgeMin']){
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'] - item.companySetting['applicantAgeMin'];
+            this.applicantSelectBirth();
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+            this.personalAgeOver = true;
+          } else {
+            this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+            this.applicantSelectBirth();
+          }
+          this.pdfUrl4Terms = item.pdfUrl4Terms;
+          this.relationship = item.relationList;
+          this.email = item.applicant.email;
+          this.email.length == 0 ? this.checkEmailDis = false : this.checkEmailDis = true;
+          this.lastName = item.applicant.lastName;
+          this.lastName.length == 0 ? this.checkLastNameDis = false : this.checkLastNameDis = true;
+          this.firstName = item.applicant.firstName;
+          this.firstName.length == 0 ? this.checkFirstNameDis = false : this.checkFirstNameDis = true;
+          this.pid = item.applicant.pid;
+          this.pid.length == 0 ? this.checkPidDis = false : this.checkPidDis = true;
+          this.Mobile = item.applicant.mobile;
+          this.selectedCity = (item.applicant.addressCityId == 0 ? '' : item.applicant.addressCityId);
+          this.toLoadArea('init');
+          this.selectedDistrict = (item.applicant.addressAreaId == 0 ? '' : item.applicant.addressAreaId);
+          this.toZipCode(true, this.selectedDistrict);
+          this.addr = item.applicant['address'];
+          if (!this.Mobile || !this.selectedCity || !this.selectedDistrict || !this.addr) {
+            this.hideUpinput = true;
+          } else {
+            this.hideUpinput = false;
+          }
+          this.birthdayMonths = this.birthMonths();
+          this.birthdayDays = this.birthDays(new Date().getFullYear(), new Date().getMonth()+1);
+          this.aloneBirthdayDays = this.birthdayDays;
+          this.noGoWithYourFds = false;
+          this.hiddenAtBegining = false;
+          this.personalSelectChange();
+        }
+      })
+    }
+    
   }
 
   deleteThisOne() {
@@ -1506,6 +1850,7 @@ export class MemberCreateComponent implements OnInit {
         returnObj['pid'] = this.applicantAlonePid;
         returnObj['birthday'] = this.applicantAloneBirthYear + '-' + (this.applicantAloneBirthMonth.length == 1? '0'+ this.applicantAloneBirthMonth: this.applicantAloneBirthMonth) + '-' + (this.applicantAloneBirthDay.length == 1? '0'+ this.applicantAloneBirthDay: this.applicantAloneBirthDay);
         this.dataService.SaveInsuredData['insuredList'].push(returnObj);
+
         this.dataService.toSaveInsuredData();
 
       }
@@ -1530,7 +1875,7 @@ export class MemberCreateComponent implements OnInit {
 
   ToSaveGoGoInsured(){
     let dataToGoinSendBak = {};
-    dataToGoinSendBak['orderNumber'] = this.dataService.gogoOrderNumber;
+    dataToGoinSendBak['orderNumber'] = this.routerAct.queryParams['value']['orderNumber'];
     dataToGoinSendBak['applicant'] = {};
     dataToGoinSendBak['applicant']['firstName'] = this.firstName;
     dataToGoinSendBak['applicant']['lastName'] = this.lastName;
@@ -1642,6 +1987,7 @@ export class MemberCreateComponent implements OnInit {
       // returnObj['pid'] = this.applicantAlonePid;
       // returnObj['birthday'] = this.applicantAloneBirthYear + '-' + (this.applicantAloneBirthMonth.length == 1? '0'+ this.applicantAloneBirthMonth: this.applicantAloneBirthMonth) + '-' + (this.applicantAloneBirthDay.length == 1? '0'+ this.applicantAloneBirthDay: this.applicantAloneBirthDay);
       // dataToGoinSendBak['insuredList'].push(returnObj);
+
       console.log('1234bak', JSON.stringify(dataToGoinSendBak));
       this.dataService.toCallGoGoApi(dataToGoinSendBak);
     }

@@ -1,3 +1,16 @@
+<!-- <ng-container *ngIf="rentalCarTemp">
+<div class="row firstRow" >
+  <div class="container">
+    <div class="col-xs-12 text-center">
+      <div class="image-center">
+        <img src="./assets/images/rentalCarThanks.png" alt="" class="img-responsive">
+      </div>
+    </div>
+  </div>
+</div>
+</ng-container> -->
+
+<ng-container>
 <div class="row firstRow" >
   <div class="container">
     <div class="col-xs-12 text-center">
@@ -7,6 +20,7 @@
     </div>
   </div>
 </div>
+</ng-container>
 
 <div class="row">
   <div class="container imgH2">
@@ -20,26 +34,29 @@
 <div class="row">
   <div class="container">
     <div class="col-xs-12 text-center">
-      <a href="/CareLineMember/member/member/travelorder"><button class="goingMemberArea form-control">會員專區</button></a>
+      <a href="{{memberLinkDe}}"><button class="goingMemberArea form-control">{{btnTxt}}</button></a>
+      <div *ngIf="rentalCarTemp" id="fingerDiv" class="fingerDiv animateInite"></div>
     </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="container">
-    <div class="div col-xs-12 text-center">
-      <h2>您獲得的優惠券 (可至會員專區查詢)</h2>
+<div *ngIf="showCoupon">
+  <div class="row">
+    <div class="container">
+      <div class="div col-xs-12 text-center">
+        <h2>您獲得的優惠券 (可至會員專區查詢)</h2>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="row couponArea">
-  <div class="container">
-    <div class="col-xs-12 text-center">
-      <div class="col-xs-6" *ngFor="let item of couponList; let i = index;">
-        <div class="inner">
-          <div class="couponIma col-xs-12">
-            <img style="margin:auto;" class="img-responsive" [src]="item['imageUrl']" alt="">
+  <div class="row couponArea">
+    <div class="container">
+      <div class="col-xs-12 text-center">
+        <div class="col-xs-6" *ngFor="let item of couponList; let i = index;">
+          <div class="inner">
+            <div class="couponIma col-xs-12">
+              <img style="margin:auto;" class="img-responsive" [src]="item['imageUrl']" alt="">
+            </div>
           </div>
         </div>
       </div>

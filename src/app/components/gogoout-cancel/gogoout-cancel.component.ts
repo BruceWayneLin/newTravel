@@ -26,7 +26,7 @@ export class GogooutCancelComponent implements OnInit {
     this.text = this.actRoute.queryParams['value']['msg'];
     if(this.actRoute.queryParams['value']['orderNumber']){
     }else{
-      this.router.navigate(['/']);
+      this.router.navigate(['travel']);
     }
     this.dataService.getGoGoInitCancel(this.actRoute.queryParams['value']['orderNumber']).subscribe((item)=>{
        this.text = item['carelineOrderNumber'];

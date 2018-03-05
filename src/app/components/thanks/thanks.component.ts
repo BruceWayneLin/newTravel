@@ -10,6 +10,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ThanksComponent implements OnInit {
   public purposeImgUrl: string;
   public couponList: any[];
+  rentalCarTemp: Boolean = false;
+  memberLinkDe: String = '/CareLineMember/member/member/travelorder';
+  orderNumber: any;
+  btnTxt: String = '會員專區';
+  showCoupon: Boolean = false;
   constructor(
       public dataService: DataServiceService,
       private routerAct: ActivatedRoute,
@@ -27,11 +32,10 @@ export class ThanksComponent implements OnInit {
     });
     if(this.routerAct.queryParams['value']['orderNumber']){
     }else{
-      this.router.navigate(['/']);
+      this.router.navigate(['travel']);
     }
 
     this.dataService.getActImgUrl(turnBakUrl).subscribe((item) => {
-
         let replyObj = JSON.parse(item);
         if(replyObj.isEx){
           var msgs = replyObj.msgs;
@@ -41,6 +45,19 @@ export class ThanksComponent implements OnInit {
         }else{
           this.purposeImgUrl = replyObj['purposeImageUrl'];
           this.couponList = replyObj['couponList'];
+          this.orderNumber = replyObj['orderNumber'];
+          if (this.router.url.slice(0, 8) === '/RentCar' || this.router.url.slice(0, 18) === '/travel/thanksPage') {
+            this.rentalCarTemp = true;
+            this.btnTxt = '簽名去';
+            if(this.router.url.slice(0, 8) === '/RentCar'){
+              this.purposeImgUrl = './assets/images/rentalCarThanks.png';
+              this.memberLinkDe = '/CareLineMember/member/member/carrentalorder';
+              this.showCoupon = false;
+            }
+            if(this.router.url.slice(0, 18) === '/travel/thanksPage'){
+              this.showCoupon = true;
+            }
+          }  
         }
     });
   }

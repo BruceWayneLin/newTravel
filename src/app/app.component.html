@@ -5,7 +5,7 @@
       </ngx-loading>
       <h1 *ngIf="ifItsLoading()" class="txtLoading">系統連線中，請耐心等待</h1>
     </div>
-   <!-- The Modal -->
+    <!-- The Modal -->
     <div id="myModal" class="modal">
       <!-- Modal content -->
       <div class="modal-content">
@@ -27,6 +27,29 @@
         </div>
       </div>
     </div>
+
+    <!-- The Modal -->
+    <div id="timeAdjTxtAreaModal" class="modal">
+        <!-- Modal content -->
+        <div id="TxtAreaModalContent" class="modal-content">
+          <p>
+            <span class="close hidden">&times;</span>
+          </p>
+          <div class="col-xs-12 text-cetner">
+            <h2>提示訊息！</h2>
+          </div>
+          <div class="text-center">
+            <div id="timeAdjTxtArea">
+  
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <button id="closebtn" class="closebtn2" (click)="canceltimeAdjTxtAreaModal()">確定</button>
+            </div>
+          </div>
+        </div>
+      </div>
   </router-outlet>
 </app-layout>
 

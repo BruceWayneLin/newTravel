@@ -42,6 +42,12 @@ export class AppComponent {
     modal.style.display = "none";
   }
 
+  canceltimeAdjTxtAreaModal(){
+    $('#timeAdjTxtArea').empty();
+    var modal = document.getElementById('timeAdjTxtAreaModal');
+    modal.style.display = "none";
+  }
+
   detectScrollAndHeaderChange() {
    $(document).on('scroll', function(){
      if($(document).scrollTop() > 400){
