@@ -602,7 +602,7 @@ export class HomePageComponent implements OnInit {
       $('.packageButton' + '3').siblings('span').addClass('selectedRadio');
       $('#btnOfPackages').find('.fa-check').addClass('hidden');
       $('.packageButton' + '3').siblings('span').empty();
-      $('.packageButton' + '3').siblings('span').append('<i class="fa fa-check"></i>'+this.selectedPackage['packageButtonName']).css(
+      $('.packageButton' + '3').siblings('span').append('<i class="fa fa-check"></i>自由配').css(
         {
           'text-align': 'center',
           'display': 'block',

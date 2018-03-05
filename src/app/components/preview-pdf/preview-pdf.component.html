@@ -5,18 +5,25 @@
     </div>
     <hr>
     <div class="people-list-container">
-      <div class="pdfSvg">
-      </div>
-      
-      <a target="_blank" clPdfPreview [pdfUrl]="pdfUrl">
-        <button class="previewYourPdfBtn">
+        <div class="page-desc careline-description">
+            <span class="careline-text-red-light">
+              ＊若發生事故，請務必立即報警並拍照存證，警方文件為申請理賠必要文件
+            </span>
+        </div>
+        <div class="pdfUrlContainer">
+          <a target="_blank" clPdfPreview [pdfUrl]="pdfUrl" style="cursor:pointer;">
+            <!-- <div class="pdfSvg">
+            </div> -->
+            <img class="img-responsive" src="assets/images/pdf/pdf-icon-0.svg" />
+          </a>
+        </div>
+        <button class="previewYourPdfBtn hidden" *ngIf="false">
           檔案預覽
           <i class="fa fa-search-plus" aria-hidden="true"></i>
         </button>
         <div id="fingerDiv" class="fingerDiv animateInite"></div>
-      </a>
     </div> 
-    <hr>
+    <hr class="specialHrTo">
     <div class="row">
         <div class="container">
           <div class="col-lg-12 text-center">

@@ -481,6 +481,7 @@ export class DataServiceService {
 
     toCallGoGoApi(data){
         this.loading = true;
+        this.gogoOrderNumber = data['orderNumber'];
         setTimeout(() => {
             var i = this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/apIn/save', data).map(res => {
                 if (res.json().isEx) {

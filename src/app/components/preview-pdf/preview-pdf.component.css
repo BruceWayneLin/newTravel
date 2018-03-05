@@ -40,7 +40,16 @@
      background-repeat: no-repeat;
      background-size: contain; 
      background-position:center;
-     height: 127px;   
+     height: 110px;   
+  }
+
+  .pdfUrlContainer a {
+    display:inline-block;
+  }
+
+  .img-responsive {
+    width: 95px;
+    margin: 0 auto;
   }
 
   .previewYourPdfBtn {
@@ -145,10 +154,11 @@
   }
   .people-list-container {
     margin-top: 15px;
-    height: 215px;
+    height: 150px;
+    text-align: center;
   }
   .fingerDiv {
-    top:60px;
+    top:55px;
   }
   #btnFinishedPdf {
     margin-top: 15px!important;
@@ -176,3 +186,22 @@
       margin-bottom: 0px!important;
     }
   } */
+
+  .pdfSvg {
+    width: 80%;
+    margin-left: 9%;
+  }
+
+  .pdfUrlContainer {
+    padding-top:20px;
+  }
+
+  .specialHrTo {
+    margin-top:20px;
+  }
+
+  @media screen and (max-width:480px) {
+    .specialHrTo {
+      margin-top:50px;
+    }
+  }

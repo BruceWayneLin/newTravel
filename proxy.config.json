@@ -1,23 +1,23 @@
 {
   "/CareLineTravel/travel-mbr": {
-    "target": "http://210.242.7.164/",
+    "target": "http://test.qat.careline.tw/",
     "secure": false,
     "logLevel": "debug",
     "pathRewrite": {
-      "^/CareLineTravel/travel-mbr" : "http://210.242.7.164/CareLineTravel/travel-mbr"
+      "^/CareLineTravel/travel-mbr" : "http://test.qat.careline.tw/CareLineTravel/travel-mbr"
     },
     "changeOrigin": false
   },
   "/CareLineMember": {
-    "target": "http://210.242.7.164/",
+    "target": "http://test.qat.careline.tw/",
     "secure": false
   },
   "/CareLineBranding": {
-    "target": "http://210.242.7.164/",
+    "target": "http://test.qat.careline.tw/",
     "secure": false
   },
   "/CareLineTravel/test-travel": {
-    "target": "http://210.242.7.164/",
+    "target": "http://test.qat.careline.tw/",
     "secure": false
   }
 }

@@ -1,4 +1,4 @@
-<ng-container *ngIf="rentalCarTemp">
+<!-- <ng-container *ngIf="rentalCarTemp">
 <div class="row firstRow" >
   <div class="container">
     <div class="col-xs-12 text-center">
@@ -8,8 +8,9 @@
     </div>
   </div>
 </div>
-</ng-container>
-<ng-container *ngIf="!rentalCarTemp">
+</ng-container> -->
+
+<ng-container>
 <div class="row firstRow" >
   <div class="container">
     <div class="col-xs-12 text-center">
@@ -38,7 +39,8 @@
     </div>
   </div>
 </div>
-<div [hidden]="rentalCarTemp">
+
+<div *ngIf="showCoupon">
   <div class="row">
     <div class="container">
       <div class="div col-xs-12 text-center">

@@ -314,8 +314,9 @@ export class BtobtoCComponent implements OnInit {
     });
     this.selectedBrand = val;
     this.isDoneSelectedBrand = true;
-    document.querySelector('#flagTwo').scrollIntoView();
-
+    setTimeout(function(){
+      document.querySelector('#flagThree').scrollIntoView();
+    }, 300);
   }
 
   createRange(number) {
@@ -837,7 +838,12 @@ export class BtobtoCComponent implements OnInit {
       this.returnObj['endHour'] = this.endHour;
       console.log('321456', this.returnObj);
       this.dataService.ifOnlyStartDayOnly(this.returnObj).subscribe((item) => {
-        console.log(item);
+        console.log(item);        
+        var uniqueItemJson = [];
+        $.each(this.cusItemJson, function(i, el){
+          if($.inArray(el, uniqueItemJson) === -1) uniqueItemJson.push(el);
+        });
+        this.cusItemJson = [];
         this.cusPackageList = item['cusPackageList'];
         this.packageList = item['packageList'];
 
@@ -872,6 +878,7 @@ export class BtobtoCComponent implements OnInit {
           });
         });
       });
+      
       document.querySelector('#flagFive').scrollIntoView({block: 'start', behavior: 'smooth'});
         this.textOfSelectingDays = '您的租車期間';
         this.tableShowHidden = true;
@@ -895,11 +902,30 @@ export class BtobtoCComponent implements OnInit {
           this.diffDays = diffDays;
         }
         if(this.pkgCustomGo === false){
-            this.getPriceServiceData();
+          this.getPriceServiceData();
         } else {
           this.toGetCusPkgPrice();
         }
-    }
+    
+        // var iOSMobile = !!navigator.platform && /iPhone/.test(navigator.platform);
+        // if(window.innerWidth <= 500 && iOSMobile){
+        //   $('.freeChoice .fa-check').addClass('hidden');
+        //   $('.packageButton' + '3').siblings('span').addClass('selectedRadio');
+        //   $('#btnOfPackages').find('.fa-check').addClass('hidden');
+        //   $('.packageButton' + '3').siblings('span').empty();
+        //   $('.packageButton' + '3').siblings('span').append('<i class="fa fa-check hidden"></i>自由配').css(
+        //     {
+        //       'text-align': 'center',
+        //       'display': 'block',
+        //       'margin': '0 auto'
+        //     }
+        //   ); 
+        //   $('#btnOfPackages span').css({
+        //     'left': '10%'
+        //   });
+        // }
+    
+      }
   }
 
   toGetCustomPackageContent(val) {
@@ -1310,20 +1336,21 @@ export class BtobtoCComponent implements OnInit {
     
     
             dataToSendBack['packageId'] = this.selectedPackage['packageId'];
-    
+            
             var uniqueItemJson = [];
             $.each(this.cusItemJson, function(i, el){
               if($.inArray(el, uniqueItemJson) === -1) uniqueItemJson.push(el);
             });
             dataToSendBack['cusItemList'] = uniqueItemJson;
-            if(this.pkgCustomGo) {
-              dataToSendBack['packageId'] = 0;
+            if(this.pkgCustomGo){
+              dataToSendBack['packageId'] = 0
               dataToSendBack['cusPackageId'] = this.defaultCustomerPkg['packageId'];
-            } else {
+            }else{
               dataToSendBack['cusPackageId'] = 0;
               dataToSendBack['packageId'] = this.selectedPackage['packageId'];
             }
-            console.log(dataToSendBack);
+
+           
             this.rentalCarService.RentalCarIsGoingToInusre(dataToSendBack);
         }
       }

@@ -74,7 +74,7 @@ export class ConfirmInfoComponent implements OnInit {
 
   reloadOneSec() {
       if(this.routerAct.queryParams['value']['reload']){ // url does not have the text 'reloaded'
-          window.location.href = 'gogoout/confirm?orderNumber='+this.routerAct.queryParams['value']['orderNumber'];
+        this.router.navigate(['travel/gogoout/confirm'], {queryParams: {orderNumber: this.routerAct.queryParams['value']['orderNumber']}});
       }
       if(this.routerAct.queryParams['value']['orderNumber']){
         this.toLoadDateForConfirm();
@@ -88,7 +88,7 @@ export class ConfirmInfoComponent implements OnInit {
   }
 
   toLoadDateForConfirm() {
-    if(this.router.url.slice(7, 15) == '/gogoout'){ 
+    if(this.router.url.slice(7, 15) == '/gogoout'){
       this.dataService.orderNumberForSave = this.routerAct.queryParams['value']['orderNumber'];
       this.dataService.orderNumber = this.routerAct.queryParams['value']['orderNumber'];
       this.gogoOutNeedToHideCol = true;
@@ -128,16 +128,19 @@ export class ConfirmInfoComponent implements OnInit {
       // rentcar and travel
       this.dataService.getConfirmInfo(this.routerAct.queryParams['value']['orderNumber']).subscribe((item) => {
         const info = item;
+        
         if(info['allowStayOnConfirmPage']){
+          $('#TxtAreaModalContent').attr('style', 'top: 15vh !important');
+          $('#timeAdjTxtArea').empty();
           if (info['text4AdjustStartTime'].length > 0) {
-            const modal = document.getElementById('myModal');
+            const modal = document.getElementById('timeAdjTxtAreaModal');
             modal.style.display = 'block';
             var txt = info['text4AdjustStartTime'];
             // var txt = '<p>因即將超過選擇的投保時間，您的保險起始時間將調整為下個整點</p><p>2018-02-27 <span>11:00</span>起算，請點選確認後繼續。</p>';
             var htmlObject = document.createElement('div');
             htmlObject.innerHTML = txt;
             $('#timeAdjTxtArea').append(htmlObject);
-            document.querySelector('#myModal').scrollIntoView();
+            document.querySelector('#timeAdjTxtAreaModal').scrollIntoView();
           }
           this.applicantName = info['apLastName'] + info['apFirstName'];
           this.applicantMobile = info['apMobile'];

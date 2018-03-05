@@ -34,13 +34,17 @@ export class AppComponent {
   }
 
   cancelThisModal(id){
-    $('#myModal').attr('style', 'padding-top:50%!important;');
     if(id){
         document.querySelector('#'+id).scrollIntoView();
         this.dataService.idToGoFlow = '';
     }
-    $('#timeAdjTxtArea').empty();
     var modal = document.getElementById('myModal');
+    modal.style.display = "none";
+  }
+
+  canceltimeAdjTxtAreaModal(){
+    $('#timeAdjTxtArea').empty();
+    var modal = document.getElementById('timeAdjTxtAreaModal');
     modal.style.display = "none";
   }
 

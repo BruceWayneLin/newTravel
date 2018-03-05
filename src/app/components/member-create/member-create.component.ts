@@ -411,7 +411,8 @@ export class MemberCreateComponent implements OnInit {
 
   toReEnterFun() {
     if(this.pBirthYear && this.pBirthMonth){
-      this.birthdayDays = this.birthDays(new Date(this.pBirthYear).getFullYear(), new Date(this.pBirthMonth).getMonth()+1);
+      this.birthdayDays =  this.birthDays(this.pBirthYear, (this.pBirthMonth < 10 ? '0'+this.pBirthMonth:this.pBirthMonth));
+      // this.birthdayDays = this.birthDays(new Date(this.pBirthYear).getFullYear(), new Date(this.pBirthMonth).getMonth()+1);
     }
     // if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
     //   this.aloneBirthdayDays = this.birthDays(new Date(this.applicantAloneBirthYear).getFullYear(), new Date(this.applicantAloneBirthMonth).getMonth()+1);
@@ -1874,7 +1875,7 @@ export class MemberCreateComponent implements OnInit {
 
   ToSaveGoGoInsured(){
     let dataToGoinSendBak = {};
-    dataToGoinSendBak['orderNumber'] = this.dataService.gogoOrderNumber;
+    dataToGoinSendBak['orderNumber'] = this.routerAct.queryParams['value']['orderNumber'];
     dataToGoinSendBak['applicant'] = {};
     dataToGoinSendBak['applicant']['firstName'] = this.firstName;
     dataToGoinSendBak['applicant']['lastName'] = this.lastName;
@@ -1986,6 +1987,7 @@ export class MemberCreateComponent implements OnInit {
       // returnObj['pid'] = this.applicantAlonePid;
       // returnObj['birthday'] = this.applicantAloneBirthYear + '-' + (this.applicantAloneBirthMonth.length == 1? '0'+ this.applicantAloneBirthMonth: this.applicantAloneBirthMonth) + '-' + (this.applicantAloneBirthDay.length == 1? '0'+ this.applicantAloneBirthDay: this.applicantAloneBirthDay);
       // dataToGoinSendBak['insuredList'].push(returnObj);
+
       console.log('1234bak', JSON.stringify(dataToGoinSendBak));
       this.dataService.toCallGoGoApi(dataToGoinSendBak);
     }
