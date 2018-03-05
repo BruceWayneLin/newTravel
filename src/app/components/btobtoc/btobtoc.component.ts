@@ -855,6 +855,8 @@ export class BtobtoCComponent implements OnInit {
             this.selectedPackage = value
         );
 
+        $('#remove2').addClass('hidden');
+
         this.selectedPackageName = this.selectedPackage['packageName'];
         this.secondaryItems = this.selectedPackage['secondaryItems'];
         this.toGetImgUrl(this.secondaryItems);
