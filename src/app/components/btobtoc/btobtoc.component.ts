@@ -243,7 +243,9 @@ export class BtobtoCComponent implements OnInit {
           this.toAddLiVal(this.trackNum);
         }
         if(this.trackNum.length > 3){
-          document.querySelector('#flagOne').scrollIntoView();
+          setTimeout(function(){
+            document.querySelector('#flagOne').scrollIntoView();
+          }, 500);
         }
       });
       $('body').css({
@@ -843,9 +845,9 @@ export class BtobtoCComponent implements OnInit {
         $.each(this.cusItemJson, function(i, el){
           if($.inArray(el, uniqueItemJson) === -1) uniqueItemJson.push(el);
         });
-        this.cusItemJson = [];
-        this.cusPackageList = item['cusPackageList'];
-        this.packageList = item['packageList'];
+        // this.cusItemJson = [];
+        // this.cusPackageList = item['cusPackageList'];
+        // this.packageList = item['packageList'];
 
         item.cusPackageList.filter(val => val.isDefaultPackage == true).map(
             value => this.defaultCustomerPkg = value
@@ -855,7 +857,7 @@ export class BtobtoCComponent implements OnInit {
             this.selectedPackage = value
         );
 
-        $('#remove2').addClass('hidden');
+        // $('#remove2').addClass('hidden');
 
         this.selectedPackageName = this.selectedPackage['packageName'];
         this.secondaryItems = this.selectedPackage['secondaryItems'];
@@ -867,18 +869,18 @@ export class BtobtoCComponent implements OnInit {
         this.fireInTheHole(this.selectedPackage['packageId'] - 1);
         this.tableList = this.selectedPackage['table'];
         console.log('table', this.tableList);
-        this.cusPackageList = item.cusPackageList;
-        this.defaultCustomerPkg['secondaryItems'].forEach((pkItem) => {
-          const objBack = {};
-          pkItem['amountList'].forEach((unit) => {
-            if(unit['isDefaultOption'] === true) {
-              objBack['companyCode'] = pkItem['companyCode'];
-              objBack['itemCode'] = pkItem['insItemCode'];
-              objBack['amountCode'] = unit['amountCode'];
-              this.cusItemJson.push(objBack);
-            }
-          });
-        });
+        // this.cusPackageList = item.cusPackageList;
+        // this.defaultCustomerPkg['secondaryItems'].forEach((pkItem) => {
+        //   const objBack = {};
+        //   pkItem['amountList'].forEach((unit) => {
+        //     if(unit['isDefaultOption'] === true) {
+        //       objBack['companyCode'] = pkItem['companyCode'];
+        //       objBack['itemCode'] = pkItem['insItemCode'];
+        //       objBack['amountCode'] = unit['amountCode'];
+        //       this.cusItemJson.push(objBack);
+        //     }
+        //   });
+        // });
       });
       
       document.querySelector('#flagFive').scrollIntoView({block: 'start', behavior: 'smooth'});
@@ -1352,7 +1354,7 @@ export class BtobtoCComponent implements OnInit {
               dataToSendBack['packageId'] = this.selectedPackage['packageId'];
             }
 
-           
+           console.log(dataToSendBack);
             this.rentalCarService.RentalCarIsGoingToInusre(dataToSendBack);
         }
       }
