@@ -6,7 +6,9 @@
     "ng": "ng",
     "sync:layout": "rm -rf src/assets/layout && cp -R ../cl-layout/src/assets/layout src/assets/layout && rm -rf src/assets/layout/@types",
     "start": "ng serve --proxy-config proxy.config.json --preserve-symlinks",
-    "build": "ng build --prod",
+    "build": "ng build --prod --preserve-symlinks --bh='/CareLineTravel/'",
+    "deploy-qat": "rsync -avh ./dist jack@172.16.88.181:/data/frontend/travel/ --delete",
+    "deploy-uat": "rsync -avh ./dist careline@172.16.88.195:/data/frontend/travel/ --delete",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -29,7 +31,7 @@
     "@types/jquery": "^3.2.12",
     "@types/lodash": "^4.14.85",
     "angular2-moment": "^1.6.0",
-    "bootstrap": "^4.0.0-beta.2",
+    "bootstrap": "4.0.0-beta.2",
     "cl-layout": "file:../cl-layout",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
@@ -74,7 +76,7 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.9.1",
-    "typescript": "~2.5.3",
+    "typescript": "~2.6.2",
     "sw-precache": "^5.2.0",
     "ts-loader": "^2.3.7"
   }

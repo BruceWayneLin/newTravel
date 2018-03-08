@@ -17,7 +17,7 @@ export class NavLogoutTravelService {
 
   click() {
     if (this.isInBtoBtoC()) {
-      location.href = `/`;
+      location.href = `${this.navBaseService.prefixUrlPath.travle}/${this.prefixUrlPath.btoBtoC}`;
     } else {
       location.href = `${this.navBaseService.prefixUrlPath.travle}/${this.prefixUrlPath.default}`;
     }
