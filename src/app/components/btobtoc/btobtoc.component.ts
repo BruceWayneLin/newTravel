@@ -307,6 +307,13 @@ export class BtobtoCComponent implements OnInit {
     document.getElementById('brandListName2').style.display = 'inline-block';
   }
 
+  forMobile(val:string){
+    var iOSMobile = !!navigator.platform && /iPhone/.test(navigator.platform);
+    if(window.innerWidth <= 500 && iOSMobile){
+      this.toAddLiVal(val);
+    }
+  }
+
   toAddLiVal(val:string) {
     console.log('this.brandlist', this.brandList);
     this.brandList.forEach((item) => {
@@ -684,6 +691,9 @@ export class BtobtoCComponent implements OnInit {
       }
       if(item['pictureCode'] == 'ITEM_SUDDEN_SICK'){
         item['pictureCode'] = 'TAK006';
+      }
+      if(item['pictureCode'] == 'CAR_TOW'){
+        item['pictureCode'] = 'carTow';
       }
       if(item['pictureCode'] == 'C_DETAIL_RESCUE'){
         item['pictureCode'] = 'TAK009';
