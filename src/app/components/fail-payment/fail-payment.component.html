@@ -12,8 +12,13 @@
     </div>
     <div class="col-xs-12 text-center content">
     </div>
-    <div class="col-xs-12 text-center">
-      <a href="#"><button class="btn">回到首頁</button></a>
+    <div id="btnArea" class="col-xs-12 text-center">
+      <div>
+          <a href="{{btnGoBakHomeUrl}}"><button class="btn">回到首頁</button></a>
+      </div>
+      <div *ngIf="url4RetryPaymentPage">
+          <a href="{{btnUrl}}"><button class="btn">{{btnTxt}}</button></a>
+      </div>
     </div>
   </div>
 </div>

@@ -8,7 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./fail-payment.component.css']
 })
 export class FailPaymentComponent implements OnInit {
-
+  btnUrl: string;
+  btnGoBakHomeUrl: string = 'travel/';
+  btnTxt: string;
+  url4RetryPaymentPage: boolean = false;
   constructor(
       private dataServiceService:DataServiceService,
       private router: Router,
@@ -27,7 +30,15 @@ export class FailPaymentComponent implements OnInit {
       });
       window.scrollTo(0, 0);
       $('html, body').animate({scrollTop: '0px'}, 0);
+      if(this.router.url.slice(0, 8) == '/RentCar'){
+        this.btnGoBakHomeUrl = 'RentCar/BtoBtoC';
+      }
       this.dataServiceService.failPaymentInfo(turnBakUrl).subscribe((item)=>{
+        if(item['url4RetryPaymentPage'].length > 1) {
+          this.btnUrl = item['url4RetryPaymentPage'];
+          this.btnTxt = '重新付款';
+          this.url4RetryPaymentPage = true;
+        }
         this.wrongMsg = item['msg'];
       })
   }

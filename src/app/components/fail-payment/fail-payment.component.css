@@ -60,4 +60,11 @@ button:hover {
     .content p, .content b {
        font-size: 18px;
     }
+    #btnArea div {
+        display:block!important;
+    }
+}
+
+#btnArea div {
+    display:inline-block;
 }
