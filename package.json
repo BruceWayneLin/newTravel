@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "sync:layout": "rm -rf src/assets/layout && cp -R ../cl-layout/src/assets/layout src/assets/layout && rm -rf src/assets/layout/@types",
+    "sync:layout": "rm -rf src/assets/layout && rsync -av --exclude=*.ts ../cl-layout/src/assets/layout/* src/assets/layout  && rm -rf src/assets/layout/@types",
     "start": "ng serve --proxy-config proxy.config.json --preserve-symlinks",
     "build": "ng build --prod --preserve-symlinks --bh='/CareLineTravel/'",
     "deploy-qat": "rsync -avh ./dist jack@172.16.88.181:/data/frontend/travel/ --delete",
