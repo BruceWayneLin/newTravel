@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?m4tj28');
-  src:  url('fonts/icomoon.eot?m4tj28#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?m4tj28') format('truetype'),
-    url('fonts/icomoon.woff?m4tj28') format('woff'),
-    url('fonts/icomoon.svg?m4tj28#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?v3fyaf');
+  src:  url('fonts/icomoon.eot?v3fyaf#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?v3fyaf') format('truetype'),
+    url('fonts/icomoon.woff?v3fyaf') format('woff'),
+    url('fonts/icomoon.svg?v3fyaf#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-cl-car-surfing:before {
+  content: "\e90c";
+}
 .icon-cl-car:before {
   content: "\e90b";
 }
@@ -62,6 +65,9 @@
 }
 .icon-light-bulb:before {
   content: "\e908";
+}
+.icon-cl-activity:before {
+  content: "\e2000";
 }
 .icon-activity:before {
   content: "\e2000";
