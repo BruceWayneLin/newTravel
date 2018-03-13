@@ -473,11 +473,11 @@ export class BtobtoCComponent implements OnInit {
     var startDaysDisabled = new Date(this.startTravelDay);
     var buttonDate = new Date(calVal);
     if(!this.startTravelDay){
-      var todayPlusStartDayLimitAndDisaster = new Date().setDate(new Date().getDate() + this.startDayLimit-1);
+      var todayPlusStartDayLimitAndDisaster = new Date().setDate(new Date().getDate() + this.startDayLimit);
     }else{
       var todayPlusStartDayLimitAndDisaster = new Date().setDate(new Date().getDate() + this.startDayLimit);
     }
-    var startDayPlusLimitedDay = new Date(this.startTravelDay).setDate(new Date(this.startTravelDay).getDate() + this.travelPeriodLimit - 1);
+    var startDayPlusLimitedDay = new Date(this.startTravelDay).setDate(new Date(this.startTravelDay).getDate() + this.travelPeriodLimit);
 
     if(this.startTravelDay){
       if(
@@ -574,13 +574,27 @@ export class BtobtoCComponent implements OnInit {
       }
     } else if (this.endTravelDay && this.startTravelDay && this.startHour && !this.endHour) {
       this.theDayUserSelected = '還車時間';
-      for(let i = 0; i <= 23; i++ ) {
-        if(i <= 9) {
-          const hrNUmber = '0' + i.toString();
-          this.timesHr.push(hrNUmber);
-        }else{
-          const hrNUmber = i.toString();
-          this.timesHr.push(hrNUmber);
+      var futureOneMonth = new Date(new Date(this.startTravelDay).getFullYear().toString() + '-' + ((new Date(this.startTravelDay).getMonth()+1) < 10 ? '0'+(new Date(this.startTravelDay).getMonth()+1).toString(): (new Date(this.startTravelDay).getMonth()+1).toString()) + '-' + ((new Date(this.startTravelDay).getDate()) < 10 ? '0'+(new Date(this.startTravelDay).getDate()).toString(): (new Date(this.startTravelDay).getDate()).toString()));
+      futureOneMonth.setDate(futureOneMonth.getDate() + 30);
+      if(new Date(futureOneMonth).getTime() == new Date(this.endTravelDay).getTime()) {
+        for(let i = 0; i <= this.startHour; i++ ) {
+          if(i <= 9) {
+            const hrNUmber = '0' + i.toString();
+            this.timesHr.push(hrNUmber);
+          }else{
+            const hrNUmber = i.toString();
+            this.timesHr.push(hrNUmber);
+          }
+        }
+      }else{
+        for(let i = 0; i <= 23; i++ ) {
+          if(i <= 9) {
+            const hrNUmber = '0' + i.toString();
+            this.timesHr.push(hrNUmber);
+          }else{
+            const hrNUmber = i.toString();
+            this.timesHr.push(hrNUmber);
+          }
         }
       }
     }
