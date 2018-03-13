@@ -93,6 +93,7 @@ export class BtobtoCComponent implements OnInit {
   fourthBtn: {};
   startMinute: any = '00';
   endMinute: any = '00';
+  scrollDown: Boolean;
 
   @ViewChild('eleTest')  el:ElementRef;
   @ViewChild('getUpClz') getUpClz:ElementRef;
@@ -113,6 +114,7 @@ export class BtobtoCComponent implements OnInit {
     this.returnObj['source'] = 'CAR_STORE_ONLINE';
     this.returnObj['pack'] = this.routerAct.queryParams['value']['pack'];
     this.trackNum = this.routerAct.queryParams['value']['__track'];
+    this.scrollDown = this.routerAct.queryParams['value']['scrollDown'];
     this.toLoadRentalCar();
   }
 
@@ -242,7 +244,12 @@ export class BtobtoCComponent implements OnInit {
         if(this.trackNum){
           this.toAddLiVal(this.trackNum);
         }
-        if(this.trackNum.length > 3){
+        if(this.scrollDown){
+          setTimeout(function(){
+            document.querySelector('#flagOne').scrollIntoView();
+          }, 500);
+        }
+        if(this.trackNum.length > 3) {
           setTimeout(function(){
             document.querySelector('#flagOne').scrollIntoView();
           }, 500);
