@@ -862,8 +862,14 @@ export class HomePageComponent implements OnInit {
       if(item['pictureCode'] == 'ITEM_SUDDEN_SICK'){
         item['pictureCode'] = 'TAK006'
       }
-      if(item['pictureCode'] == 'C_DETAIL_RESCUE'){
+      if(
+        item['pictureCode'] == 'C_DETAIL_RESCUE' ||
+        item['pictureCode'] == 'ITEM_RESCUE'
+      ){
         item['pictureCode'] = 'TAK009'
+      }
+      if(item['pictureCode'] == 'ITEM_HOME_STOLEN'){
+        item['pictureCode'] = 'TAK010'
       }
     })
   }
@@ -952,6 +958,8 @@ export class HomePageComponent implements OnInit {
       case 'MingTai':
         this.logoImgSrc = 'assets/images/logos/mitai.jpg';
         break;
+      case 'Cathay':
+        this.logoImgSrc = 'assets/images/logos/Cathy.png';
     }
   }
 
