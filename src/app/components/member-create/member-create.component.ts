@@ -119,6 +119,7 @@ export class MemberCreateComponent implements OnInit {
   showAddrDoll: boolean;
   alonePidRepeat: boolean;
   rentalCarTemplate: Boolean = false;
+  insuredSizeLimit: any = 6;
 
   @ViewChild('emailElm') EmailEl:ElementRef;
   @ViewChild('lastNameEl') lastNameEl:ElementRef;
@@ -895,6 +896,7 @@ export class MemberCreateComponent implements OnInit {
           this.applicantAloneMinAge = item.companySetting['insuredAgeMin'];
           this.countBrthDayFromSelectedBtn = item['travelStartDate'];
           this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+          this.insuredSizeLimit = item.companySetting['insuredSizeLimit'];
           item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
           this.pBirthYear = item.applicant.birthday.slice(0, 4);
           this.pBirthMonth = item.applicant.birthday.slice(5, 7);
@@ -1071,6 +1073,7 @@ export class MemberCreateComponent implements OnInit {
           this.applicantAgeMin = item.companySetting['applicantAgeMin'];
           this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
           this.applicantAloneMinAge = item.companySetting['insuredAgeMin'];
+          this.insuredSizeLimit = item.companySetting['insuredSizeLimit'];
           this.countBrthDayFromSelectedBtn = item['travelStartDate'];
           this.applicantAgeMin = item.companySetting['applicantAgeMin'];
           this.relationship = item.relationList;
@@ -1718,7 +1721,7 @@ export class MemberCreateComponent implements OnInit {
 
   createInsuredCard() {
     var lengthOfOwls = $('#insuredInfoAppend').children('#insuredOneCard').length;
-    var maxOwlsNumber = 6;
+    var maxOwlsNumber = this.insuredSizeLimit;
     if(lengthOfOwls < maxOwlsNumber){
       switch (lengthOfOwls) {
         case 1:
