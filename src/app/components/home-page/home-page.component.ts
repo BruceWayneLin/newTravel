@@ -750,7 +750,7 @@ export class HomePageComponent implements OnInit {
             this.endTravelDay = $event.target.value;
 
             if(this.startTravelDay && this.endTravelDay){
-              this.dataService.ifOnlyStartDayOnly(sendDataBak).subscribe((item) => {
+              this.dataService.ifOnlyStartDayOnly(sendDataBak).do((item) => {
                 console.log(item);
                 this.cusPackageList = item['cusPackageList'];
                 this.packageList = item['packageList'];
@@ -785,8 +785,14 @@ export class HomePageComponent implements OnInit {
                     }
                   });
                 });
+              }).delay(100).subscribe(() => {
+                if(this.pkgCustomGo) {
+                  $('.packageButton3').trigger('click');
+                } else {
+                }
               });
             }
+
             if (this.startTravelDay && this.endTravelDay) {
 
             document.querySelector('#flagFive').scrollIntoView({block: 'start', behavior: 'smooth'});
