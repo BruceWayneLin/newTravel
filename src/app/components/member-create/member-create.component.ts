@@ -196,18 +196,17 @@ export class MemberCreateComponent implements OnInit {
         }
       }
     }else{
+      var userAge = this.calculate_for_BT_TR_age_From_(this.applicantAloneBirthMonth, this.applicantAloneBirthDay, this.applicantAloneBirthYear);
+
+      console.log('被保險人', userAge);
+      console.log('出發日年', currentYear);
+      console.log('出發日月', currentMonth);
+      console.log('出發日日', currentDay);
       if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth){
         // this.aloneBirthdayDays =  this.birthDays(this.applicantAloneBirthYear, this.applicantAloneBirthMonth);
       }
       if(this.applicantAloneBirthYear && this.applicantAloneBirthMonth && this.applicantAloneBirthDay){
         this.aloneBdEmpty = false;
-        let userAge = currentYear - this.applicantAloneBirthYear;
-        if((currentMonth >= this.applicantAloneBirthMonth) && (currentDay >= this.applicantAloneBirthDay)){
-          //生日過今天 保留原本選擇年紀
-        } else {
-          userAge = userAge - 1;
-          //未過今天 年紀扣一歲
-        }
         if(this.insuredLimitedAge !== 0){
           if(this.applicantAloneBirthYear <= (currentYear - (this.insuredLimitedAge+1))){
             if((this.applicantAloneBirthMonth < currentMonth) && (this.applicantAloneBirthDay >= currentDay) || (this.applicantAloneBirthMonth <= currentMonth) && (this.applicantAloneBirthDay <= currentDay)){
@@ -217,6 +216,10 @@ export class MemberCreateComponent implements OnInit {
               this.aloneBdWrong = false;
               this.rateInfoList.forEach((item) => {
                 if((userAge >= item.ageMin) && (userAge <= item.ageMax)){
+                  console.log('被保險人', userAge);
+                  console.log('出發日年', currentYear);
+                  console.log('出發日月', currentMonth);
+                  console.log('出發日日', currentDay);
                   this.aloneWarningWord = item.tipText;
                 }
               });
@@ -232,6 +235,10 @@ export class MemberCreateComponent implements OnInit {
               console.log('4', userAge);
               this.rateInfoList.forEach((item) => {
                 if((userAge >= item.ageMin) && (userAge <= item.ageMax)){
+                  console.log('被保險人', userAge);
+                  console.log('出發日年', currentYear);
+                  console.log('出發日月', currentMonth);
+                  console.log('出發日日', currentDay);
                   this.aloneWarningWord = item.tipText;
                 }
               });
@@ -241,6 +248,10 @@ export class MemberCreateComponent implements OnInit {
             this.aloneBdWrong = false;
             this.rateInfoList.forEach((item) => {
               if((userAge >= item.ageMin) && (userAge <= item.ageMax)){
+                console.log('被保險人', userAge);
+                  console.log('出發日年', currentYear);
+                  console.log('出發日月', currentMonth);
+                  console.log('出發日日', currentDay);
                 this.aloneWarningWord = item.tipText;
               }
             });
@@ -248,6 +259,10 @@ export class MemberCreateComponent implements OnInit {
   
         }
       } else if (!this.applicantAloneBirthYear && !this.applicantAloneBirthMonth && !this.applicantAloneBirthDay) {
+        console.log('被保險人', userAge);
+        console.log('出發日年', currentYear);
+        console.log('出發日月', currentMonth);
+        console.log('出發日日', currentDay);
         this.aloneBdEmpty = true;
         this.aloneBdWrong = false;
       }
