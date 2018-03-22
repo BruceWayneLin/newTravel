@@ -749,7 +749,7 @@ export class HomePageComponent implements OnInit {
             sendDataBak['startDate'] = this.startTravelDay;
             this.endTravelDay = $event.target.value;
 
-            if(!this.pkgCustomGo && this.startTravelDay && this.endTravelDay){
+            if(this.startTravelDay && this.endTravelDay){
               this.dataService.ifOnlyStartDayOnly(sendDataBak).subscribe((item) => {
                 console.log(item);
                 this.cusPackageList = item['cusPackageList'];
