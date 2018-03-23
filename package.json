@@ -9,7 +9,7 @@
     "build": "ng build --prod --preserve-symlinks --bh='/CareLineTravel/'",
     "deploy-qat": "rsync -avh ./dist jack@172.16.88.181:/data/frontend/travel/ --delete",
     "deploy-uat": "rsync -avh ./dist careline@172.16.88.195:/data/frontend/travel/ --delete",
-    "deploy-stage": "rsync -avh ./dist careline@172.16.88.205:/data/frontend/travel/ --delete",
+    "deploy-stage": "rsync -avh ./dist careline@172.16.88.205:/data/frontend/travel/botRender/ --delete",
     "deploy-server": "rsync -avh -e 'ssh -p 53901' --delete ./dist careline@210.65.132.23:/data/frontend/travel",
     "test": "ng test",
     "lint": "ng lint",
