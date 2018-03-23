@@ -362,7 +362,7 @@
               <span class="pull-right txtBirth" style="padding-top:15px;">生日</span>
             </div>
             <div class="col-xs-5">
-              <select [(ngModel)]="applicantAloneBirthYear" (change)="checkAloneBd('reset') && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}" #birthdayYAE="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
+              <select [(ngModel)]="applicantAloneBirthYear" (change)="checkAloneBd() && changedData() && toReEnterFun()" [ngClass]="{inValidInput:aloneBdWrong || aloneBdEmpty}" #birthdayYAE="ngModel" class="form-control" [disabled]="applicantAloneLockInput">
                 <option value="">年</option>
                 <option *ngFor="let year of birthdayYears" value="{{year}}" selected>{{year}}</option>
               </select>
@@ -388,6 +388,20 @@
         <div class="col-xs-2">
         </div>
       </div>
+
+      <div class="col-xs-12" *ngIf="routeUrlGoGoNeedToHide">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-4">
+          </div>
+          <div class="col-xs-4">
+              <div class="col-xs-12 text-right insuredPriceDivH4">
+                  <h4 class="text-right"><span style="color:black;">保費:</span> NT${{aloneInsuredPrice}}</h4>
+              </div>
+          </div>
+          <div class="col-xs-2">
+          </div>
+      </div>
+
     </div>
   </div>
 </ng-container>

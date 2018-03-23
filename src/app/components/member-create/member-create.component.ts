@@ -120,6 +120,7 @@ export class MemberCreateComponent implements OnInit {
   alonePidRepeat: boolean;
   rentalCarTemplate: Boolean = false;
   insuredSizeLimit: any = 6;
+  aloneInsuredPrice: Number = 0;
 
   @ViewChild('emailElm') EmailEl:ElementRef;
   @ViewChild('lastNameEl') lastNameEl:ElementRef;
@@ -221,6 +222,7 @@ export class MemberCreateComponent implements OnInit {
                   console.log('出發日月', currentMonth);
                   console.log('出發日日', currentDay);
                   this.aloneWarningWord = item.tipText;
+                  this.aloneInsuredPrice = item.rate;
                 }
               });
             }
@@ -240,6 +242,8 @@ export class MemberCreateComponent implements OnInit {
                   console.log('出發日月', currentMonth);
                   console.log('出發日日', currentDay);
                   this.aloneWarningWord = item.tipText;
+                  this.aloneInsuredPrice = item.rate;
+
                 }
               });
             }
@@ -253,6 +257,8 @@ export class MemberCreateComponent implements OnInit {
                   console.log('出發日月', currentMonth);
                   console.log('出發日日', currentDay);
                 this.aloneWarningWord = item.tipText;
+                this.aloneInsuredPrice = item.rate;
+
               }
             });
           }
