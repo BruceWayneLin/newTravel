@@ -131,6 +131,11 @@ export class HomePageComponent implements OnInit {
     return parms;
   };
 
+  numberWithCommas = (x) => {
+    let Xn = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return Xn
+  }
+
   ngOnInit() {
     this.fourthBtn = {};
     this.fourthBtn['packageId'] = '';
