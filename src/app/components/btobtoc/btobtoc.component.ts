@@ -476,6 +476,11 @@ export class BtobtoCComponent implements OnInit {
     }
   }
 
+  numberWithCommas = (x) => {
+    let Xn = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return Xn
+  }
+
   buttonToDisabled(calVal) {
     var startDaysDisabled = new Date(this.startTravelDay);
     var buttonDate = new Date(calVal);
