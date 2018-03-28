@@ -131,6 +131,11 @@ export class HomePageComponent implements OnInit {
     return parms;
   };
 
+  numberWithCommas = (x) => {
+    let Xn = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return Xn
+  }
+
   ngOnInit() {
     this.fourthBtn = {};
     this.fourthBtn['packageId'] = '';
@@ -749,8 +754,8 @@ export class HomePageComponent implements OnInit {
             sendDataBak['startDate'] = this.startTravelDay;
             this.endTravelDay = $event.target.value;
 
-            if(!this.pkgCustomGo && this.startTravelDay && this.endTravelDay){
-              this.dataService.ifOnlyStartDayOnly(sendDataBak).subscribe((item) => {
+            if(this.startTravelDay && this.endTravelDay){
+              this.dataService.ifOnlyStartDayOnly(sendDataBak).do((item) => {
                 console.log(item);
                 this.cusPackageList = item['cusPackageList'];
                 this.packageList = item['packageList'];
@@ -785,8 +790,14 @@ export class HomePageComponent implements OnInit {
                     }
                   });
                 });
+              }).delay(100).subscribe(() => {
+                if(this.pkgCustomGo) {
+                  $('.packageButton3').trigger('click');
+                } else {
+                }
               });
             }
+
             if (this.startTravelDay && this.endTravelDay) {
 
             document.querySelector('#flagFive').scrollIntoView({block: 'start', behavior: 'smooth'});
@@ -862,8 +873,14 @@ export class HomePageComponent implements OnInit {
       if(item['pictureCode'] == 'ITEM_SUDDEN_SICK'){
         item['pictureCode'] = 'TAK006'
       }
-      if(item['pictureCode'] == 'C_DETAIL_RESCUE'){
+      if(
+        item['pictureCode'] == 'C_DETAIL_RESCUE' ||
+        item['pictureCode'] == 'ITEM_RESCUE'
+      ){
         item['pictureCode'] = 'TAK009'
+      }
+      if(item['pictureCode'] == 'ITEM_HOME_STOLEN'){
+        item['pictureCode'] = 'TAK010'
       }
     })
   }
@@ -952,6 +969,8 @@ export class HomePageComponent implements OnInit {
       case 'MingTai':
         this.logoImgSrc = 'assets/images/logos/mitai.jpg';
         break;
+      case 'Cathay':
+        this.logoImgSrc = 'assets/images/logos/Cathy.png';
     }
   }
 

@@ -87,6 +87,11 @@ export class ConfirmInfoComponent implements OnInit {
       }
   }
 
+  numberWithCommas = (x) => {
+    let Xn = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return Xn
+  }
+
   toLoadDateForConfirm() {
     if(this.router.url.slice(7, 15) == '/gogoout'){
       this.dataService.orderNumberForSave = this.routerAct.queryParams['value']['orderNumber'];
