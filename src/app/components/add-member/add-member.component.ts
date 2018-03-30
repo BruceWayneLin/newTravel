@@ -496,7 +496,7 @@ export class AddMemberComponent implements OnInit {
 
   checkChineseName(value){
     if(value){
-      if (value.match(/[\u4E00-\u9FFF\u3400-\u4DFF\uF900-\uFAFF]+/g)) {
+      if (!value.match(/[^\u4e00-\u9fa5]/)) {
         return false;
       } else {
         return true;

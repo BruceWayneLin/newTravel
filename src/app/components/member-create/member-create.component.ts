@@ -275,21 +275,21 @@ export class MemberCreateComponent implements OnInit {
     this.toRecheckAgain();
     if(value){
       if(value && id == 'last'){
-        if (value.match(/[\u4E00-\u9FFF\u3400-\u4DFF\uF900-\uFAFF]+/g)) {
+        if (!value.match(/[^\u4e00-\u9fa5]/)) {
           this.aloneNameLastChinese = false;
         } else {
           this.aloneNameLastChinese = true;
           this.aloneLastNameEmpty = false;
         }
       } else if (value && id == 'first'){
-        if (value.match(/[\u4E00-\u9FFF\u3400-\u4DFF\uF900-\uFAFF]+/g)) {
+        if (!value.match(/[^\u4e00-\u9fa5]/)) {
           this.aloneNameFirstChinese = false;
         } else {
           this.aloneNameFirstChinese = true;
           this.aloneFirstNameEmpty = false;
         }
       } else if (value || id == ''){
-        if (value.match(/[\u4E00-\u9FFF\u3400-\u4DFF\uF900-\uFAFF]+/g)) {
+        if (!value.match(/[^\u4e00-\u9fa5]/)) {
           return false;
         } else {
           return true;
