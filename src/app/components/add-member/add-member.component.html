@@ -127,12 +127,12 @@
           </div>
           <div class="col-xs-12 col-sm-12 text-center">
             <div class="col-xs-6 col-sm-6" style="padding-left:0px;">
-              <input class=" memberFormInput form-control" #secondLastName="ngModel" (change)="checkDisable('')" [(ngModel)]="secondCardLastName" [ngClass]="{inValidInput: secondLastName.touched && !secondLastName.valid || secondLastNameValiFail}" type="text" placeholder="姓" value="" required>
+              <input class=" memberFormInput form-control" #secondLastName="ngModel" (change)="checkDisable('')" [(ngModel)]="secondCardLastName" [ngClass]="{inValidInput: secondLastName.touched && !secondLastName.valid || secondLastNameValiFail || checkChineseName(secondLastName.value)}" type="text" placeholder="姓" value="" required>
               <div class="inValid text-left" style="white-space: nowrap;" *ngIf="secondLastName.touched && !secondLastName.valid || secondCardValidFail || secondLastNameValiFail">此欄位為必填。</div>
               <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(secondLastName.value)">姓名必須是中文。</div>
             </div>
             <div class="col-xs-6 col-sm-6" style="padding-right:0px;">
-              <input class=" memberFormInput form-control" #secondFirstName="ngModel" (change)="checkDisable('')" [(ngModel)]="secondCardFirstName" [ngClass]="{inValidInput: secondFirstName.touched && !secondFirstName.valid || secondFirstNameValiFail}" type="text" placeholder="名" value="" required>
+              <input class=" memberFormInput form-control" #secondFirstName="ngModel" (change)="checkDisable('')" [(ngModel)]="secondCardFirstName" [ngClass]="{inValidInput: secondFirstName.touched && !secondFirstName.valid || secondFirstNameValiFail || checkChineseName(secondFirstName.value)}" type="text" placeholder="名" value="" required>
               <div class="inValid text-left" style="white-space: nowrap;"  *ngIf="secondFirstName.touched && !secondFirstName.valid || secondCardValidFail || secondFirstNameValiFail">此欄位為必填。</div>
               <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(secondFirstName.value)">姓名必須是中文。</div>
             </div>
@@ -213,12 +213,12 @@
         <div class="col-xs-12 col-sm-6"></div>
         <div class="col-xs-12 col-sm-12 text-center">
           <div class="col-xs-6 col-sm-6" style="padding-left:0px;">
-            <input class=" memberFormInput form-control" (change)="checkDisable('')" type="text" #thirdLastName="ngModel" [(ngModel)]="thirdCardLastName" [ngClass]="{inValidInput: thirdLastName.touched && !thirdLastName.valid || thirdCardValidFail || thirdLastNameValiFail}" placeholder="姓" value="" [disabled]="!thirdCardLock" required>
+            <input class=" memberFormInput form-control" (change)="checkDisable('')" type="text" #thirdLastName="ngModel" [(ngModel)]="thirdCardLastName" [ngClass]="{inValidInput: thirdLastName.touched && !thirdLastName.valid || thirdCardValidFail || thirdLastNameValiFail || checkChineseName(thirdLastName.value)}" placeholder="姓" value="" [disabled]="!thirdCardLock" required>
             <div class="inValid text-left" style="white-space: nowrap;" *ngIf="thirdLastName.touched && !thirdLastName.valid || thirdCardValidFail || thirdLastNameValiFail">此欄位為必填。</div>
             <div class="inValid text-left" style="white-space: nowrap;" *ngIf="checkChineseName(thirdLastName.value)">姓名必須是中文。</div>
           </div>
           <div class="col-xs-6 col-sm-6" style="padding-right:0px;">
-            <input class=" memberFormInput form-control" (change)="checkDisable('')" type="text" #thirdFirstName="ngModel" [(ngModel)]="thirdCardFirstName" [ngClass]="{inValidInput: thirdFirstName.touched && !thirdFirstName.valid || thirdCardValidFail || thirdFirstNameValiFail}" placeholder="名" [disabled]="!thirdCardLock" value="" required>
+            <input class=" memberFormInput form-control" (change)="checkDisable('')" type="text" #thirdFirstName="ngModel" [(ngModel)]="thirdCardFirstName" [ngClass]="{inValidInput: thirdFirstName.touched && !thirdFirstName.valid || thirdCardValidFail || thirdFirstNameValiFail || checkChineseName(thirdFirstName.value)}" placeholder="名" [disabled]="!thirdCardLock" value="" required>
             <div class="inValid text-left"style="white-space: nowrap;"  *ngIf="thirdFirstName.touched && !thirdFirstName.valid || thirdCardValidFail || thirdFirstNameValiFail">此欄位為必填。</div>
             <div class="inValid text-left" style="white-space: nowrap;" *ngIf="checkChineseName(thirdFirstName.value)">姓名必須是中文。</div>
           </div>
@@ -299,12 +299,12 @@
       </div>
       <div class="col-xs-12 col-sm-12 text-center">
         <div class="col-xs-6 col-sm-6" style="padding-left:0px;">
-          <input class=" memberFormInput form-control" (change)="checkDisable('')" [disabled]="!fourthCardLock" #fourthLastName="ngModel" [(ngModel)]="fourthCardLastName" type="text" placeholder="姓" value="" [ngClass]="{inValidInput: fourthLastName.touched && !fourthLastName.valid || fourthCardValidFail || fourthLastNameValiFail}" required>
+          <input class=" memberFormInput form-control" (change)="checkDisable('')" [disabled]="!fourthCardLock" #fourthLastName="ngModel" [(ngModel)]="fourthCardLastName" type="text" placeholder="姓" value="" [ngClass]="{inValidInput: fourthLastName.touched && !fourthLastName.valid || fourthCardValidFail || fourthLastNameValiFail || checkChineseName(fourthLastName.value)}" required>
           <div class="inValid text-left" style="white-space: nowrap;" *ngIf="fourthLastName.touched && !fourthLastName.valid || fourthCardValidFail || fourthLastNameValiFail">此欄位為必填。</div>
           <div class="inValid text-left" style="white-space: nowrap;" *ngIf="checkChineseName(fourthLastName.value)">姓名必須是中文。</div>
         </div>
         <div class="col-xs-6 col-sm-6" style="padding-right:0px;">
-          <input class=" memberFormInput form-control" (change)="checkDisable('')" [disabled]="!fourthCardLock" type="text" #fourthFirstName="ngModel" [(ngModel)]="fourthCardFirstName" placeholder="名" value="" [ngClass]="{inValidInput: fourthFirstName.touched && !fourthFirstName.valid || fourthCardValidFail || fourthFirstNameValiFail}" required>
+          <input class=" memberFormInput form-control" (change)="checkDisable('')" [disabled]="!fourthCardLock" type="text" #fourthFirstName="ngModel" [(ngModel)]="fourthCardFirstName" placeholder="名" value="" [ngClass]="{inValidInput: fourthFirstName.touched && !fourthFirstName.valid || fourthCardValidFail || fourthFirstNameValiFail || checkChineseName(fourthFirstName.value)}" required>
           <div class="inValid text-left" style="white-space: nowrap;" *ngIf="fourthFirstName.touched && !fourthFirstName.valid || fourthCardValidFail || fourthFirstNameValiFail">此欄位為必填。</div>
           <div class="inValid text-left" style="white-space: nowrap;" *ngIf="checkChineseName(fourthFirstName.value)">姓名必須是中文。</div>
         </div>
@@ -385,12 +385,12 @@
       <div class="col-xs-12 col-sm-6"></div>
       <div class="col-xs-12 col-sm-12 text-center">
         <div class="col-xs-6 col-sm-6" style="padding-left:0px;">
-          <input [disabled]="!fifthCardLock" class=" memberFormInput form-control" (change)="checkDisable('')" [(ngModel)]="fifthCardLastName" #fifthLastName="ngModel" [ngClass]="{inValidInput: fifthLastName.touched && !fifthLastName.valid || fifthCardValidFail || fifthLastNameValiFail}" type="text" placeholder="姓" value="" required>
+          <input [disabled]="!fifthCardLock" class=" memberFormInput form-control" (change)="checkDisable('')" [(ngModel)]="fifthCardLastName" #fifthLastName="ngModel" [ngClass]="{inValidInput: fifthLastName.touched && !fifthLastName.valid || fifthCardValidFail || fifthLastNameValiFail || checkChineseName(fifthLastName.value)}" type="text" placeholder="姓" value="" required>
           <div class="inValid text-left" style="white-space: nowrap;" *ngIf="fifthLastName.touched && !fifthLastName.valid || fifthCardValidFail || fifthLastNameValiFail">此欄位為必填。</div>
           <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(fifthLastName.value)">姓名必須是中文。</div>
         </div>
         <div class="col-xs-6 col-sm-6" style="padding-right:0px;">
-          <input [disabled]="!fifthCardLock" class=" memberFormInput form-control" (change)="checkDisable('')" [(ngModel)]="fifthCardFirstName" #fifthFirstName="ngModel" type="text" [ngClass]="{inValidInput: fifthFirstName.touched && !fifthFirstName.valid || fifthCardValidFail || fifthFirstNameValiFail}" placeholder="名" value="" required>
+          <input [disabled]="!fifthCardLock" class=" memberFormInput form-control" (change)="checkDisable('')" [(ngModel)]="fifthCardFirstName" #fifthFirstName="ngModel" type="text" [ngClass]="{inValidInput: fifthFirstName.touched && !fifthFirstName.valid || fifthCardValidFail || fifthFirstNameValiFail || checkChineseName(fifthFirstName.value)}" placeholder="名" value="" required>
           <div class="inValid text-left" style="white-space: nowrap;" *ngIf="fifthFirstName.touched && !fifthFirstName.valid || fifthCardValidFail || fifthFirstNameValiFail">此欄位為必填。</div>
           <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(fifthFirstName.value)">姓名必須是中文。</div>
         </div>
@@ -471,12 +471,12 @@
         </div>
         <div class="col-xs-12 col-sm-12 text-center">
           <div class="col-xs-6 col-sm-6" style="padding-left:0px;">
-            <input [disabled]="!sixthCardLock" (change)="checkDisable('')" class=" memberFormInput form-control" type="text" [(ngModel)]="sixthCardLastName" #sixthLastName="ngModel" placeholder="姓" [ngClass]="{inValidInput: sixthLastName.touched && !sixthLastName.valid || sixthCardValidFail || sixthLastNameValidFail}" value="" required>
+            <input [disabled]="!sixthCardLock" (change)="checkDisable('')" class=" memberFormInput form-control" type="text" [(ngModel)]="sixthCardLastName" #sixthLastName="ngModel" placeholder="姓" [ngClass]="{inValidInput: sixthLastName.touched && !sixthLastName.valid || sixthCardValidFail || sixthLastNameValidFail || checkChineseName(sixthLastName.value)}" value="" required>
             <div class="inValid text-left" style="white-space: nowrap;"  *ngIf="sixthLastName.touched && !sixthLastName.valid || sixthNameValidFai || sixthLastNameValidFail">此欄位為必填。</div>
             <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(sixthLastName.value)">姓名必須是中文。</div>
           </div>
           <div class="col-xs-6 col-sm-6" style="padding-right:0px;">
-            <input [disabled]="!sixthCardLock" (change)="checkDisable('')" class=" memberFormInput form-control" type="text" [(ngModel)]="sixthCardFirstName" #sixthFirstName="ngModel" placeholder="名" [ngClass]="{inValidInput: sixthFirstName.touched && !sixthFirstName.valid || sixthCardValidFail || sixthFirstNameValidFail}" value="" required>
+            <input [disabled]="!sixthCardLock" (change)="checkDisable('')" class=" memberFormInput form-control" type="text" [(ngModel)]="sixthCardFirstName" #sixthFirstName="ngModel" placeholder="名" [ngClass]="{inValidInput: sixthFirstName.touched && !sixthFirstName.valid || sixthCardValidFail || sixthFirstNameValidFail || checkChineseName(sixthFirstName.value)}" value="" required>
             <div class="inValid text-left" style="white-space: nowrap;" *ngIf="sixthFirstName.touched && !sixthFirstName.valid || sixthNameValidFail || sixthFirstNameValidFail">此欄位為必填。</div>
             <div class="inValid text-left"  style="white-space: nowrap;" *ngIf="checkChineseName(sixthFirstName.value)">姓名必須是中文。</div>
           </div>
