@@ -353,6 +353,7 @@ export class HomePageComponent implements OnInit {
       }
     }).delay(500).subscribe(() => {
       this.toCompatibilityUse();
+      this.changeCountries('');
     });
 
     $('body').css({
@@ -363,7 +364,6 @@ export class HomePageComponent implements OnInit {
         '-webkit-overflow-scrolling': 'touch'
       });
     }, 500);
-    this.changeCountries('');
   }
 
   firstWeekLastDay: any;
@@ -1151,17 +1151,21 @@ export class HomePageComponent implements OnInit {
   changeCountries(item) {
     if(this.resetBackCountry){
       for(let i = 0; i <= this.countries.length; i ++){
-        if (this.countries[i]['groupId'] == this.selectedCountriesId) {
-          this.selectedCountries = this.countries[i];
-          console.log(this.selectedCountries);
+        if(this.countries[i]){
+          if (this.countries[i]['groupId'] == this.selectedCountriesId) {
+            this.selectedCountries = this.countries[i];
+            console.log(this.selectedCountries);
+          }
         }
       }
       this.resetBackCountry = '';
     }else{
       this.selectedCountries = '';
       for(let i = 0; i <= this.countries.length; i ++){
-        if (this.countries[i]['groupId'] == this.selectedCountriesId) {
-          this.selectedCountries = this.countries[i];
+        if(this.countries[i]){
+          if (this.countries[i]['groupId'] == this.selectedCountriesId) {
+            this.selectedCountries = this.countries[i];
+          }
         }
       }
     }

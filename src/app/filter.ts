@@ -10,7 +10,7 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 export class filterPipe implements PipeTransform {
   transform(value: any[], args: number): any {
     for(let i = 0; i <= value.length; i++) {
-      if(value[i]['groupId']){
+      if(value[i]){
         if(value[i]['groupId'] == args) {
           return value[i].countryList;
         }
