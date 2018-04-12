@@ -128,8 +128,9 @@ export class BtobtoCComponent implements OnInit {
     if(this.startTravelDay === this.endTravelDay){
       this.endMin = ':59';
       this.endMinute = '59';
-    }else{
-      this.endMin = '';
+    } else {
+      this.endMin = ':00';
+      this.endMinute = '00';
     }
     this.selectTravelDayIsDone = true;
     this.tableShowHidden = true;
