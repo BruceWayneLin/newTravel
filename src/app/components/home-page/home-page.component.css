@@ -1121,6 +1121,7 @@ header {
   }
   .typhoonDay {
     white-space: nowrap;
+    left: 17px;
   }
 }
 

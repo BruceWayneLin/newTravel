@@ -469,8 +469,8 @@ export class BtobtoCComponent implements OnInit {
 
   buttonToDisabledTwo(btnVal) {
     let buttonDate = new Date(btnVal);
-    for(var i = 0; i <= this.disabledDays.length; i++) {
-      if (buttonDate.getTime() == new Date(this.disabledDays[i]).getTime() && new Date(this.disabledDays[i]).getTime() > new Date(this.testDay).getTime()) {
+    for(let i = 0; i <= this.disabledDays.length; i++) {
+      if (buttonDate.getTime() >= new Date(this.disabledDays[i]).getTime()) {
         return true;
       }
     }
