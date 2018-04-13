@@ -98,15 +98,6 @@ export class HomePageComponent implements OnInit {
   ){
     window.scrollTo(0, 0);
     $('body,html').animate({scrollTop: '0px'}, 0);
-
-    if(window.location.href.slice(0, 5) !== 'https'){
-    } else {
-      console.log = function(){};
-      console.dir = function(){};
-      console.info = function(){};
-      console.debug = function(){};
-      console.warn = function(){};
-    }
   }
 
   images: Array<any> = [];

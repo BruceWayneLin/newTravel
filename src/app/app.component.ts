@@ -14,6 +14,14 @@ export class AppComponent {
   constructor(
     public dataService: DataServiceService
   ) {
+    if(window.location.href.slice(0, 5) !== 'https'){
+    } else {
+      console.log = function(){};
+      console.dir = function(){};
+      console.info = function(){};
+      console.debug = function(){};
+      console.warn = function(){};
+    }
   }
   ngOnInit() {
     this.detectScrollAndHeaderChange();
