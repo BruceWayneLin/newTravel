@@ -4,6 +4,7 @@ import { Headers, Http, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import {routes} from "../app.module";
+import { catchError } from 'rxjs/operators/catchError';
 declare var jquery:any;
 declare var $ :any;
 

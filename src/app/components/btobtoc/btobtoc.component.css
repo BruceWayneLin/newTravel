@@ -62,6 +62,19 @@ input[type="search"] {
     border-radius: 10px; 
   }
 
+  .featureDescH3 {
+    color: #e84466;
+    font-size: 16pt;
+    background: url('/assets/images/ribbon.svg') center no-repeat;
+    font-weight: normal;
+    background-size: cover;
+    margin: 0 auto;
+    padding: 13px;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: auto;
+  }
+
   .logo {
     max-width: 125px;
     height: auto;

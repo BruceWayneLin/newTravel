@@ -224,10 +224,17 @@
   margin-top: 15px;
 }
 
-
 .featureDescH3 {
   color: #e84466;
+  font-size: 16pt;
+  background: url('/assets/images/ribbon.svg') center no-repeat;
   font-weight: normal;
+  background-size: cover;
+  margin: 0 auto;
+  padding: 13px;
+  margin-bottom: 10px;
+  display: inline-block;
+  width: auto;
 }
 
 .longTri {
@@ -530,7 +537,7 @@ td.weekDayText {
 }
 
 .selPkgH2 {
-  margin-bottom: 20px!important;
+  margin-bottom: 10px!important;
 }
 
 .imgSrcH3Item {
