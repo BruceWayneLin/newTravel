@@ -873,6 +873,13 @@ export class BtobtoCComponent implements OnInit {
       this.returnObj['endDate'] = this.endTravelDay;
       this.returnObj['startHour'] = this.startHour;
       this.returnObj['startMinute'] = this.startMinute;
+      if(this.startTravelDay === this.endTravelDay){
+        this.endMin = ':59';
+        this.endMinute = '59';
+      } else {
+        this.endMin = ':00';
+        this.endMinute = '00';
+      }
       this.returnObj['endMinute'] = this.endMinute;
       this.returnObj['endHour'] = this.endHour;
       console.log('321456', this.returnObj);
