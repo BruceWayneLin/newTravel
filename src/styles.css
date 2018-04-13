@@ -1858,3 +1858,7 @@ h2.selectStartBakH2#backToPoint {
 #timeAdjTxtArea span {
   color: red;
 }
+
+.defaultCorsorClass {
+  cursor: default!important;
+}

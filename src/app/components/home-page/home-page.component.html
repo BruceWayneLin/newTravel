@@ -195,7 +195,7 @@
                 </ng-container>
               </ng-container>
               <td class="text-center" [ngClass]="toHiddenDate(btnStartDay.value) ? 'calDayNone' : ''">
-                <button style="z-index:999;" [hidden]="toHiddenDate(btnStartDay.value)" #btnStartDay [disabled]="buttonToDisabled(btnStartDay.value) || buttonToDisabledTwo(btnStartDay.value)" id="{{'calendarDayButton'+i}}" (click)="onClickMe($event, 'calendarDayButton'+ i, i, btnStartDay.value)" value="{{firstMon | amAdd:i : 'days' | amDateFormat: 'YYYY-MM-DD'}}">
+                <button style="z-index:999;" [hidden]="toHiddenDate(btnStartDay.value)" [ngClass]="{'defaultCorsorClass': buttonToDisabled(btnStartDay.value) || buttonToDisabledTwo(btnStartDay.value)}" #btnStartDay [disabled]="buttonToDisabled(btnStartDay.value) || buttonToDisabledTwo(btnStartDay.value)" id="{{'calendarDayButton'+i}}" (click)="onClickMe($event, 'calendarDayButton'+ i, i, btnStartDay.value)" value="{{firstMon | amAdd:i : 'days' | amDateFormat: 'YYYY-MM-DD'}}">
                   <h4><i class="checkBtn fa fa-check hidden" aria-hidden="true" style="pointer-events: none;"></i></h4>
                   {{firstMon | amLocal | amAdd:i : 'days' | amDateFormat: 'DD'}}
                   <h4><span class="checkBtnTxt hidden" style="pointer-events: none;">出發日</span></h4>
