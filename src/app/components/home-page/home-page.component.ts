@@ -1,5 +1,5 @@
 import {Component, OnInit, AfterViewInit, ElementRef, ViewChild, ViewChildren, AfterViewChecked}  from '@angular/core';
-import { ActivatedRoute, RouterModule, Routes } from "@angular/router";
+import { ActivatedRoute, RouterModule, Routes, Router } from "@angular/router";
 import { DataServiceService } from '../../services/data-service.service';
 
 declare var jquery:any;
@@ -93,13 +93,14 @@ export class HomePageComponent implements OnInit {
 
   constructor(
     private dataService:DataServiceService,
-    private routerAct:ActivatedRoute
+    private routerAct:ActivatedRoute,
+    private router: Router
   ){
     window.scrollTo(0, 0);
     $('body,html').animate({scrollTop: '0px'}, 0);
-    var envi = 'local';
-    if(envi == 'local'){
-    }else{
+
+    if(window.location.href.slice(0, 5) !== 'https'){
+    } else {
       console.log = function(){};
       console.dir = function(){};
       console.info = function(){};
