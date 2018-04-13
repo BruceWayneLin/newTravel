@@ -61,6 +61,14 @@ input[type="search"] {
     /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
     border-radius: 10px; 
   }
+
+  .logo {
+    max-width: 125px;
+    height: auto;
+    float: right;
+    margin: 20px 30%;
+    margin-top: 15px;
+  }
   
   #brandListName li {
     list-style-type: none;
