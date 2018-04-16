@@ -567,7 +567,7 @@ export class DataServiceService {
         this.http.post('/CareLineTravel/travel-mbr/journey/validateBeforePayment', objSendBak).map(res => {
             return res.text();
         }).pipe(
-            timeout(30000),
+            timeout(40000),
             catchError(error => of(`系統短暫忙碌, 請重新點選確認。`))
           ).subscribe(
             (item) => { 
