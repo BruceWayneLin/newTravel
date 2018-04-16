@@ -1,12 +1,18 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions } from '@angular/http';
+import { of } from 'rxjs/observable/of';
+import { concatMap, timeout, catchError, delay } from 'rxjs/operators';
 
 import 'rxjs/add/operator/map';
 import {routes} from "../app.module";
-import { catchError } from 'rxjs/operators/catchError';
+
 declare var jquery:any;
 declare var $ :any;
+
+const loadingClose = () => {
+    this.loading = false;
+}
 
 @Injectable()
 export class DataServiceService {
@@ -560,16 +566,42 @@ export class DataServiceService {
         objSendBak['orderNumber'] = this.orderNumberForSave;
         this.http.post('/CareLineTravel/travel-mbr/journey/validateBeforePayment', objSendBak).map(res => {
             return res.text();
-        }).subscribe((item) => {
+        }).pipe(
+            timeout(30000),
+            catchError(error => of(`系統短暫忙碌, 請重新點選確認。`))
+          ).subscribe(
+            (item) => { 
             if(item == 'ok'){
                 this.loading = true;
                 window.location.href = '/CareLineTravel/travel-mbr/journey/goToPayment?orderNumber=' +  encodeURIComponent(this.orderNumberForSave);
             } else {
-                let replyObj = JSON.parse(item);
-                if(replyObj.isEx){
-                    if(replyObj.kickout){
-                        this.route.navigate(['travel']);
-                    }else{
+                if(item == '系統短暫忙碌, 請重新點選確認。') {
+                    this.loading = false;
+                    var modal = document.getElementById('myModal');
+                    modal.style.display = "block";
+                    this.AlertTXT = ['系統短暫忙碌, 請重新點選確認。'];
+                    document.querySelector('#myModal').scrollIntoView();
+                } else {
+                    let replyObj = JSON.parse(item);
+                    if(replyObj.isEx){
+                        if(replyObj.kickout){
+                            this.route.navigate(['travel']);
+                        } else {
+                            if (replyObj.data) {
+                                // Server 回傳錯誤
+                                if (replyObj.data && replyObj.data.errorFlagName) {
+                                    var flagName = replyObj.data.errorFlagName;
+                                    this.idToGoFlow = flagName;
+                                }
+                            }
+                            this.loading = false;
+                            var msgs = replyObj.msgs;
+                            var modal = document.getElementById('myModal');
+                            modal.style.display = "block";
+                            this.AlertTXT = msgs;
+                            document.querySelector('#myModal').scrollIntoView();
+                        }
+                    } else {
                         if (replyObj.data) {
                             // Server 回傳錯誤
                             if (replyObj.data && replyObj.data.errorFlagName) {
@@ -584,20 +616,6 @@ export class DataServiceService {
                         this.AlertTXT = msgs;
                         document.querySelector('#myModal').scrollIntoView();
                     }
-                }else{
-                    if (replyObj.data) {
-                        // Server 回傳錯誤
-                        if (replyObj.data && replyObj.data.errorFlagName) {
-                            var flagName = replyObj.data.errorFlagName;
-                            this.idToGoFlow = flagName;
-                        }
-                    }
-                    this.loading = false;
-                    var msgs = replyObj.msgs;
-                    var modal = document.getElementById('myModal');
-                    modal.style.display = "block";
-                    this.AlertTXT = msgs;
-                    document.querySelector('#myModal').scrollIntoView();
                 }
             }
         });

@@ -69,10 +69,12 @@ input[type="search"] {
     font-weight: normal;
     background-size: cover;
     margin: 0 auto;
-    padding: 13px;
+    padding: 8px;
     margin-bottom: 10px;
     display: inline-block;
     width: auto;
+    padding-left:13px;
+    padding-right:13px;
   }
 
   .logo {
