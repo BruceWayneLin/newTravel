@@ -1,6 +1,6 @@
 @import '../home-page/home-page.component.css';
 input[type="search"] {
-    width: 196px;
+    width: 200px;
     height: 36px;
     padding: 0;
     line-height: 32px;
@@ -47,7 +47,7 @@ input[type="search"] {
     margin:0px;
     padding:0px;
     border: 1px solid #e84466;
-    width:196px;
+    width:200px;
     overflow: auto;
     max-height: 200px;
     overflow-x: hidden;
@@ -168,10 +168,10 @@ input[type="search"] {
   #brandListName2 {
     display: inline-block;
     position: relative;
-    margin:0px;
-    padding:0px;
+    margin: 0px;
+    padding: 0px;
     border: 1px solid #e84466;
-    width:196px;
+    width: 200px;
     overflow: auto;
     max-height: 200px;
     overflow-x: hidden;
@@ -220,10 +220,10 @@ input[type="search"] {
   #selectValHour {
     display: inline-block;
     position: relative;
-    margin:0px;
-    padding:0px;
+    margin: 0px;
+    padding: 0px;
     border: 1px solid #e84466;
-    width:196px;
+    width: 200px;
     overflow: auto;
     max-height: 200px;
     overflow-x: hidden;
