@@ -980,13 +980,13 @@ header {
 
 @media screen and (max-width: 500px) and (min-width: 458px) {
   #calendarTable td button {
-    padding-left: 15px!important;
+    padding-left: 15px;
   }
 }
 
 @media screen and (max-width: 375px){
   #calendarTable td button{
-    padding-left: 10px!important;
+    padding-left: 10px;
   }
   .specialPkgLabel input:checked + span {
     left: 5px!important;
@@ -1111,13 +1111,13 @@ header {
     /*margin: auto;*/
   }
   .logo {
-    margin-left: 35%!important;
+    margin-left: 33%!important;
   }
 }
 
 @media screen and (max-width: 375px) {
   .logo {
-    margin: auto 35%;
+    margin: auto 33%;
   }
 }
 
@@ -1140,7 +1140,7 @@ header {
     left: 321px;
   }
   #calendarTable td button{
-    padding-left: 15px!important;
+    padding-left: 15px;
   }
   #rowOfBtn input {
     width: 85px;
@@ -1286,7 +1286,7 @@ header {
     margin-right: 10px;
   }
   #calendarTable td button{
-    padding-left: 20%!important;
+    padding-left: 20%;
   }
   #customerLogo {
     margin: 20px 25%;
@@ -1319,7 +1319,7 @@ header {
     left: 10%!important;
   }
   #calendarTable td button{
-    padding-left: 20%!important;
+    padding-left: 20%;
   }
   #insuredOneCard {
     height:100%!important;

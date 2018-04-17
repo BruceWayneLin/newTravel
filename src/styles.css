@@ -1688,16 +1688,108 @@ input, input:before, input:after {
   }
   #customerLogo {
     margin-left: -10%!important;
+    position: relative;
+    left: -25%;
   }
   .insuredTit {
     padding-left: 15px!important;
     padding-right: 15px!important;
   }
 }
+
 /* ie  */
 @supports (-ms-ime-align:auto) {
   .img-grey {
 
+  }
+}
+
+@media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 3)
+{ 
+  label.purposeLabel span {
+    font-size: 15px!important;
+  }
+  #calendarTable td button .checkBtnTxt {
+    left: -8px!important;
+  }
+  body #calendarTable td button {
+    font-size: 30px!important;
+    padding-left: 25%!important;
+  }
+
+  #calendarTableDiv .modifiedDays {
+    font-size: 15px!important;
+    padding-left: 4%!important;
+  }
+
+  #btnOfPackages {
+    width:100%!important;
+  }
+  .secondaryPackageCon.col-xs-12 {
+    padding:0px!important;
+  }
+  .secondaryPackageCon #secondCol2 .insItemUl {
+    font-size: 10px!important;
+  }
+  #btnOfPackages .col-xs-3{
+    padding:3px;
+  }
+  .container.packageContent {
+    margin-top: 13px!important;
+  }
+  #btnOfPackages .col-xs-3 .specialPkgLabel span {
+    left:17%;
+  }
+  #customerLogo {
+    margin: 20px 0%!important;
+  }
+}
+
+@media only screen and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 2)
+{ 
+  label.purposeLabel span {
+    font-size: 15px!important;
+  }
+  #calendarTable td button .checkBtnTxt {
+    left: -8px!important;
+  }
+  body #calendarTable td button {
+    font-size: 30px!important;
+    padding-left: 25%!important;
+  }
+
+  #calendarTableDiv .modifiedDays {
+    font-size: 15px!important;
+    padding-left: 4%!important;
+  }
+
+  #btnOfPackages {
+    width:100%!important;
+  }
+  #btnOfPackages .col-xs-3{
+    padding:3px;
+  }
+  .secondaryPackageCon.col-xs-12 {
+    padding:0px!important;
+  }
+  .secondaryPackageCon #secondCol2 .insItemUl {
+    font-size: 10px!important;
+  }
+  .container.packageContent {
+    margin-top: 13px!important;
+  }
+  #btnOfPackages .col-xs-3 .specialPkgLabel span {
+    left:17%;
+  }
+  #customerLogo {
+    margin: 20px 0%!important;
   }
 }
 
