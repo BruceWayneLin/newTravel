@@ -77,8 +77,8 @@
                   </select>
                   <i class="fa fa-angle-down dropDown" style="font-size:36px;"></i>
                   <select style="display:inline-block;" [(ngModel)]="selectedCountry" (change)="toggleDoneSelect()" name="country" id="country" class="topSelect form-control">
+                    <option value="">國家</option>
                     <ng-container *ngFor="let item of countries | filter: selectedCountriesId; let i = index;">
-                      <option value="">國家</option>
                       <option value="{{item.code}}" >
                         {{item.name}}
                       </option>
