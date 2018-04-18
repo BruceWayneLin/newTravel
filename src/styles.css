@@ -1965,3 +1965,7 @@ h2.selectStartBakH2#backToPoint {
 .defaultCorsorClass {
   cursor: default!important;
 }
+
+#customerLogo {
+  margin-top: 0px!important;
+}
