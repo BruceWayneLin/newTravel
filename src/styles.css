@@ -1742,10 +1742,13 @@ input, input:before, input:after {
     margin-top: 13px!important;
   }
   #btnOfPackages .col-xs-3 .specialPkgLabel span {
-    left:17%;
+    left:15%!important;
   }
   #customerLogo {
     margin: 20px 0%!important;
+  }
+  #btnOfPackages .col-xs-3 .specialPkgLabel input[type="radio"]:checked + span {
+    left:15%!important;
   }
 }
 
@@ -1773,6 +1776,11 @@ input, input:before, input:after {
   #btnOfPackages {
     width:100%!important;
   }
+
+  #btnOfPackages .specialPkgLabel span {
+    left: 15%!important;
+  }
+
   #btnOfPackages .col-xs-3{
     padding:3px;
   }
@@ -1786,7 +1794,10 @@ input, input:before, input:after {
     margin-top: 13px!important;
   }
   #btnOfPackages .col-xs-3 .specialPkgLabel span {
-    left:17%;
+    left:15%!important;
+  }
+  #btnOfPackages .col-xs-3 .specialPkgLabel input[type="radio"]:checked + span {
+    left:15%!important;
   }
   #customerLogo {
     margin: 20px 0%!important;

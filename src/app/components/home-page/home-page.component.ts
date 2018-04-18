@@ -594,7 +594,7 @@ export class HomePageComponent implements OnInit {
     }, 100);  
     document.querySelector('#flagSix').scrollIntoView();
     var iOSMobile = !!navigator.platform && /iPhone/.test(navigator.platform);
-    if(window.innerWidth <= 500 && iOSMobile){
+    if(window.innerWidth <= 668 && iOSMobile){
       $('#btnOfPackages').find('.selectedRadio').removeClass('selectedRadio');
       $('.packageButton' + '3').siblings('span').addClass('selectedRadio');
       $('#btnOfPackages').find('.fa-check').addClass('hidden');
