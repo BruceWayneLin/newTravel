@@ -1969,3 +1969,6 @@ h2.selectStartBakH2#backToPoint {
 #customerLogo {
   margin-top: 0px!important;
 }
+.packageTit h2 {
+  margin-top: 25px;
+}
