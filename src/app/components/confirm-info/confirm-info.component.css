@@ -576,3 +576,29 @@ span.priceSpanNT {
   display:none!important;
 }
 
+.checkBoxDiv {
+  background: url('../../../assets/images/arrowIcons/default.png');
+  background-repeat: no-repeat;
+  background-size: unset;
+  height: 25px;
+  width: 22px;
+  background-position-x: -21px;
+  display: inline-block;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.checkBoxDiv.noChecked{
+  background: url('../../../assets/images/arrowIcons/default.png');
+  background-repeat: no-repeat;
+  background-size: unset;
+  height: 25px;
+  width: 22px;
+  background-position-x: 1px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#kycRow {
+  margin: 5px 15px;
+}

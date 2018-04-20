@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Accordion} from "ngx-accordion";
-import {Router, ActivatedRoute} from '@angular/router';
+import { Component, OnInit, ViewChild, ViewChildren, ElementRef } from '@angular/core';
+import { Accordion } from 'ngx-accordion';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import { SecurityContext } from '@angular/core/src/security';
 
-declare var jquery:any;
-declare var $ :any;
+declare var jquery: any;
+declare var $ : any;
 @Component({
   selector: 'app-confirm-info',
   templateUrl: './confirm-info.component.html',
@@ -17,7 +17,6 @@ declare var $ :any;
 
 export class ConfirmInfoComponent implements OnInit {
   isExpandAll: boolean = false;
-
   applicantName: string;
   applicantMobile: string;
   applicantPid: string;
@@ -25,7 +24,6 @@ export class ConfirmInfoComponent implements OnInit {
   applicantBth: string;
   applicantEmail: string;
   inPackageButtonName: string;
-
   insuredDateStart: string;
   insuredDateEnd: string;
   insuredLocation: string;
@@ -42,15 +40,37 @@ export class ConfirmInfoComponent implements OnInit {
   insuredCarBrand: any;
   insuredCarBrandShow: Boolean = false;
 
+  fakeJson: any = [
+    {
+      'question' : 'how old are you?',
+      'options': [
+        {'value': '18歲', 'default': 'true'},
+        {'value': '28歲', 'default': 'false'},
+        {'value': '30歲', 'default': 'false'},
+        {'value': '38歲', 'default': 'false'}
+      ]
+    },
+    {
+      'question' : 'what revenue you get per year?',
+      'options': [
+        {'value': '100萬', 'default': 'true'},
+        {'value': '200萬', 'default': 'false'},
+        {'value': '300萬', 'default': 'false'},
+        {'value': '400萬', 'default': 'false'}
+      ]
+    }
+  ];
+
   insuredList: any[];
 
   @ViewChild(Accordion) MyAccordion: Accordion;
+  @ViewChild('changeEl') changeEl: ElementRef;
 
   constructor(
       public dataService: DataServiceService,
       private router: Router,
       private routerAct: ActivatedRoute
-  ) {   
+  ) {
     $('body').css({
       '-webkit-overflow-scrolling': 'auto'
     });
@@ -72,6 +92,16 @@ export class ConfirmInfoComponent implements OnInit {
     }
   }
 
+  toConsol(value, e) {
+    let arrayC = value.classList;
+    
+    if (value.classList.length === 2) {
+      arrayC.remove('noChecked');
+    } else {
+      arrayC.add('noChecked');
+    }
+  }
+
   reloadOneSec() {
       if(this.routerAct.queryParams['value']['reload']){ // url does not have the text 'reloaded'
         this.router.navigate(['travel/gogoout/confirm'], {queryParams: {orderNumber: this.routerAct.queryParams['value']['orderNumber']}});
@@ -88,8 +118,12 @@ export class ConfirmInfoComponent implements OnInit {
   }
 
   numberWithCommas = (x) => {
-    let Xn = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return Xn
+    if(!x){
+      return '0';
+    } else {
+      let Xn = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return Xn;
+    }
   }
 
   toLoadDateForConfirm() {
@@ -177,6 +211,7 @@ export class ConfirmInfoComponent implements OnInit {
           this.odPeriodDays = info['odPeriodDays'];
           this.odRate = info['odRate'];
           this.dataService.purposeImageUrl = info['purposeImageUrl'];
+
           document.querySelector('#flagTop').scrollIntoView();
           if(this.router.url.slice(0, 8) === '/RentCar') {
             this.rentalCarTemp = true;
