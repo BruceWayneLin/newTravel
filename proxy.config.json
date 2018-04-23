@@ -1,10 +1,10 @@
 {
   "/CareLineTravel/travel-mbr": {
-    "target": "http://test.qat.careline.tw/",
+    "target": "http://dev01.careline.tw/",
     "secure": false,
     "logLevel": "debug",
     "pathRewrite": {
-      "^/CareLineTravel/travel-mbr" : "http://test.qat.careline.tw/CareLineTravel/travel-mbr"
+      "^/CareLineTravel/travel-mbr" : "http://dev01.careline.tw/CareLineTravel/travel-mbr"
     },
     "changeOrigin": false
   },

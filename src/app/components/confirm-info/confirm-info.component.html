@@ -284,7 +284,7 @@
   </div>
 
   <!-- kyc form -->
-  <div class="row">
+  <div class="row" *ngIf="kycJson?.length >= 1">
     <div class="container-fluid">
       <div class="col-lg-12" style="padding:0px;">
         <div class="titleForm text-left">
@@ -297,12 +297,12 @@
 
   <div class="row applicant" style="margin-bottom: 35px;">
     <div class="container">
-        <div id="kycRow" class="col-12 text-left" *ngFor="let item of fakeJson; let i = index">
+        <div id="kycRow" class="col-12 text-left" *ngFor="let item of kycJson; let i = index">
             <h4>{{ i+1+'. ' }}{{item['question']}}</h4>
             <ng-container *ngFor="let unit of item['options'];">
-                <div style="display: inline-flex">
-                  <label for="vehicle{{i}}" class="checkBoxDiv noChecked" #changeEl (click)="toConsol(changeEl, $event)">
-                  <input [hidden]="true" type="radio" name="vehicle{{i}}" value="{{unit['value']}}" checked="{{unit['default'] == 'true' ? 'checked' : ''}}">
+                <div style="display: inline-flex" >
+                  <label for="vehicle{{i}}" ngClass="{{unit['isDefault'] ? 'checkBoxDiv' : 'checkBoxDiv noChecked'}}" #changeEl (click)="toConsol(changeEl, $event, unit, item)">
+                      <!-- <input #kycValue [hidden]="true" type="radio" name="vehicle{{i}}" value="{{unit['value']}}" checked="{{unit['default'] == 'true' ? 'checked' : ''}}"> -->
                   </label>
                   {{unit['value']}}
                 </div>

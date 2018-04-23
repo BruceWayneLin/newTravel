@@ -39,27 +39,8 @@ export class ConfirmInfoComponent implements OnInit {
   adjustTimeBoolean: boolean = false;
   insuredCarBrand: any;
   insuredCarBrandShow: Boolean = false;
-
-  fakeJson: any = [
-    {
-      'question' : 'how old are you?',
-      'options': [
-        {'value': '18歲', 'default': 'true'},
-        {'value': '28歲', 'default': 'false'},
-        {'value': '30歲', 'default': 'false'},
-        {'value': '38歲', 'default': 'false'}
-      ]
-    },
-    {
-      'question' : 'what revenue you get per year?',
-      'options': [
-        {'value': '100萬', 'default': 'true'},
-        {'value': '200萬', 'default': 'false'},
-        {'value': '300萬', 'default': 'false'},
-        {'value': '400萬', 'default': 'false'}
-      ]
-    }
-  ];
+  kycJson: any;
+  kycAns: any = [];
 
   insuredList: any[];
 
@@ -92,9 +73,26 @@ export class ConfirmInfoComponent implements OnInit {
     }
   }
 
-  toConsol(value, e) {
+  toConsol(value, e, unit, item) {
+    var obj = {};
+    obj['optionValue'] = unit.value;
+    obj['type'] = item.questionType;
+    this.kycAns.forEach((objVal, index) => {
+      if(objVal['type'] === item.questionType){
+        this.kycAns.splice(index, 1);
+        this.kycAns.push(obj);
+      }
+    });
+
     let arrayC = value.classList;
-    
+    var arryInputSel = $('label[for=' + value['htmlFor'] + ']');
+    for(let i = 0; i <= arryInputSel.length; i++) {
+      if(arryInputSel[i]){
+        if(arryInputSel[i].classList.length === 1){
+          arryInputSel[i].classList.add('noChecked');
+        }
+      }
+    }
     if (value.classList.length === 2) {
       arrayC.remove('noChecked');
     } else {
@@ -149,6 +147,21 @@ export class ConfirmInfoComponent implements OnInit {
         this.insuredList = info['insuredList'];
         this.text4Activity = info['text4Activity'];
         this.odPeriodDays = info['odPeriodDays'];
+        if(info['kycQuestions']) {
+          this.kycJson = info['kycQuestions'];
+          this.kycJson.forEach(element => {
+            var DefaultObj = {};
+            DefaultObj['type'] = element['questionType'];
+            element['options'].forEach(item => {
+              if(item['isDefault']) {
+                DefaultObj['optionValue'] = item['value'];
+              }
+            });
+            this.kycAns.push(DefaultObj);
+          });
+          console.log(this.kycAns);
+        }
+        
         // this.odRate = info['odRate'];
         this.dataService.purposeImageUrl = info['purposeImageUrl'];
         
@@ -210,6 +223,20 @@ export class ConfirmInfoComponent implements OnInit {
           this.text4Activity = info['text4Activity'];
           this.odPeriodDays = info['odPeriodDays'];
           this.odRate = info['odRate'];
+          if ( info['kycQuestions'] ) {
+            this.kycJson = info['kycQuestions'];
+            this.kycJson.forEach(element => {
+              var DefaultObj = {};
+              DefaultObj['type'] = element['questionType'];
+              element['options'].forEach(item => {
+                if(item['isDefault']) {
+                  DefaultObj['optionValue'] = item['value'];
+                }
+              });
+              this.kycAns.push(DefaultObj);
+            });
+            console.log(this.kycAns);
+          }
           this.dataService.purposeImageUrl = info['purposeImageUrl'];
 
           document.querySelector('#flagTop').scrollIntoView();
@@ -260,7 +287,8 @@ export class ConfirmInfoComponent implements OnInit {
   }
 
   confirmPaying(){
-    this.dataService.confirmPaying();
+    console.log(this.kycAns);
+    this.dataService.confirmPaying(this.kycAns);
   }
 
   doSomethingOnClose() {

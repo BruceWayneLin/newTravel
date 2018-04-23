@@ -582,7 +582,7 @@ span.priceSpanNT {
   background-size: unset;
   height: 25px;
   width: 22px;
-  background-position-x: -21px;
+  background-position-x: -110px;
   display: inline-block;
   cursor: pointer;
   z-index: 10;
@@ -594,11 +594,17 @@ span.priceSpanNT {
   background-size: unset;
   height: 25px;
   width: 22px;
-  background-position-x: 1px;
+  background-position-x: -88px;
   display: inline-block;
   cursor: pointer;
 }
 
 #kycRow {
   margin: 5px 15px;
+}
+
+@media screen and (max-width:667px){
+  #kycRow {
+    margin: 5px -15px;
+  }
 }

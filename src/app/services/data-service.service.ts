@@ -559,11 +559,12 @@ export class DataServiceService {
         });
     }
 
-    confirmPaying(){
+    confirmPaying(value){
         console.log(this.orderNumberForSave);
         this.loading = true;
         let objSendBak = {};
         objSendBak['orderNumber'] = this.orderNumberForSave;
+        objSendBak['kycSelections'] = value;
         this.http.post('/CareLineTravel/travel-mbr/journey/validateBeforePayment', objSendBak).map(res => {
             return res.text();
         }).pipe(

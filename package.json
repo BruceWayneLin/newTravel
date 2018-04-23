@@ -11,6 +11,7 @@
     "deploy-uat": "rsync -avh ./dist careline@172.16.88.195:/data/frontend/travel/ --delete",
     "deploy-stage": "rsync -avh ./dist careline@172.16.88.205:/data/frontend/travel/botRender/ --delete",
     "deploy-server": "rsync -avh -e 'ssh -p 53901' --delete ./dist careline@210.65.132.23:/data/frontend/travel",
+    "deploy-dev01": "rsync -avh ./dist careline@172.16.88.210:/data/frontend/travel/ --delete",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
