@@ -617,6 +617,9 @@ button:active {
     max-width: 465px;
     width: 118%;
   }
+  .insItemUl li {
+    font-size: 14px!important;
+  }
 }
 
 #accordionDiv .panel-heading {
@@ -1083,6 +1086,9 @@ input, input:before, input:after {
   .fa.fa-chevron-circle-up {
     font-size: 30px!important;
   }
+  .insItemUl li {
+    font-size: 14px!important;
+  }
 }
 
 #closebtn {
@@ -1124,6 +1130,9 @@ input, input:before, input:after {
 @media screen and (max-width: 500px) {
   #detailDivShift button {
     margin-left: 45%;
+  }
+  .logo {
+    margin: 0px!important;
   }
 }
 
