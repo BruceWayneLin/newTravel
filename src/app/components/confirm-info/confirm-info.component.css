@@ -608,3 +608,10 @@ span.priceSpanNT {
     margin: 5px -15px;
   }
 }
+
+#KycFormH2 {
+  padding-top:10px;
+  /* padding-bottom:20px; */
+  font-size: 20px;
+  text-align: center;
+}

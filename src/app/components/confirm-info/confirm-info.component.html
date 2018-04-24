@@ -278,9 +278,21 @@
               </accordion-group>
             </ng-container>
           </accordion>
-  
         </div>
       </div>
+  
+       <!-- membercreate -->
+       <div class="lastCon" *ngIf="!routeUrlGoGo">
+        <div class="row">
+          <div class="container">
+            <div id="MobileUseIdForPrice" class="col-lg-12 text-center" style="padding-left:10%;">
+              <span class="blackSpanTitle" style="">應收保費</span>
+              <span class="priceSpanNT">NT${{numberWithCommas(odRate)}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- membercreate -->
   </div>
 
   <!-- kyc form -->
@@ -289,7 +301,7 @@
       <div class="col-lg-12" style="padding:0px;">
         <div class="titleForm text-left">
           <div id="flagTop"></div>
-          <h2 style="padding-top:10px; padding-bottom:20px;">我是KYC表單</h2>
+          <h2 id="KycFormH2">依法規定，保險公司需了解您的保險需求，請協助勾選完成流程</h2>
         </div>
       </div>
     </div>
@@ -312,20 +324,8 @@
   </div>
   <!-- end of kyc form -->
 
-<!-- membercreate -->
-  <div class="lastCon" *ngIf="!routeUrlGoGo">
-    <div class="row">
-      <div class="container">
-        <div id="MobileUseIdForPrice" class="col-lg-12 text-center" style="padding-left:10%;">
-          <span class="blackSpanTitle" style="">應收保費</span>
-          <span class="priceSpanNT">NT${{numberWithCommas(odRate)}}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- membercreate -->
 <ng-container *ngIf="!rentalCarTemp">
-    <div class="row" *ngIf="!routeUrlGoGo">
+    <div class="row" *ngIf="!routeUrlGoGo" style="position: relative; top: -10px;">
         <div class="container">
           <div class="col-lg-12 text-center imgContain">
             <div style="display:block; margin: 0 auto;">
@@ -339,8 +339,7 @@
       </div>
 </ng-container>
 <!-- membercreate -->
-
-  <div class="row">
+  <div class="row" style="position: relative; top: -10px;">
     <div class="container" *ngIf="!routeUrlGoGo">
       <div class="col-lg-12 text-center">
         <div class="col-xs-12 col-sm-6 col-lg-6">
