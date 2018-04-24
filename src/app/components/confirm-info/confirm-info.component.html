@@ -61,16 +61,16 @@
     </div>
   </div>
 
-<div class="row">
-  <div class="container-fluid">
-    <div class="col-lg-12 text-left" style="padding:0px;">
-      <div class="titleForm">
-        <div id="flagInsuredPPlFlag"></div>
-        <h2 id="thisFocusDiv" style="padding:10px; padding-bottom:20px;padding-left:0px;">投保內容</h2>
+  <div class="row">
+    <div class="container-fluid">
+      <div class="col-lg-12 text-left" style="padding:0px;">
+        <div class="titleForm">
+          <div id="flagInsuredPPlFlag"></div>
+          <h2 id="thisFocusDiv" style="padding:10px; padding-bottom:20px;padding-left:0px;">投保內容</h2>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <div class="row" id="titleWithoutPadding" style="margin-top:5px;">
     <div class="container">
@@ -189,16 +189,6 @@
                           </ul>
                         </div>
                       </ng-container>
-                      <!--<ng-container *ngFor="let package of item['inPackageInfo']['secondaryItems']; let x = index;">-->
-                        <!--<div class="col-xs-12">-->
-                          <!--<h4>{{package['insItemName']}}</h4>-->
-                          <!--<ul>-->
-                            <!--<li *ngFor="let list of package['detailTableRowList']">-->
-                              <!--<span>{{list['detailName']}} {{list['detailValue']}}元</span>-->
-                            <!--</li>-->
-                          <!--</ul>-->
-                        <!--</div>-->
-                      <!--</ng-container>-->
                     </div>
                   </div>
 
@@ -288,24 +278,54 @@
               </accordion-group>
             </ng-container>
           </accordion>
-  
         </div>
       </div>
+  
+       <!-- membercreate -->
+       <div class="lastCon" *ngIf="!routeUrlGoGo">
+        <div class="row">
+          <div class="container">
+            <div id="MobileUseIdForPrice" class="col-lg-12 text-center" style="padding-left:10%;">
+              <span class="blackSpanTitle" style="">應收保費</span>
+              <span class="priceSpanNT">NT${{numberWithCommas(odRate)}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- membercreate -->
   </div>
-<!-- membercreate -->
-  <div class="lastCon" *ngIf="!routeUrlGoGo">
-    <div class="row">
-      <div class="container">
-        <div id="MobileUseIdForPrice" class="col-lg-12 text-center" style="padding-left:10%;">
-          <span class="blackSpanTitle" style="">應收保費</span>
-          <span class="priceSpanNT">NT${{numberWithCommas(odRate)}}</span>
+
+  <!-- kyc form -->
+  <div class="row" *ngIf="kycJson?.length >= 1">
+    <div class="container-fluid">
+      <div class="col-lg-12" style="padding:0px;">
+        <div class="titleForm text-left">
+          <div id="flagTop"></div>
+          <h2 id="KycFormH2">依法規定，保險公司需了解您的保險需求，請協助勾選完成流程</h2>
         </div>
       </div>
     </div>
   </div>
-<!-- membercreate -->
+
+  <div class="row applicant" style="margin-bottom: 35px;">
+    <div class="container">
+        <div id="kycRow" class="col-12 text-left" *ngFor="let item of kycJson; let i = index">
+            <h4>{{ i+1+'. ' }}{{item['question']}}</h4>
+            <ng-container *ngFor="let unit of item['options'];">
+                <div style="display: inline-flex" >
+                  <label for="vehicle{{i}}" ngClass="{{unit['isDefault'] ? 'checkBoxDiv' : 'checkBoxDiv noChecked'}}" #changeEl (click)="toConsol(changeEl, $event, unit, item)">
+                      <!-- <input #kycValue [hidden]="true" type="radio" name="vehicle{{i}}" value="{{unit['value']}}" checked="{{unit['default'] == 'true' ? 'checked' : ''}}"> -->
+                  </label>
+                  {{unit['value']}}
+                </div>
+            </ng-container>
+        </div>
+    </div>
+  </div>
+  <!-- end of kyc form -->
+
 <ng-container *ngIf="!rentalCarTemp">
-    <div class="row" *ngIf="!routeUrlGoGo">
+    <div class="row" *ngIf="!routeUrlGoGo" style="position: relative; top: -10px;">
         <div class="container">
           <div class="col-lg-12 text-center imgContain">
             <div style="display:block; margin: 0 auto;">
@@ -319,7 +339,7 @@
       </div>
 </ng-container>
 <!-- membercreate -->
-  <div class="row">
+  <div class="row" style="position: relative; top: -10px;">
     <div class="container" *ngIf="!routeUrlGoGo">
       <div class="col-lg-12 text-center">
         <div class="col-xs-12 col-sm-6 col-lg-6">

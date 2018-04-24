@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Accordion} from "ngx-accordion";
-import {Router, ActivatedRoute} from '@angular/router';
+import { Component, OnInit, ViewChild, ViewChildren, ElementRef } from '@angular/core';
+import { Accordion } from 'ngx-accordion';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../../services/data-service.service';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import { SecurityContext } from '@angular/core/src/security';
 
-declare var jquery:any;
-declare var $ :any;
+declare var jquery: any;
+declare var $ : any;
 @Component({
   selector: 'app-confirm-info',
   templateUrl: './confirm-info.component.html',
@@ -17,7 +17,6 @@ declare var $ :any;
 
 export class ConfirmInfoComponent implements OnInit {
   isExpandAll: boolean = false;
-
   applicantName: string;
   applicantMobile: string;
   applicantPid: string;
@@ -25,7 +24,6 @@ export class ConfirmInfoComponent implements OnInit {
   applicantBth: string;
   applicantEmail: string;
   inPackageButtonName: string;
-
   insuredDateStart: string;
   insuredDateEnd: string;
   insuredLocation: string;
@@ -41,16 +39,19 @@ export class ConfirmInfoComponent implements OnInit {
   adjustTimeBoolean: boolean = false;
   insuredCarBrand: any;
   insuredCarBrandShow: Boolean = false;
+  kycJson: any;
+  kycAns: any = [];
 
   insuredList: any[];
 
   @ViewChild(Accordion) MyAccordion: Accordion;
+  @ViewChild('changeEl') changeEl: ElementRef;
 
   constructor(
       public dataService: DataServiceService,
       private router: Router,
       private routerAct: ActivatedRoute
-  ) {   
+  ) {
     $('body').css({
       '-webkit-overflow-scrolling': 'auto'
     });
@@ -72,6 +73,33 @@ export class ConfirmInfoComponent implements OnInit {
     }
   }
 
+  toConsol(value, e, unit, item) {
+    var obj = {};
+    obj['optionValue'] = unit.value;
+    obj['type'] = item.questionType;
+    this.kycAns.forEach((objVal, index) => {
+      if(objVal['type'] === item.questionType){
+        this.kycAns.splice(index, 1);
+        this.kycAns.push(obj);
+      }
+    });
+
+    let arrayC = value.classList;
+    var arryInputSel = $('label[for=' + value['htmlFor'] + ']');
+    for(let i = 0; i <= arryInputSel.length; i++) {
+      if(arryInputSel[i]){
+        if(arryInputSel[i].classList.length === 1){
+          arryInputSel[i].classList.add('noChecked');
+        }
+      }
+    }
+    if (value.classList.length === 2) {
+      arrayC.remove('noChecked');
+    } else {
+      arrayC.add('noChecked');
+    }
+  }
+
   reloadOneSec() {
       if(this.routerAct.queryParams['value']['reload']){ // url does not have the text 'reloaded'
         this.router.navigate(['travel/gogoout/confirm'], {queryParams: {orderNumber: this.routerAct.queryParams['value']['orderNumber']}});
@@ -88,8 +116,12 @@ export class ConfirmInfoComponent implements OnInit {
   }
 
   numberWithCommas = (x) => {
-    let Xn = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return Xn
+    if(!x){
+      return '0';
+    } else {
+      let Xn = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return Xn;
+    }
   }
 
   toLoadDateForConfirm() {
@@ -115,6 +147,21 @@ export class ConfirmInfoComponent implements OnInit {
         this.insuredList = info['insuredList'];
         this.text4Activity = info['text4Activity'];
         this.odPeriodDays = info['odPeriodDays'];
+        if(info['kycQuestions']) {
+          this.kycJson = info['kycQuestions'];
+          this.kycJson.forEach(element => {
+            var DefaultObj = {};
+            DefaultObj['type'] = element['questionType'];
+            element['options'].forEach(item => {
+              if(item['isDefault']) {
+                DefaultObj['optionValue'] = item['value'];
+              }
+            });
+            this.kycAns.push(DefaultObj);
+          });
+          console.log(this.kycAns);
+        }
+        
         // this.odRate = info['odRate'];
         this.dataService.purposeImageUrl = info['purposeImageUrl'];
         
@@ -176,7 +223,22 @@ export class ConfirmInfoComponent implements OnInit {
           this.text4Activity = info['text4Activity'];
           this.odPeriodDays = info['odPeriodDays'];
           this.odRate = info['odRate'];
+          if ( info['kycQuestions'] ) {
+            this.kycJson = info['kycQuestions'];
+            this.kycJson.forEach(element => {
+              var DefaultObj = {};
+              DefaultObj['type'] = element['questionType'];
+              element['options'].forEach(item => {
+                if(item['isDefault']) {
+                  DefaultObj['optionValue'] = item['value'];
+                }
+              });
+              this.kycAns.push(DefaultObj);
+            });
+            console.log(this.kycAns);
+          }
           this.dataService.purposeImageUrl = info['purposeImageUrl'];
+
           document.querySelector('#flagTop').scrollIntoView();
           if(this.router.url.slice(0, 8) === '/RentCar') {
             this.rentalCarTemp = true;
@@ -225,7 +287,8 @@ export class ConfirmInfoComponent implements OnInit {
   }
 
   confirmPaying(){
-    this.dataService.confirmPaying();
+    console.log(this.kycAns);
+    this.dataService.confirmPaying(this.kycAns);
   }
 
   doSomethingOnClose() {

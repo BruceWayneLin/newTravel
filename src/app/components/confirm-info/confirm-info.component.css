@@ -576,3 +576,42 @@ span.priceSpanNT {
   display:none!important;
 }
 
+.checkBoxDiv {
+  background: url('../../../assets/images/arrowIcons/default.png');
+  background-repeat: no-repeat;
+  background-size: unset;
+  height: 25px;
+  width: 22px;
+  background-position-x: -110px;
+  display: inline-block;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.checkBoxDiv.noChecked{
+  background: url('../../../assets/images/arrowIcons/default.png');
+  background-repeat: no-repeat;
+  background-size: unset;
+  height: 25px;
+  width: 22px;
+  background-position-x: -88px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#kycRow {
+  margin: 5px 15px;
+}
+
+@media screen and (max-width:667px){
+  #kycRow {
+    margin: 5px -15px;
+  }
+}
+
+#KycFormH2 {
+  padding-top:10px;
+  /* padding-bottom:20px; */
+  font-size: 20px;
+  text-align: center;
+}
