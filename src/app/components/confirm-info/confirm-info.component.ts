@@ -318,7 +318,7 @@ export class ConfirmInfoComponent implements OnInit {
   }
 
   toGoSignature() {
-    this.dataService.toGoNextFromConfirm(this.routerAct.queryParams['value']['orderNumber']);
+    this.dataService.toGoNextFromConfirm(this.routerAct.queryParams['value']['orderNumber'], this.kycAns);
   }
 
 }

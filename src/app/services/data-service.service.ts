@@ -449,12 +449,12 @@ export class DataServiceService {
         }, 400);
     }
 
-    toGoNextFromConfirm(val){
+    toGoNextFromConfirm(val, kycAns){
         var postData;
         if(val){
-         postData = {"orderNumber": val};   
+         postData = {"orderNumber": val, 'kycSelections': kycAns};
         }else{
-         postData = {"orderNumber": this.gogoOrderNumber};   
+         postData = {"orderNumber": this.gogoOrderNumber, 'kycSelections': kycAns};
         }
         this.http.post('/CareLineTravel/travel-mbr/b2bCar/gogoout/confirm/next', postData).map(res => {
             if (res.json().isEx) {
