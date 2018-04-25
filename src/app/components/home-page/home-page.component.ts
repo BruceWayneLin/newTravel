@@ -1239,8 +1239,6 @@ export class HomePageComponent implements OnInit {
 
       if (this.theTimeClicked == this.totalTimesTimes) {
         startDayPlusLastDayNum = new Date(this.startTravelDay).setDate(new Date(this.startTravelDay).getDate() + this.travelPeriodLimit);
-        // let firstEndDay = new Date(this.firstMon).setDate(new Date(this.firstMon).getDate() + this.getDayFromBkend);
-        // console.log(new Date(firstEndDay));
 
         let timeDiff = Math.abs(new Date(startDayPlusLastDayNum).getTime() - new Date(this.startTravelDay).getTime());
         let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -1290,80 +1288,12 @@ export class HomePageComponent implements OnInit {
         return true;
       }
     }
-
-    //
-
-    //
-    //   if(new Date(value) > new Date(getSunDayOfTheWeek) || new Date(value) < new Date(theDayOfStartDaySun) || (new Date(value) > new Date(getDayBtnDays))){
-    //     return true;
-    //   }else{
-    //     return false;
-    //   }
-
-    // else{
       var yesterday = new Date().setDate(new Date(this.getMonday(new Date())).getDate()-1);
 
-    //   let yes = new Date(new Date().setDate(new Date().getDate()-1));
-    //   if(new Date().getDate() == 1){
-    //    if(new Date(value) < new Date(yes)){
-    //      return true;
-    //    }else if (new Date(value) > new Date(lastDayNeedToHide)){
-    //      return true;
-    //    }
-    //  }else if (new Date(value) > new Date(lastDayNeedToHide)){
-    //   return true;
-    //  }else if(new Date(value) < new Date(yesterday)){
-    //     return true;
-    //  }else{
-    //     if(new Date().getDay() == 6){
-    //       let tmr = new Date(new Date().setDate(new Date().getDate()+1));
-    //       if(new Date(value) < new Date(tmr)){
-    //         return true;
-    //       }else{
-    //         return false;
-    //       }
-    //     }
-    //   }
-    // }
   }
 
   checkShoudShowTitle(val){
-    // if(this.startTravelDay){
-    //   var oneDay = 24*60*60*1000;
-    //   var behindStartTravelDayHide = new Date(this.startTravelDay).setDate(new Date(this.startTravelDay).getDate()-1 - new Date(this.startTravelDay).getDay());
-    //   var nextMonthLastDay = new Date(new Date(this.startTravelDay).getFullYear(), new Date(this.startTravelDay).getMonth() + this.theTimeClicked, 0);
-    //   var sunday = new Date(this.startTravelDay).setDate(new Date(this.startTravelDay).getDate() - new Date(this.startTravelDay).getDay());
-    //   var sundayMinusOneDay = new Date(sunday).setDate(new Date(sunday).getDate() - 1);
-    //   var getStartDayLastDay;
-    //   if(this.theTimeClicked == this.totalTimesTimes){
-    //     getStartDayLastDay = new Date(this.startTravelDay).setDate(new Date(this.startTravelDay).getDate() + this.travelPeriodLimit);
-    //   }else{
-    //     var getDayBetween =  Math.round(Math.abs((new Date(nextMonthLastDay).getTime() - new Date(this.startTravelDay).getTime())/(oneDay)));
-    //     getStartDayLastDay = new Date(this.startTravelDay).setDate(new Date(this.startTravelDay).getDate() + getDayBetween);
-    //   }
-    //   if((new Date(val).getDate() == 1) || (new Date(val) <= new Date(sunday)) && new Date(val).getDay() == 0 && new Date(val) > new Date(sundayMinusOneDay)){
-    //     if(new Date(val) > new Date(getStartDayLastDay) || new Date(val) < new Date(behindStartTravelDayHide)){
-    //       return false;
-    //     }else{
-    //       return true;
-    //     }
-    //   }else{
-    //     return false;
-    //   }
-    // }else{
-    //   var tmr = new Date().setDate(new Date().getDate() + 1);
-    //   let sunday = new Date().setDate(new Date().getDate() - new Date().getDay());
-    //   var lastDayNoStartDay = new Date().setDate(new Date().getDate() + this.startDayLimit - 1);
-    //   if((new Date(val) < new Date(sunday) || new Date(val).getDate() == 1 || (new Date(val).getDay() == 0 && new Date(val) < new Date(tmr)))){
-    //     if(new Date(val) > new Date(lastDayNoStartDay) || new Date(val) < new Date(new Date().setDate(new Date().getDate() - new Date().getDay()))){
-    //       return false;
-    //     }else{
-    //       return true;
-    //     }
-    //   }else{
-    //     return false;
-    //   }
-    // }
+    
   }
 
   buttonToDisabled(calVal) {

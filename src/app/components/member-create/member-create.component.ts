@@ -1046,6 +1046,8 @@ export class MemberCreateComponent implements OnInit {
           this.applicantAloneMinAge = item.companySetting['insuredAgeMin'];
           this.countBrthDayFromSelectedBtn = item['travelStartDate'];
           this.applicantAgeMin = item.companySetting['applicantAgeMin'];
+          this.insuredSizeLimit = item.companySetting['insuredSizeLimit'];
+          this.checkHowManyOwlsNeedToHide(this.insuredSizeLimit);
           item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
           this.pBirthYear = item.applicant.birthday.slice(0, 4);
           this.pBirthMonth = item.applicant.birthday.slice(5, 7);
