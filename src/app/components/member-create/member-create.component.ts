@@ -39,6 +39,13 @@ export class MemberCreateComponent implements OnInit {
   owlAnanFour: boolean = true;
   owlAnanFifth: boolean = true;
 
+  /* hidden owls uses*/
+  owlAnanOneHidden: boolean = false;
+  owlAnanTwoHidden: boolean = false;
+  owlAnanThreeHidden: boolean = false;
+  owlAnanFourHidden: boolean = false;
+  owlAnanFifthHidden: boolean = false;
+
   birthdayYears: any[] = [];
   birthdayMonths: any[] = [];
   birthdayDays: any[] = [];
@@ -165,6 +172,32 @@ export class MemberCreateComponent implements OnInit {
   numberWithCommas = (x) => {
     let Xn = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return Xn
+  }
+
+  checkHowManyOwlsNeedToHide(val:Number){
+    switch(val){
+      case 2:
+        this.owlAnanTwoHidden = true;
+        this.owlAnanThreeHidden = true;
+        this.owlAnanFourHidden = true;
+        this.owlAnanFifthHidden = true;
+      break;
+      case 3:
+        this.owlAnanThreeHidden = true;
+        this.owlAnanFourHidden = true;
+        this.owlAnanFifthHidden = true;
+      break;
+      case 4:
+        this.owlAnanFourHidden = true;
+        this.owlAnanFifthHidden = true;
+      break;
+      case 5:
+        this.owlAnanFifthHidden = true;
+      break;
+      case 6:
+      break;
+      default:
+    }
   }
 
   checkAloneBd(val?){
@@ -906,6 +939,7 @@ export class MemberCreateComponent implements OnInit {
           this.countBrthDayFromSelectedBtn = item['travelStartDate'];
           this.applicantAgeMin = item.companySetting['applicantAgeMin'];
           this.insuredSizeLimit = item.companySetting['insuredSizeLimit'];
+          this.checkHowManyOwlsNeedToHide(this.insuredSizeLimit);
           item.applicant.birthday.length == 0 ? this.checkBDay = false : this.checkBDay = true;
           this.pBirthYear = item.applicant.birthday.slice(0, 4);
           this.pBirthMonth = item.applicant.birthday.slice(5, 7);
@@ -1083,6 +1117,7 @@ export class MemberCreateComponent implements OnInit {
           this.insuredLimitedAge = item.companySetting['insuredAgeMax'] - item.companySetting['insuredAgeMin'];
           this.applicantAloneMinAge = item.companySetting['insuredAgeMin'];
           this.insuredSizeLimit = item.companySetting['insuredSizeLimit'];
+          this.checkHowManyOwlsNeedToHide(this.insuredSizeLimit);
           this.countBrthDayFromSelectedBtn = item['travelStartDate'];
           this.applicantAgeMin = item.companySetting['applicantAgeMin'];
           this.relationship = item.relationList;

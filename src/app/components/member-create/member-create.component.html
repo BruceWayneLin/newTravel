@@ -436,23 +436,23 @@
         </span>
       </div>
       <div class="col-xs-7 appendDollArea">
-        <div class="annaDiv">
+        <div class="annaDiv" *ngIf="!owlAnanOneHidden">
           <div alt="" class="anan ananDivImg img-responsive" [ngClass]="{'img-grey': owlAnanOne}">
           </div>
         </div>
-        <div class="annaDiv">
+        <div class="annaDiv" *ngIf="!owlAnanTwoHidden">
           <div alt="" class="anan ananDivImg img-responsive" [ngClass]="{'img-grey': owlAnanTwo}">
           </div>
         </div>
-        <div class="annaDiv">
+        <div class="annaDiv" *ngIf="!owlAnanThreeHidden">
           <div alt="" class="anan ananDivImg img-responsive" [ngClass]="{'img-grey': owlAnanThree}">
           </div>
         </div>
-        <div class="annaDiv">
+        <div class="annaDiv" *ngIf="!owlAnanFourHidden">
           <div alt="" class="anan ananDivImg img-responsive" [ngClass]="{'img-grey': owlAnanFour}">
           </div>
         </div>
-        <div class="annaDiv">
+        <div class="annaDiv" *ngIf="!owlAnanFifthHidden">
           <div alt="" class="anan ananDivImg img-responsive" [ngClass]="{'img-grey': owlAnanFifth}">
           </div>
         </div>
@@ -468,7 +468,7 @@
   </div>
   <div class="container noneTit">
     <div class="col-lg-12 text-left">
-      <h5>*加保5人以上請撥 免費客服專線: 0800-234-088</h5>
+      <h5>*加保{{insuredSizeLimit}}人以上請撥 免費客服專線: 0800-234-088</h5>
     </div>
   </div>
 </div>
